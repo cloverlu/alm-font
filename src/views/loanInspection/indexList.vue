@@ -5,7 +5,7 @@
 -->
 <template lang="pug">
 	.loanIns-list
-		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item.bizType)")
+		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item.bizType,item.bizId)")
 			.item-header
 				.item-header-state(class="shoulddo" v-if="item.bizStatus === 1" ) 应做
 				.item-header-state(class="undo" v-if="item.bizStatus === 2" ) 未做
@@ -35,9 +35,21 @@ export default {
     };
   },
   methods: {
-    handleClick(type) {
+    handleClick(type, id) {
       if (type === "小企业授信业务首次跟踪检查") {
-        this.$router.push({ name: "creditFirstIndex" });
+        this.$router.push({
+          name: "creditFirstIndex",
+          params: {
+            bizId: id
+          }
+        });
+      } else if (type === "小企业授信业务贷后例行检查") {
+        this.$router.push({
+          name: "creditRoutineIndex",
+          params: {
+            bizId: id
+          }
+        });
       }
     }
   }
