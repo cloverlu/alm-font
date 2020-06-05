@@ -57,7 +57,7 @@ const loanInsList = _ => {
   const bizStatus = [].concat(status, ...status);
   const data = [];
   const date = "2020-06-02";
-  for (let i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 6; i++) {
     data.push({
       bizType: bizType[i],
       bizStatus: bizStatus[i],

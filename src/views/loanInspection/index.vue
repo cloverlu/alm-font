@@ -12,22 +12,28 @@
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2") 保存
+				span(v-else-if="operateTag === 3") 下一步
 		.loanIns-index-content
-			scroll(:top="46")
-				loadInsList(v-if="hasChildRouter")
-				router-view(v-else)
+				scroll(:top="44" )
+					.content(:class="footerShow ? 'footershow' : ''")
+						loadInsList(v-if="hasChildRouter")
+						router-view(v-else)
+					.footer(v-if="footerShow") 
+						footerNext
 </template>
 
 <script>
 import loadInsList from "../loanInspection/indexList";
+import footerNext from "../loanInspection/components/footerNext";
 import Scroll from "../../components/Scroll";
 export default {
-  components: { loadInsList, Scroll },
+  components: { loadInsList, Scroll, footerNext },
   data() {
     return {
       hasChildRouter: this.$route.params.hasChildRouter,
       title: "",
-      operateTag: 1
+      operateTag: 1,
+      footerShow: false
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -37,10 +43,13 @@ export default {
   beforeRouteUpdate(to, from, next) {
     const meta = to.meta;
     this.title = meta.title;
+    this.footerShow = meta.footer;
     if (meta.tag === "operateIcon") {
       this.operateTag = 1;
     } else if (meta.tag === "resave") {
       this.operateTag = 2;
+    } else if (meta.tag === "footerNext") {
+      this.operateTag = 3;
     }
     this.hasChildRouter = to.name === "loanInspectionIndex";
     next();
@@ -49,8 +58,13 @@ export default {
   mounted() {
     const meta = this.$route.meta;
     this.title = meta.title;
+    this.footerShow = meta.footer;
     if (meta.tag === "operateIcon") {
       this.operateTag = 1;
+    } else if (meta.tag === "resave") {
+      this.operateTag = 2;
+    } else if (meta.tag === "footerNext") {
+      this.operateTag = 3;
     }
   },
 
@@ -99,6 +113,20 @@ export default {
   .loanIns-index-content {
     flex: 1;
     background-color: #f7f7f7;
+    .content {
+      width: 100%;
+      min-height: 100%;
+      box-sizing: border-box;
+      &.footershow {
+        padding-bottom: px2rem(38);
+      }
+    }
+    .footer {
+      width: 100%;
+      height: px2rem(38);
+      z-index: 100;
+      margin-top: px2rem(-38);
+    }
   }
 }
 </style>
