@@ -8,6 +8,8 @@ import "@/assets/style/global.scss";
 
 import "./assets/iconfont/iconfont.css";
 
+import "mint-ui/lib/style.min.css";
+
 Vue.config.productionTip = false;
 
 new Vue({
