@@ -124,7 +124,6 @@ $ratio: 375 / 10;
   text-overflow: ellipsis;
   overflow-wrap: break-word;
 }
-
 @mixin columnBlue{
 	width: px2rem(3);
 	background-color: #4e78de;
@@ -134,6 +133,7 @@ $ratio: 375 / 10;
 	display: block;
 
 }
+
 
 @mixin shelfImgHeight {
   @media screen and (max-width:414px) {
@@ -230,29 +230,3 @@ $homeAnimationTime: .2s;
   transition: all .2s linear;
 }
 
-// 文本域
-.textArea {
-  width: 100%;
-  height: px2rem(74);
-	border: none;
-	&.mint-cell
-		&:last-child{
-			background-image: none;
-		}
-  &:focus {
-    outline: none;
-	}
-	.mint-cell-wrapper{
-		background-image: none;
-		.mint-field-core {
-			color: #9f9f9f;
-			font-size: px2rem(14);
-			resize: none;
-			&::placeholder {
-				color: #9f9f9f;
-				font-size: px2rem(14);
-			}
-		}
-	}
-  
-}

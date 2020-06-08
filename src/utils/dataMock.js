@@ -96,4 +96,74 @@ const payType = [
   }
 ];
 
-export { todoListTitle, loanInsList, definite1, payType };
+//definite1
+const definite1Field = [
+  {
+    name: "要求",
+    id: 1,
+    modelName: "equireCheck"
+  },
+  {
+    name: "落实情况",
+    id: 2,
+    modelName: "checked"
+  }
+];
+//definite2
+const definite2Field = [
+  {
+    name: "资金使用情况详细说明",
+    id: 1,
+    modelName: "detailMsg4useAmout"
+  },
+  {
+    name: "提供纸质或影像资料的信息来源",
+    id: 2,
+    modelName: "msgSource"
+  }
+];
+
+//definite2
+const definite2Field2 = [
+  {
+    name: "情况说明",
+    id: 1,
+    modelName: "msg"
+  }
+];
+
+//配合程度
+const coordinate = [
+  {
+    key: 1,
+    value: "配合"
+  },
+  {
+    key: 0,
+    value: "不配合"
+  }
+];
+
+//是否
+const yesNo = [
+  {
+    key: 1,
+    value: "是"
+  },
+  {
+    key: 0,
+    value: "否"
+  }
+];
+
+export {
+  todoListTitle,
+  loanInsList,
+  definite1,
+  payType,
+  definite1Field,
+  definite2Field,
+  definite2Field2,
+  coordinate,
+  yesNo
+};

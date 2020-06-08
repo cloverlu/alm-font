@@ -77,32 +77,3 @@
 .opacity-slide-up-enter-active, .opacity-slide-up-leave-active {
   transition: all .2s linear;
 }
-
-.textArea {
-  width: 100%;
-  height: 1.97333rem;
-  border: none;
-}
-
-.textArea.mint-cell .textArea:last-child {
-  background-image: none;
-}
-
-.textArea:focus {
-  outline: none;
-}
-
-.textArea .mint-cell-wrapper {
-  background-image: none;
-}
-
-.textArea .mint-cell-wrapper .mint-field-core {
-  color: #9f9f9f;
-  font-size: 0.37333rem;
-  resize: none;
-}
-
-.textArea .mint-cell-wrapper .mint-field-core::placeholder {
-  color: #9f9f9f;
-  font-size: 0.37333rem;
-}

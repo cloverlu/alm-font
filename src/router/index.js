@@ -2,8 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
-import creditFirstIndex from "@/views/loanInspection/creditFirst/definite-1";
+import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/index";
+import definite2 from "@/views/loanInspection/creditFirst/definite-2";
+import definite3 from "@/views/loanInspection/creditFirst/definite-3";
 
 Vue.use(VueRouter);
 
@@ -23,7 +25,7 @@ const routes = [
     children: []
   },
   {
-    path: "/loanInspection",
+    path: "/almHome/loanInspection",
     name: "loanInspectionIndex",
     component: loanInspectionIndex,
     meta: {
@@ -36,16 +38,40 @@ const routes = [
     },
     children: [
       //类型1
+      //检查申请明细-1
       {
         path: ":type/:bizId",
         name: "creditFirstIndex",
-        component: creditFirstIndex,
+        component: definite1,
         meta: {
           title: "检查申请明细",
           tag: "resave",
           footer: true
         },
-        children: []
+        children: [
+          //检查申请明细-2
+          {
+            path: "definite2",
+            name: "definite2",
+            component: definite2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-3
+          {
+            path: "definite3",
+            name: "definite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          }
+        ]
       },
       // 类型2
       {
@@ -70,3 +96,8 @@ const router = new VueRouter({
 });
 
 export default router;
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+};

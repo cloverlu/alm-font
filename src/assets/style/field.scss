@@ -1,0 +1,132 @@
+@import '../style/mixin.scss';
+
+// field通用样式
+
+.textArea {
+  width: 100%;
+  height: px2rem(74);
+	border: none;
+	&.mint-cell
+		&:last-child{
+			background-image: none;
+		}
+  &:focus {
+    outline: none;
+	}
+	.mint-cell-wrapper{
+		background-image: none;
+		.mint-field-core {
+			color: #9f9f9f;
+			font-size: px2rem(14);
+			resize: none;
+			&::placeholder {
+				color: #9f9f9f;
+				font-size: px2rem(14);
+			}
+		}
+	}
+  
+}
+
+//左右结构的展示内容
+.definite-field {
+	width: 100%;
+	background-color: #fff;
+	border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+	.item {
+		width: 100%;
+		height: px2rem(44);
+		line-height: px2rem(44);
+		padding: 0 px2rem(16) 0 px2rem(16);
+		display: flex;
+		font-size: px2rem(14);
+		box-sizing: border-box;
+		border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+		&.item-textarea {
+			border: none;
+			padding: 0;
+		}
+		.tag {
+			flex: 0 0 px2rem(140);
+			text-align: left;
+			color: #090909;
+			&.big{
+				flex: 0 0 px2rem(170);
+			}
+			&.big-max{
+				flex: 0 0 px2rem(280);
+			}
+		}
+		.arrow {
+			font-size: px2rem(14);
+			color: #848484;
+			margin-left: px2rem(3);
+		}
+		.info {
+			flex: 1;
+			text-align: right;
+			color: #9f9f9f;
+			.pay-type {
+				width: 100%;
+				height: px2rem(145);
+				background-color: #fff;
+				.item {
+					width: 100%;
+					height: px2rem(44);
+					border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+					text-align: center;
+					font-size: px2rem(14);
+					justify-content: center;
+					align-items: center;
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+//蓝色小标题
+.definite-smalltitle {
+	width: 100%;
+	padding-left: px2rem(16);
+	box-sizing: border-box;
+	@include fontColorBlue;
+	font-size: px2rem(14);
+	display: flex;
+	.colum-blue {
+		height: px2rem(14);
+		@include columnBlue;
+		margin-right: px2rem(5);
+	}
+}
+
+@mixin lineHeight44 {
+	width:100%;
+	height:px2rem(44)
+	
+}
+@mixin lineHeight74 {
+	width:100%;
+	height:px2rem(74)
+	
+}
+
+//input
+.field-input{
+	border: none;
+  height: px2rem(40);
+  width: 100%;
+	text-align: right;
+	color:#9F9F9F;
+	font-size: px2rem(14);
+	line-height: 1;
+	&:focus{
+		outline: none;
+	}
+	&::placeholder{
+		color:#9F9F9F;
+    font-size: px2rem(14);
+	}
+}
