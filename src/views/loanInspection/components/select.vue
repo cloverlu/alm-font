@@ -5,20 +5,34 @@
 -->
 
 <template lang="pug">
-	#trigger(:class="fontColor") {{defaultValue}}
+	.trigger(:id= "triggerId" :class="fontColor") {{defaultval}}
 </template>
 
 <script>
 import MobileSelect from "mobile-select";
 export default {
-  props: ["selectData", "defaultValue", "title", "fontColor"],
+  props: ["selectData", "defaultValue", "title", "fontColor", "triggerId"],
+  data() {
+    return {};
+  },
+  computed: {
+    defaultval: function() {
+      var defaultval = "";
+      this.selectData.filter(item => {
+        if (this.defaultValue === item.key) {
+          defaultval = item.value;
+        }
+      });
+      return defaultval;
+    }
+  },
   mounted() {
     this.mobileSelect();
   },
   methods: {
     mobileSelect() {
       new MobileSelect({
-        trigger: "#trigger",
+        trigger: "#" + this.triggerId,
         title: this.title,
         wheels: [{ data: this.selectData }],
         callback: (indexArr, data) => {

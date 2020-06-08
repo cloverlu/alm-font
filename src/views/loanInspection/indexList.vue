@@ -35,6 +35,8 @@ export default {
       list: loanInsList()
     };
   },
+  watch: {},
+  mounted() {},
   methods: {
     handleClick(type, id) {
       if (type === "小企业授信业务首次跟踪检查") {
@@ -42,7 +44,7 @@ export default {
           name: "creditFirstIndex",
           params: {
             bizId: id,
-            type: "creditFirst"
+            type: "loanCreditFirst"
           }
         });
       } else if (type === "小企业授信业务贷后例行检查") {

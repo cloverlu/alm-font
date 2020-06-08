@@ -8,7 +8,7 @@
 		.loanIns-index-header
 			.arrow-back(@click="back")
 				span(class="iconfont iconfanhui")
-			.title {{title}}
+			.title {{title}} 
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2") 保存
@@ -16,7 +16,7 @@
 		.loanIns-index-content
 				scroll(:top="44" )
 					.content(:class="footerShow ? 'footershow' : ''")
-						loadInsList(v-if="hasChildRouter")
+						loadInsList(v-if="hasChildRouter") 
 						router-view(v-else)
 					.footer(v-if="footerShow") 
 						footerNext
@@ -33,7 +33,8 @@ export default {
       hasChildRouter: this.$route.params.hasChildRouter,
       title: "",
       operateTag: 1,
-      footerShow: false
+      footerShow: false,
+      that: this
     };
   },
   beforeRouteEnter(to, from, next) {
