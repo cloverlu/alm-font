@@ -138,21 +138,20 @@
 </template>
 
 <script>
-import { DetailsOfIOU, detailArray } from "../../../utils/dataMock";
+import { DetailsOfIOU } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
 export default {
   components: { "mt-cell": Cell, "mt-field": Field },
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      detailArray: detailArray,
-      requireCheck: "",
-      checked: "",
-      specialRequireCheck: "",
-      specialChecked: "",
-      HoldPensonRisk: "",
-      managerRisk: "",
-      otherRisk: ""
+      requireCheck: "", // 审批意见要求
+      checked: "", // 审批意见落实情况
+      specialRequireCheck: "", // 产品贷后要求
+      specialChecked: "", // 产品贷后落实情况
+      HoldPensonRisk: "", // 实际控制人或法定代表人风险点
+      managerRisk: "", // 管理层风险点
+      otherRisk: "" // 其他风险点
     };
   }
 };

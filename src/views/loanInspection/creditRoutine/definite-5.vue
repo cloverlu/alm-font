@@ -17,7 +17,7 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="DetailsOfIOU.stockLastBalance"
+          v-model="stockLastBalance"
         ></mt-field>
         <mt-cell title="本次检查存货变动情况"></mt-cell>
         <mt-field
@@ -26,7 +26,7 @@
           v-model="stockChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.stockChangSitu"
+          :placeholder="sss"
         ></mt-field>
       </div>
 
@@ -41,7 +41,7 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="DetailsOfIOU.busIncLastBalance"
+          v-model="busIncLastBalance"
         ></mt-field>
         <mt-cell title="本次检查营业收入变动情况"></mt-cell>
         <mt-field
@@ -50,7 +50,7 @@
           v-model="busIncChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.busIncChangSitu"
+          :placeholder="xxx"
         ></mt-field>
 
         <!-- 加工制造类 -->
@@ -64,7 +64,7 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="DetailsOfIOU.dailyExpenLastBalance"
+          v-model="dailyExpenLastBalance"
         ></mt-field>
         <mt-cell title="本次检查变动情况"></mt-cell>
         <mt-field
@@ -73,7 +73,7 @@
           v-model="dailyExpenChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.dailyExpenChangSitu"
+          :placeholder="xxx"
         ></mt-field>
 
         <mt-field
@@ -100,15 +100,13 @@ export default {
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      creditChageMsg1: "",
-      creditChageMsg2: "",
-      creditChageMsg3: "",
-      RecentNegativeInformation: "",
-      stockChangSitu: "",
-      busIncLastBalance: "",
-      dailyExpenChangSitu: "",
-      proAndOpeAbnormalSuitMsg: "",
-      busIncChangSitu: ""
+      stockLastBalance: "", // 上次全面检查或调查时余额  存货
+      stockChangSitu: "", // 本次检查存货变动情况  存货
+      busIncLastBalance: "", // 上次全面检查或调查时余额  营业收入
+      busIncChangSitu: "", // 本次检查存货变动情况  营业收入
+      dailyExpenLastBalance: "", // 上次全面检查或调查时余额  水煤气
+      dailyExpenChangSitu: "", // 本次检查存货变动情况  水煤气
+      proAndOpeAbnormalSuitMsg: "" //
     };
   },
   methods: {}

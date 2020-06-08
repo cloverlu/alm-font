@@ -92,6 +92,7 @@ export default {
     display: flex;
     padding: 0 px2rem(16) 0 px2rem(16);
     box-sizing: border-box;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.16);
     .arrow-back {
       color: #000000;
       font-size: px2rem(17);

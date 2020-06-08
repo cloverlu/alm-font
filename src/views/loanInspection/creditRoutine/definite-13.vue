@@ -16,25 +16,25 @@
           class="textFiled"
           label="检查地点"
           placeholder="10"
-          v-model="DetailsOfIOU.checkAddr"
+          v-model="checkAddr"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="检查配合程度"
           placeholder="10"
-          v-model="DetailsOfIOU.cooperate"
+          v-model="cooperate"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="生产经营场所变动情况"
           placeholder="10"
-          v-model="DetailsOfIOU.addrChangedMsg"
+          v-model="addrChangedMsg"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="接待人员"
           placeholder="10"
-          v-model="DetailsOfIOU.staff"
+          v-model="staff"
         ></mt-field>
       </div>
     </div>
@@ -48,7 +48,11 @@ export default {
   components: { "mt-field": Field },
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU
+      DetailsOfIOU: DetailsOfIOU,
+      checkAddr: "", // 检查地点
+      cooperate: "", // 检查配合程度
+      addrChangedMsg: "", // 生产经营场所变动情况
+      staff: "" // 接待人员
     };
   }
 };

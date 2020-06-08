@@ -21,7 +21,7 @@
           v-model="riskMsg"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.riskMsg"
+          :placeholder="riskMsg"
         ></mt-field>
 
         <mt-cell title="检查结论及措施建议"></mt-cell>
@@ -31,7 +31,7 @@
           v-model="suggest"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.suggest"
+          :placeholder="suggest"
         ></mt-field>
         <div class="signBox">
           <span class="left" @click="click">检查人员（签字）：</span>
@@ -57,13 +57,9 @@ export default {
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      creditChageMsg1: "",
-      creditChageMsg2: "",
-      creditChageMsg3: "",
-      RecentNegativeInformation: "",
+      existRisk: true,
       riskMsg: "",
-      suggest: "",
-      existRisk: ""
+      suggest: ""
     };
   },
   methods: {

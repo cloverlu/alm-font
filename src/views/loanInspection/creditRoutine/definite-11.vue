@@ -13,10 +13,7 @@
           <span class="lightBlue"></span>
           <span class="coName">基于企业征信报告</span>
         </div>
-        <mt-cell
-          title="征信报告查询日期"
-          :value="DetailsOfIOU.queryDate"
-        ></mt-cell>
+        <mt-cell title="征信报告查询日期" :value="queryDate"></mt-cell>
       </div>
 
       <div class="enterpriseCredit">
@@ -31,7 +28,7 @@
           class="textFiled"
           label="未结清贷款笔数"
           placeholder="10"
-          v-model="DetailsOfIOU.unPayOffLoanNum"
+          v-model="unPayOffLoanNum"
         ></mt-field>
         <!-- <mt-cell
           title="未结清贷款笔数"
@@ -41,19 +38,19 @@
           class="textFiled"
           label="未结清贷款金额"
           placeholder="10"
-          v-model="DetailsOfIOU.unPayOffAmout"
+          v-model="unPayOffAmout"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="涉及金融机构"
           placeholder="10"
-          v-model="DetailsOfIOU.finInstitutionNum"
+          v-model="finInstitutionNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款结余"
           placeholder="10"
-          v-model="DetailsOfIOU.sumBalance"
+          v-model="sumBalance"
         ></mt-field>
 
         <div class="nothing"></div>
@@ -61,42 +58,36 @@
           class="textFiled"
           label="对外担保笔数"
           placeholder="10"
-          v-model="DetailsOfIOU.guaranteeNum"
+          v-model="guaranteeNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保金额"
           placeholder="10"
-          v-model="DetailsOfIOU.guaranteeAmout"
+          v-model="guaranteeAmout"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保结余"
           placeholder="10"
-          v-model="DetailsOfIOU.guaranteeBalance"
+          v-model="guaranteeBalance"
         ></mt-field>
 
         <!-- （2）逾期及欠息等不良记录 -->
         <div class="coNo2">（2）逾期及欠息等不良记录</div>
         <mt-field
           class="textFiled"
-          label="对外担保结余"
-          placeholder="10"
-          v-model="DetailsOfIOU.guaranteeBalance"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
           label="贷款期间借款企业是否发生逾期、欠息等不良信用记录"
           placeholder="10"
-          v-model="DetailsOfIOU.existBadRecord"
+          v-model="existBadRecord"
         ></mt-field>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="specialRequireCheck"
+          v-model="badRecordMsg"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.badRecordMsg"
+          :placeholder="badRecordMsg"
         ></mt-field>
         <!-- （3）借款企业欠税情况 -->
         <div class="coNo2">（3）借款企业欠税情况</div>
@@ -104,25 +95,25 @@
           class="textFiled"
           label="欠税记录"
           placeholder="10"
-          v-model="DetailsOfIOU.oweTaxRecordNum"
+          v-model="oweTaxRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="民事判决"
           placeholder="10"
-          v-model="DetailsOfIOU.civilJudgmentRecordNum"
+          v-model="civilJudgmentRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="强制执行记录"
           placeholder="10"
-          v-model="DetailsOfIOU.forceImpleRecordNum"
+          v-model="forceImpleRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="行政处罚记录"
           placeholder="10"
-          v-model="DetailsOfIOU.administRecordNum"
+          v-model="administRecordNum"
         ></mt-field>
 
         <!-- （4）征信记录 -->
@@ -134,7 +125,7 @@
           v-model="creditChageMsg1"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.changedMsg"
+          :placeholder="changedMsg"
         ></mt-field>
 
         <!-- 2.关联企业征信： -->
@@ -146,7 +137,7 @@
           v-model="creditChageMsg2"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.changedMsg"
+          :placeholder="changedMsg"
         ></mt-field>
 
         <!-- 3.法人保证人征信： -->
@@ -158,7 +149,7 @@
           v-model="creditChageMsg3"
           class="text"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.changedMsg"
+          :placeholder="changedMsg"
         ></mt-field>
 
         <div class="nothing"></div>
@@ -170,67 +161,54 @@
           class="text"
           v-model="RecentNegativeInformation"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.RecentNegativeInformation"
+          :placeholder="RecentNegativeInformation"
         ></mt-field>
       </div>
-
-      <mt-actionsheet :actions="actions" v-model="sheetVisible">
-      </mt-actionsheet>
     </div>
   </div>
 </template>
 
 <script>
 import { DetailsOfIOU } from "../../../utils/dataMock";
-import { Cell, Field, Actionsheet } from "mint-ui";
+import { Cell, Field } from "mint-ui";
 export default {
   components: {
     "mt-cell": Cell,
-    "mt-actionsheet": Actionsheet,
     "mt-field": Field
   },
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      actions: [
-        {
-          name: "是",
-          method: this.getTrue // 调用methods中的函数
-        },
-        {
-          name: "否",
-          method: this.getFalse // 调用methods中的函数
-        }
-      ], // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
+      queryDate: "2020-06-03",
+      // 借款企业部分
+      unPayOffLoanNum: "", //未结清贷款笔数
+      unPayOffAmout: "", // 未结清贷款金额
+      finInstitutionNum: "", // 涉及金融机构
+      sumBalance: "", // 未结清贷款结余
+      DebitCardNum: "", //未销户贷记卡账户
 
-      existBadRecord: false,
-      sheetVisible: DetailsOfIOU.existBadRecord,
-      creditChageMsg1: "",
-      creditChageMsg2: "",
-      creditChageMsg3: "",
-      RecentNegativeInformation: "",
-      specialRequireCheck: ""
+      DebitCardLineAmout: "", //未销户贷记卡担保金额
+      guaranteeNum: "", //对外担保笔数
+      guaranteeAmout: "", //对外担保金额
+      guaranteeBalance: "", //对外担保结余
+      existBadRecord: "", // 是否逾期
+      badRecordMsg: "", //  逾期及违约 不良影响
+      oweTaxRecordNum: "", // 欠税记录
+      civilJudgmentRecordNum: "", // 民事判决
+      forceImpleRecordNum: "", // 强制执行记录
+      administRecordNum: "", // 行政处罚记录
+
+      creditChageMsg1: "", // 	借款企业 征信变化情况说明
+      existCreditChage1: "", // 借款企业 征信变化是否变化
+      creditChageMsg2: "", // 	关联企业 征信变化情况说明
+      existCreditChage2: "", // 关联企业 征信变化是否变化
+      creditChageMsg3: "", // 	法人保证人 征信变化情况说明
+      existCreditChage3: "", // 法人保证人 征信变化是否变化
+
+      RecentNegativeInformation: "" //近期负面信息情况
     };
   },
-  methods: {
-    actionSheet: function() {
-      // 打开action sheet
-      this.sheetVisible = true;
-    },
-    getTrue: function() {
-      console.log("选择是");
-      this.existBadRecord = true;
-      console.log(this.existBadRecord);
-    },
-    getFalse: function() {
-      console.log("选择否");
-    },
-    goWay: function() {
-      console.log("ssss");
-      // this.sheetVisible = true;
-      this.actionSheet();
-    }
-  }
+  methods: {}
 };
 </script>
 
