@@ -9,14 +9,25 @@
 			span(class="iconfont iconxiayiye1")
 			span 上一页
 		span |
-		.next
+		.next(@click="footerNext")
 			span 下一页
 			span(class="iconfont iconxiayiye")
 			
 </template>
 
 <script>
-export default {};
+import { loanInspectionMixin } from "../../../utils/mixin";
+export default {
+  mixins: [loanInspectionMixin],
+  computed: {},
+  methods: {
+    footerNext() {
+      //随机数
+      const val = Math.floor(Math.random() * 10000 + 1);
+      this.setNextFooter({ nextFooter: val });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

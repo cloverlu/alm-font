@@ -28,6 +28,7 @@
 
 <script>
 import { loanInsList } from "../../utils/dataMock.js";
+
 export default {
   data() {
     return {
@@ -40,7 +41,8 @@ export default {
         this.$router.push({
           name: "creditFirstIndex",
           params: {
-            bizId: id
+            bizId: id,
+            type: "creditFirst"
           }
         });
       } else if (type === "小企业授信业务贷后例行检查") {

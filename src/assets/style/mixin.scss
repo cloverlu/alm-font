@@ -10,6 +10,15 @@ $ratio: 375 / 10;
   @return $px / $ratio + rem;
 }
 
+@mixin fontColorBlack {
+	color: #090909;
+}
+@mixin fontColorBlue {
+	color: #4e78de;
+}
+@mixin borderTopColor {
+	border-top:px2rem(1) solid rgba(229,229,229,1);
+}
 @mixin scroll {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -116,6 +125,16 @@ $ratio: 375 / 10;
   overflow-wrap: break-word;
 }
 
+@mixin columnBlue{
+	width: px2rem(3);
+	background-color: #4e78de;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	display: block;
+
+}
+
 @mixin shelfImgHeight {
   @media screen and (max-width:414px) {
     height: px2rem(115)
@@ -209,4 +228,31 @@ $homeAnimationTime: .2s;
 
 .opacity-slide-up-enter-active, .opacity-slide-up-leave-active {
   transition: all .2s linear;
+}
+
+// 文本域
+.textArea {
+  width: 100%;
+  height: px2rem(74);
+	border: none;
+	&.mint-cell
+		&:last-child{
+			background-image: none;
+		}
+  &:focus {
+    outline: none;
+	}
+	.mint-cell-wrapper{
+		background-image: none;
+		.mint-field-core {
+			color: #9f9f9f;
+			font-size: px2rem(14);
+			resize: none;
+			&::placeholder {
+				color: #9f9f9f;
+				font-size: px2rem(14);
+			}
+		}
+	}
+  
 }

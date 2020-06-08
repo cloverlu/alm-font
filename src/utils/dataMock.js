@@ -43,15 +43,15 @@ const todoListTitle = [
   }
 ];
 
+const bizType = [
+  "小企业授信业务首次跟踪检查",
+  "小企业授信业务贷后例行检查",
+  "小企业授信业务贷后全面检查",
+  "小企业授信业务还款资金落实情况检查",
+  "小企业法人快捷贷首次检查",
+  "小企业法人快捷贷贷后日常检查"
+];
 const loanInsList = _ => {
-  const bizType = [
-    "小企业授信业务首次跟踪检查",
-    "小企业授信业务贷后例行检查",
-    "小企业授信业务贷后全面检查",
-    "小企业授信业务还款资金落实情况检查",
-    "小企业法人快捷贷首次检查",
-    "小企业法人快捷贷贷后日常检查"
-  ];
   // 1-应做，2-未做，3-已做
   const status = [1, 2, 3];
   const bizStatus = [].concat(status, ...status);
@@ -72,4 +72,28 @@ const loanInsList = _ => {
   return data;
 };
 
-export { todoListTitle, loanInsList };
+const definite1 = {
+  custName: "张三有限公司",
+  bizType: bizType[0],
+  billBeginDate: "20200201",
+  billAmout: "50000",
+  billLength: "1个月"
+};
+
+// const payType = ["贷款人受托支付", "借款人自主支付", "受托支付+自主支付"];
+const payType = [
+  {
+    key: 1,
+    value: "贷款人受托支付"
+  },
+  {
+    key: 2,
+    value: "借款人自主支付"
+  },
+  {
+    key: 3,
+    value: "受托支付+自主支付"
+  }
+];
+
+export { todoListTitle, loanInsList, definite1, payType };

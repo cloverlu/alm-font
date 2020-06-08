@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
-import creditFirstIndex from "@/views/loanInspection/creditFirst/index";
+import creditFirstIndex from "@/views/loanInspection/creditFirst/definite-1";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/index";
 
 Vue.use(VueRouter);
@@ -23,7 +23,7 @@ const routes = [
     children: []
   },
   {
-    path: "/almHome/loanInspection",
+    path: "/loanInspection",
     name: "loanInspectionIndex",
     component: loanInspectionIndex,
     meta: {
@@ -37,7 +37,7 @@ const routes = [
     children: [
       //类型1
       {
-        path: "/almHome/loanInspection/creditFirst/:bizId",
+        path: ":type/:bizId",
         name: "creditFirstIndex",
         component: creditFirstIndex,
         meta: {
