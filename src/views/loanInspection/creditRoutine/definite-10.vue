@@ -388,13 +388,13 @@ export default {
 
 .formTitle {
   width: 100%;
-  height: px2rem(60);
+  height: px2rem(44);
   position: relative;
   .lightBlue {
     position: absolute;
     display: inline-block;
     width: px2rem(3);
-    height: px2rem(17);
+    height: px2rem(14);
     top: 50%;
     left: px2rem(18);
     transform: translate(-50%, -50%);
@@ -406,8 +406,8 @@ export default {
     position: absolute;
     display: inline-block;
     width: px2rem(3);
-    height: px2rem(17);
-    top: 40%;
+    height: px2rem(14);
+    top: 32%;
     left: px2rem(18);
     transform: translate(-50%, -50%);
     background: rgba(78, 120, 222, 1);
@@ -417,13 +417,13 @@ export default {
   .coName {
     position: absolute;
     display: inline-block;
-    height: px2rem(35);
+    height: px2rem(30);
     width: px2rem(327);
-    line-height: px2rem(20);
+    line-height: px2rem(15);
     top: 50%;
     // left: 21%;
     transform: translate(px2rem(26), -50%);
-    font-size: px2rem(15);
+    font-size: px2rem(14);
     // font-family: Source Han Sans CN;
     // font-weight: bold;
     color: rgba(78, 120, 222, 1);
@@ -432,13 +432,13 @@ export default {
   .coNameBlack {
     position: absolute;
     display: inline-block;
-    height: px2rem(23);
+    height: px2rem(14);
     width: 100%;
-    line-height: px2rem(20);
+    line-height: px2rem(15);
     top: 50%;
     // left: 21%;
     transform: translate(px2rem(26), -50%);
-    font-size: px2rem(15);
+    font-size: px2rem(14);
     // font-family: Source Han Sans CN;
     // font-weight: bold;
     color: rgba(113, 113, 113, 1);
@@ -455,7 +455,7 @@ export default {
     position: absolute;
     display: inline-block;
     width: px2rem(3);
-    height: px2rem(17);
+    height: px2rem(14);
     top: 30%;
     left: px2rem(18);
     transform: translate(-50%, -50%);
@@ -467,7 +467,7 @@ export default {
     position: absolute;
     display: inline-block;
     width: px2rem(3);
-    height: px2rem(17);
+    height: px2rem(14);
     top: 70%;
     left: px2rem(18);
     transform: translate(-50%, -50%);
@@ -478,12 +478,12 @@ export default {
   .coNameBlack {
     position: absolute;
     display: inline-block;
-    height: px2rem(20);
+    height: px2rem(14);
     width: px2rem(327);
-    line-height: px2rem(20);
+    line-height: px2rem(15);
     top: 30%;
     transform: translate(px2rem(26), -50%);
-    font-size: px2rem(15);
+    font-size: px2rem(14);
     // font-family: Source Han Sans CN;
     // font-weight: bold;
     color: rgba(113, 113, 113, 1);
@@ -492,12 +492,12 @@ export default {
   .coNameBlack1 {
     position: absolute;
     display: inline-block;
-    height: px2rem(20);
+    height: px2rem(14);
     width: px2rem(327);
-    line-height: px2rem(20);
+    line-height: px2rem(15);
     top: 70%;
     transform: translate(px2rem(26), -50%);
-    font-size: px2rem(15);
+    font-size: px2rem(14);
     // font-family: Source Han Sans CN;
     // font-weight: bold;
     color: rgba(113, 113, 113, 1);
@@ -630,9 +630,12 @@ textarea {
     font-size: px2rem(14);
   }
   .mint-cell-value {
+    color: #888;
+    font-size: px2rem(14);
     .mint-field-core {
       text-align: right;
       color: #888;
+      font-size: px2rem(14);
     }
   }
 }
