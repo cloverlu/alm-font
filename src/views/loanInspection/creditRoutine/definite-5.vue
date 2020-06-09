@@ -130,13 +130,13 @@ export default {
 
   .formTitle {
     width: 100%;
-    height: px2rem(50);
+    height: px2rem(44);
     position: relative;
     .lightBlue {
       position: absolute;
       display: inline-block;
       width: px2rem(3);
-      height: px2rem(17);
+      height: px2rem(14);
       top: 50%;
       left: px2rem(18);
       transform: translate(-50%, -50%);
@@ -147,9 +147,9 @@ export default {
     .coName {
       position: absolute;
       display: inline-block;
-      height: px2rem(23);
+      height: px2rem(14);
       width: 100%;
-      line-height: px2rem(20);
+      line-height: px2rem(15);
       top: 50%;
       // left: 21%;
       transform: translate(px2rem(26), -50%);

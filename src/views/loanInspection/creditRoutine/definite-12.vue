@@ -48,7 +48,7 @@
             type="textarea"
             rows="3"
             v-model="requireCheck"
-            class="text is-nolabel"
+            class="text is-nolabel textArea"
             style="overflow:hidden"
             placeholder="xxx1"
           ></mt-field>
@@ -57,7 +57,7 @@
             type="textarea"
             rows="3"
             v-model="checked"
-            class="text"
+            class="text textArea"
             style="overflow:hidden"
             placeholder="xxx2"
           ></mt-field>
@@ -84,7 +84,7 @@
             type="textarea"
             rows="3"
             v-model="specialChecked"
-            class="text"
+            class="text textArea"
             style="overflow:hidden"
             placeholder="xxx4"
           ></mt-field>
@@ -105,7 +105,7 @@
             type="textarea"
             rows="3"
             v-model="HoldPensonRisk"
-            class="text"
+            class="text textArea"
             style="overflow:hidden"
             placeholder="xxx5"
           ></mt-field>
@@ -126,7 +126,7 @@
             type="textarea"
             rows="3"
             v-model="managerRisk"
-            class="text"
+            class="text textArea"
             style="overflow:hidden"
             placeholder="xxx6"
           ></mt-field>
@@ -143,7 +143,7 @@
             type="textarea"
             rows="3"
             v-model="otherRisk"
-            class="text"
+            class="text textArea"
             style="overflow:hidden"
             placeholder="xxx7"
           ></mt-field>
@@ -187,7 +187,7 @@ export default {
       position: absolute;
       display: inline-block;
       width: px2rem(3);
-      height: px2rem(17);
+      height: px2rem(14);
       top: 50%;
       left: px2rem(10);
       transform: translate(-50%, -50%);
@@ -198,13 +198,13 @@ export default {
     .coName {
       position: absolute;
       display: inline-block;
-      height: px2rem(23);
+      height: px2rem(14);
       width: px2rem(120);
-      line-height: px2rem(20);
+      line-height: px2rem(15);
       top: 50%;
       left: 21%;
       transform: translate(-50%, -50%);
-      font-size: px2rem(15);
+      font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
       color: rgba(9, 9, 9, 1);
@@ -228,7 +228,7 @@ export default {
   .title {
     width: px2rem(60);
     height: px2rem(23);
-    font-size: px2rem(15);
+    font-size: px2rem(14);
     // font-family: Source Han Sans CN;
     // font-weight: bold;
     line-height: px2rem(20);
@@ -245,7 +245,7 @@ export default {
       position: absolute;
       display: inline-block;
       width: px2rem(3);
-      height: px2rem(17);
+      height: px2rem(14);
       top: 50%;
       left: px2rem(10);
       transform: translate(-50%, -50%);
@@ -256,13 +256,13 @@ export default {
     .coName {
       position: absolute;
       display: inline-block;
-      height: px2rem(23);
+      height: px2rem(14);
       width: 100%;
-      line-height: px2rem(20);
+      line-height: px2rem(15);
       top: 50%;
       // left: 21%;
       transform: translate(px2rem(16), -50%);
-      font-size: px2rem(15);
+      font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
       color: rgba(78, 120, 222, 1);
@@ -325,12 +325,12 @@ export default {
 //   }
 // }
 // 禁止文本框放大缩小
-textarea {
-  resize: none;
-  font-size: px2rem(14);
-  font-family: Source Han Sans CN;
-  font-weight: 500;
-  color: rgba(183, 183, 183, 1);
-  opacity: 1;
-}
+// textarea {
+//   resize: none;
+//   font-size: px2rem(14);
+//   // font-family: Source Han Sans CN;
+//   font-weight: 500;
+//   color: rgba(183, 183, 183, 1);
+//   opacity: 1;
+// }
 </style>

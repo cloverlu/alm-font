@@ -7,10 +7,10 @@
   <div class="checkDetail">
     <!-- 公司信息 -->
     <div class="companyInformation">
-      <div class="formTitle">
+      <!-- <div class="formTitle">
         <span class="lightBlue"></span>
         <span class="coName">{{ DetailsOfIOU.orgName }}</span>
-      </div>
+      </div> -->
       <div class="formBody">
         <mt-field
           class="textFiled"
