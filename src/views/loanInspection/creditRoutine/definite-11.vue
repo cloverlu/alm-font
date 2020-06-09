@@ -13,7 +13,11 @@
           <span class="lightBlue"></span>
           <span class="coName">基于企业征信报告</span>
         </div>
-        <mt-cell title="征信报告查询日期" :value="queryDate"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="征信报告查询日期"
+          :value="queryDate"
+        ></mt-cell>
       </div>
 
       <div class="enterpriseCredit">
@@ -267,7 +271,11 @@ export default {
       // }
     };
   },
-  methods: {}
+  methods: {
+    getSelect: function() {
+      console.log("ssss");
+    }
+  }
 };
 </script>
 
@@ -327,8 +335,8 @@ export default {
       // left: 21%;
       transform: translate(px2rem(26), -50%);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(113, 113, 113, 1);
       opacity: 1;
     }
@@ -342,7 +350,7 @@ export default {
     line-height: px2rem(50);
     padding: 0 px2rem(10);
     display: flex;
-    font-size: px2rem(16);
+    font-size: px2rem(14);
     box-sizing: border-box;
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-child {
@@ -350,13 +358,13 @@ export default {
       padding: 0;
     }
     .tag {
-      font-family: Source Han Sans CN;
-      font-weight: bolder;
+      // font-family: Source Han Sans CN;
+      // font-weight: bolder;
       width: px2rem(270);
       text-align: left;
       color: #090909;
       height: px2rem(50);
-      font-size: px2rem(16);
+      font-size: px2rem(14);
       line-height: px2rem(20);
       padding-top: px2rem(5);
     }
@@ -396,7 +404,7 @@ export default {
     line-height: px2rem(44);
     padding: 0 px2rem(10);
     display: flex;
-    font-size: px2rem(16);
+    font-size: px2rem(14);
     box-sizing: border-box;
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-child {
@@ -404,13 +412,13 @@ export default {
       padding: 0;
     }
     .tag {
-      font-family: Source Han Sans CN;
-      font-weight: bolder;
+      // font-family: Source Han Sans CN;
+      // font-weight: bolder;
       width: px2rem(270);
       text-align: left;
       color: #090909;
       height: px2rem(44);
-      font-size: px2rem(16);
+      font-size: px2rem(14);
       line-height: px2rem(44);
     }
     .arrow {
@@ -445,8 +453,8 @@ export default {
   .coNo1 {
     height: px2rem(12);
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     line-height: px2rem(20);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
@@ -456,8 +464,8 @@ export default {
   .coNo2 {
     height: px2rem(44);
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     line-height: px2rem(44);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
@@ -467,8 +475,8 @@ export default {
   .coNo3 {
     height: px2rem(44);
     font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
+    // font-family: Source Han Sans CN;
+    // font-weight: 700;
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
@@ -490,8 +498,8 @@ export default {
 
   .text {
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     color: rgba(9, 9, 9, 1);
     opacity: 1;
   }

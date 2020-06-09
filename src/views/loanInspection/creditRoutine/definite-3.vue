@@ -26,7 +26,7 @@
           ></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-cell title="预警信号说明"></mt-cell>
+        <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
@@ -36,7 +36,7 @@
           :placeholder="riskMsg"
         ></mt-field>
 
-        <mt-cell title="检查结论及措施建议"></mt-cell>
+        <mt-cell class="textFiled" title="检查结论及措施建议"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
@@ -84,6 +84,9 @@ export default {
   methods: {
     click: function() {
       console.log("ssss");
+    },
+    getSelect: function() {
+      console.log("ssss");
     }
   }
 };
@@ -99,8 +102,8 @@ export default {
       // width: px2rem(60);
       height: px2rem(23);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       line-height: px2rem(20);
       color: rgba(9, 9, 9, 1);
       opacity: 1;
@@ -133,8 +136,8 @@ export default {
         // left: 21%;
         transform: translate(px2rem(26), -50%);
         font-size: px2rem(14);
-        font-family: Source Han Sans CN;
-        font-weight: bold;
+        // font-family: Source Han Sans CN;
+        // font-weight: bold;
         color: rgba(78, 120, 222, 1);
         opacity: 1;
       }
@@ -148,8 +151,8 @@ export default {
         // left: 21%;
         transform: translate(px2rem(26), -50%);
         font-size: px2rem(15);
-        font-family: Source Han Sans CN;
-        font-weight: bold;
+        // font-family: Source Han Sans CN;
+        // font-weight: bold;
         color: rgba(113, 113, 113, 1);
         opacity: 1;
       }
@@ -158,8 +161,8 @@ export default {
     .coNo1 {
       height: px2rem(12);
       font-size: px2rem(12);
-      font-family: Source Han Sans CN;
-      font-weight: 500;
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
       line-height: px2rem(20);
       color: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -169,8 +172,8 @@ export default {
     .coNo2 {
       height: px2rem(44);
       font-size: px2rem(12);
-      font-family: Source Han Sans CN;
-      font-weight: 500;
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
       line-height: px2rem(44);
       color: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -180,8 +183,8 @@ export default {
     .coNo3 {
       height: px2rem(44);
       font-size: px2rem(14);
-      font-family: Source Han Sans CN;
-      font-weight: 700;
+      // font-family: Source Han Sans CN;
+      // font-weight: 700;
       line-height: px2rem(44);
       color: rgba(9, 9, 9, 1);
       opacity: 1;
@@ -203,8 +206,8 @@ export default {
 
     .text {
       font-size: px2rem(12);
-      font-family: Source Han Sans CN;
-      font-weight: 500;
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
       color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
@@ -216,7 +219,7 @@ export default {
       line-height: px2rem(44);
       padding: 0 px2rem(10);
       display: flex;
-      font-size: px2rem(16);
+      font-size: px2rem(14);
       box-sizing: border-box;
       border-top: px2rem(1) solid rgba(229, 229, 229, 1);
       &:last-child {
@@ -224,13 +227,13 @@ export default {
         padding: 0;
       }
       .tag {
-        font-family: Source Han Sans CN;
-        font-weight: bolder;
+        // font-family: Source Han Sans CN;
+        // font-weight: bolder;
         width: px2rem(270);
         text-align: left;
         color: #090909;
         height: px2rem(44);
-        font-size: px2rem(16);
+        font-size: px2rem(14);
         line-height: px2rem(44);
       }
       .arrow {
@@ -265,12 +268,12 @@ export default {
     .signBox {
       height: px2rem(44);
       font-size: px2rem(14);
-      font-family: Source Han Sans CN;
-      font-weight: 700;
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
       line-height: px2rem(44);
       color: rgba(9, 9, 9, 1);
       opacity: 1;
-      padding: 0 px2rem(8);
+      padding: 0 px2rem(15);
       background-color: #fff;
       .right {
         float: right;
@@ -285,8 +288,8 @@ export default {
     .mint-button--primary {
       background-color: rgba(78, 120, 222, 1);
       font-size: 18px;
-      font-family: Source Han Sans CN;
-      font-weight: 500;
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
       color: rgba(255, 255, 255, 1);
       opacity: 1;
     }

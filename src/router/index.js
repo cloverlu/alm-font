@@ -82,7 +82,7 @@ const routes = [
       {
         path: "/almHome/loanInspection/creditRoutine/:bizId",
         name: "creditRoutineIndex",
-        component: definite10,
+        component: creditRoutineIndex,
         meta: {
           title: "检查申请明细",
           tag: "resave",
