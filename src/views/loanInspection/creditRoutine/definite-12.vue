@@ -12,10 +12,26 @@
         <span class="coName">{{ DetailsOfIOU.orgName }}</span>
       </div>
       <div class="formBody">
-        <mt-cell title="检查类型" :value="DetailsOfIOU.checkType"></mt-cell>
-        <mt-cell title="客户名称" :value="DetailsOfIOU.custName"></mt-cell>
-        <mt-cell title="授信金额" :value="DetailsOfIOU.lineAmout"></mt-cell>
-        <mt-cell title="贷款余额" :value="DetailsOfIOU.lineBalance"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="检查类型"
+          :value="DetailsOfIOU.checkType"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="客户名称"
+          :value="DetailsOfIOU.custName"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="授信金额"
+          :value="DetailsOfIOU.lineAmout"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="贷款余额"
+          :value="DetailsOfIOU.lineBalance"
+        ></mt-cell>
       </div>
     </div>
     <!--填写信息  -->
@@ -27,7 +43,7 @@
           <span class="coName">审批意见中贷后日常检查要求及落实情况</span>
         </div>
         <div class="textarea">
-          <mt-cell title="要求" class="textUpTitle"></mt-cell>
+          <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
           <mt-field
             type="textarea"
             rows="3"
@@ -36,7 +52,7 @@
             style="overflow:hidden"
             placeholder="xxx1"
           ></mt-field>
-          <mt-cell title="落实情况" class="textUpTitle"></mt-cell>
+          <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
           <mt-field
             type="textarea"
             rows="3"
@@ -54,7 +70,7 @@
           <span class="coName">产品贷后日常检查特殊要求及落实情况</span>
         </div>
         <div class="textarea">
-          <mt-cell title="要求" class="textUpTitle"></mt-cell>
+          <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
           <mt-field
             type="textarea"
             rows="3"
@@ -63,7 +79,7 @@
             style="overflow:hidden"
             placeholder="xxx3"
           ></mt-field>
-          <mt-cell title="落实情况" class="textUpTitle"></mt-cell>
+          <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
           <mt-field
             type="textarea"
             rows="3"
@@ -83,7 +99,7 @@
         <div class="textarea">
           <mt-cell
             title="健康、 嗜好、家庭关系等方面"
-            class="textUpTitle"
+            class="textFiled textUpTitle"
           ></mt-cell>
           <mt-field
             type="textarea"
@@ -104,7 +120,7 @@
         <div class="textarea">
           <mt-cell
             title="股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题"
-            class="textUpTitle"
+            class="textFiled textUpTitle"
           ></mt-cell>
           <mt-field
             type="textarea"
@@ -189,8 +205,8 @@ export default {
       left: 21%;
       transform: translate(-50%, -50%);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
@@ -202,40 +218,6 @@ export default {
       background: rgba(255, 255, 255, 1);
       border-top: px2rem(1) solid rgba(229, 229, 229, 1);
       opacity: 1;
-      // .mint-cell-wrapper {
-      //   .mint-cell-title {
-      //     height: px2rem(14);
-      //     font-size: px2rem(14);
-      //     font-family: Source Han Sans CN;
-      //     font-weight: 500;
-      //     line-height: px2rem(20);
-      //     color: rgba(9, 9, 9, 1);
-      //     opacity: 1;
-      //     span {
-      //       display: inline-block;
-      //       height: px2rem(14);
-      //       font-size: px2rem(14);
-      //       font-family: Source Han Sans CN;
-      //       font-weight: 500;
-      //       line-height: px2rem(20);
-      //       color: rgba(9, 9, 9, 1);
-      //       opacity: 1;
-      //     }
-      //   }
-      //   .mint-cell-value {
-      //     span {
-      //       display: inline-block;
-      //       height: px2rem(14);
-      //       font-size: px2rem(14);
-      //       font-family: Source Han Sans CN;
-      //       font-weight: 500;
-      //       line-height: px2rem(20);
-      //       color: rgba(159, 159, 159, 1);
-      //       opacity: 1;
-      //     }
-      //   }
-      // }
-
       &:last-of-type {
         border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
       }
@@ -247,8 +229,8 @@ export default {
     width: px2rem(60);
     height: px2rem(23);
     font-size: px2rem(15);
-    font-family: Source Han Sans CN;
-    font-weight: bold;
+    // font-family: Source Han Sans CN;
+    // font-weight: bold;
     line-height: px2rem(20);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
@@ -281,8 +263,8 @@ export default {
       // left: 21%;
       transform: translate(px2rem(16), -50%);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(78, 120, 222, 1);
       opacity: 1;
     }
@@ -291,8 +273,8 @@ export default {
     .textUpTitle {
       height: px2rem(14);
       font-size: px2rem(14);
-      font-family: Source Han Sans CN;
-      font-weight: 700;
+      // font-family: Source Han Sans CN;
+      // font-weight: 700;
       line-height: px2rem(20);
       color: rgba(9, 9, 9, 1);
       opacity: 1;
@@ -309,39 +291,39 @@ export default {
 
 <style lang="scss">
 // 公司信息字体格式调整
-.formBody {
-  .mint-cell-text {
-    height: px2rem(14);
-    font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
-    line-height: px2rem(20);
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-  }
-  .mint-cell-value {
-    display: inline-block;
-    height: px2rem(14);
-    font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
-    line-height: px2rem(20);
-    color: rgba(159, 159, 159, 1);
-    opacity: 1;
-  }
-}
-.textarea {
-  .mint-cell-title {
-    height: px2rem(14);
-    font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
-    line-height: px2rem(20);
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-  }
-}
+// .formBody {
+//   .mint-cell-text {
+//     height: px2rem(14);
+//     font-size: px2rem(14);
+//     // font-family: Source Han Sans CN;
+//     // font-weight: 700;
+//     line-height: px2rem(20);
+//     color: rgba(9, 9, 9, 1);
+//     opacity: 1;
+//   }
+//   .mint-cell-value {
+//     display: inline-block;
+//     height: px2rem(14);
+//     font-size: px2rem(14);
+//     // font-family: Source Han Sans CN;
+//     // font-weight: 500;
+//     line-height: px2rem(20);
+//     color: rgba(159, 159, 159, 1);
+//     opacity: 1;
+//   }
+// }
+// .textarea {
+//   .mint-cell-title {
+//     height: px2rem(14);
+//     font-size: px2rem(14);
+//     // font-family: Source Han Sans CN;
+//     // font-weight: 700;
+//     line-height: px2rem(20);
+//     color: rgba(9, 9, 9, 1);
+//     opacity: 1;
+//     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+//   }
+// }
 // 禁止文本框放大缩小
 textarea {
   resize: none;

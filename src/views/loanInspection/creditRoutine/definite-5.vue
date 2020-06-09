@@ -19,14 +19,14 @@
           placeholder="10"
           v-model="stockLastBalance"
         ></mt-field>
-        <mt-cell title="本次检查存货变动情况"></mt-cell>
+        <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
           v-model="stockChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="sss"
+          placeholder="sss"
         ></mt-field>
       </div>
 
@@ -43,14 +43,14 @@
           placeholder="10"
           v-model="busIncLastBalance"
         ></mt-field>
-        <mt-cell title="本次检查营业收入变动情况"></mt-cell>
+        <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
           v-model="busIncChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="xxx"
+          placeholder="xxx"
         ></mt-field>
 
         <!-- 加工制造类 -->
@@ -66,14 +66,14 @@
           placeholder="10"
           v-model="dailyExpenLastBalance"
         ></mt-field>
-        <mt-cell title="本次检查变动情况"></mt-cell>
+        <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
           v-model="dailyExpenChangSitu"
           class="text"
           style="overflow:hidden"
-          :placeholder="xxx"
+          placeholder="xxx"
         ></mt-field>
 
         <mt-field
@@ -82,7 +82,7 @@
           class="text"
           v-model="proAndOpeAbnormalSuitMsg"
           style="overflow:hidden"
-          :placeholder="DetailsOfIOU.proAndOpeAbnormalSuitMsg"
+          placeholder="DetailsOfIOU.proAndOpeAbnormalSuitMsg"
         ></mt-field>
       </div>
     </div>
@@ -120,8 +120,8 @@ export default {
     // width: px2rem(60);
     height: px2rem(23);
     font-size: px2rem(15);
-    font-family: Source Han Sans CN;
-    font-weight: bold;
+    // font-family: Source Han Sans CN;
+    // font-weight: bold;
     line-height: px2rem(20);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
@@ -154,8 +154,8 @@ export default {
       // left: 21%;
       transform: translate(px2rem(26), -50%);
       font-size: px2rem(14);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(78, 120, 222, 1);
       opacity: 1;
     }
@@ -169,8 +169,8 @@ export default {
       // left: 21%;
       transform: translate(px2rem(26), -50%);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(113, 113, 113, 1);
       opacity: 1;
     }
@@ -179,8 +179,8 @@ export default {
   .coNo1 {
     height: px2rem(12);
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     line-height: px2rem(20);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
@@ -190,8 +190,8 @@ export default {
   .coNo2 {
     height: px2rem(44);
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     line-height: px2rem(44);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
@@ -201,8 +201,8 @@ export default {
   .coNo3 {
     height: px2rem(44);
     font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
+    // font-family: Source Han Sans CN;
+    // font-weight: 700;
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
@@ -224,8 +224,8 @@ export default {
 
   .text {
     font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
+    // font-family: Source Han Sans CN;
+    // font-weight: 500;
     color: rgba(9, 9, 9, 1);
     opacity: 1;
   }

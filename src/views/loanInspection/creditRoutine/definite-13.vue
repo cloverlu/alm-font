@@ -16,7 +16,7 @@
           class="textFiled"
           label="检查地点"
           placeholder="10"
-          v-model="checkAddr"
+          v-model="params.checkAddr"
         ></mt-field>
         <!-- <mt-field
           class="textFiled"
@@ -46,7 +46,7 @@
           class="textFiled"
           label="接待人员"
           placeholder="10"
-          v-model="staff"
+          v-model="params.staff"
         ></mt-field>
       </div>
     </div>
@@ -115,8 +115,8 @@ export default {
       left: 21%;
       transform: translate(-50%, -50%);
       font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
       color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
@@ -129,7 +129,7 @@ export default {
       line-height: px2rem(44);
       padding: 0 px2rem(10);
       display: flex;
-      font-size: px2rem(16);
+      font-size: px2rem(14);
       box-sizing: border-box;
       border-top: px2rem(1) solid rgba(229, 229, 229, 1);
       &:last-child {
@@ -137,8 +137,8 @@ export default {
         padding: 0;
       }
       .tag {
-        font-family: Source Han Sans CN;
-        font-weight: bolder;
+        // font-family: Source Han Sans CN;
+        // font-weight: bolder;
         flex: 0 0 px2rem(100);
         text-align: left;
         color: #090909;
