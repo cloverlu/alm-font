@@ -1,155 +1,158 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 检查申请明细-12
  * @Author: sunhua
  * @Date: 2020-06-05 9:03:54
 -->
 <template>
   <div class="checkDetail">
-    <!-- 公司信息 -->
-    <div class="companyInformation">
-      <div class="formTitle">
-        <span class="lightBlue"></span>
-        <span class="coName">{{ DetailsOfIOU.orgName }}</span>
+    <div class="definte12-wrapper" v-if="hasRouterChild2">
+      <!-- 公司信息 -->
+      <div class="companyInformation">
+        <div class="formTitle">
+          <span class="lightBlue"></span>
+          <span class="coName">{{ DetailsOfIOU.orgName }}</span>
+        </div>
+        <div class="formBody">
+          <mt-cell
+            class="textFiled"
+            title="检查类型"
+            :value="DetailsOfIOU.checkType"
+          ></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="客户名称"
+            :value="DetailsOfIOU.custName"
+          ></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="授信金额"
+            :value="DetailsOfIOU.lineAmout"
+          ></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="贷款余额"
+            :value="DetailsOfIOU.lineBalance"
+          ></mt-cell>
+        </div>
       </div>
-      <div class="formBody">
-        <mt-cell
-          class="textFiled"
-          title="检查类型"
-          :value="DetailsOfIOU.checkType"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="客户名称"
-          :value="DetailsOfIOU.custName"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="授信金额"
-          :value="DetailsOfIOU.lineAmout"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="贷款余额"
-          :value="DetailsOfIOU.lineBalance"
-        ></mt-cell>
+      <!--填写信息  -->
+      <div class="fillInInformation">
+        <div class="title">填写信息</div>
+        <div class="dailyCheck">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">审批意见中贷后日常检查要求及落实情况</span>
+          </div>
+          <div class="textarea">
+            <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="requireCheck"
+              class="text is-nolabel textArea"
+              style="overflow:hidden"
+              placeholder="xxx1"
+            ></mt-field>
+            <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="checked"
+              class="text textArea"
+              style="overflow:hidden"
+              placeholder="xxx2"
+            ></mt-field>
+          </div>
+        </div>
+
+        <div class="specialRequirements">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">产品贷后日常检查特殊要求及落实情况</span>
+          </div>
+          <div class="textarea">
+            <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="specialRequireCheck"
+              class="text"
+              style="overflow:hidden"
+              placeholder="xxx3"
+            ></mt-field>
+            <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="specialChecked"
+              class="text textArea"
+              style="overflow:hidden"
+              placeholder="xxx4"
+            ></mt-field>
+          </div>
+        </div>
+
+        <div class="actualController">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">实际控制人或法定代表人风险点</span>
+          </div>
+          <div class="textarea">
+            <mt-cell
+              title="健康、 嗜好、家庭关系等方面"
+              class="textFiled textUpTitle"
+            ></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="HoldPensonRisk"
+              class="text textArea"
+              style="overflow:hidden"
+              placeholder="xxx5"
+            ></mt-field>
+          </div>
+        </div>
+
+        <div class="management">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">管理层风险点</span>
+          </div>
+          <div class="textarea">
+            <mt-cell
+              title="股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题"
+              class="textFiled textUpTitle"
+            ></mt-cell>
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="managerRisk"
+              class="text textArea"
+              style="overflow:hidden"
+              placeholder="xxx6"
+            ></mt-field>
+          </div>
+        </div>
+
+        <div class="recentInspection">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">近期检查发现的其他风险点</span>
+          </div>
+          <div class="textarea">
+            <mt-field
+              type="textarea"
+              rows="3"
+              v-model="otherRisk"
+              class="text textArea"
+              style="overflow:hidden"
+              placeholder="xxx7"
+            ></mt-field>
+          </div>
+        </div>
       </div>
     </div>
-    <!--填写信息  -->
-    <div class="fillInInformation">
-      <div class="title">填写信息</div>
-      <div class="dailyCheck">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">审批意见中贷后日常检查要求及落实情况</span>
-        </div>
-        <div class="textarea">
-          <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="requireCheck"
-            class="text is-nolabel textArea"
-            style="overflow:hidden"
-            placeholder="xxx1"
-          ></mt-field>
-          <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="checked"
-            class="text textArea"
-            style="overflow:hidden"
-            placeholder="xxx2"
-          ></mt-field>
-        </div>
-      </div>
-
-      <div class="specialRequirements">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">产品贷后日常检查特殊要求及落实情况</span>
-        </div>
-        <div class="textarea">
-          <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="specialRequireCheck"
-            class="text"
-            style="overflow:hidden"
-            placeholder="xxx3"
-          ></mt-field>
-          <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="specialChecked"
-            class="text textArea"
-            style="overflow:hidden"
-            placeholder="xxx4"
-          ></mt-field>
-        </div>
-      </div>
-
-      <div class="actualController">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">实际控制人或法定代表人风险点</span>
-        </div>
-        <div class="textarea">
-          <mt-cell
-            title="健康、 嗜好、家庭关系等方面"
-            class="textFiled textUpTitle"
-          ></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="HoldPensonRisk"
-            class="text textArea"
-            style="overflow:hidden"
-            placeholder="xxx5"
-          ></mt-field>
-        </div>
-      </div>
-
-      <div class="management">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">管理层风险点</span>
-        </div>
-        <div class="textarea">
-          <mt-cell
-            title="股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题"
-            class="textFiled textUpTitle"
-          ></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="managerRisk"
-            class="text textArea"
-            style="overflow:hidden"
-            placeholder="xxx6"
-          ></mt-field>
-        </div>
-      </div>
-
-      <div class="recentInspection">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">近期检查发现的其他风险点</span>
-        </div>
-        <div class="textarea">
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="otherRisk"
-            class="text textArea"
-            style="overflow:hidden"
-            placeholder="xxx7"
-          ></mt-field>
-        </div>
-      </div>
-    </div>
+    <router-view v-else></router-view>
   </div>
 </template>
 
@@ -160,6 +163,7 @@ export default {
   components: { "mt-cell": Cell, "mt-field": Field },
   data() {
     return {
+      hasRouterChild2: this.$route.params.hasRouterChild2,
       DetailsOfIOU: DetailsOfIOU,
       requireCheck: "", // 审批意见要求
       checked: "", // 审批意见落实情况
@@ -169,6 +173,14 @@ export default {
       managerRisk: "", // 管理层风险点
       otherRisk: "" // 其他风险点
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    to.params.hasRouterChild2 = to.name === "creditRoutineIndex";
+    next();
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.hasRouterChild2 = to.name === "creditRoutineIndex";
+    next();
   }
 };
 </script>

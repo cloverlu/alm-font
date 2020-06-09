@@ -35,6 +35,18 @@ export default {
         } else if (currentName === "definite2") {
           this.$router.push({ name: "definite3" });
         }
+      } else if (currentType === "loanCreditRoutine") {
+        if (currentName === "creditRoutineIndex") {
+          this.$router.push({ name: "definite13" });
+        } else if (currentName === "definite13") {
+          this.$router.push({ name: "definite11" });
+        } else if (currentName === "definite11") {
+          this.$router.push({ name: "definite10" });
+        } else if (currentName === "definite10") {
+          this.$router.push({ name: "definite5" });
+        } else if (currentName === "definite5") {
+          this.$router.push({ name: "definite3" });
+        }
       }
 
       //随机数
