@@ -4,6 +4,11 @@ import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
 import creditFirstIndex from "@/views/loanInspection/creditFirst/definite-1";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
+import definite13 from "@/views/loanInspection/creditRoutine/definite-13";
+import definite11 from "@/views/loanInspection/creditRoutine/definite-11";
+import definite10 from "@/views/loanInspection/creditRoutine/definite-10";
+import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
+import definite3 from "@/views/loanInspection/creditRoutine/definite-3";
 
 Vue.use(VueRouter);
 
@@ -51,13 +56,74 @@ const routes = [
       {
         path: "/almHome/loanInspection/creditRoutine/:bizId",
         name: "creditRoutineIndex",
-        component: creditRoutineIndex,
+        component: definite10,
         meta: {
           title: "检查申请明细",
           tag: "resave",
           footer: true
         },
-        children: []
+        children: [
+          // 申请明细13
+          {
+            path: "/almHome/loanInspection/creditRoutine/definite13/:bizId",
+            name: "definite13",
+            component: definite13,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细11
+          {
+            path: "/almHome/loanInspection/creditRoutine/definite11/:bizId",
+            name: "definite11",
+            component: definite11,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细10
+          {
+            path: "/almHome/loanInspection/creditRoutine/definite10/:bizId",
+            name: "definite10",
+            component: definite10,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细11
+          {
+            path: "/almHome/loanInspection/creditRoutine/definite5/:bizId",
+            name: "definite5",
+            component: definite5,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细11
+          {
+            path: "/almHome/loanInspection/creditRoutine/definite3/:bizId",
+            name: "definite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          }
+        ]
       }
     ]
   }

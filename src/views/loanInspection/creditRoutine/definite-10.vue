@@ -303,214 +303,214 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/style/global.scss";
-.coInformation {
-  .title {
-    // width: px2rem(60);
-    height: px2rem(23);
+// .coInformation {
+.title {
+  // width: px2rem(60);
+  height: px2rem(23);
+  font-size: px2rem(15);
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  line-height: px2rem(20);
+  color: rgba(9, 9, 9, 1);
+  opacity: 1;
+  margin: px2rem(6) px2rem(17) px2rem(-8);
+}
+
+.formTitle {
+  width: 100%;
+  height: px2rem(60);
+  position: relative;
+  .lightBlue {
+    position: absolute;
+    display: inline-block;
+    width: px2rem(3);
+    height: px2rem(17);
+    top: 50%;
+    left: px2rem(18);
+    transform: translate(-50%, -50%);
+    background: rgba(78, 120, 222, 1);
+    opacity: 1;
+    border-radius: px2rem(2);
+  }
+  .lightBlue2 {
+    position: absolute;
+    display: inline-block;
+    width: px2rem(3);
+    height: px2rem(17);
+    top: 40%;
+    left: px2rem(18);
+    transform: translate(-50%, -50%);
+    background: rgba(78, 120, 222, 1);
+    opacity: 1;
+    border-radius: px2rem(2);
+  }
+  .coName {
+    position: absolute;
+    display: inline-block;
+    height: px2rem(35);
+    width: px2rem(327);
+    line-height: px2rem(20);
+    top: 50%;
+    // left: 21%;
+    transform: translate(px2rem(26), -50%);
     font-size: px2rem(15);
     font-family: Source Han Sans CN;
     font-weight: bold;
-    line-height: px2rem(20);
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-    margin: px2rem(6) px2rem(17) px2rem(-8);
-  }
-
-  .formTitle {
-    width: 100%;
-    height: px2rem(60);
-    position: relative;
-    .lightBlue {
-      position: absolute;
-      display: inline-block;
-      width: px2rem(3);
-      height: px2rem(17);
-      top: 50%;
-      left: px2rem(18);
-      transform: translate(-50%, -50%);
-      background: rgba(78, 120, 222, 1);
-      opacity: 1;
-      border-radius: px2rem(2);
-    }
-    .lightBlue2 {
-      position: absolute;
-      display: inline-block;
-      width: px2rem(3);
-      height: px2rem(17);
-      top: 40%;
-      left: px2rem(18);
-      transform: translate(-50%, -50%);
-      background: rgba(78, 120, 222, 1);
-      opacity: 1;
-      border-radius: px2rem(2);
-    }
-    .coName {
-      position: absolute;
-      display: inline-block;
-      height: px2rem(35);
-      width: px2rem(327);
-      line-height: px2rem(20);
-      top: 50%;
-      // left: 21%;
-      transform: translate(px2rem(26), -50%);
-      font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
-      color: rgba(78, 120, 222, 1);
-      opacity: 1;
-    }
-    .coNameBlack {
-      position: absolute;
-      display: inline-block;
-      height: px2rem(23);
-      width: 100%;
-      line-height: px2rem(20);
-      top: 50%;
-      // left: 21%;
-      transform: translate(px2rem(26), -50%);
-      font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
-      color: rgba(113, 113, 113, 1);
-      opacity: 1;
-    }
-  }
-
-  .formTitle1 {
-    width: 100%;
-    box-sizing: border-box;
-    height: px2rem(65);
-    position: relative;
-    .lightBlue {
-      position: absolute;
-      display: inline-block;
-      width: px2rem(3);
-      height: px2rem(17);
-      top: 30%;
-      left: px2rem(18);
-      transform: translate(-50%, -50%);
-      background: rgba(78, 120, 222, 1);
-      opacity: 1;
-      border-radius: px2rem(2);
-    }
-    .lightBlue1 {
-      position: absolute;
-      display: inline-block;
-      width: px2rem(3);
-      height: px2rem(17);
-      top: 70%;
-      left: px2rem(18);
-      transform: translate(-50%, -50%);
-      background: rgba(78, 120, 222, 1);
-      opacity: 1;
-      border-radius: px2rem(2);
-    }
-    .coNameBlack {
-      position: absolute;
-      display: inline-block;
-      height: px2rem(20);
-      width: px2rem(327);
-      line-height: px2rem(20);
-      top: 30%;
-      transform: translate(px2rem(26), -50%);
-      font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
-      color: rgba(113, 113, 113, 1);
-      opacity: 1;
-    }
-    .coNameBlack1 {
-      position: absolute;
-      display: inline-block;
-      height: px2rem(20);
-      width: px2rem(327);
-      line-height: px2rem(20);
-      top: 70%;
-      transform: translate(px2rem(26), -50%);
-      font-size: px2rem(15);
-      font-family: Source Han Sans CN;
-      font-weight: bold;
-      color: rgba(113, 113, 113, 1);
-      opacity: 1;
-    }
-  }
-
-  .coNo1 {
-    height: px2rem(12);
-    font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
-    line-height: px2rem(20);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
-    margin: px2rem(-6) 0 px2rem(10) px2rem(8);
   }
-
-  .coNo2 {
-    height: px2rem(44);
-    font-size: px2rem(12);
-    font-family: Source Han Sans CN;
-    font-weight: 500;
-    line-height: px2rem(44);
-    color: rgba(78, 120, 222, 1);
-    opacity: 1;
-    margin-left: px2rem(8);
-  }
-
-  .coNo3 {
-    height: px2rem(44);
-    font-size: px2rem(14);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
-    line-height: px2rem(44);
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-    margin-left: px2rem(8);
-  }
-
-  .mint-cell {
-    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-    &:last-of-type {
-      border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
-    }
-    .mint-cell-wrapper {
-      .mint-cell-title {
-        display: inline-block;
-        width: px2rem(252);
-      }
-    }
-  }
-
-  .nothing {
+  .coNameBlack {
+    position: absolute;
+    display: inline-block;
+    height: px2rem(23);
     width: 100%;
-    height: px2rem(10);
-    background-color: #f1f1f1;
-  }
-
-  .text {
-    font-size: px2rem(12);
+    line-height: px2rem(20);
+    top: 50%;
+    // left: 21%;
+    transform: translate(px2rem(26), -50%);
+    font-size: px2rem(15);
     font-family: Source Han Sans CN;
-    font-weight: 500;
-    color: rgba(9, 9, 9, 1);
+    font-weight: bold;
+    color: rgba(113, 113, 113, 1);
     opacity: 1;
   }
+}
 
-  .signBox {
-    height: px2rem(44);
-    font-size: px2rem(16);
-    font-family: Source Han Sans CN;
-    font-weight: 700;
-    line-height: px2rem(44);
-    color: rgba(9, 9, 9, 1);
+.formTitle1 {
+  width: 100%;
+  box-sizing: border-box;
+  height: px2rem(65);
+  position: relative;
+  .lightBlue {
+    position: absolute;
+    display: inline-block;
+    width: px2rem(3);
+    height: px2rem(17);
+    top: 30%;
+    left: px2rem(18);
+    transform: translate(-50%, -50%);
+    background: rgba(78, 120, 222, 1);
     opacity: 1;
-    padding: 0 px2rem(8);
-    background-color: #fff;
-    .right {
-      float: right;
-      color: #888;
+    border-radius: px2rem(2);
+  }
+  .lightBlue1 {
+    position: absolute;
+    display: inline-block;
+    width: px2rem(3);
+    height: px2rem(17);
+    top: 70%;
+    left: px2rem(18);
+    transform: translate(-50%, -50%);
+    background: rgba(78, 120, 222, 1);
+    opacity: 1;
+    border-radius: px2rem(2);
+  }
+  .coNameBlack {
+    position: absolute;
+    display: inline-block;
+    height: px2rem(20);
+    width: px2rem(327);
+    line-height: px2rem(20);
+    top: 30%;
+    transform: translate(px2rem(26), -50%);
+    font-size: px2rem(15);
+    font-family: Source Han Sans CN;
+    font-weight: bold;
+    color: rgba(113, 113, 113, 1);
+    opacity: 1;
+  }
+  .coNameBlack1 {
+    position: absolute;
+    display: inline-block;
+    height: px2rem(20);
+    width: px2rem(327);
+    line-height: px2rem(20);
+    top: 70%;
+    transform: translate(px2rem(26), -50%);
+    font-size: px2rem(15);
+    font-family: Source Han Sans CN;
+    font-weight: bold;
+    color: rgba(113, 113, 113, 1);
+    opacity: 1;
+  }
+}
+
+.coNo1 {
+  height: px2rem(12);
+  font-size: px2rem(12);
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: px2rem(20);
+  color: rgba(78, 120, 222, 1);
+  opacity: 1;
+  margin: px2rem(-6) 0 px2rem(10) px2rem(8);
+}
+
+.coNo2 {
+  height: px2rem(44);
+  font-size: px2rem(12);
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  line-height: px2rem(44);
+  color: rgba(78, 120, 222, 1);
+  opacity: 1;
+  margin-left: px2rem(8);
+}
+
+.coNo3 {
+  height: px2rem(44);
+  font-size: px2rem(14);
+  font-family: Source Han Sans CN;
+  font-weight: 700;
+  line-height: px2rem(44);
+  color: rgba(9, 9, 9, 1);
+  opacity: 1;
+  margin-left: px2rem(8);
+}
+
+.mint-cell {
+  border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+  &:last-of-type {
+    border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+  }
+  .mint-cell-wrapper {
+    .mint-cell-title {
+      display: inline-block;
+      width: px2rem(252);
     }
   }
 }
+
+.nothing {
+  width: 100%;
+  height: px2rem(10);
+  background-color: #f1f1f1;
+}
+
+.text {
+  font-size: px2rem(12);
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: rgba(9, 9, 9, 1);
+  opacity: 1;
+}
+
+.signBox {
+  height: px2rem(44);
+  font-size: px2rem(16);
+  font-family: Source Han Sans CN;
+  font-weight: 700;
+  line-height: px2rem(44);
+  color: rgba(9, 9, 9, 1);
+  opacity: 1;
+  padding: 0 px2rem(8);
+  background-color: #fff;
+  .right {
+    float: right;
+    color: #888;
+  }
+}
+// }
 </style>
 
 <style lang="scss">

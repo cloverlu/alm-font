@@ -75,19 +75,33 @@
 
         <!-- （2）逾期及欠息等不良记录 -->
         <div class="coNo2">（2）逾期及欠息等不良记录</div>
-        <mt-field
+        <!-- <mt-field
           class="textFiled"
           label="贷款期间借款企业是否发生逾期、欠息等不良信用记录"
           placeholder="10"
           v-model="existBadRecord"
-        ></mt-field>
+        ></mt-field> -->
+        <div class="item">
+          <span class="tag"
+            >贷款期间借款企业是否发生逾期、欠息等不良信用记录</span
+          >
+          <almSelect
+            :selectData="cooperationTypes"
+            :defaultValue="cooperationTypes[0].value"
+            :title="selectTitle"
+            :fontColor="fontColor"
+            @getSelectValue="getSelect"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
         <mt-field
           type="textarea"
           rows="3"
           v-model="badRecordMsg"
           class="text"
           style="overflow:hidden"
-          :placeholder="badRecordMsg"
+          placeholder="badRecordMsg"
         ></mt-field>
         <!-- （3）借款企业欠税情况 -->
         <div class="coNo2">（3）借款企业欠税情况</div>
@@ -118,38 +132,74 @@
 
         <!-- （4）征信记录 -->
         <div class="coNo2">（4）征信记录</div>
-        <mt-cell title="征信记录是否有异常变化"> </mt-cell>
+        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+        <div class="item1">
+          <span class="tag">征信记录是否有异常变化</span>
+          <almSelect
+            :selectData="cooperationTypes"
+            :defaultValue="cooperationTypes[0].value"
+            :title="selectTitle"
+            :fontColor="fontColor"
+            @getSelectValue="getSelect"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
         <mt-field
           type="textarea"
           rows="3"
           v-model="creditChageMsg1"
           class="text"
           style="overflow:hidden"
-          :placeholder="changedMsg"
+          placeholder="changedMsg"
         ></mt-field>
 
         <!-- 2.关联企业征信： -->
         <div class="coNo3">2.关联企业征信：</div>
-        <mt-cell title="征信记录是否有异常变化"> </mt-cell>
+        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+        <div class="item1">
+          <span class="tag">征信记录是否有异常变化</span>
+          <almSelect
+            :selectData="cooperationTypes"
+            :defaultValue="cooperationTypes[0].value"
+            :title="selectTitle"
+            :fontColor="fontColor"
+            @getSelectValue="getSelect"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
         <mt-field
           type="textarea"
           rows="3"
           v-model="creditChageMsg2"
           class="text"
           style="overflow:hidden"
-          :placeholder="changedMsg"
+          placeholder="changedMsg"
         ></mt-field>
 
         <!-- 3.法人保证人征信： -->
         <div class="coNo3">3.法人保证人征信：</div>
-        <mt-cell title="征信记录是否有异常变化"> </mt-cell>
+        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+        <div class="item1">
+          <span class="tag">征信记录是否有异常变化</span>
+          <almSelect
+            :selectData="cooperationTypes"
+            :defaultValue="cooperationTypes[0].value"
+            :title="selectTitle"
+            :fontColor="fontColor"
+            @getSelectValue="getSelect"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
         <mt-field
           type="textarea"
           rows="3"
           v-model="creditChageMsg3"
           class="text"
           style="overflow:hidden"
-          :placeholder="changedMsg"
+          placeholder="changedMsg"
         ></mt-field>
 
         <div class="nothing"></div>
@@ -161,7 +211,7 @@
           class="text"
           v-model="RecentNegativeInformation"
           style="overflow:hidden"
-          :placeholder="RecentNegativeInformation"
+          placeholder="RecentNegativeInformation"
         ></mt-field>
       </div>
     </div>
@@ -169,17 +219,25 @@
 </template>
 
 <script>
-import { DetailsOfIOU } from "../../../utils/dataMock";
+import { DetailsOfIOU, cooperationType } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
+import almSelect from "../components/select";
 export default {
   components: {
     "mt-cell": Cell,
-    "mt-field": Field
+    "mt-field": Field,
+    almSelect
   },
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
       queryDate: "2020-06-03",
+      cooperationTypes: cooperationType,
+      popupVisible: false,
+      payType: 1,
+      selectTitle: "检查配合程度",
+      fontColor: "blue",
+      // params: {
       // 借款企业部分
       unPayOffLoanNum: "", //未结清贷款笔数
       unPayOffAmout: "", // 未结清贷款金额
@@ -206,6 +264,7 @@ export default {
       existCreditChage3: "", // 法人保证人 征信变化是否变化
 
       RecentNegativeInformation: "" //近期负面信息情况
+      // }
     };
   },
   methods: {}
@@ -272,6 +331,114 @@ export default {
       font-weight: bold;
       color: rgba(113, 113, 113, 1);
       opacity: 1;
+    }
+  }
+
+  .item {
+    background-color: #fff;
+    // width: px2rem(252);
+    width: 100%;
+    height: px2rem(50);
+    line-height: px2rem(50);
+    padding: 0 px2rem(10);
+    display: flex;
+    font-size: px2rem(16);
+    box-sizing: border-box;
+    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+    &:last-child {
+      border: none;
+      padding: 0;
+    }
+    .tag {
+      font-family: Source Han Sans CN;
+      font-weight: bolder;
+      width: px2rem(270);
+      text-align: left;
+      color: #090909;
+      height: px2rem(50);
+      font-size: px2rem(16);
+      line-height: px2rem(20);
+      padding-top: px2rem(5);
+    }
+    .arrow {
+      font-size: px2rem(14);
+      color: #848484;
+      margin-left: px2rem(3);
+    }
+    .info {
+      flex: 1;
+      text-align: right;
+      color: #9f9f9f;
+      .pay-type {
+        width: 100%;
+        height: px2rem(145);
+        background-color: #fff;
+        .item {
+          width: 100%;
+          height: px2rem(44);
+          border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+          text-align: center;
+          font-size: px2rem(14);
+          justify-content: center;
+          align-items: center;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  .item1 {
+    background-color: #fff;
+    width: 100%;
+    height: px2rem(44);
+    line-height: px2rem(44);
+    padding: 0 px2rem(10);
+    display: flex;
+    font-size: px2rem(16);
+    box-sizing: border-box;
+    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+    &:last-child {
+      border: none;
+      padding: 0;
+    }
+    .tag {
+      font-family: Source Han Sans CN;
+      font-weight: bolder;
+      width: px2rem(270);
+      text-align: left;
+      color: #090909;
+      height: px2rem(44);
+      font-size: px2rem(16);
+      line-height: px2rem(44);
+    }
+    .arrow {
+      font-size: px2rem(14);
+      color: #848484;
+      margin-left: px2rem(3);
+    }
+    .info {
+      flex: 1;
+      text-align: right;
+      color: #9f9f9f;
+      .pay-type {
+        width: 100%;
+        height: px2rem(145);
+        background-color: #fff;
+        .item {
+          width: 100%;
+          height: px2rem(44);
+          border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+          text-align: center;
+          font-size: px2rem(14);
+          justify-content: center;
+          align-items: center;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
     }
   }
 

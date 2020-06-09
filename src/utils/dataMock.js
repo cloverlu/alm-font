@@ -164,4 +164,23 @@ const payType = [
   }
 ];
 
-export { todoListTitle, loanInsList, definite1, payType, DetailsOfIOU };
+// 检查配合程度
+const cooperationType = [
+  {
+    key: 1,
+    value: "配合"
+  },
+  {
+    key: 0,
+    value: "不配合"
+  }
+];
+
+export {
+  todoListTitle,
+  loanInsList,
+  definite1,
+  payType,
+  DetailsOfIOU,
+  cooperationType
+};

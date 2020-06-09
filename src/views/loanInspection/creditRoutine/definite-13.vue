@@ -18,17 +18,29 @@
           placeholder="10"
           v-model="checkAddr"
         ></mt-field>
-        <mt-field
+        <!-- <mt-field
           class="textFiled"
           label="检查配合程度"
           placeholder="10"
           v-model="cooperate"
-        ></mt-field>
+        ></mt-field> -->
+        <div class="item">
+          <span class="tag">检查配合程度</span>
+          <almSelect
+            :selectData="cooperationTypes"
+            :defaultValue="cooperationTypes[0].value"
+            :title="selectTitle"
+            :fontColor="fontColor"
+            @getSelectValue="getSelect"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
         <mt-field
           class="textFiled"
           label="生产经营场所变动情况"
           placeholder="10"
-          v-model="addrChangedMsg"
+          v-model="params.addrChangedMsg"
         ></mt-field>
         <mt-field
           class="textFiled"
@@ -42,18 +54,31 @@
 </template>
 
 <script>
-import { DetailsOfIOU } from "../../../utils/dataMock";
+import { DetailsOfIOU, cooperationType } from "../../../utils/dataMock";
+import almSelect from "../components/select";
 import { Field } from "mint-ui";
 export default {
-  components: { "mt-field": Field },
+  components: { "mt-field": Field, almSelect },
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      checkAddr: "", // 检查地点
-      cooperate: "", // 检查配合程度
-      addrChangedMsg: "", // 生产经营场所变动情况
-      staff: "" // 接待人员
+      cooperationTypes: cooperationType,
+      popupVisible: false,
+      payType: 1,
+      selectTitle: "检查配合程度",
+      fontColor: "blue",
+      params: {
+        checkAddr: "",
+        cooperate: 1,
+        addrChangedMsg: "",
+        staff: ""
+      }
     };
+  },
+  methods: {
+    getSelect(data) {
+      this.params.cooperate = data.key;
+    }
   }
 };
 </script>
@@ -97,6 +122,56 @@ export default {
     }
   }
   .formBody {
+    .item {
+      background-color: #fff;
+      width: 100%;
+      height: px2rem(44);
+      line-height: px2rem(44);
+      padding: 0 px2rem(10);
+      display: flex;
+      font-size: px2rem(16);
+      box-sizing: border-box;
+      border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+      &:last-child {
+        border: none;
+        padding: 0;
+      }
+      .tag {
+        font-family: Source Han Sans CN;
+        font-weight: bolder;
+        flex: 0 0 px2rem(100);
+        text-align: left;
+        color: #090909;
+      }
+      .arrow {
+        font-size: px2rem(14);
+        color: #848484;
+        margin-left: px2rem(3);
+      }
+      .info {
+        flex: 1;
+        text-align: right;
+        color: #9f9f9f;
+        .pay-type {
+          width: 100%;
+          height: px2rem(145);
+          background-color: #fff;
+          .item {
+            width: 100%;
+            height: px2rem(44);
+            border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+            text-align: center;
+            font-size: px2rem(14);
+            justify-content: center;
+            align-items: center;
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+
     .mint-cell {
       width: 100%;
       height: px2rem(44);
