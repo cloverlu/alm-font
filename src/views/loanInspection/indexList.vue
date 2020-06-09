@@ -51,7 +51,8 @@ export default {
         this.$router.push({
           name: "creditRoutineIndex",
           params: {
-            bizId: id
+            bizId: id,
+            type: "loanCreditRoutine"
           }
         });
       }

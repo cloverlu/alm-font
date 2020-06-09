@@ -8,7 +8,7 @@ import definite13 from "@/views/loanInspection/creditRoutine/definite-13";
 import definite11 from "@/views/loanInspection/creditRoutine/definite-11";
 import definite10 from "@/views/loanInspection/creditRoutine/definite-10";
 import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
-import definite3 from "@/views/loanInspection/creditRoutine/definite-3";
+import definite3 from "@/views/loanInspection/components/definite-3";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 
@@ -80,7 +80,7 @@ const routes = [
       },
       // 类型2
       {
-        path: "/almHome/loanInspection/creditRoutine/:bizId",
+        path: ":type/:bizId",
         name: "creditRoutineIndex",
         component: creditRoutineIndex,
         meta: {
@@ -91,7 +91,7 @@ const routes = [
         children: [
           // 申请明细13
           {
-            path: "/almHome/loanInspection/creditRoutine/definite13/:bizId",
+            path: "definite13",
             name: "definite13",
             component: definite13,
             meta: {
@@ -103,7 +103,7 @@ const routes = [
           },
           // 申请明细11
           {
-            path: "/almHome/loanInspection/creditRoutine/definite11/:bizId",
+            path: "definite11",
             name: "definite11",
             component: definite11,
             meta: {
@@ -115,7 +115,7 @@ const routes = [
           },
           // 申请明细10
           {
-            path: "/almHome/loanInspection/creditRoutine/definite10/:bizId",
+            path: "definite10",
             name: "definite10",
             component: definite10,
             meta: {
@@ -127,7 +127,7 @@ const routes = [
           },
           // 申请明细11
           {
-            path: "/almHome/loanInspection/creditRoutine/definite5/:bizId",
+            path: "definite5",
             name: "definite5",
             component: definite5,
             meta: {
@@ -139,7 +139,7 @@ const routes = [
           },
           // 申请明细11
           {
-            path: "/almHome/loanInspection/creditRoutine/definite3/:bizId",
+            path: "definite3",
             name: "definite3",
             component: definite3,
             meta: {
