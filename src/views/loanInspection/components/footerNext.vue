@@ -5,7 +5,7 @@
 -->
 <template lang="pug">
 	.footer-next
-		.prev(class="active")
+		.prev(class="active" @click="footerPrev")
 			span(class="iconfont iconxiayiye1")
 			span 上一页
 		span |
@@ -21,9 +21,25 @@ export default {
   mixins: [loanInspectionMixin],
   computed: {},
   methods: {
+    footerPrev() {
+      this.$router.go(-1);
+    },
     footerNext() {
+      const currentName = this.$route.name;
+      const currentType = this.$route.params.type;
+
+      console.log(this.$route);
+      if (currentType === "loanCreditFirst") {
+        if (currentName === "creditFirstIndex") {
+          this.$router.push({ name: "definite2" });
+        } else if (currentName === "definite2") {
+          this.$router.push({ name: "definite3" });
+        }
+      }
+
       //随机数
       const val = Math.floor(Math.random() * 10000 + 1);
+      //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”
       this.setNextFooter({ nextFooter: val });
     }
   }
@@ -50,7 +66,6 @@ export default {
     color: #9f9f9f;
     line-height: px2rem(38);
     &:hover,
-    &:focus,
     &.active {
       span {
         color: #4d77db;
