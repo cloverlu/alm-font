@@ -30,7 +30,7 @@
 
 .checkDetail{
 	width: 100%;
-	height: 100%
+	height: 100%;
 }
 
 //左右结构的展示内容
@@ -90,6 +90,35 @@
 			}
 		}
 	}
+}
+
+//带蓝条的大标题
+.definite-1-title {
+	width: 100%;
+	height: px2rem(45);
+	line-height: px2rem(45);
+	padding: 0 px2rem(9) 0 px2rem(9);
+	display: flex;
+	.colum-blue {
+		height: px2rem(17);
+		@include columnBlue;
+	}
+	.title {
+		color: #090909;
+		font-size: px2rem(15);
+		margin-left: px2rem(4);
+	}
+}
+
+//不带蓝条的黑色标题，一般与.definite-smalltitle 配合使用
+.definite-1-title2 {
+	width: 100%;
+	height: px2rem(37);
+	line-height: px2rem(37);
+	font-size: px2rem(15);
+	padding-left: px2rem(17);
+	box-sizing: border-box;
+	@include fontColorBlack;
 }
 
 //蓝色小标题

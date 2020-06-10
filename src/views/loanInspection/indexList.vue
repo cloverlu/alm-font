@@ -63,6 +63,14 @@ export default {
             type: "loanDailyInspection"
           }
         });
+      } else if (type === "小企业授信业务贷后全面检查") {
+        this.$router.push({
+          name: "creditOverallIndex",
+          params: {
+            bizId: id,
+            type: "loanCreditOverall"
+          }
+        });
       }
     }
   }

@@ -53,6 +53,12 @@ export default {
         } else if (currentName === "definite5") {
           this.$router.push({ name: "definite3" });
         }
+      } else if (currentType === "loanCreditOverall") {
+        if (currentName === "creditOverallIndex") {
+          this.$router.push({ name: "overalltDefinite13" });
+        } else if (currentName === "overalltDefinite13") {
+          this.$router.push({ name: "overalltDefinite11" });
+        }
       }
 
       //随机数

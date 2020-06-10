@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
-import definite16 from "@/views/loanInspection/creditFirst/definite-16";
+import definite16 from "@/views/loanInspection/components/definite-16";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
-import definite13 from "@/views/loanInspection/creditRoutine/definite-13";
-import definite11 from "@/views/loanInspection/creditRoutine/definite-11";
+import definite13 from "@/views/loanInspection/components/definite-13";
+import definite11 from "@/views/loanInspection/components/definite-11";
 import definite10 from "@/views/loanInspection/creditRoutine/definite-10";
 import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
 import definite3 from "@/views/loanInspection/components/definite-3";
@@ -13,6 +13,7 @@ import definite4 from "@/views/loanInspection/components/definite-4";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
+import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 
 Vue.use(VueRouter);
 
@@ -47,7 +48,7 @@ const routes = [
       //类型1
       //检查申请明细-1
       {
-        path: ":type/:bizId",
+        path: "1/:type/:bizId",
         name: "creditFirstIndex",
         component: definite1,
         meta: {
@@ -93,7 +94,7 @@ const routes = [
       },
       // 类型2
       {
-        path: ":type/:bizId",
+        path: "2/:type/:bizId",
         name: "creditRoutineIndex",
         component: creditRoutineIndex,
         meta: {
@@ -171,6 +172,42 @@ const routes = [
               title: "检查申请明细",
               tag: "resave",
               footer: false
+            }
+          }
+        ]
+      },
+      //类型3
+      //新增1-8
+      {
+        path: "3/:type/:bizId",
+        name: "creditOverallIndex",
+        component: creditOverallIndex,
+        meta: {
+          title: "检查申请明细",
+          tag: "resave",
+          footer: true
+        },
+        children: [
+          //检查申请明细-13
+          {
+            path: "definite13",
+            name: "overalltDefinite13",
+            component: definite13,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-11
+          {
+            path: "definite11",
+            name: "overalltDefinite11",
+            component: definite11,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
             }
           }
         ]
