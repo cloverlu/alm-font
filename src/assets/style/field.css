@@ -213,3 +213,13 @@
   color: #9F9F9F;
   font-size: 0.37333rem;
 }
+
+.image-upload-uploader .van-uploader__preview-image {
+  width: 1.57333rem;
+  height: 1.57333rem;
+}
+
+.image-upload-uploader .van-uploader__upload {
+  width: 1.57333rem;
+  height: 1.57333rem;
+}

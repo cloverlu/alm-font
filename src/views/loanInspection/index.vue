@@ -14,7 +14,7 @@
 				span(v-else-if="operateTag === 2") 保存
 				span(v-else-if="operateTag === 3") 下一步
 		.loanIns-index-content
-				scroll(:top="44" )
+				scroll(:top="scrollTop" ref="scrollWrapper" )
 					.content(:class="footerShow ? 'footershow' : ''")
 						loadInsList(v-if="hasChildRouter") 
 						router-view(v-else)
@@ -26,15 +26,18 @@
 import loadInsList from "../loanInspection/indexList";
 import footerNext from "../loanInspection/components/footerNext";
 import Scroll from "../../components/Scroll";
+import { loanInspectionMixin } from "../../utils/mixin";
 export default {
   components: { loadInsList, Scroll, footerNext },
+  mixins: [loanInspectionMixin],
   data() {
     return {
       hasChildRouter: this.$route.params.hasChildRouter,
       title: "",
       operateTag: 1,
       footerShow: false,
-      that: this
+      that: this,
+      scrollTop: 44
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -69,10 +72,28 @@ export default {
     }
   },
 
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.$nextTick(() => {
+          this.$refs.scrollWrapper.scrollTo(0, 0);
+        });
+      }
+    },
+    // 监听是否点击了上一步，用vuex里的nextFooter属性
+    prevFooter(val, oldval) {
+      if (val !== oldval) {
+        this.$nextTick(() => {
+          this.$refs.scrollWrapper.scrollTo(0, 0);
+        });
+      }
+    }
+  },
   methods: {
     back() {
       this.$router.go(-1);
+      this.$refs.scrollWrapper.scrollTo(0, 0);
     }
   }
 };

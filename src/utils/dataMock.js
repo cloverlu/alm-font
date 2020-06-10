@@ -235,6 +235,34 @@ const yesNo = [
   }
 ];
 
+//definte16,影像数据字段
+const definte16 = _ => {
+  const definite16Array = [];
+  const valueArray = [
+    "《小企业授信业务额度借款支用单》或《用款申请》",
+    "《小企业贷款受托支付申请书》或自主支付清单",
+    "汇款凭证",
+    "账户流水",
+    "受托支付合同",
+    "入库单",
+    "贷款购买标的（如原材料、机器设备等）",
+    "企业大门",
+    "企业经营场地或生产车间",
+    "检查人员现场检查影像等",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m1_" + i;
+    definite16Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return definite16Array;
+};
+
 export {
   todoListTitle,
   loanInsList,
@@ -246,5 +274,6 @@ export {
   definite2Field,
   definite2Field2,
   coordinate,
-  yesNo
+  yesNo,
+  definte16
 };

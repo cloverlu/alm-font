@@ -23,6 +23,10 @@ export default {
   methods: {
     footerPrev() {
       this.$router.go(-1);
+      //随机数
+      const val = Math.floor(Math.random() * 10000 + 1);
+      //向vuex添加setPrevFooter的值，以方便所有组件判断是否点击了“上一步”
+      this.setPrevFooter({ prevFooter: val });
     },
     footerNext() {
       const currentName = this.$route.name;
@@ -31,9 +35,11 @@ export default {
       console.log(this.$route);
       if (currentType === "loanCreditFirst") {
         if (currentName === "creditFirstIndex") {
-          this.$router.push({ name: "definite2" });
-        } else if (currentName === "definite2") {
-          this.$router.push({ name: "definite3" });
+          this.$router.push({ name: "firstDefinite2" });
+        } else if (currentName === "firstDefinite2") {
+          this.$router.push({ name: "firstDefinite16" });
+        } else if (currentName === "firstDefinite16") {
+          this.$router.push({ name: "firstDefinite3" });
         }
       } else if (currentType === "loanCreditRoutine") {
         if (currentName === "creditRoutineIndex") {
