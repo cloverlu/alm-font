@@ -6,49 +6,51 @@
 <template>
   <div class="checkDetail">
     <!-- 公司信息 -->
-    <div class="companyInformation">
-      <!-- <div class="formTitle">
+    <div class="definte13">
+      <div class="companyInformation">
+        <!-- <div class="formTitle">
         <span class="lightBlue"></span>
         <span class="coName">{{ DetailsOfIOU.orgName }}</span>
       </div> -->
-      <div class="formBody">
-        <mt-field
-          class="textFiled"
-          label="检查地点"
-          placeholder="10"
-          v-model="params.checkAddr"
-        ></mt-field>
-        <!-- <mt-field
+        <div class="formBody">
+          <mt-field
+            class="textFiled"
+            label="检查地点"
+            placeholder="10"
+            v-model="params.checkAddr"
+          ></mt-field>
+          <!-- <mt-field
           class="textFiled"
           label="检查配合程度"
           placeholder="10"
           v-model="cooperate"
         ></mt-field> -->
-        <div class="item">
-          <span class="tag">检查配合程度</span>
-          <almSelect
-            :selectData="coordinate"
-            :defaultValue="params.cooperate"
-            :triggerId="cooperate"
-            :title="selectTitle"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
+          <div class="item">
+            <span class="tag">检查配合程度</span>
+            <almSelect
+              :selectData="coordinate"
+              :defaultValue="params.cooperate"
+              :triggerId="cooperate"
+              :title="selectTitle"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            class="textFiled"
+            label="生产经营场所变动情况"
+            placeholder="10"
+            v-model="params.addrChangedMsg"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="接待人员"
+            placeholder="10"
+            v-model="params.staff"
+          ></mt-field>
         </div>
-        <mt-field
-          class="textFiled"
-          label="生产经营场所变动情况"
-          placeholder="10"
-          v-model="params.addrChangedMsg"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="接待人员"
-          placeholder="10"
-          v-model="params.staff"
-        ></mt-field>
       </div>
     </div>
   </div>
@@ -193,6 +195,29 @@ export default {
 
       &:last-of-type {
         border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+@import "../../../assets/style/global.scss";
+.definte13 {
+  width: 100%;
+  height: 100%;
+  .textFiled {
+    .mint-cell-title {
+      width: px2rem(150) !important;
+      font-size: px2rem(14);
+    }
+    .mint-cell-value {
+      color: #888;
+      font-size: px2rem(14);
+      .mint-field-core {
+        text-align: right;
+        color: #888;
+        font-size: px2rem(14);
       }
     }
   }

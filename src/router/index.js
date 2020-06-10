@@ -13,6 +13,7 @@ import definite4 from "@/views/loanInspection/components/definite-4";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
+import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
 
 Vue.use(VueRouter);
 
@@ -175,7 +176,7 @@ const routes = [
           }
         ]
       },
-      // 类型6
+      // 类型6 新增1
       {
         path: ":type/:bizId",
         name: "dailyInspectionIndex",
@@ -185,7 +186,19 @@ const routes = [
           tag: "resave",
           footer: true
         },
-        children: []
+        children: [
+          // 新增1-2
+          {
+            path: "newly2",
+            name: "newly2",
+            component: newly2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          }
+        ]
       }
     ]
   }

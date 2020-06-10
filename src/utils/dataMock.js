@@ -235,6 +235,30 @@ const yesNo = [
   }
 ];
 
+// 担保方式
+const securityKinds = [
+  {
+    key: 1,
+    value: "信用"
+  },
+  {
+    key: 2,
+    value: "抵押"
+  },
+  {
+    key: 3,
+    value: "质押"
+  },
+  {
+    key: 4,
+    value: "保证"
+  },
+  {
+    key: 5,
+    value: "其他"
+  }
+];
+
 //definte16,影像数据字段
 const definte16 = _ => {
   const definite16Array = [];
@@ -275,5 +299,6 @@ export {
   definite2Field2,
   coordinate,
   yesNo,
-  definte16
+  definte16,
+  securityKinds
 };
