@@ -188,11 +188,13 @@ export default {
 .newly1-wrapper {
   width: 100%;
   height: 100%;
+  background-color: #fff;
   .companyInformation {
     width: 100%;
     box-sizing: border-box;
 
     .formTitle {
+      background-color: #f7f7f7;
       width: 100%;
       height: px2rem(44);
       position: relative;

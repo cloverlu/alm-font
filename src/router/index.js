@@ -15,6 +15,7 @@ import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
 import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
+import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 
 Vue.use(VueRouter);
@@ -241,6 +242,17 @@ const routes = [
             path: "newly2",
             name: "newly2",
             component: newly2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-3
+          {
+            path: "newly3",
+            name: "newly3",
+            component: newly3,
             meta: {
               title: "检查申请明细",
               tag: "resave",

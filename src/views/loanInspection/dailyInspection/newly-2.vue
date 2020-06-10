@@ -391,6 +391,7 @@ export default {
     }
   }
   .formTitle {
+    background-color: #f7f7f7;
     width: 100%;
     height: px2rem(44);
     position: relative;
