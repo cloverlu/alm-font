@@ -13,13 +13,13 @@
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2") 保存
 				span(v-else-if="operateTag === 3") 下一步
-		.loanIns-index-content
-				scroll(:top="scrollTop" ref="scrollWrapper" )
-					.content(:class="footerShow ? 'footershow' : ''")
-						loadInsList(v-if="hasChildRouter") 
-						router-view(v-else)
-					.footer(v-if="footerShow") 
-						footerNext
+		scroll(:top="scrollTop" ref="scrollWrapper" )
+			.loanIns-index-content
+				.content(:class="footerShow ? 'footershow' : ''")
+					loadInsList(v-if="hasChildRouter") 
+					router-view(v-else)
+				.footer(v-if="footerShow") 
+					footerNext
 </template>
 
 <script>
@@ -136,19 +136,23 @@ export default {
   .loanIns-index-content {
     flex: 1;
     background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     .content {
       width: 100%;
-      min-height: 100%;
+      // min-height: 100%;
+      flex: 1;
       box-sizing: border-box;
-      &.footershow {
-        padding-bottom: px2rem(38);
-      }
+      // &.footershow {
+      //   // padding-bottom: px2rem(38);
+      // }
     }
     .footer {
       width: 100%;
       height: px2rem(38);
       z-index: 100;
-      margin-top: px2rem(-38);
+      // margin-top: px2rem(-38);
     }
   }
 }

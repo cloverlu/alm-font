@@ -50,11 +50,10 @@ export default {
       box-sizing: border-box;
     }
     .field-one-item-tag {
-      height: px2rem(44);
+      min-height: px2rem(44);
       @include fontColorBlack;
       font-size: px2rem(14);
-      line-height: px2rem(44);
-      padding: 0 px2rem(16) 0 px2rem(16);
+      padding: px2rem(15) px2rem(16);
     }
     .field-one-item-field {
       height: px2rem(74);

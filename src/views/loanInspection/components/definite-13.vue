@@ -96,8 +96,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/style/global.scss";
+
 .companyInformation {
   width: 100%;
+  height: 100%;
+  background-color: #fff;
   box-sizing: border-box;
 
   .formTitle {

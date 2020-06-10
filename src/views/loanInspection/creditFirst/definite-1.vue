@@ -113,33 +113,9 @@ export default {
   .definite-1-wrapper {
     width: 100%;
     height: 100%;
-    .definite-1-title {
-      width: 100%;
-      height: px2rem(45);
-      line-height: px2rem(45);
-      padding: 0 px2rem(9) 0 px2rem(9);
-      display: flex;
-      .colum-blue {
-        height: px2rem(17);
-        @include columnBlue;
-      }
-      .title {
-        color: #090909;
-        font-size: px2rem(15);
-        margin-left: px2rem(4);
-      }
-    }
+
     .definite-field {
       height: px2rem(338);
-    }
-    .definite-1-title2 {
-      width: 100%;
-      height: px2rem(37);
-      line-height: px2rem(37);
-      font-size: px2rem(15);
-      padding-left: px2rem(17);
-      box-sizing: border-box;
-      @include fontColorBlack;
     }
     .definite-smalltitle {
       height: px2rem(24);

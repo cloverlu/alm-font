@@ -263,6 +263,44 @@ const definte16 = _ => {
   return definite16Array;
 };
 
+//新增1-8
+const newly18 = {
+  custName: "张三有限公司",
+  bizType: bizType[2],
+  lineAmout: "200000", //授信金额
+  lineBalance: "50000" //授信余额
+};
+
+const securityKinds = _ => {
+  const kinds = ["信用", "抵押", "质押", "保证", "其它"];
+  const data = [];
+  for (let i = 1; i < kinds.length; i++) {
+    data.push({
+      key: i,
+      value: kinds[i]
+    });
+  }
+  return data;
+};
+
+//新增1-8里的内容
+const newly18One = [
+  {
+    name: "健康、 嗜好、家庭关系等方面",
+    id: 1,
+    modelName: "HoldPensonRisk"
+  }
+];
+//新增1-8里的内容
+const newly18Two = [
+  {
+    name:
+      "股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题",
+    id: 1,
+    modelName: "managerRisk"
+  }
+];
+
 export {
   todoListTitle,
   loanInsList,
@@ -275,5 +313,9 @@ export {
   definite2Field2,
   coordinate,
   yesNo,
-  definte16
+  definte16,
+  newly18,
+  securityKinds,
+  newly18One,
+  newly18Two
 };
