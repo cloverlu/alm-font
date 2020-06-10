@@ -9,8 +9,10 @@ import definite11 from "@/views/loanInspection/creditRoutine/definite-11";
 import definite10 from "@/views/loanInspection/creditRoutine/definite-10";
 import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
 import definite3 from "@/views/loanInspection/components/definite-3";
+import definite4 from "@/views/loanInspection/components/definite-4";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
+import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
 
 Vue.use(VueRouter);
 
@@ -73,7 +75,7 @@ const routes = [
             meta: {
               title: "检查申请明细",
               tag: "resave",
-              footer: true
+              footer: false
             }
           }
         ]
@@ -125,7 +127,7 @@ const routes = [
             },
             children: []
           },
-          // 申请明细11
+          // 申请明细5
           {
             path: "definite5",
             name: "definite5",
@@ -137,19 +139,42 @@ const routes = [
             },
             children: []
           },
-          // 申请明细11
+          // 申请明细3
           {
             path: "definite3",
-            name: "definite3",
+            name: "routineDefinite3",
             component: definite3,
             meta: {
               title: "检查申请明细",
               tag: "resave",
-              footer: true
+              footer: false
             },
             children: []
+          },
+          //检查申请明细-4
+          {
+            path: "definite4",
+            name: "definite4",
+            component: definite4,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
           }
         ]
+      },
+      // 类型6
+      {
+        path: ":type/:bizId",
+        name: "dailyInspectionIndex",
+        component: newly1,
+        meta: {
+          title: "检查申请明细",
+          tag: "resave",
+          footer: true
+        },
+        children: []
       }
     ]
   }
