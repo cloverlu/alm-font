@@ -190,7 +190,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
+        // 将数据存入vuex里的setDefinite12里
         this.setDefinite12({ params: this.params });
       }
     }

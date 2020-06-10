@@ -96,7 +96,8 @@ export default {
     },
     goback: function() {
       console.log("返回");
-      this.$router.push("definite5");
+      // this.$router.push("definite5");
+      history.go(-3);
     },
     goSign: function() {
       this.$router.push("definite4");
@@ -106,7 +107,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
+        // 将数据存入vuex里的setDefinite3里
         this.setDefinite3({ params: this.params });
         this.setRoutineDefinite3({ params: this.params });
       }
@@ -252,8 +253,8 @@ export default {
   .submit {
     position: absolute;
     width: calc(100% - 30px);
-    height: px2rem(200);
-    bottom: px2rem(-290);
+    // height: px2rem(200);
+    bottom: px2rem(-205);
     padding-left: px2rem(15);
     .mint-button {
       width: px2rem(345);
@@ -267,6 +268,7 @@ export default {
     }
     .mint-button--default {
       background-color: rgba(209, 210, 212, 1);
+      margin-bottom: px2rem(10);
     }
   }
 }
