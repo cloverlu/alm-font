@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 检查申请明细-3
  * @Author: sunhua
  * @Date: 2020-06-04 17:03:54
 -->
@@ -13,12 +13,12 @@
           <span class="lightBlue"></span>
           <span class="coName">检查结论及措施建议</span>
         </div>
-        <!-- <mt-cell title="是否存在风险预警信号" :value="existRisk"></mt-cell> -->
         <div class="item1">
           <span class="tag">是否存在风险预警信号</span>
           <almSelect
-            :selectData="cooperationTypes"
-            :defaultValue="cooperationTypes[0].value"
+            :selectData="yesNo"
+            :defaultValue="params.existRisk"
+            :triggerId="existRisk"
             :title="selectTitle"
             :fontColor="fontColor"
             @getSelectValue="getSelect"
@@ -30,35 +30,41 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="riskMsg"
+          v-model="params.riskMsg"
           class="text"
           style="overflow:hidden"
-          :placeholder="riskMsg"
+          placeholder="riskMsg"
         ></mt-field>
 
         <mt-cell class="textFiled" title="检查结论及措施建议"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="suggest"
+          v-model="params.suggest"
           class="text"
           style="overflow:hidden"
-          :placeholder="suggest"
+          placeholder="suggest"
         ></mt-field>
         <div class="signBox">
-          <span class="left" @click="click">检查人员（签字）：</span>
+          <span class="left"
+            >检查人员（签字）：<span
+              class="iconfont iconqianzi"
+              @click="goSign()"
+            ></span
+          ></span>
           <span class="right">2020-06-01</span>
         </div>
       </div>
     </div>
     <div class="submit">
       <mt-button type="primary" size="large">提交审批</mt-button>
+      <mt-button size="large" @click="goback()">上一步</mt-button>
     </div>
   </div>
 </template>
 
 <script>
-import { DetailsOfIOU, cooperationType } from "../../../utils/dataMock";
+import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Cell, Field, Button } from "mint-ui";
 import almSelect from "../components/select";
 export default {
@@ -71,22 +77,39 @@ export default {
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      existRisk: true,
-      riskMsg: "",
-      suggest: "",
-      cooperationTypes: cooperationType,
+      yesNo: yesNo,
       popupVisible: false,
       payType: 1,
-      selectTitle: "检查配合程度",
-      fontColor: "blue"
+      selectTitle: "是否存在风险预警信号",
+      fontColor: "blue",
+      existRisk: "existRisk",
+      params: {
+        existRisk: 1,
+        riskMsg: "",
+        suggest: ""
+      }
     };
   },
   methods: {
-    click: function() {
-      console.log("ssss");
+    getSelect: function(data) {
+      this.params.existRisk = data.key;
     },
-    getSelect: function() {
-      console.log("ssss");
+    goback: function() {
+      console.log("返回");
+      this.$router.push("definite5");
+    },
+    goSign: function() {
+      this.$router.push("definite4");
+    }
+  },
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite1里
+        this.setDefinite3({ params: this.params });
+        this.setRoutineDefinite3({ params: this.params });
+      }
     }
   }
 };
@@ -96,7 +119,7 @@ export default {
 @import "../../../assets/style/global.scss";
 .checkDetail {
   position: relative;
-  height: px2rem(582);
+  // height: px2rem(582);
   .coInformation {
     .title {
       // width: px2rem(60);
@@ -220,6 +243,7 @@ export default {
       opacity: 1;
       padding: 0 px2rem(15);
       background-color: #fff;
+      border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
       .right {
         float: right;
       }
@@ -227,16 +251,22 @@ export default {
   }
   .submit {
     position: absolute;
-    width: calc(100% - 20px);
-    bottom: px2rem(10);
-    padding-left: px2rem(10);
-    .mint-button--primary {
+    width: calc(100% - 30px);
+    height: px2rem(200);
+    bottom: px2rem(-290);
+    padding-left: px2rem(15);
+    .mint-button {
+      width: px2rem(345);
       background-color: rgba(78, 120, 222, 1);
-      font-size: 18px;
-      // font-family: Source Han Sans CN;
-      // font-weight: 500;
+      font-size: px2rem(18);
+      height: px2rem(44);
       color: rgba(255, 255, 255, 1);
+      border-radius: px2rem(3);
       opacity: 1;
+      margin-bottom: px2rem(15);
+    }
+    .mint-button--default {
+      background-color: rgba(209, 210, 212, 1);
     }
   }
 }

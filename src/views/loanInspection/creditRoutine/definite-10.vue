@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 检查申请明细-10
  * @Author: sunhua
  * @Date: 2020-06-04 17:03:54
 -->
@@ -41,25 +41,25 @@
         class="textFiled"
         label="未结清贷款笔数"
         placeholder="10"
-        v-model="unPayOffLoanNum"
+        v-model="params.unPayOffLoanNumCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未结清贷款金额"
         placeholder="10"
-        v-model="unPayOffAmout"
+        v-model="params.unPayOffAmoutCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="涉及金融机构"
         placeholder="10"
-        v-model="finInstitutionNum"
+        v-model="params.finInstitutionNumCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未结清贷款结余"
         placeholder="10"
-        v-model="sumBalance"
+        v-model="params.sumBalanceCon"
       ></mt-field>
       <!--  -->
       <div class="nothing"></div>
@@ -68,13 +68,13 @@
         class="textFiled"
         label="未销户贷记卡账户"
         placeholder="10"
-        v-model="DebitCardNum"
+        v-model="params.debitCardNumCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未销户贷记卡担保金额"
         placeholder="10"
-        v-model="DebitCardLineAmout"
+        v-model="params.debitCardLineAmoutCon"
       ></mt-field>
 
       <div class="nothing"></div>
@@ -83,19 +83,19 @@
         class="textFiled"
         label="对外担保笔数"
         placeholder="10"
-        v-model="guaranteeNum"
+        v-model="params.guaranteeNumCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="对外担保金额"
         placeholder="10"
-        v-model="guaranteeAmout"
+        v-model="params.guaranteeAmoutCon"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="对外担保结余"
         placeholder="10"
-        v-model="guaranteeBalance"
+        v-model="params.guaranteeBalanceCon"
       ></mt-field>
 
       <!-- （2）逾期及违约 -->
@@ -104,11 +104,12 @@
       <div class="item1">
         <span class="tag">是否存在逾期及违约记录</span>
         <almSelect
-          :selectData="cooperationTypes"
-          :defaultValue="cooperationTypes[0].value"
+          :selectData="yesNo"
+          :defaultValue="params.existBadRecordCon"
+          :triggerId="existBadRecordCon"
           :title="selectTitle"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect1"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
@@ -116,7 +117,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="badRecordMsg"
+        v-model="params.badRecordMsgCon"
         class="text"
         style="overflow:hidden"
         placeholder="逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
@@ -127,11 +128,12 @@
       <div class="item1">
         <span class="tag">征信记录是否有异常变化</span>
         <almSelect
-          :selectData="cooperationTypes"
-          :defaultValue="cooperationTypes[0].value"
+          :selectData="yesNo"
+          :defaultValue="params.existCreditChage4"
+          :triggerId="existCreditChage4"
           :title="selectTitle"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect2"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
@@ -139,7 +141,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="creditChageMsg4"
+        v-model="params.creditChageMsg4"
         class="text"
         style="overflow:hidden"
         placeholder="xxx"
@@ -159,25 +161,25 @@
         class="textFiled"
         label="未结清贷款笔数"
         placeholder="10"
-        v-model="unPayOffLoanNum"
+        v-model="params.unPayOffLoanNumJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未结清贷款金额"
         placeholder="10"
-        v-model="unPayOffAmout"
+        v-model="params.unPayOffAmoutJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="涉及金融机构"
         placeholder="10"
-        v-model="finInstitutionNum"
+        v-model="params.finInstitutionNumJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未结清贷款结余"
         placeholder="10"
-        v-model="sumBalance"
+        v-model="params.sumBalanceJur"
       ></mt-field>
 
       <div class="nothing"></div>
@@ -186,13 +188,13 @@
         class="textFiled"
         label="未销户贷记卡账户"
         placeholder="10"
-        v-model="DebitCardNum"
+        v-model="params.debitCardNumJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="未销户贷记卡担保金额"
         placeholder="10"
-        v-model="DebitCardLineAmout"
+        v-model="params.debitCardLineAmoutJur"
       ></mt-field>
 
       <div class="nothing"></div>
@@ -201,35 +203,31 @@
         class="textFiled"
         label="对外担保笔数"
         placeholder="10"
-        v-model="guaranteeNum"
+        v-model="params.guaranteeNumJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="对外担保金额"
         placeholder="10"
-        v-model="guaranteeAmout"
+        v-model="params.guaranteeAmoutJur"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="对外担保结余"
         placeholder="10"
-        v-model="guaranteeBalance"
+        v-model="params.guaranteeBalanceJur"
       ></mt-field>
 
       <div class="coNo2">（2）逾期及违约</div>
-      <!-- <mt-cell
-        title="是否存在逾期及违约记录"
-        :value="`${existBadRecord == true ? '是' : '否'}`"
-      >
-      </mt-cell> -->
       <div class="item1">
         <span class="tag">是否存在逾期及违约记录</span>
         <almSelect
-          :selectData="cooperationTypes"
-          :defaultValue="cooperationTypes[0].value"
+          :selectData="yesNo"
+          :defaultValue="params.existBadRecordJur"
+          :triggerId="existBadRecordJur"
           :title="selectTitle"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect3"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
@@ -237,7 +235,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="badRecordMsg"
+        v-model="params.badRecordMsgJur"
         class="text"
         style="overflow:hidden"
         placeholder="逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
@@ -248,11 +246,12 @@
       <div class="item1">
         <span class="tag">征信记录是否有异常变化</span>
         <almSelect
-          :selectData="cooperationTypes"
-          :defaultValue="cooperationTypes[0].value"
+          :selectData="yesNo"
+          :defaultValue="params.existCreditChage5"
+          :triggerId="existCreditChage5"
           :title="selectTitle"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect4"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
@@ -260,7 +259,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="creditChageMsg5"
+        v-model="params.creditChageMsg5"
         class="text"
         style="overflow:hidden"
         placeholder="xx"
@@ -271,11 +270,12 @@
       <div class="item1">
         <span class="tag">征信记录是否有异常变化</span>
         <almSelect
-          :selectData="cooperationTypes"
-          :defaultValue="cooperationTypes[0].value"
+          :selectData="yesNo"
+          :defaultValue="params.existCreditChage3"
+          :triggerId="existCreditChage3"
           :title="selectTitle"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect5"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
@@ -283,7 +283,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="creditChageMsg3"
+        v-model="params.creditChageMsg3"
         class="text"
         style="overflow:hidden"
         placeholder="xxx"
@@ -296,7 +296,7 @@
         type="textarea"
         rows="3"
         class="text"
-        v-model="RecentNegativeInformation"
+        v-model="params.RecentNegativeInformation"
         style="overflow:hidden"
         placeholder="xxx"
       ></mt-field>
@@ -305,7 +305,7 @@
 </template>
 
 <script>
-import { DetailsOfIOU, cooperationType } from "../../../utils/dataMock";
+import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
 import almSelect from "../components/select";
 export default {
@@ -318,54 +318,84 @@ export default {
     return {
       DetailsOfIOU: DetailsOfIOU,
       queryDate: "2020-06-03",
-      cooperationTypes: cooperationType,
+      yesNo: yesNo,
       popupVisible: false,
       payType: 1,
       selectTitle: "检查配合程度",
       fontColor: "blue",
-      // 企业实际控制人部分
-      unPayOffLoanNum: "", //未结清贷款笔数
-      unPayOffAmout: "", // 未结清贷款金额
-      finInstitutionNum: "", // 涉及金融机构
-      sumBalance: "", // 未结清贷款结余
-      DebitCardNum: "", //未销户贷记卡账户
+      existBadRecordCon: "existBadRecordCon",
+      existBadRecordJur: "existBadRecordJur",
+      existCreditChage4: "existCreditChage4",
+      existCreditChage5: "existCreditChage5",
+      existCreditChage3: "existCreditChage3",
+      params: {
+        // 企业实际控制人部分
+        unPayOffLoanNumCon: "", //未结清贷款笔数
+        unPayOffAmoutCon: "", // 未结清贷款金额
+        finInstitutionNumCon: "", // 涉及金融机构
+        sumBalanceCon: "", // 未结清贷款结余
+        debitCardNumCon: "", //未销户贷记卡账户
 
-      DebitCardLineAmout: "", //未销户贷记卡担保金额
-      guaranteeNum: "", //对外担保笔数
-      guaranteeAmout: "", //对外担保金额
-      guaranteeBalance: "", //对外担保结余
-      badRecordMsg: "", //  逾期及违约 不良影响
-      existBadRecord: "",
+        debitCardLineAmoutCon: "", //未销户贷记卡担保金额
+        guaranteeNumCon: "", //对外担保笔数
+        guaranteeAmoutCon: "", //对外担保金额
+        guaranteeBalanceCon: "", //对外担保结余
+        badRecordMsgCon: "", //  逾期及违约 不良影响
+        existBadRecordCon: 1, // 逾期及违约 是否
 
-      // 企业法定代表人部分
-      // unPayOffLoanNum: "", //未结清贷款笔数
-      // unPayOffAmout: "", // 未结清贷款金额
-      // finInstitutionNum: "", // 涉及金融机构
-      // sumBalance: "", // 未结清贷款结余
-      // DebitCardNum: "", //未销户贷记卡账户
+        // 企业法定代表人部分
+        unPayOffLoanNumJur: "", //未结清贷款笔数
+        unPayOffAmoutJur: "", // 未结清贷款金额
+        finInstitutionNumJur: "", // 涉及金融机构
+        sumBalanceJur: "", // 未结清贷款结余
+        debitCardNumJur: "", //未销户贷记卡账户
 
-      // DebitCardLineAmout: "", //未销户贷记卡担保金额
-      // guaranteeNum: "", //对外担保笔数
-      // guaranteeAmout: "", //对外担保金额
-      // guaranteeBalance: "", //对外担保结余
+        debitCardLineAmoutJur: "", //授信总金额
+        guaranteeNumJur: "", //对外担保笔数
+        guaranteeAmoutJur: "", //对外担保金额
+        guaranteeBalanceJur: "", //对外担保结余
+        badRecordMsgJur: "", //  逾期及违约 不良影响
+        existBadRecordJur: 1, //  逾期及违约 是否存在
 
-      creditChageMsg4: "", // 企业实际控制人 征信变化情况说明
-      existCreditChage4: "", // 企业实际控制人 征信变化是否变化
-      creditChageMsg5: "", // 企业法定代表人 征信变化情况说明
-      existCreditChage5: "", // 企业法定代表人 征信变化是否变化
-      creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
-      existCreditChage6: "", // 企业其他保证人 征信变化是否变化
-      creditChageMsg3: "", // 法人保证人 征信变化情况说明
-      existCreditChage3: "", // 法人保证人 征信变化是否变化
+        creditChageMsg4: "", // 企业实际控制人 征信变化情况说明
+        existCreditChage4: 1, // 企业实际控制人 征信变化是否变化
+        creditChageMsg5: "", // 企业法定代表人 征信变化情况说明
+        existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
+        creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
+        existCreditChage6: "", // 企业其他保证人 征信变化是否变化
+        creditChageMsg3: "", // 法人保证人 征信变化情况说明
+        existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
-      RecentNegativeInformation: "",
-      addedOverdues: false,
-      pickerVisible: false
+        RecentNegativeInformation: "",
+        addedOverdues: false,
+        pickerVisible: false
+      }
     };
   },
   methods: {
-    getSelect: function() {
-      console.log("ssss");
+    getSelect1(data) {
+      this.params.existBadRecordCon = data.key;
+    },
+    getSelect2(data) {
+      this.params.existBadRecordJur = data.key;
+    },
+    getSelect3(data) {
+      this.params.existCreditChage4 = data.key;
+    },
+    getSelect4(data) {
+      this.params.existCreditChage5 = data.key;
+    },
+    getSelect5(data) {
+      this.params.existCreditChage3 = data.key;
+    }
+  },
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite1里
+        this.setDefinite10({ params: this.params });
+      }
     }
   }
 };

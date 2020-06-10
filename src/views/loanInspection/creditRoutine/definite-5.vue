@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 检查申请明细-5
  * @Author: sunhua
  * @Date: 2020-06-04 17:03:54
 -->
@@ -17,13 +17,13 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="stockLastBalance"
+          v-model="params.stockLastBalance"
         ></mt-field>
         <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="stockChangSitu"
+          v-model="params.stockChangSitu"
           class="text"
           style="overflow:hidden"
           placeholder="sss"
@@ -41,13 +41,13 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="busIncLastBalance"
+          v-model="params.busIncLastBalance"
         ></mt-field>
         <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="busIncChangSitu"
+          v-model="params.busIncChangSitu"
           class="text"
           style="overflow:hidden"
           placeholder="xxx"
@@ -64,13 +64,13 @@
           class="textFiled"
           label="上次全面检查或调查时余额"
           placeholder="10"
-          v-model="dailyExpenLastBalance"
+          v-model="params.dailyExpenLastBalance"
         ></mt-field>
         <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="dailyExpenChangSitu"
+          v-model="params.dailyExpenChangSitu"
           class="text"
           style="overflow:hidden"
           placeholder="xxx"
@@ -80,9 +80,9 @@
           type="textarea"
           rows="4"
           class="text"
-          v-model="proAndOpeAbnormalSuitMsg"
+          v-model="params.proAndOpeAbnormalSuitMsg"
           style="overflow:hidden"
-          placeholder="DetailsOfIOU.proAndOpeAbnormalSuitMsg"
+          placeholder="xxx"
         ></mt-field>
       </div>
     </div>
@@ -100,16 +100,27 @@ export default {
   data() {
     return {
       DetailsOfIOU: DetailsOfIOU,
-      stockLastBalance: "", // 上次全面检查或调查时余额  存货
-      stockChangSitu: "", // 本次检查存货变动情况  存货
-      busIncLastBalance: "", // 上次全面检查或调查时余额  营业收入
-      busIncChangSitu: "", // 本次检查存货变动情况  营业收入
-      dailyExpenLastBalance: "", // 上次全面检查或调查时余额  水煤气
-      dailyExpenChangSitu: "", // 本次检查存货变动情况  水煤气
-      proAndOpeAbnormalSuitMsg: "" //
+      params: {
+        stockLastBalance: "", // 上次全面检查或调查时余额  存货
+        stockChangSitu: "", // 本次检查存货变动情况  存货
+        busIncLastBalance: "", // 上次全面检查或调查时余额  营业收入
+        busIncChangSitu: "", // 本次检查存货变动情况  营业收入
+        dailyExpenLastBalance: "", // 上次全面检查或调查时余额  水煤气
+        dailyExpenChangSitu: "", // 本次检查存货变动情况  水煤气
+        proAndOpeAbnormalSuitMsg: "" //
+      }
     };
   },
-  methods: {}
+  methods: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite1里
+        this.setDefinite5({ params: this.params });
+      }
+    }
+  }
 };
 </script>
 

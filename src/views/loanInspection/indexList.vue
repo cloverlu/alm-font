@@ -55,6 +55,14 @@ export default {
             type: "loanCreditRoutine"
           }
         });
+      } else if (type === "小企业法人快捷贷贷后日常检查") {
+        this.$router.push({
+          name: "dailyInspectionIndex",
+          params: {
+            bizId: id,
+            type: "loanDailyInspection"
+          }
+        });
       }
     }
   }
