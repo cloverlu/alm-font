@@ -3,6 +3,7 @@ export const loanInspectionMixin = {
   computed: {
     ...mapGetters([
       "nextFooter",
+      "prevFooter",
       "definite1",
       "definite12",
       "definite13",
@@ -13,9 +14,11 @@ export const loanInspectionMixin = {
       "routineDefinite3"
     ])
   },
+
   methods: {
     ...mapActions([
       "setNextFooter",
+      "setPrevFooter",
       "setDefinite1",
       "setDefinite12",
       "setDefinite13",

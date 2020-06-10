@@ -2,6 +2,9 @@ const actions = {
   setNextFooter: ({ commit }, nextFooter) => {
     return commit("SET_NEXTFOOTER", nextFooter);
   },
+  setPrevFooter: ({ commit }, prevFooter) => {
+    return commit("SET_PREVFOOTER", prevFooter);
+  },
   setDefinite1: ({ commit }, definite1) => {
     return commit("SET_DEFINITE1", definite1);
   },

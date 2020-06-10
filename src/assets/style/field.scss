@@ -135,3 +135,16 @@
     font-size: px2rem(14);
 	}
 }
+
+//图片上传
+.image-upload-uploader{
+	.van-uploader__preview-image{
+		width: px2rem(59);
+		height: px2rem(59);
+	}
+	.van-uploader__upload{
+		width: px2rem(59);
+		height: px2rem(59);
+
+	}
+}
