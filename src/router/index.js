@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
 import definite16 from "@/views/loanInspection/components/definite-16";
+import definite17 from "@/views/loanInspection/components/definite-17";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
 import definite13 from "@/views/loanInspection/components/definite-13";
 import definite11 from "@/views/loanInspection/components/definite-11";
@@ -13,6 +14,7 @@ import definite4 from "@/views/loanInspection/components/definite-4";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
+import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 
 Vue.use(VueRouter);
@@ -151,6 +153,17 @@ const routes = [
             },
             children: []
           },
+          //检查申请明细-17
+          {
+            path: "definite17",
+            name: "routineDefinite17",
+            component: definite17,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
           // 申请明细3
           {
             path: "definite3",
@@ -212,7 +225,7 @@ const routes = [
           }
         ]
       },
-      // 类型6
+      // 类型6 新增1
       {
         path: ":type/:bizId",
         name: "dailyInspectionIndex",
@@ -222,7 +235,19 @@ const routes = [
           tag: "resave",
           footer: true
         },
-        children: []
+        children: [
+          // 新增1-2
+          {
+            path: "newly2",
+            name: "newly2",
+            component: newly2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          }
+        ]
       }
     ]
   }

@@ -6,84 +6,86 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="coInformation">
-      <div class="title">财务信息</div>
-      <div class="dailyCheck">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">存货</span>
-        </div>
-        <mt-field
-          class="textFiled"
-          label="上次全面检查或调查时余额"
-          placeholder="10"
-          v-model="params.stockLastBalance"
-        ></mt-field>
-        <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.stockChangSitu"
-          class="text"
-          style="overflow:hidden"
-          placeholder="sss"
-        ></mt-field>
-      </div>
-
-      <div class="enterpriseCredit">
-        <!--营业收入 -->
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">营业收入</span>
+    <div class="definite5">
+      <div class="coInformation">
+        <div class="title">财务信息</div>
+        <div class="dailyCheck">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">存货</span>
+          </div>
+          <mt-field
+            class="textFiled"
+            label="上次全面检查或调查时余额"
+            placeholder="10"
+            v-model="params.stockLastBalance"
+          ></mt-field>
+          <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.stockChangSitu"
+            class="text"
+            style="overflow:hidden"
+            placeholder="sss"
+          ></mt-field>
         </div>
 
-        <mt-field
-          class="textFiled"
-          label="上次全面检查或调查时余额"
-          placeholder="10"
-          v-model="params.busIncLastBalance"
-        ></mt-field>
-        <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.busIncChangSitu"
-          class="text"
-          style="overflow:hidden"
-          placeholder="xxx"
-        ></mt-field>
+        <div class="enterpriseCredit">
+          <!--营业收入 -->
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">营业收入</span>
+          </div>
 
-        <!-- 加工制造类 -->
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName"
-            >水、电、煤、气费其中一项或多项(加工制造类企业必填)</span
-          >
+          <mt-field
+            class="textFiled"
+            label="上次全面检查或调查时余额"
+            placeholder="10"
+            v-model="params.busIncLastBalance"
+          ></mt-field>
+          <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.busIncChangSitu"
+            class="text"
+            style="overflow:hidden"
+            placeholder="xxx"
+          ></mt-field>
+
+          <!-- 加工制造类 -->
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName"
+              >水、电、煤、气费其中一项或多项(加工制造类企业必填)</span
+            >
+          </div>
+          <mt-field
+            class="textFiled"
+            label="上次全面检查或调查时余额"
+            placeholder="10"
+            v-model="params.dailyExpenLastBalance"
+          ></mt-field>
+          <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.dailyExpenChangSitu"
+            class="text"
+            style="overflow:hidden"
+            placeholder="xxx"
+          ></mt-field>
+
+          <mt-field
+            type="textarea"
+            rows="4"
+            class="text"
+            v-model="params.proAndOpeAbnormalSuitMsg"
+            style="overflow:hidden"
+            placeholder="xxx"
+          ></mt-field>
         </div>
-        <mt-field
-          class="textFiled"
-          label="上次全面检查或调查时余额"
-          placeholder="10"
-          v-model="params.dailyExpenLastBalance"
-        ></mt-field>
-        <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.dailyExpenChangSitu"
-          class="text"
-          style="overflow:hidden"
-          placeholder="xxx"
-        ></mt-field>
-
-        <mt-field
-          type="textarea"
-          rows="4"
-          class="text"
-          v-model="params.proAndOpeAbnormalSuitMsg"
-          style="overflow:hidden"
-          placeholder="xxx"
-        ></mt-field>
       </div>
     </div>
   </div>
@@ -116,7 +118,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
+        // 将数据存入vuex里的setDefinite5里
         this.setDefinite5({ params: this.params });
       }
     }
@@ -244,7 +246,27 @@ export default {
 </style>
 
 <style lang="scss">
+@import "../../../assets/style/global.scss";
 textarea {
   resize: none;
+}
+.definite5 {
+  width: 100%;
+  height: 100%;
+  .textFiled {
+    .mint-cell-title {
+      width: px2rem(200) !important;
+      font-size: px2rem(14);
+    }
+    .mint-cell-value {
+      color: #888;
+      font-size: px2rem(14);
+      .mint-field-core {
+        text-align: right;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
 }
 </style>

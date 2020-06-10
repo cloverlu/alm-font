@@ -51,7 +51,15 @@ export default {
         } else if (currentName === "definite10") {
           this.$router.push({ name: "definite5" });
         } else if (currentName === "definite5") {
-          this.$router.push({ name: "definite3" });
+          this.$router.push({ name: "routineDefinite17" });
+        } else if (currentName === "routineDefinite17") {
+          this.$router.push({ name: "routineDefinite3" });
+        }
+      } else if (currentType === "loanDailyInspection") {
+        if (currentName === "dailyInspectionIndex") {
+          this.$router.push({ name: "newly2" });
+        } else if (currentName === "newly2") {
+          this.$router.push({ name: "newly3" });
         }
       } else if (currentType === "loanCreditOverall") {
         if (currentName === "creditOverallIndex") {

@@ -235,6 +235,30 @@ const yesNo = [
   }
 ];
 
+// 担保方式
+const securityKindsArr = [
+  {
+    key: 1,
+    value: "信用"
+  },
+  {
+    key: 2,
+    value: "抵押"
+  },
+  {
+    key: 3,
+    value: "质押"
+  },
+  {
+    key: 4,
+    value: "保证"
+  },
+  {
+    key: 5,
+    value: "其他"
+  }
+];
+
 //definte16,影像数据字段
 const definte16 = _ => {
   const definite16Array = [];
@@ -261,6 +285,33 @@ const definte16 = _ => {
     });
   }
   return definite16Array;
+};
+//definte17,影像维护字段
+const definte17 = _ => {
+  const definite17Array = [];
+  const valueArray = [
+    "财务报表",
+    "纳税材料",
+    "水电费材料",
+    "银行流水",
+    "其他经营材料",
+    "企业办公场所（含企业大门）",
+    "企业生产车间（含重要生产或经营工序）",
+    "企业重要生产或经营设备、存货",
+    "检查人员现场检查的影像",
+    "抵押物影像",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m2_" + i;
+    definite17Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return definite17Array;
 };
 
 //新增1-8
@@ -314,6 +365,8 @@ export {
   coordinate,
   yesNo,
   definte16,
+  definte17,
+  securityKindsArr,
   newly18,
   securityKinds,
   newly18One,
