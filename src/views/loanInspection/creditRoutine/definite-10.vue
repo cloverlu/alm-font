@@ -148,15 +148,17 @@
           placeholder="xxx"
         ></mt-field>
 
-        <div class="title">2.企业法定代表人及其配偶（若有）征信：</div>
-        <div class="formTitle1">
-          <span class="lightBlue"></span>
-          <span class="coNameBlack">征信分类</span>
-          <span class="lightBlue1"></span>
-          <span class="coNameBlack1">征信情况</span>
-        </div>
-        <div class="coNo1">
-          （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+        <div class="titleBox">
+          <div class="title">2.企业法定代表人及其配偶（若有）征信：</div>
+          <div class="formTitle1">
+            <span class="lightBlue"></span>
+            <span class="coNameBlack">征信分类</span>
+            <span class="lightBlue1"></span>
+            <span class="coNameBlack1">征信情况</span>
+          </div>
+          <div class="coNo1">
+            （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+          </div>
         </div>
         <mt-field
           class="textFiled"
@@ -537,6 +539,70 @@ export default {
   }
 }
 
+.titleBox {
+  height: px2rem(103);
+  padding-top: px2rem(5);
+  background-color: #f7f7f7;
+  .formTitle1 {
+    width: 100%;
+    box-sizing: border-box;
+    height: px2rem(65);
+    position: relative;
+    .lightBlue {
+      position: absolute;
+      display: inline-block;
+      width: px2rem(3);
+      height: px2rem(14);
+      top: 30%;
+      left: px2rem(18);
+      transform: translate(-50%, -50%);
+      background: rgba(78, 120, 222, 1);
+      opacity: 1;
+      border-radius: px2rem(2);
+    }
+    .lightBlue1 {
+      position: absolute;
+      display: inline-block;
+      width: px2rem(3);
+      height: px2rem(14);
+      top: 70%;
+      left: px2rem(18);
+      transform: translate(-50%, -50%);
+      background: rgba(78, 120, 222, 1);
+      opacity: 1;
+      border-radius: px2rem(2);
+    }
+    .coNameBlack {
+      position: absolute;
+      display: inline-block;
+      height: px2rem(14);
+      width: px2rem(327);
+      line-height: px2rem(15);
+      top: 30%;
+      transform: translate(px2rem(26), -50%);
+      font-size: px2rem(14);
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
+      color: rgba(113, 113, 113, 1);
+      opacity: 1;
+    }
+    .coNameBlack1 {
+      position: absolute;
+      display: inline-block;
+      height: px2rem(14);
+      width: px2rem(327);
+      line-height: px2rem(15);
+      top: 70%;
+      transform: translate(px2rem(26), -50%);
+      font-size: px2rem(14);
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
+      color: rgba(113, 113, 113, 1);
+      opacity: 1;
+    }
+  }
+}
+
 .coNo1 {
   height: px2rem(12);
   font-size: px2rem(12);
@@ -549,6 +615,7 @@ export default {
 }
 
 .coNo2 {
+  background-color: #f7f7f7;
   height: px2rem(44);
   font-size: px2rem(12);
   // font-family: Source Han Sans CN;
@@ -556,10 +623,11 @@ export default {
   line-height: px2rem(44);
   color: rgba(78, 120, 222, 1);
   opacity: 1;
-  margin-left: px2rem(8);
+  padding-left: px2rem(8);
 }
 
 .coNo3 {
+  background-color: #f7f7f7;
   height: px2rem(44);
   font-size: px2rem(14);
   // font-family: Source Han Sans CN;
@@ -567,7 +635,7 @@ export default {
   line-height: px2rem(44);
   color: rgba(9, 9, 9, 1);
   opacity: 1;
-  margin-left: px2rem(8);
+  padding-left: px2rem(8);
 }
 
 .item1 {

@@ -236,7 +236,7 @@ const yesNo = [
 ];
 
 // 担保方式
-const securityKinds = [
+const securityKindsArr = [
   {
     key: 1,
     value: "信用"
@@ -286,6 +286,71 @@ const definte16 = _ => {
   }
   return definite16Array;
 };
+//definte17,影像维护字段
+const definte17 = _ => {
+  const definite17Array = [];
+  const valueArray = [
+    "财务报表",
+    "纳税材料",
+    "水电费材料",
+    "银行流水",
+    "其他经营材料",
+    "企业办公场所（含企业大门）",
+    "企业生产车间（含重要生产或经营工序）",
+    "企业重要生产或经营设备、存货",
+    "检查人员现场检查的影像",
+    "抵押物影像",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m2_" + i;
+    definite17Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return definite17Array;
+};
+
+//新增1-8
+const newly18 = {
+  custName: "张三有限公司",
+  bizType: bizType[2],
+  lineAmout: "200000", //授信金额
+  lineBalance: "50000" //授信余额
+};
+
+const securityKinds = _ => {
+  const kinds = ["信用", "抵押", "质押", "保证", "其它"];
+  const data = [];
+  for (let i = 1; i < kinds.length; i++) {
+    data.push({
+      key: i,
+      value: kinds[i]
+    });
+  }
+  return data;
+};
+
+//新增1-8里的内容
+const newly18One = [
+  {
+    name: "健康、 嗜好、家庭关系等方面",
+    id: 1,
+    modelName: "HoldPensonRisk"
+  }
+];
+//新增1-8里的内容
+const newly18Two = [
+  {
+    name:
+      "股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题",
+    id: 1,
+    modelName: "managerRisk"
+  }
+];
 
 export {
   todoListTitle,
@@ -300,5 +365,10 @@ export {
   coordinate,
   yesNo,
   definte16,
-  securityKinds
+  definte17,
+  securityKindsArr,
+  newly18,
+  securityKinds,
+  newly18One,
+  newly18Two
 };

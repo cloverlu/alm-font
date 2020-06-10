@@ -482,6 +482,7 @@ export default {
   }
 
   .coNo2 {
+    background-color: #f7f7f7;
     height: px2rem(44);
     font-size: px2rem(12);
     // font-family: Source Han Sans CN;
@@ -489,10 +490,11 @@ export default {
     line-height: px2rem(44);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
-    margin-left: px2rem(8);
+    padding-left: px2rem(8);
   }
 
   .coNo3 {
+    background-color: #f7f7f7;
     height: px2rem(44);
     font-size: px2rem(14);
     // font-family: Source Han Sans CN;
@@ -500,7 +502,7 @@ export default {
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
-    margin-left: px2rem(8);
+    padding-left: px2rem(8);
   }
 
   .mint-cell {

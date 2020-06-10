@@ -38,7 +38,7 @@
             <div class="item">
               <span class="tag">担保方式</span>
               <almSelect
-                :selectData="securityKinds"
+                :selectData="securityKindsArr"
                 :defaultValue="params.securityKind"
                 :triggerId="securityKind"
                 :title="selectTitle"
@@ -110,7 +110,7 @@
 import {
   DetailsOfIOU,
   coordinate,
-  securityKinds,
+  securityKindsArr,
   yesNo
 } from "../../../utils/dataMock";
 import almSelect from "../components/select";
@@ -124,7 +124,7 @@ export default {
       hasRouterChild6: this.$route.params.hasRouterChild6,
       DetailsOfIOU: DetailsOfIOU,
       coordinate: coordinate,
-      securityKinds: securityKinds,
+      securityKindsArr: securityKindsArr,
       yesNo: yesNo,
       popupVisible: false,
       payType: 1,

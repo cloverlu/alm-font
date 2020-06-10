@@ -55,10 +55,10 @@
           <span class="right">2020-06-01</span>
         </div>
       </div>
-    </div>
-    <div class="submit">
-      <mt-button type="primary" size="large">提交审批</mt-button>
-      <mt-button size="large" @click="goback()">上一步</mt-button>
+      <div class="submit">
+        <mt-button type="primary" size="large">提交审批</mt-button>
+        <mt-button size="large" @click="goback()">上一步</mt-button>
+      </div>
     </div>
   </div>
 </template>
@@ -97,7 +97,7 @@ export default {
     goback: function() {
       console.log("返回");
       // this.$router.push("definite5");
-      history.go(-3);
+      history.go(-1);
     },
     goSign: function() {
       this.$router.push("definite4");
@@ -254,7 +254,7 @@ export default {
     position: absolute;
     width: calc(100% - 30px);
     // height: px2rem(200);
-    bottom: px2rem(-205);
+    bottom: px2rem(-0);
     padding-left: px2rem(15);
     .mint-button {
       width: px2rem(345);
