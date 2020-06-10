@@ -48,7 +48,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="requireCheck"
+              v-model="params.requireCheck"
               class="text is-nolabel textArea"
               style="overflow:hidden"
               placeholder="xxx1"
@@ -57,7 +57,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="checked"
+              v-model="params.checked"
               class="text textArea"
               style="overflow:hidden"
               placeholder="xxx2"
@@ -75,7 +75,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="specialRequireCheck"
+              v-model="params.specialRequireCheck"
               class="text"
               style="overflow:hidden"
               placeholder="xxx3"
@@ -84,7 +84,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="specialChecked"
+              v-model="params.specialChecked"
               class="text textArea"
               style="overflow:hidden"
               placeholder="xxx4"
@@ -105,7 +105,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="HoldPensonRisk"
+              v-model="params.HoldPensonRisk"
               class="text textArea"
               style="overflow:hidden"
               placeholder="xxx5"
@@ -126,7 +126,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="managerRisk"
+              v-model="params.managerRisk"
               class="text textArea"
               style="overflow:hidden"
               placeholder="xxx6"
@@ -143,7 +143,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="otherRisk"
+              v-model="params.otherRisk"
               class="text textArea"
               style="overflow:hidden"
               placeholder="xxx7"
@@ -159,19 +159,23 @@
 <script>
 import { DetailsOfIOU } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
+import { loanInspectionMixin } from "../../../utils/mixin";
 export default {
+  mixins: [loanInspectionMixin],
   components: { "mt-cell": Cell, "mt-field": Field },
   data() {
     return {
       hasRouterChild2: this.$route.params.hasRouterChild2,
       DetailsOfIOU: DetailsOfIOU,
-      requireCheck: "", // 审批意见要求
-      checked: "", // 审批意见落实情况
-      specialRequireCheck: "", // 产品贷后要求
-      specialChecked: "", // 产品贷后落实情况
-      HoldPensonRisk: "", // 实际控制人或法定代表人风险点
-      managerRisk: "", // 管理层风险点
-      otherRisk: "" // 其他风险点
+      params: {
+        requireCheck: "", // 审批意见要求
+        checked: "", // 审批意见落实情况
+        specialRequireCheck: "", // 产品贷后要求
+        specialChecked: "", // 产品贷后落实情况
+        HoldPensonRisk: "", // 实际控制人或法定代表人风险点
+        managerRisk: "", // 管理层风险点
+        otherRisk: "" // 其他风险点
+      }
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -181,6 +185,15 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.hasRouterChild2 = to.name === "creditRoutineIndex";
     next();
+  },
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite1里
+        this.setDefinite12({ params: this.params });
+      }
+    }
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 检查申请明细-11
  * @Author: sunhua
  * @Date: 2020-06-04 17:03:54
 -->
@@ -32,7 +32,7 @@
           class="textFiled"
           label="未结清贷款笔数"
           placeholder="10"
-          v-model="unPayOffLoanNum"
+          v-model="params.unPayOffLoanNum"
         ></mt-field>
         <!-- <mt-cell
           title="未结清贷款笔数"
@@ -42,19 +42,19 @@
           class="textFiled"
           label="未结清贷款金额"
           placeholder="10"
-          v-model="unPayOffAmout"
+          v-model="params.unPayOffAmout"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="涉及金融机构"
           placeholder="10"
-          v-model="finInstitutionNum"
+          v-model="params.finInstitutionNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款结余"
           placeholder="10"
-          v-model="sumBalance"
+          v-model="params.sumBalance"
         ></mt-field>
 
         <div class="nothing"></div>
@@ -62,19 +62,19 @@
           class="textFiled"
           label="对外担保笔数"
           placeholder="10"
-          v-model="guaranteeNum"
+          v-model="params.guaranteeNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保金额"
           placeholder="10"
-          v-model="guaranteeAmout"
+          v-model="params.guaranteeAmout"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保结余"
           placeholder="10"
-          v-model="guaranteeBalance"
+          v-model="params.guaranteeBalance"
         ></mt-field>
 
         <!-- （2）逾期及欠息等不良记录 -->
@@ -90,8 +90,9 @@
             >贷款期间借款企业是否发生逾期、欠息等不良信用记录</span
           >
           <almSelect
-            :selectData="cooperationTypes"
-            :defaultValue="cooperationTypes[0].value"
+            :selectData="yesNo"
+            :defaultValue="params.existBadRecord"
+            :triggerId="existBadRecord"
             :title="selectTitle"
             :fontColor="fontColor"
             @getSelectValue="getSelect"
@@ -102,7 +103,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="badRecordMsg"
+          v-model="params.badRecordMsg"
           class="text"
           style="overflow:hidden"
           placeholder="badRecordMsg"
@@ -113,25 +114,25 @@
           class="textFiled"
           label="欠税记录"
           placeholder="10"
-          v-model="oweTaxRecordNum"
+          v-model="params.oweTaxRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="民事判决"
           placeholder="10"
-          v-model="civilJudgmentRecordNum"
+          v-model="params.civilJudgmentRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="强制执行记录"
           placeholder="10"
-          v-model="forceImpleRecordNum"
+          v-model="params.forceImpleRecordNum"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="行政处罚记录"
           placeholder="10"
-          v-model="administRecordNum"
+          v-model="params.administRecordNum"
         ></mt-field>
 
         <!-- （4）征信记录 -->
@@ -140,9 +141,10 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <almSelect
-            :selectData="cooperationTypes"
-            :defaultValue="cooperationTypes[0].value"
-            :title="selectTitle"
+            :selectData="yesNo"
+            :defaultValue="params.existCreditChage1"
+            :triggerId="existCreditChage1"
+            :title="selectTitle2"
             :fontColor="fontColor"
             @getSelectValue="getSelect"
             class="info"
@@ -152,7 +154,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="creditChageMsg1"
+          v-model="params.creditChageMsg1"
           class="text"
           style="overflow:hidden"
           placeholder="changedMsg"
@@ -164,9 +166,10 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <almSelect
-            :selectData="cooperationTypes"
-            :defaultValue="cooperationTypes[0].value"
-            :title="selectTitle"
+            :selectData="yesNo"
+            :defaultValue="params.existCreditChage2"
+            :triggerId="existCreditChage2"
+            :title="selectTitle2"
             :fontColor="fontColor"
             @getSelectValue="getSelect"
             class="info"
@@ -176,7 +179,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="creditChageMsg2"
+          v-model="params.creditChageMsg2"
           class="text"
           style="overflow:hidden"
           placeholder="changedMsg"
@@ -188,9 +191,10 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <almSelect
-            :selectData="cooperationTypes"
-            :defaultValue="cooperationTypes[0].value"
-            :title="selectTitle"
+            :selectData="yesNo"
+            :defaultValue="params.existCreditChage3"
+            :triggerId="existCreditChage3"
+            :title="selectTitle2"
             :fontColor="fontColor"
             @getSelectValue="getSelect"
             class="info"
@@ -200,7 +204,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="creditChageMsg3"
+          v-model="params.creditChageMsg3"
           class="text"
           style="overflow:hidden"
           placeholder="changedMsg"
@@ -208,12 +212,12 @@
 
         <div class="nothing"></div>
 
-        <mt-cell class="textFiled" title="近期负面信息情况"> </mt-cell>
+        <mt-cell class="textFiled" title="近期负面信息情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
           class="text"
-          v-model="RecentNegativeInformation"
+          v-model="params.RecentNegativeInformation"
           style="overflow:hidden"
           placeholder="RecentNegativeInformation"
         ></mt-field>
@@ -223,7 +227,7 @@
 </template>
 
 <script>
-import { DetailsOfIOU, cooperationType } from "../../../utils/dataMock";
+import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
 import almSelect from "../components/select";
 export default {
@@ -236,44 +240,58 @@ export default {
     return {
       DetailsOfIOU: DetailsOfIOU,
       queryDate: "2020-06-03",
-      cooperationTypes: cooperationType,
+      yesNo: yesNo,
       popupVisible: false,
       payType: 1,
-      selectTitle: "检查配合程度",
+      selectTitle: "贷款期间借款企业是否发生逾期、欠息等不良信用记录",
+      selectTitle2: "征信记录是否有异常变化",
       fontColor: "blue",
-      // params: {
-      // 借款企业部分
-      unPayOffLoanNum: "", //未结清贷款笔数
-      unPayOffAmout: "", // 未结清贷款金额
-      finInstitutionNum: "", // 涉及金融机构
-      sumBalance: "", // 未结清贷款结余
-      DebitCardNum: "", //未销户贷记卡账户
+      existBadRecord: "existBadRecord",
+      existCreditChage1: "existCreditChage1",
+      existCreditChage2: "existCreditChage2",
+      existCreditChage3: "existCreditChage3",
+      params: {
+        // 借款企业部分
+        unPayOffLoanNum: "", //未结清贷款笔数
+        unPayOffAmout: "", // 未结清贷款金额
+        finInstitutionNum: "", // 涉及金融机构
+        sumBalance: "", // 未结清贷款结余
+        DebitCardNum: "", //未销户贷记卡账户
 
-      DebitCardLineAmout: "", //未销户贷记卡担保金额
-      guaranteeNum: "", //对外担保笔数
-      guaranteeAmout: "", //对外担保金额
-      guaranteeBalance: "", //对外担保结余
-      existBadRecord: "", // 是否逾期
-      badRecordMsg: "", //  逾期及违约 不良影响
-      oweTaxRecordNum: "", // 欠税记录
-      civilJudgmentRecordNum: "", // 民事判决
-      forceImpleRecordNum: "", // 强制执行记录
-      administRecordNum: "", // 行政处罚记录
+        DebitCardLineAmout: "", //未销户贷记卡担保金额
+        guaranteeNum: "", //对外担保笔数
+        guaranteeAmout: "", //对外担保金额
+        guaranteeBalance: "", //对外担保结余
+        existBadRecord: 1, // 是否逾期 借款企业
+        badRecordMsg: "", //  逾期及违约 不良影响
+        oweTaxRecordNum: "", // 欠税记录
+        civilJudgmentRecordNum: "", // 民事判决
+        forceImpleRecordNum: "", // 强制执行记录
+        administRecordNum: "", // 行政处罚记录
 
-      creditChageMsg1: "", // 	借款企业 征信变化情况说明
-      existCreditChage1: "", // 借款企业 征信变化是否变化
-      creditChageMsg2: "", // 	关联企业 征信变化情况说明
-      existCreditChage2: "", // 关联企业 征信变化是否变化
-      creditChageMsg3: "", // 	法人保证人 征信变化情况说明
-      existCreditChage3: "", // 法人保证人 征信变化是否变化
+        creditChageMsg1: "", // 	借款企业 征信变化情况说明
+        existCreditChage1: 0, // 借款企业 征信变化是否变化
+        creditChageMsg2: "", // 	关联企业 征信变化情况说明
+        existCreditChage2: 0, // 关联企业 征信变化是否变化
+        creditChageMsg3: "", // 	法人保证人 征信变化情况说明
+        existCreditChage3: 0, // 法人保证人 征信变化是否变化
 
-      RecentNegativeInformation: "" //近期负面信息情况
-      // }
+        RecentNegativeInformation: "" //近期负面信息情况
+      }
     };
   },
   methods: {
-    getSelect: function() {
-      console.log("ssss");
+    getSelect(data) {
+      this.params.cooperate = data.key;
+    }
+  },
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite1里
+        this.setDefinite11({ params: this.params });
+      }
     }
   }
 };
