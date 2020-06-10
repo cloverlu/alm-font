@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
-import creditFirstIndex from "@/views/loanInspection/creditFirst/definite-1";
+import definite16 from "@/views/loanInspection/creditFirst/definite-16";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
 import definite13 from "@/views/loanInspection/creditRoutine/definite-13";
 import definite11 from "@/views/loanInspection/creditRoutine/definite-11";
@@ -59,8 +59,19 @@ const routes = [
           //检查申请明细-2
           {
             path: "definite2",
-            name: "definite2",
+            name: "firstDefinite2",
             component: definite2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-16
+          {
+            path: "definite16",
+            name: "firstDefinite16",
+            component: definite16,
             meta: {
               title: "检查申请明细",
               tag: "resave",
@@ -70,7 +81,7 @@ const routes = [
           //检查申请明细-3
           {
             path: "definite3",
-            name: "definite3",
+            name: "firstDefinite3",
             component: definite3,
             meta: {
               title: "检查申请明细",
