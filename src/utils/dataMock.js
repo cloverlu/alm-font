@@ -211,6 +211,34 @@ const cooperationType = [
   }
 ];
 
+// 检查类型
+const bizTypes = [
+  {
+    key: "m1",
+    value: "小企业授信业务首次跟踪检查"
+  },
+  {
+    key: "m2",
+    value: "小企业授信业务贷后例行检查"
+  },
+  {
+    key: "m3",
+    value: "小企业授信业务贷后全面检查"
+  },
+  {
+    key: "m4",
+    value: "小企业授信业务还款资金落实情况检查"
+  },
+  {
+    key: "m5",
+    value: "小企业法人快捷贷首次检查"
+  },
+  {
+    key: "m6",
+    value: "小企业法人快捷贷贷后日常检查"
+  }
+];
+
 //配合程度
 const coordinate = [
   {
@@ -286,9 +314,9 @@ const definte16 = _ => {
   }
   return definite16Array;
 };
-//definte17,影像维护字段
-const definte17 = _ => {
-  const definite17Array = [];
+//definte18,影像维护字段
+const definte18 = _ => {
+  const definite18Array = [];
   const valueArray = [
     "财务报表",
     "纳税材料",
@@ -304,14 +332,30 @@ const definte17 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m2_" + i;
-    definite17Array.push({
+    definite18Array.push({
       id: i,
       text: valueArray[i],
       vModel: a,
       vId: "m" + i
     });
   }
-  return definite17Array;
+  return definite18Array;
+};
+
+// processing2-4 影像维护字段
+const processing4 = _ => {
+  const processing4Array = [];
+  const valueArray = ["其他"];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m4_" + i;
+    processing4Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return processing4Array;
 };
 
 //新增1-8
@@ -365,10 +409,12 @@ export {
   coordinate,
   yesNo,
   definte16,
-  definte17,
+  definte18,
+  processing4,
   securityKindsArr,
   newly18,
   securityKinds,
   newly18One,
-  newly18Two
+  newly18Two,
+  bizTypes
 };
