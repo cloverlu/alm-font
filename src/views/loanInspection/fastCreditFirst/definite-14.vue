@@ -25,13 +25,11 @@
         class="textFiled"
         title="合同编号"
         :value="params.contractNo"
-        placeholder="440000002200111"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="授信业务小类"
         :value="params.bizSubKind"
-        placeholder="xxx"
       ></mt-cell>
       <mt-cell
         class="textFiled"
@@ -55,12 +53,7 @@
         placeholder="10"
         v-model="params.repayDate"
       ></mt-field>
-      <mt-field
-        class="textFiled"
-        label="约定用途"
-        placeholder="10"
-        v-model="params.repayAmout"
-      ></mt-field>
+      <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -70,25 +63,104 @@
         placeholder="请输入"
       ></mt-field>
       <div class="item1">
-        <span class="tag1">贷款支付方式</span>
+        <span class="tag">贷款支付方式</span>
         <almSelect
-          :selectData="yesNo"
+          :selectData="payKindsArr"
           :defaultValue="params.payKind"
           :triggerId="payKind"
-          :title="selectTitle"
+          :title="selectTitle1"
           :fontColor="fontColor"
-          @getSelectValue="getSelect"
+          @getSelectValue="getSelect1"
           class="info"
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
+
+      <div class="formTitle">
+        <span class="lightBlue"></span>
+        <span class="coName">检查内容</span>
+      </div>
+
+      <mt-field class="textFiled" label="资金使用情况说明"></mt-field>
+      <mt-field
+        type="textarea"
+        rows="3"
+        v-model="params.detailMsg4useAmout"
+        class="text"
+        style="overflow:hidden"
+        placeholder="包括支付对象名称、金额等，必要时可收集汇款凭证、商务合同、账户流水等证明材料进行佐证。"
+      ></mt-field>
+      <div class="item1">
+        <span class="tag">是否按合同约定的用途使用信贷资金</span>
+        <almSelect
+          :selectData="yesNo"
+          :defaultValue="params.useAmoutByContract"
+          :triggerId="useAmoutByContract"
+          :title="selectTitle2"
+          :fontColor="fontColor"
+          @getSelectValue="getSelect2"
+          class="info"
+        ></almSelect>
+        <span class="iconfont iconxiala arrow"></span>
+      </div>
+      <div class="item1">
+        <span class="tag">是否履行合同约定</span>
+        <almSelect
+          :selectData="yesNo"
+          :defaultValue="params.executeCon"
+          :triggerId="executeCon"
+          :title="selectTitle3"
+          :fontColor="fontColor"
+          @getSelectValue="getSelect3"
+          class="info"
+        ></almSelect>
+        <span class="iconfont iconxiala arrow"></span>
+      </div>
+
+      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field
+        type="textarea"
+        rows="3"
+        v-model="params.msg"
+        class="text"
+        style="overflow:hidden"
+        placeholder="xxxx"
+      ></mt-field>
+      <div class="item1">
+        <span class="tag">对我行检查的态度</span>
+        <almSelect
+          :selectData="coordinate"
+          :defaultValue="params.cooperate"
+          :triggerId="cooperate"
+          :title="selectTitle4"
+          :fontColor="fontColor"
+          @getSelectValue="getSelect4"
+          class="info"
+        ></almSelect>
+        <span class="iconfont iconxiala arrow"></span>
+      </div>
+
+      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field
+        type="textarea"
+        rows="3"
+        v-model="params.otherSitu"
+        class="text"
+        style="overflow:hidden"
+        placeholder="xxxx"
+      ></mt-field>
     </div>
     <router-view v-else></router-view>
   </div>
 </template>
 
 <script>
-import { DetailsOfIOU, bizTypes } from "../../../utils/dataMock";
+import {
+  DetailsOfIOU,
+  payKindsArr,
+  yesNo,
+  coordinate
+} from "../../../utils/dataMock";
 import { Field, Cell } from "mint-ui";
 import { loanInspectionMixin } from "../../../utils/mixin";
 import almSelect from "../components/select";
@@ -96,29 +168,43 @@ export default {
   mixins: [loanInspectionMixin],
   components: {
     "mt-cell": Cell,
-    "mt-field": Field
-    // almSelect
+    "mt-field": Field,
+    almSelect
   },
   data() {
     return {
       hasRouterChild2: this.$route.params.hasRouterChild2,
       DetailsOfIOU: DetailsOfIOU,
-      bizTypes: bizTypes,
+      payKindsArr: payKindsArr,
+      coordinate: coordinate,
+      yesNo: yesNo,
       popupVisible: false,
       payType: 1,
-      selectTitle: "贷款支付方式",
+      selectTitle1: "贷款支付方式",
+      selectTitle2: "是否按合同约定的用途使用信贷资金",
+      selectTitle3: "是否履行合同约定",
+      selectTitle4: "对我行检查的态度",
       fontColor: "blue",
       payKind: "payKind",
+      useAmoutByContract: "useAmoutByContract",
+      executeCon: "executeCon",
+      cooperate: "cooperate",
       params: {
         bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
         custName: "王健林", // 客户名称
-        contractNo: "", //  合同编号
-        bizSubKind: "", //  授信业务小类
+        contractNo: "440000002200111", //  合同编号
+        bizSubKind: "xx", //  授信业务小类
         loanAmout: "1000000000", // 贷款金额
         loanLength: "2040-08-25", // 贷款期限
+        payKind: 1, // 贷款支付方式
         repayKind: "", // 还款方式
         repayDate: "", // 还款日期
-        repayAmout: "" // 还款金额
+        loanPurpose: "", // 约定用途
+        detailMsg4useAmout: "", // 资金使用情况详细说明
+        useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
+        executeCon: 1, //是否履行合同约定
+        cooperate: 1, //对我行检查的态度
+        otherSitu: "" // 其他
       }
     };
   },
@@ -131,21 +217,27 @@ export default {
     next();
   },
   methods: {
-    // getSelect: function(data) {
-    //   this.params.bizType = data.key;
-    // },
-    // getSelect1: function(data) {
-    //   this.params.repayKind = data.key;
-    // }
+    getSelect1: function(data) {
+      this.params.payKind = data.key;
+    },
+    getSelect2: function(data) {
+      this.params.useAmoutByContract = data.key;
+    },
+    getSelect3: function(data) {
+      this.params.executeCon = data.key;
+    },
+    getSelect4: function(data) {
+      this.params.cooperate = data.key;
+    }
   },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite5里
-    //     this.setDefinite5({ params: this.params });
-    //   }
-    // }
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 将数据存入vuex里的setDefinite5里
+        this.setDefinite5({ params: this.params });
+      }
+    }
   }
 };
 </script>
@@ -222,10 +314,10 @@ export default {
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-child {
       border: none;
-      padding: 0;
+      padding: 0 px2rem(10);
     }
     .tag {
-      width: px2rem(100);
+      width: px2rem(224);
       text-align: left;
       color: #090909;
       height: px2rem(44);
@@ -260,6 +352,9 @@ export default {
       }
     }
   }
+  // .margintop {
+  //   margin-top: px2rem(1);
+  // }
 }
 </style>
 
@@ -273,7 +368,7 @@ textarea {
   height: 100%;
   .textFiled {
     .mint-cell-title {
-      width: px2rem(100) !important;
+      width: px2rem(224) !important;
       font-size: px2rem(14);
     }
     .mint-cell-value {

@@ -253,7 +253,7 @@ export default {
 
   .formTitle {
     width: 100%;
-    height: px2rem(50);
+    height: px2rem(44);
     position: relative;
     .lightBlue {
       position: absolute;
@@ -371,7 +371,7 @@ export default {
     background-color: #fff;
     position: relative;
     width: 100%;
-    height: px2rem(204);
+    height: px2rem(229);
     .submit {
       position: absolute;
       width: calc(100% - 30px);

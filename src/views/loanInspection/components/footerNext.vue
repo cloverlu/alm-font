@@ -92,6 +92,8 @@ export default {
       } else if (currentType === "loanFastCreditFirst") {
         if (currentName === "fastCreditFirstIndex") {
           this.$router.push({ name: "fastCreditFirstDefinite16" });
+        } else if (currentName === "fastCreditFirstDefinite16") {
+          this.$router.push({ name: "fastCreditFirstDefinite3" });
         }
       }
 
