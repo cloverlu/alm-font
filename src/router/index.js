@@ -7,7 +7,7 @@ import definite18 from "@/views/loanInspection/components/definite-18";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
 import definite13 from "@/views/loanInspection/components/definite-13";
 import definite11 from "@/views/loanInspection/components/definite-11";
-import definite10 from "@/views/loanInspection/creditRoutine/definite-10";
+import definite10 from "@/views/loanInspection/components/definite-10";
 import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
 import definite7 from "@/views/loanInspection/components/definite-7";
 import definite3 from "@/views/loanInspection/components/definite-3";
@@ -20,6 +20,9 @@ import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
 import newly4 from "@/views/loanInspection/dailyInspection/newly-4";
 import newly5 from "@/views/loanInspection/dailyInspection/newly-5";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
+import definite89 from "@/views/loanInspection/creditOverall/credit89";
+import definite6 from "@/views/loanInspection/creditOverall/definite6";
+import definite17 from "@/views/loanInspection/creditOverall/definite-17";
 import repaymentInspectionIndex from "@/views/loanInspection/repaymentInspection/newly-9";
 import processing4 from "@/views/loanInspection/repaymentInspection/processing2-4";
 import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
@@ -228,6 +231,61 @@ const routes = [
               title: "检查申请明细",
               tag: "resave",
               footer: true
+            }
+          },
+          //检查申请明细-10
+          {
+            path: "definite10",
+            name: "overalltDefinite10",
+            component: definite10,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-8/检查申请明细-9
+          {
+            path: "definite89",
+            name: "overalltDefinite89",
+            component: definite89,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细6
+          {
+            path: "definite6",
+            name: "overalltDefinite6",
+            component: definite6,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细17
+          {
+            path: "definite17",
+            name: "overalltDefinite17",
+            component: definite17,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细3
+          {
+            path: "definite3",
+            name: "overalltDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
             }
           }
         ]
