@@ -10,18 +10,18 @@
 			span(class="colum-blue")
 			span  影像维护
 		.definite-13-content
-			imageUpload(v-for="item in definte17" :key="item.id" :item="item")
+			imageUpload(v-for="item in definte18" :key="item.id" :item="item")
 			
 </template>
 
 <script>
 import imageUpload from "../components/imageUpload";
-import { definte17 } from "../../../utils/dataMock";
+import { definte18 } from "../../../utils/dataMock";
 export default {
   components: { imageUpload },
   data() {
     return {
-      definte17: definte17()
+      definte18: definte18()
     };
   },
   mounted() {}

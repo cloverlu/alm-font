@@ -71,6 +71,14 @@ export default {
             type: "loanCreditOverall"
           }
         });
+      } else if (type === "小企业授信业务还款资金落实情况检查") {
+        this.$router.push({
+          name: "repaymentInspectionIndex",
+          params: {
+            bizId: id,
+            type: "repaymentInspection"
+          }
+        });
       }
     }
   }

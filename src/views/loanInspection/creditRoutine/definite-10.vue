@@ -294,7 +294,7 @@
 
         <div class="nothing"></div>
 
-        <mt-cell title="近期负面信息情况"> </mt-cell>
+        <mt-cell class="textFiled" title="近期负面信息情况"> </mt-cell>
         <mt-field
           type="textarea"
           rows="3"
@@ -737,6 +737,15 @@ textarea {
       font-size: px2rem(14);
       .mint-field-core {
         text-align: right;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
+  .text {
+    .mint-cell-value {
+      .mint-field-core {
+        text-align: left;
         color: #888;
         font-size: px2rem(14);
       }

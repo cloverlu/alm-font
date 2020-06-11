@@ -548,5 +548,14 @@ export default {
       }
     }
   }
+  .text {
+    .mint-cell-value {
+      .mint-field-core {
+        text-align: left;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
 }
 </style>
