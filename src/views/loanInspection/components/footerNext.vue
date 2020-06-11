@@ -61,6 +61,10 @@ export default {
         } else if (currentName === "newly2") {
           this.$router.push({ name: "newly3" });
         } else if (currentName === "newly3") {
+          this.$router.push({ name: "newly4" });
+        } else if (currentName === "newly4") {
+          this.$router.push({ name: "newly5" });
+        } else if (currentName === "newly5") {
           this.$router.push({ name: "newlyDefinite16" });
         } else if (currentName === "newlyDefinite16") {
           this.$router.push({ name: "newlyDefinite3" });
@@ -81,9 +85,13 @@ export default {
         } else if (currentName === "overalltDefinite17") {
           this.$router.push({ name: "overalltDefinite3" });
         }
-      } else if (currentType === "repaymentInspection") {
+      } else if (currentType === "loanRepaymentInspection") {
         if (currentName === "repaymentInspectionIndex") {
           this.$router.push({ name: "processing4" });
+        }
+      } else if (currentType === "loanFastCreditFirst") {
+        if (currentName === "fastCreditFirstIndex") {
+          this.$router.push({ name: "fastCreditFirstDefinite16" });
         }
       }
 

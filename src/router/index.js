@@ -17,12 +17,15 @@ import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
 import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
 import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
+import newly4 from "@/views/loanInspection/dailyInspection/newly-4";
+import newly5 from "@/views/loanInspection/dailyInspection/newly-5";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 import definite89 from "@/views/loanInspection/creditOverall/credit89";
 import definite6 from "@/views/loanInspection/creditOverall/definite6";
 import definite17 from "@/views/loanInspection/creditOverall/definite-17";
 import repaymentInspectionIndex from "@/views/loanInspection/repaymentInspection/newly-9";
 import processing4 from "@/views/loanInspection/repaymentInspection/processing2-4";
+import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
 
 Vue.use(VueRouter);
 
@@ -322,6 +325,42 @@ const routes = [
           }
         ]
       },
+      // 类型5
+      {
+        path: "5/:type/:bizId",
+        name: "fastCreditFirstIndex",
+        component: definite14,
+        meta: {
+          title: "检查申请明细",
+          tag: "resave",
+          footer: true
+        },
+        children: [
+          //检查申请明细-16
+          {
+            path: "fastCreditFirstDefinite16",
+            name: "fastCreditFirstDefinite16",
+            component: definite16,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 申请明细3
+          {
+            path: "fastCreditFirstDefinite3",
+            name: "fastCreditFirstDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            },
+            children: []
+          }
+        ]
+      },
       // 类型6 新增1
       {
         path: "6/:type/:bizId",
@@ -349,6 +388,28 @@ const routes = [
             path: "newly3",
             name: "newly3",
             component: newly3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-4
+          {
+            path: "newly4",
+            name: "newly4",
+            component: newly4,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-5
+          {
+            path: "newly5",
+            name: "newly5",
+            component: newly5,
             meta: {
               title: "检查申请明细",
               tag: "resave",
