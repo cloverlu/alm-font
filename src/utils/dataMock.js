@@ -309,7 +309,7 @@ const definte16 = _ => {
       id: i,
       text: valueArray[i],
       vModel: a,
-      vId: "m" + i
+      vId: "m1" + i
     });
   }
   return definite16Array;
@@ -358,6 +358,33 @@ const processing4 = _ => {
   return processing4Array;
 };
 
+//definte17,影像数据字段
+const definte17 = _ => {
+  const definite17Array = [];
+  const valueArray = [
+    "能耗类材料",
+    "银行流水",
+    "主要上下游客户合同单据",
+    "其他财务经营材料",
+    "企业办公场所（含企业大门）",
+    "企业生产车间（含重要生产或经营工序）",
+    "企业重要生产或经营设备、存货",
+    "检查人员现场检查的影像",
+    "抵押物影像",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m6_" + i;
+    definite17Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m6" + i
+    });
+  }
+  return definite17Array;
+};
+
 //新增1-8
 const newly18 = {
   custName: "张三有限公司",
@@ -396,6 +423,219 @@ const newly18Two = [
   }
 ];
 
+//财务科目里的字段
+const caiwu = {
+  one: ["应收票据", "存货", "私人借款", "应付票据"],
+  two: ["应收账款", "银行借款", "应付账款"],
+  three: ["营业收入", "日常消耗", "人工成本", "现金流"],
+  four: ["原材料成本", "财务费用", "纳税数额", "利润"],
+  // five: ["应收票据", "存货", "私人借款", "应付票据"],
+  // six: ["应收账款", "银行借款", "应付账款"],
+  seven: ["营业收入", "员工成本", "现金流", "利润"],
+  eight: ["营业成本", "财务费用", "纳税数额"]
+};
+
+const caiwuOne = [
+  {
+    id: 1,
+    title: "应收票据",
+    items: {
+      currentBalance: "colDebtBalance", //当前余额
+      lastBalance: "colDebtLastBalance", //应收票据上期检查（或调查）时点余额
+      Chang30Msg: "colDebtChang30Msg" // 应收票据变动超过30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "存货",
+    items: {
+      currentBalance: "stockChangSitu", //存货上次全面检查或调查时余额
+      lastBalance: "stockLastBalance", //存货本次检查存货变动情况
+      Chang30Msg: "stockChang30Msg" // 存货变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "私人借款",
+    items: {
+      currentBalance: "loanForPsonBalance", //私人借款当前余额
+      lastBalance: "loanForPsonLastBalance", //私人借款上期检查（或调查）时点余额
+      Chang30Msg: "loanForPsonChang30Msg" // 私人借款变动超过30%，原因
+    }
+  },
+  {
+    id: 4,
+    title: "应付票据",
+    items: {
+      currentBalance: "payDebtBalance", //应付票据当前余额
+      lastBalance: "payDebtLastBalance", //应付票据上期检查（或调查）时点余额
+      Chang30Msg: "payDebtChang30Msg" // 应付票据变动超过30%，原因
+    }
+  }
+];
+
+const caiwuTwo = [
+  {
+    id: 1,
+    title: "应收账款",
+    items: {
+      currentBalance: "colCapitalBalance", //应收账款当前余额
+      lastBalance: "colCapitalLastBalance", //应收账款上期检查（或调查）时点余额
+      Chang30Msg: "colCapitalChang30Msg" // 应收账款变动超过30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "银行借款",
+    items: {
+      currentBalance: "loanForBankBalance", //银行借款当前余额
+      lastBalance: "loanForBankLastBalance", //银行借款上期检查（或调查）时点余额
+      Chang30Msg: "loanForBankChang30Msg" // 银行借款变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "应付账款",
+    items: {
+      currentBalance: "payCapitalBalance", //应收账款当前余额
+      lastBalance: "payCapitalLastBalance", //应收账款上期检查（或调查）时点余额
+      Chang30Msg: "payCapitalChang30Msg" // 应收账款变动超过30%，原因}
+    }
+  }
+];
+
+const caiwuThree = [
+  {
+    id: 1,
+    title: "营业收入",
+    items: {
+      Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
+      Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "日常消耗",
+    items: {
+      Inc3MSitu: "dailyExpen3MSitu", //近三个月的情况
+      Chang30Msg: "dailyExpenChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "人工成本",
+    items: {
+      Inc3MSitu: "emplCost3M", //近三个月的情况
+      Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 4,
+    title: "现金流",
+    items: {
+      Inc3MSitu: "cash3M", //近三个月的情况
+      Chang30Msg: "cashChang30Msg" // 应收账款变动超过30%，原因
+    }
+  }
+];
+
+const caiwuFour = [
+  {
+    id: 1,
+    title: "原材料成本",
+    items: {
+      Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
+      Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "财务费用",
+    items: {
+      Inc3MSitu: "financeCost3M", //近三个月的情况
+      Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "纳税数额",
+    items: {
+      Inc3MSitu: "payTaxAmout3M", //近三个月的情况
+      Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 4,
+    title: "利润",
+    items: {
+      Inc3MSitu: "profit3M", //近三个月的情况
+      Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
+    }
+  }
+];
+
+const caiwuSeven = [
+  {
+    id: 1,
+    title: "营业收入",
+    items: {
+      Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
+      Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "员工成本",
+    items: {
+      Inc3MSitu: "emplCost3M", //近三个月的情况
+      Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "现金流",
+    items: {
+      Inc3MSitu: "cash3M", //近三个月的情况
+      Chang30Msg: "cashChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 4,
+    title: "利润",
+    items: {
+      Inc3MSitu: "profit3M", //近三个月的情况
+      Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
+    }
+  }
+];
+
+const caiwuEight = [
+  {
+    id: 1,
+    title: "营业成本",
+    items: {
+      Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
+      Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
+    }
+  },
+  {
+    id: 2,
+    title: "财务费用",
+    items: {
+      Inc3MSitu: "financeCost3M", //近三个月的情况
+      Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
+    }
+  },
+  {
+    id: 3,
+    title: "纳税数额",
+    items: {
+      Inc3MSitu: "payTaxAmout3M", //近三个月的情况
+      Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
+    }
+  }
+];
+
 export {
   todoListTitle,
   loanInsList,
@@ -409,6 +649,7 @@ export {
   coordinate,
   yesNo,
   definte16,
+  definte17,
   definte18,
   processing4,
   securityKindsArr,
@@ -416,5 +657,12 @@ export {
   securityKinds,
   newly18One,
   newly18Two,
+  caiwu,
+  caiwuOne,
+  caiwuTwo,
+  caiwuThree,
+  caiwuFour,
+  caiwuSeven,
+  caiwuEight,
   bizTypes
 };

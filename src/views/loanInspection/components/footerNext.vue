@@ -70,6 +70,16 @@ export default {
           this.$router.push({ name: "overalltDefinite13" });
         } else if (currentName === "overalltDefinite13") {
           this.$router.push({ name: "overalltDefinite11" });
+        } else if (currentName === "overalltDefinite11") {
+          this.$router.push({ name: "overalltDefinite10" });
+        } else if (currentName === "overalltDefinite10") {
+          this.$router.push({ name: "overalltDefinite89" });
+        } else if (currentName === "overalltDefinite89") {
+          this.$router.push({ name: "overalltDefinite6" });
+        } else if (currentName === "overalltDefinite6") {
+          this.$router.push({ name: "overalltDefinite17" });
+        } else if (currentName === "overalltDefinite17") {
+          this.$router.push({ name: "overalltDefinite3" });
         }
       } else if (currentType === "repaymentInspection") {
         if (currentName === "repaymentInspectionIndex") {
