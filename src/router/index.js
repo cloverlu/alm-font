@@ -3,20 +3,26 @@ import VueRouter from "vue-router";
 import Home from "@/views/home/index.vue";
 import loanInspectionIndex from "@/views/loanInspection/index";
 import definite16 from "@/views/loanInspection/components/definite-16";
+import definite18 from "@/views/loanInspection/components/definite-18";
 import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
 import definite13 from "@/views/loanInspection/components/definite-13";
 import definite11 from "@/views/loanInspection/components/definite-11";
 import definite10 from "@/views/loanInspection/components/definite-10";
 import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
+import definite7 from "@/views/loanInspection/components/definite-7";
 import definite3 from "@/views/loanInspection/components/definite-3";
 import definite4 from "@/views/loanInspection/components/definite-4";
 import definite1 from "@/views/loanInspection/creditFirst/definite-1";
 import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
+import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
+import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 import definite89 from "@/views/loanInspection/creditOverall/credit89";
 import definite6 from "@/views/loanInspection/creditOverall/definite6";
 import definite17 from "@/views/loanInspection/creditOverall/definite-17";
+import repaymentInspectionIndex from "@/views/loanInspection/repaymentInspection/newly-9";
+import processing4 from "@/views/loanInspection/repaymentInspection/processing2-4";
 
 Vue.use(VueRouter);
 
@@ -154,6 +160,17 @@ const routes = [
             },
             children: []
           },
+          //检查申请明细-17
+          {
+            path: "definite18",
+            name: "routineDefinite18",
+            component: definite18,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
           // 申请明细3
           {
             path: "definite3",
@@ -270,9 +287,44 @@ const routes = [
           }
         ]
       },
-      // 类型6
+      // 类型4
       {
-        path: ":type/:bizId",
+        path: "4/:type/:bizId",
+        name: "repaymentInspectionIndex",
+        component: repaymentInspectionIndex,
+        meta: {
+          title: "检查申请明细",
+          tag: "resave",
+          footer: true
+        },
+        children: [
+          //检查申请明细-7
+          {
+            path: "definite7",
+            name: "repaymentInspectionDefinite7",
+            component: definite7,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 流程2-4
+          {
+            path: "processing4",
+            name: "processing4",
+            component: processing4,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
+          }
+        ]
+      },
+      // 类型6 新增1
+      {
+        path: "6/:type/:bizId",
         name: "dailyInspectionIndex",
         component: newly1,
         meta: {
@@ -280,7 +332,53 @@ const routes = [
           tag: "resave",
           footer: true
         },
-        children: []
+        children: [
+          // 新增1-2
+          {
+            path: "newly2",
+            name: "newly2",
+            component: newly2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-3
+          {
+            path: "newly3",
+            name: "newly3",
+            component: newly3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细 16
+          {
+            path: "newlyDefinite16",
+            name: "newlyDefinite16",
+            component: definite16,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 申请明细3
+          {
+            path: "newlyDefinite3",
+            name: "newlyDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            },
+            children: []
+          }
+        ]
       }
     ]
   }

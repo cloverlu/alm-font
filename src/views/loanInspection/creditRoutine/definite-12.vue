@@ -190,7 +190,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
+        // 将数据存入vuex里的setDefinite12里
         this.setDefinite12({ params: this.params });
       }
     }
@@ -263,6 +263,7 @@ export default {
   }
 
   .formTitle {
+    background-color: #f7f7f7;
     width: 100%;
     height: px2rem(44);
     position: relative;
@@ -315,47 +316,24 @@ export default {
 </style>
 
 <style lang="scss">
-// 公司信息字体格式调整
-// .formBody {
-//   .mint-cell-text {
-//     height: px2rem(14);
-//     font-size: px2rem(14);
-//     // font-family: Source Han Sans CN;
-//     // font-weight: 700;
-//     line-height: px2rem(20);
-//     color: rgba(9, 9, 9, 1);
-//     opacity: 1;
-//   }
-//   .mint-cell-value {
-//     display: inline-block;
-//     height: px2rem(14);
-//     font-size: px2rem(14);
-//     // font-family: Source Han Sans CN;
-//     // font-weight: 500;
-//     line-height: px2rem(20);
-//     color: rgba(159, 159, 159, 1);
-//     opacity: 1;
-//   }
-// }
-// .textarea {
-//   .mint-cell-title {
-//     height: px2rem(14);
-//     font-size: px2rem(14);
-//     // font-family: Source Han Sans CN;
-//     // font-weight: 700;
-//     line-height: px2rem(20);
-//     color: rgba(9, 9, 9, 1);
-//     opacity: 1;
-//     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-//   }
-// }
-// 禁止文本框放大缩小
-// textarea {
-//   resize: none;
-//   font-size: px2rem(14);
-//   // font-family: Source Han Sans CN;
-//   font-weight: 500;
-//   color: rgba(183, 183, 183, 1);
-//   opacity: 1;
-// }
+@import "../../../assets/style/global.scss";
+.definte12-wrapper {
+  width: 100%;
+  height: 100%;
+  .textFiled {
+    .mint-cell-title {
+      width: px2rem(252) !important;
+      font-size: px2rem(14);
+    }
+    .mint-cell-value {
+      color: #888;
+      font-size: px2rem(14);
+      .mint-field-core {
+        text-align: right;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
+}
 </style>

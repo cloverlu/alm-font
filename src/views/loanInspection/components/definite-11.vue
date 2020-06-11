@@ -6,221 +6,223 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="coInformation">
-      <div class="title">征信情况</div>
-      <div class="dailyCheck">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">基于企业征信报告</span>
+    <div class="definite11">
+      <div class="coInformation">
+        <div class="title">征信情况</div>
+        <div class="dailyCheck">
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coName">基于企业征信报告</span>
+          </div>
+          <mt-cell
+            class="textFiled"
+            title="征信报告查询日期"
+            :value="queryDate"
+          ></mt-cell>
         </div>
-        <mt-cell
-          class="textFiled"
-          title="征信报告查询日期"
-          :value="queryDate"
-        ></mt-cell>
-      </div>
 
-      <div class="enterpriseCredit">
-        <div class="title">1.借款企业征信：</div>
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coNameBlack">征信情况</span>
-        </div>
-        <!-- （1）未结清贷款及对外担保情况 -->
-        <div class="coNo1">（1）未结清贷款及对外担保情况</div>
-        <mt-field
-          class="textFiled"
-          label="未结清贷款笔数"
-          placeholder="10"
-          v-model="params.unPayOffLoanNum"
-        ></mt-field>
-        <!-- <mt-cell
+        <div class="enterpriseCredit">
+          <div class="title">1.借款企业征信：</div>
+          <div class="formTitle">
+            <span class="lightBlue"></span>
+            <span class="coNameBlack">征信情况</span>
+          </div>
+          <!-- （1）未结清贷款及对外担保情况 -->
+          <div class="coNo1">（1）未结清贷款及对外担保情况</div>
+          <mt-field
+            class="textFiled"
+            label="未结清贷款笔数"
+            placeholder="10"
+            v-model="params.unPayOffLoanNum"
+          ></mt-field>
+          <!-- <mt-cell
           title="未结清贷款笔数"
           :value="DetailsOfIOU.unPayOffLoanNum"
         ></mt-cell> -->
-        <mt-field
-          class="textFiled"
-          label="未结清贷款金额"
-          placeholder="10"
-          v-model="params.unPayOffAmout"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="涉及金融机构"
-          placeholder="10"
-          v-model="params.finInstitutionNum"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="未结清贷款结余"
-          placeholder="10"
-          v-model="params.sumBalance"
-        ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="未结清贷款金额"
+            placeholder="10"
+            v-model="params.unPayOffAmout"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="涉及金融机构"
+            placeholder="10"
+            v-model="params.finInstitutionNum"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="未结清贷款结余"
+            placeholder="10"
+            v-model="params.sumBalance"
+          ></mt-field>
 
-        <div class="nothing"></div>
-        <mt-field
-          class="textFiled"
-          label="对外担保笔数"
-          placeholder="10"
-          v-model="params.guaranteeNum"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="对外担保金额"
-          placeholder="10"
-          v-model="params.guaranteeAmout"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="对外担保结余"
-          placeholder="10"
-          v-model="params.guaranteeBalance"
-        ></mt-field>
+          <div class="nothing"></div>
+          <mt-field
+            class="textFiled"
+            label="对外担保笔数"
+            placeholder="10"
+            v-model="params.guaranteeNum"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="对外担保金额"
+            placeholder="10"
+            v-model="params.guaranteeAmout"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="对外担保结余"
+            placeholder="10"
+            v-model="params.guaranteeBalance"
+          ></mt-field>
 
-        <!-- （2）逾期及欠息等不良记录 -->
-        <div class="coNo2">（2）逾期及欠息等不良记录</div>
-        <!-- <mt-field
+          <!-- （2）逾期及欠息等不良记录 -->
+          <div class="coNo2">（2）逾期及欠息等不良记录</div>
+          <!-- <mt-field
           class="textFiled"
           label="贷款期间借款企业是否发生逾期、欠息等不良信用记录"
           placeholder="10"
           v-model="existBadRecord"
         ></mt-field> -->
-        <div class="item">
-          <span class="tag"
-            >贷款期间借款企业是否发生逾期、欠息等不良信用记录</span
-          >
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.existBadRecord"
-            :triggerId="existBadRecord"
-            :title="selectTitle"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
+          <div class="item">
+            <span class="tag"
+              >贷款期间借款企业是否发生逾期、欠息等不良信用记录</span
+            >
+            <almSelect
+              :selectData="yesNo"
+              :defaultValue="params.existBadRecord"
+              :triggerId="existBadRecord"
+              :title="selectTitle"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.badRecordMsg"
+            class="text"
+            style="overflow:hidden"
+            placeholder="badRecordMsg"
+          ></mt-field>
+          <!-- （3）借款企业欠税情况 -->
+          <div class="coNo2">（3）借款企业欠税情况</div>
+          <mt-field
+            class="textFiled"
+            label="欠税记录"
+            placeholder="10"
+            v-model="params.oweTaxRecordNum"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="民事判决"
+            placeholder="10"
+            v-model="params.civilJudgmentRecordNum"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="强制执行记录"
+            placeholder="10"
+            v-model="params.forceImpleRecordNum"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="行政处罚记录"
+            placeholder="10"
+            v-model="params.administRecordNum"
+          ></mt-field>
+
+          <!-- （4）征信记录 -->
+          <div class="coNo2">（4）征信记录</div>
+          <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+          <div class="item1">
+            <span class="tag">征信记录是否有异常变化</span>
+            <almSelect
+              :selectData="yesNo"
+              :defaultValue="params.existCreditChage1"
+              :triggerId="existCreditChage1"
+              :title="selectTitle2"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.creditChageMsg1"
+            class="text"
+            style="overflow:hidden"
+            placeholder="changedMsg"
+          ></mt-field>
+
+          <!-- 2.关联企业征信： -->
+          <div class="coNo3">2.关联企业征信：</div>
+          <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+          <div class="item1">
+            <span class="tag">征信记录是否有异常变化</span>
+            <almSelect
+              :selectData="yesNo"
+              :defaultValue="params.existCreditChage2"
+              :triggerId="existCreditChage2"
+              :title="selectTitle2"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.creditChageMsg2"
+            class="text"
+            style="overflow:hidden"
+            placeholder="changedMsg"
+          ></mt-field>
+
+          <!-- 3.法人保证人征信： -->
+          <div class="coNo3">3.法人保证人征信：</div>
+          <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
+          <div class="item1">
+            <span class="tag">征信记录是否有异常变化</span>
+            <almSelect
+              :selectData="yesNo"
+              :defaultValue="params.existCreditChage3"
+              :triggerId="existCreditChage3"
+              :title="selectTitle2"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="params.creditChageMsg3"
+            class="text"
+            style="overflow:hidden"
+            placeholder="changedMsg"
+          ></mt-field>
+
+          <div class="nothing"></div>
+
+          <mt-cell class="textFiled" title="近期负面信息情况"></mt-cell>
+          <mt-field
+            type="textarea"
+            rows="3"
+            class="text"
+            v-model="params.RecentNegativeInformation"
+            style="overflow:hidden"
+            placeholder="RecentNegativeInformation"
+          ></mt-field>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.badRecordMsg"
-          class="text"
-          style="overflow:hidden"
-          placeholder="badRecordMsg"
-        ></mt-field>
-        <!-- （3）借款企业欠税情况 -->
-        <div class="coNo2">（3）借款企业欠税情况</div>
-        <mt-field
-          class="textFiled"
-          label="欠税记录"
-          placeholder="10"
-          v-model="params.oweTaxRecordNum"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="民事判决"
-          placeholder="10"
-          v-model="params.civilJudgmentRecordNum"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="强制执行记录"
-          placeholder="10"
-          v-model="params.forceImpleRecordNum"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="行政处罚记录"
-          placeholder="10"
-          v-model="params.administRecordNum"
-        ></mt-field>
-
-        <!-- （4）征信记录 -->
-        <div class="coNo2">（4）征信记录</div>
-        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
-        <div class="item1">
-          <span class="tag">征信记录是否有异常变化</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.existCreditChage1"
-            :triggerId="existCreditChage1"
-            :title="selectTitle2"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.creditChageMsg1"
-          class="text"
-          style="overflow:hidden"
-          placeholder="changedMsg"
-        ></mt-field>
-
-        <!-- 2.关联企业征信： -->
-        <div class="coNo3">2.关联企业征信：</div>
-        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
-        <div class="item1">
-          <span class="tag">征信记录是否有异常变化</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.existCreditChage2"
-            :triggerId="existCreditChage2"
-            :title="selectTitle2"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.creditChageMsg2"
-          class="text"
-          style="overflow:hidden"
-          placeholder="changedMsg"
-        ></mt-field>
-
-        <!-- 3.法人保证人征信： -->
-        <div class="coNo3">3.法人保证人征信：</div>
-        <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
-        <div class="item1">
-          <span class="tag">征信记录是否有异常变化</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.existCreditChage3"
-            :triggerId="existCreditChage3"
-            :title="selectTitle2"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.creditChageMsg3"
-          class="text"
-          style="overflow:hidden"
-          placeholder="changedMsg"
-        ></mt-field>
-
-        <div class="nothing"></div>
-
-        <mt-cell class="textFiled" title="近期负面信息情况"></mt-cell>
-        <mt-field
-          type="textarea"
-          rows="3"
-          class="text"
-          v-model="params.RecentNegativeInformation"
-          style="overflow:hidden"
-          placeholder="RecentNegativeInformation"
-        ></mt-field>
       </div>
     </div>
   </div>
@@ -289,7 +291,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
+        // 将数据存入vuex里的setDefinite11里
         this.setDefinite11({ params: this.params });
       }
     }
@@ -480,6 +482,7 @@ export default {
   }
 
   .coNo2 {
+    background-color: #f7f7f7;
     height: px2rem(44);
     font-size: px2rem(12);
     // font-family: Source Han Sans CN;
@@ -487,10 +490,11 @@ export default {
     line-height: px2rem(44);
     color: rgba(78, 120, 222, 1);
     opacity: 1;
-    margin-left: px2rem(8);
+    padding-left: px2rem(8);
   }
 
   .coNo3 {
+    background-color: #f7f7f7;
     height: px2rem(44);
     font-size: px2rem(14);
     // font-family: Source Han Sans CN;
@@ -498,7 +502,7 @@ export default {
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
-    margin-left: px2rem(8);
+    padding-left: px2rem(8);
   }
 
   .mint-cell {
@@ -525,7 +529,33 @@ export default {
 </style>
 
 <style lang="scss">
-textarea {
-  resize: none;
+@import "../../../assets/style/global.scss";
+.definite11 {
+  width: 100%;
+  height: 100%;
+  .textFiled {
+    .mint-cell-title {
+      width: px2rem(150) !important;
+      font-size: px2rem(14);
+    }
+    .mint-cell-value {
+      color: #888;
+      font-size: px2rem(14);
+      .mint-field-core {
+        text-align: right;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
+  .text {
+    .mint-cell-value {
+      .mint-field-core {
+        text-align: left;
+        color: #888;
+        font-size: px2rem(14);
+      }
+    }
+  }
 }
 </style>

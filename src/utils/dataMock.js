@@ -211,6 +211,34 @@ const cooperationType = [
   }
 ];
 
+// 检查类型
+const bizTypes = [
+  {
+    key: "m1",
+    value: "小企业授信业务首次跟踪检查"
+  },
+  {
+    key: "m2",
+    value: "小企业授信业务贷后例行检查"
+  },
+  {
+    key: "m3",
+    value: "小企业授信业务贷后全面检查"
+  },
+  {
+    key: "m4",
+    value: "小企业授信业务还款资金落实情况检查"
+  },
+  {
+    key: "m5",
+    value: "小企业法人快捷贷首次检查"
+  },
+  {
+    key: "m6",
+    value: "小企业法人快捷贷贷后日常检查"
+  }
+];
+
 //配合程度
 const coordinate = [
   {
@@ -232,6 +260,30 @@ const yesNo = [
   {
     key: 0,
     value: "否"
+  }
+];
+
+// 担保方式
+const securityKindsArr = [
+  {
+    key: 1,
+    value: "信用"
+  },
+  {
+    key: 2,
+    value: "抵押"
+  },
+  {
+    key: 3,
+    value: "质押"
+  },
+  {
+    key: 4,
+    value: "保证"
+  },
+  {
+    key: 5,
+    value: "其他"
   }
 ];
 
@@ -261,6 +313,49 @@ const definte16 = _ => {
     });
   }
   return definite16Array;
+};
+//definte18,影像维护字段
+const definte18 = _ => {
+  const definite18Array = [];
+  const valueArray = [
+    "财务报表",
+    "纳税材料",
+    "水电费材料",
+    "银行流水",
+    "其他经营材料",
+    "企业办公场所（含企业大门）",
+    "企业生产车间（含重要生产或经营工序）",
+    "企业重要生产或经营设备、存货",
+    "检查人员现场检查的影像",
+    "抵押物影像",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m2_" + i;
+    definite18Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return definite18Array;
+};
+
+// processing2-4 影像维护字段
+const processing4 = _ => {
+  const processing4Array = [];
+  const valueArray = ["其他"];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m4_" + i;
+    processing4Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m" + i
+    });
+  }
+  return processing4Array;
 };
 
 //definte17,影像数据字段
@@ -555,6 +650,9 @@ export {
   yesNo,
   definte16,
   definte17,
+  definte18,
+  processing4,
+  securityKindsArr,
   newly18,
   securityKinds,
   newly18One,
@@ -565,5 +663,6 @@ export {
   caiwuThree,
   caiwuFour,
   caiwuSeven,
-  caiwuEight
+  caiwuEight,
+  bizTypes
 };

@@ -34,6 +34,9 @@ const actions = {
   },
   setRoutineDefinite3: ({ commit }, routineDefinite3) => {
     return commit("SET_RoutineDefinite3", routineDefinite3);
+  },
+  setNewly1: ({ commit }, newly1) => {
+    return commit("SET_Newly1", newly1);
   }
 };
 

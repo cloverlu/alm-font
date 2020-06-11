@@ -10,7 +10,8 @@ const getters = {
   definite12: state => state.creditRoutine.definite12,
   definite13: state => state.creditRoutine.definite13,
   definite4: state => state.creditRoutine.definite4,
-  routineDefinite3: state => state.creditRoutine.routineDefinite3
+  routineDefinite3: state => state.creditRoutine.routineDefinite3,
+  newly1: state => state.dailyInspection.newly1
 };
 
 export default getters;

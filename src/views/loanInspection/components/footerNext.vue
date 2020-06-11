@@ -51,7 +51,19 @@ export default {
         } else if (currentName === "definite10") {
           this.$router.push({ name: "definite5" });
         } else if (currentName === "definite5") {
-          this.$router.push({ name: "definite3" });
+          this.$router.push({ name: "routineDefinite18" });
+        } else if (currentName === "routineDefinite18") {
+          this.$router.push({ name: "routineDefinite3" });
+        }
+      } else if (currentType === "loanDailyInspection") {
+        if (currentName === "dailyInspectionIndex") {
+          this.$router.push({ name: "newly2" });
+        } else if (currentName === "newly2") {
+          this.$router.push({ name: "newly3" });
+        } else if (currentName === "newly3") {
+          this.$router.push({ name: "newlyDefinite16" });
+        } else if (currentName === "newlyDefinite16") {
+          this.$router.push({ name: "newlyDefinite3" });
         }
       } else if (currentType === "loanCreditOverall") {
         if (currentName === "creditOverallIndex") {
@@ -68,6 +80,10 @@ export default {
           this.$router.push({ name: "overalltDefinite17" });
         } else if (currentName === "overalltDefinite17") {
           this.$router.push({ name: "overalltDefinite3" });
+        }
+      } else if (currentType === "repaymentInspection") {
+        if (currentName === "repaymentInspectionIndex") {
+          this.$router.push({ name: "processing4" });
         }
       }
 
