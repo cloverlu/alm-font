@@ -5,34 +5,36 @@
 -->
 <template>
   <div class="checkDetail">
-    <!--填写信息  -->
-    <div class="coInformation">
-      <div class="enterpriseCredit">
-        <div class="signBox">
-          <span class="left"
-            >检查人员（签字）：<span class="iconfont iconqianzi"></span
-          ></span>
-          <span class="right">2020-06-01</span>
+    <div class="definite4">
+      <!--填写信息  -->
+      <div class="coInformation">
+        <div class="enterpriseCredit">
+          <div class="signBox">
+            <span class="left"
+              >检查人员（签字）：<span class="iconfont iconqianzi"></span
+            ></span>
+            <span class="right">2020-06-01</span>
+          </div>
+          <div id="canvas" ref="canvas"></div>
         </div>
-        <div id="canvas" ref="canvas"></div>
       </div>
-    </div>
-    <div class="submit">
-      <button
-        id="clearCanvas"
-        ref="clearCanvas"
-        class="mint-button mint-button--default"
-      >
-        重置
-      </button>
-      <button
-        type="primary"
-        id="saveCanvas"
-        ref="saveCanvas"
-        class="mint-button"
-      >
-        保存
-      </button>
+      <div class="submit">
+        <button
+          id="clearCanvas"
+          ref="clearCanvas"
+          class="mint-button mint-button--default"
+        >
+          重置
+        </button>
+        <button
+          type="primary"
+          id="saveCanvas"
+          ref="saveCanvas"
+          class="mint-button"
+        >
+          保存
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -143,8 +145,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/style/global.scss";
-.checkDetail {
+.definite4 {
   position: relative;
+  width: 100%;
+  height: 100%;
 
   .signBox {
     height: px2rem(44);
