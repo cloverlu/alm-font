@@ -263,6 +263,22 @@ const yesNo = [
   }
 ];
 
+// 贷款支付方式
+const payKindsArr = [
+  {
+    key: 1,
+    value: "贷款人受托支付"
+  },
+  {
+    key: 2,
+    value: "借款人自主支付"
+  },
+  {
+    key: 3,
+    value: "受托支付+自主支付"
+  }
+];
+
 // 担保方式
 const securityKindsArr = [
   {
@@ -672,6 +688,7 @@ export {
   definte18,
   processing4,
   securityKindsArr,
+  payKindsArr,
   newly18,
   securityKinds,
   newly18One,

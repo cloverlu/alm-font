@@ -184,18 +184,18 @@ const routes = [
               footer: false
             },
             children: []
-          },
-          //检查申请明细-4
-          {
-            path: "definite4",
-            name: "definite4",
-            component: definite4,
-            meta: {
-              title: "检查申请明细",
-              tag: "resave",
-              footer: false
-            }
           }
+          // //检查申请明细-4
+          // {
+          //   path: "definite4",
+          //   name: "definite4",
+          //   component: definite4,
+          //   meta: {
+          //     title: "检查申请明细",
+          //     tag: "resave",
+          //     footer: false
+          //   }
+          // }
         ]
       },
       //类型3
