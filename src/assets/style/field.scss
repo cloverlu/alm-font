@@ -177,3 +177,35 @@
 
 	}
 }
+
+// dropdown
+.dropdown89 {
+  .van-dropdown-menu__bar {
+    height: px2rem(31);
+    border-top-left-radius: px2rem(3);
+    border-top-right-radius: px2rem(3);
+    background-color: rgba(78, 120, 222, 0.81);
+
+    .van-dropdown-menu__item {
+      flex: none;
+      width: 100%;
+      .van-dropdown-menu__title {
+        color: #fff;
+        font-size: px2rem(14);
+        line-height: px2rem(31);
+        width: 100%;
+        &::after {
+          right: px2rem(10);
+        }
+      }
+    }
+  }
+}
+
+//添加的大按钮
+.add-primary {
+  width: 100%;
+  &.mint-button--primary {
+    background-color: #4e78de;
+  }
+}
