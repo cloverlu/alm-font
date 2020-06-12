@@ -262,3 +262,34 @@
   width: 1.57333rem;
   height: 1.57333rem;
 }
+
+.dropdown89 .van-dropdown-menu__bar {
+  height: 0.82667rem;
+  border-top-left-radius: 0.08rem;
+  border-top-right-radius: 0.08rem;
+  background-color: rgba(78, 120, 222, 0.81);
+}
+
+.dropdown89 .van-dropdown-menu__bar .van-dropdown-menu__item {
+  flex: none;
+  width: 100%;
+}
+
+.dropdown89 .van-dropdown-menu__bar .van-dropdown-menu__item .van-dropdown-menu__title {
+  color: #fff;
+  font-size: 0.37333rem;
+  line-height: 0.82667rem;
+  width: 100%;
+}
+
+.dropdown89 .van-dropdown-menu__bar .van-dropdown-menu__item .van-dropdown-menu__title::after {
+  right: 0.26667rem;
+}
+
+.add-primary {
+  width: 100%;
+}
+
+.add-primary.mint-button--primary {
+  background-color: #4e78de;
+}

@@ -68,7 +68,7 @@ export default {
       border: px2rem(1) solid #e6e6ea;
       text-align: center;
       color: #b2b2b2;
-
+      font-size: px2rem(14);
       &:focus {
         outline: none;
       }

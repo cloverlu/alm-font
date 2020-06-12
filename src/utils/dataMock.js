@@ -336,7 +336,7 @@ const definte18 = _ => {
       id: i,
       text: valueArray[i],
       vModel: a,
-      vId: "m" + i
+      vId: "m2" + i
     });
   }
   return definite18Array;
@@ -352,7 +352,7 @@ const processing4 = _ => {
       id: i,
       text: valueArray[i],
       vModel: a,
-      vId: "m" + i
+      vId: "m4" + i
     });
   }
   return processing4Array;
@@ -636,6 +636,25 @@ const caiwuEight = [
   }
 ];
 
+//新增1-4
+const newly4 = [
+  {
+    id: 1,
+    name: "押品价值及变现能力变动情况",
+    modelName: "assitChangeSuit"
+  },
+  {
+    id: 2,
+    name: "押品其他情况",
+    modelName: "assitOtherSuit"
+  },
+  {
+    id: 3,
+    name: "押品检查小结",
+    modelName: "summaryForAssit"
+  }
+];
+
 export {
   todoListTitle,
   loanInsList,
@@ -664,5 +683,6 @@ export {
   caiwuFour,
   caiwuSeven,
   caiwuEight,
-  bizTypes
+  bizTypes,
+  newly4
 };

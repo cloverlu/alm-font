@@ -17,8 +17,7 @@ import definite2 from "@/views/loanInspection/creditFirst/definite-2";
 import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
 import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
 import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
-import newly4 from "@/views/loanInspection/dailyInspection/newly-4";
-import newly5 from "@/views/loanInspection/dailyInspection/newly-5";
+import newly45 from "@/views/loanInspection/dailyInspection/newly-45";
 import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
 import definite89 from "@/views/loanInspection/creditOverall/credit89";
 import definite6 from "@/views/loanInspection/creditOverall/definite6";
@@ -396,26 +395,16 @@ const routes = [
           },
           // 新增1-4
           {
-            path: "newly4",
-            name: "newly4",
-            component: newly4,
+            path: "newly45",
+            name: "newly45",
+            component: newly45,
             meta: {
               title: "检查申请明细",
               tag: "resave",
               footer: true
             }
           },
-          // 新增1-5
-          {
-            path: "newly5",
-            name: "newly5",
-            component: newly5,
-            meta: {
-              title: "检查申请明细",
-              tag: "resave",
-              footer: true
-            }
-          },
+
           //检查申请明细 16
           {
             path: "newlyDefinite16",

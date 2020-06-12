@@ -3,52 +3,117 @@
  * @Author: sunhua
  * @Date: 2020-06-04 17:03:54
 -->
-<template>
-  <div class="checkDetail">
-    <!-- 公司信息 -->
-    <div class="newly5"></div>
-  </div>
+<template lang="pug">
+	.newly5-wrapper
+		.wrapper
+			.newly-5-repeat(v-for="(item,index) in info" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
+				.repeat-operation(v-if="index !== 0")
+					.repeat-operation-title 新增 {{item.id}}
+					.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
+				.definite-field
+					.item
+						span(class="tag") 担保公司名称
+						span(class="info") 
+							input(v-model="item.assitName" type="input" class="field-input" placeholder="请输入")
+					.item
+						span(class="tag") 我行合作状态
+						span(class="info") 
+							input(v-model="item.CooperatStatus" type="input" class="field-input" placeholder="请输入")
+					.item
+						span(class="tag") 风险分类
+						span(class="info") 
+							input(v-model="item.assitFiveClass" type="input" class="field-input" placeholder="请输入")
+		.add
+			mt-button(class="add-primary" type="primary" @click="addInfo") + 增加
 </template>
 
 <script>
-import { DetailsOfIOU } from "../../../utils/dataMock";
-import almSelect from "../components/select";
-import { Field } from "mint-ui";
+import { Button } from "mint-ui";
 export default {
-  components: {
-    // "mt-field": Field,
-    // almSelect
-  },
+  components: { "mt-button": Button },
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
-
+      info: [
+        {
+          id: 1,
+          assitName: "", //担保公司名称
+          CooperatStatus: "", //我行合作状态
+          assitFiveClass: "" //风险分类
+        }
+      ],
+      trasIndex: "",
       params: {}
     };
   },
   methods: {
     getSelect1(data) {
       this.params.securityKind = data.key;
+    },
+    operateDelete(index, id) {
+      this.trasIndex = id;
+      setTimeout(() => {
+        this.info.splice(index, 1);
+      }, 100);
+    },
+    addInfo() {
+      const item = {
+        id: Date.now(),
+        assitName: "", //担保公司名称
+        CooperatStatus: "", //我行合作状态
+        assitFiveClass: "" //风险分类
+      };
+      this.info.push(item);
     }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite12里
-    //     this.setDefinite12({ params: this.params });
-    //   }
-    // }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../../assets/style/global.scss";
-.newly5 {
+.newly5-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
+  .wrapper {
+    flex: 1;
+    .newly-5-repeat {
+      &.transa {
+        transform: scaleX(0);
+        transition: transform 0.2s;
+        transform-origin: top right;
+      }
+      .repeat-operation {
+        width: 100%;
+        height: px2rem(30);
+        line-height: px2rem(30);
+        background-color: #dee4f2;
+        padding: 0 px2rem(16);
+        box-sizing: border-box;
+        display: flex;
+        .repeat-operation-title {
+          color: #4e78de;
+          font-size: px2rem(12);
+          flex: 1;
+          text-align: left;
+        }
+        .repeat-operation-delete {
+          color: #db3822;
+          font-size: px2rem(12);
+          flex: 1;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .add {
+    flex: 0 0 px2rem(70);
+    width: 100%;
+    padding: px2rem(11) px2rem(15);
+    box-sizing: border-box;
+  }
 }
 </style>
 

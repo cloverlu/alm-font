@@ -24,7 +24,7 @@ export default {
     footerPrev() {
       this.$router.go(-1);
       //随机数
-      const val = Math.floor(Math.random() * 10000 + 1);
+      const val = Date.now();
       //向vuex添加setPrevFooter的值，以方便所有组件判断是否点击了“上一步”
       this.setPrevFooter({ prevFooter: val });
     },
@@ -61,10 +61,8 @@ export default {
         } else if (currentName === "newly2") {
           this.$router.push({ name: "newly3" });
         } else if (currentName === "newly3") {
-          this.$router.push({ name: "newly4" });
-        } else if (currentName === "newly4") {
-          this.$router.push({ name: "newly5" });
-        } else if (currentName === "newly5") {
+          this.$router.push({ name: "newly45" });
+        } else if (currentName === "newly45") {
           this.$router.push({ name: "newlyDefinite16" });
         } else if (currentName === "newlyDefinite16") {
           this.$router.push({ name: "newlyDefinite3" });
@@ -96,7 +94,7 @@ export default {
       }
 
       //随机数
-      const val = Math.floor(Math.random() * 10000 + 1);
+      const val = Date.now();
       //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”
       this.setNextFooter({ nextFooter: val });
     }
