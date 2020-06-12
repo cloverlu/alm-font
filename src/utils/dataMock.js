@@ -652,6 +652,22 @@ const caiwuEight = [
   }
 ];
 
+// 还款意愿数组
+const payIntentionsArr = [
+  {
+    key: 1,
+    value: "良好"
+  },
+  {
+    key: 2,
+    value: "较差"
+  },
+  {
+    key: 3,
+    value: "无"
+  }
+];
+
 export {
   todoListTitle,
   loanInsList,
@@ -681,5 +697,6 @@ export {
   caiwuFour,
   caiwuSeven,
   caiwuEight,
-  bizTypes
+  bizTypes,
+  payIntentionsArr
 };

@@ -273,7 +273,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(10);
+      left: px2rem(16);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -287,7 +287,7 @@ export default {
       line-height: px2rem(15);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(16), -50%);
+      transform: translate(px2rem(22), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
@@ -320,7 +320,13 @@ export default {
 .definte12-wrapper {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(252) !important;
       font-size: px2rem(14);

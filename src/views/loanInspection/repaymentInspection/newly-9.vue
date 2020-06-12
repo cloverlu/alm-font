@@ -6,7 +6,7 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="newly9" v-if="hasRouterChild2">
+    <div class="newly9" v-if="hasRouterChild4">
       <div class="coInformation">
         <div class="formTitle">
           <span class="lightBlue"></span>
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      hasRouterChild2: this.$route.params.hasRouterChild2,
+      hasRouterChild4: this.$route.params.hasRouterChild4,
       DetailsOfIOU: DetailsOfIOU,
       bizTypes: bizTypes,
       popupVisible: false,
@@ -97,11 +97,11 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    to.params.hasRouterChild2 = to.name === "repaymentInspectionIndex";
+    to.params.hasRouterChild4 = to.name === "repaymentInspectionIndex";
     next();
   },
   beforeRouteUpdate(to, from, next) {
-    this.hasRouterChild2 = to.name === "repaymentInspectionIndex";
+    this.hasRouterChild4 = to.name === "repaymentInspectionIndex";
     next();
   },
   methods: {
@@ -141,7 +141,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(18);
+      left: px2rem(10);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -155,7 +155,7 @@ export default {
       line-height: px2rem(15);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(16), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
@@ -245,7 +245,13 @@ textarea {
 .newly9 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(100) !important;
       font-size: px2rem(14);
