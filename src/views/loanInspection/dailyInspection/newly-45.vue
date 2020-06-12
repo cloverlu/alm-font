@@ -1,55 +1,42 @@
 <!--
- * @Descripttion: 检查申请明细-8、检查申请明细-9
+ * @Descripttion: 新增4/新增5
  * @Author: penglu
- * @Date: 2020-06-10 16:04:35
+ * @Date: 2020-06-11 16:37:28
 -->
+
 <template lang="pug">
 	.definite-89-wrapper
-		//- .mask(v-show="dropVisibale")
 		.definite-89-top
-			.definite-1-title
-				span(class="colum-blue")
-				span(class="title") 企业财务情况
+			.definite-1-title2
+				span(class="title") 担保情况检查
 			.definite-89-dropdown
-				//- .drop-down-item(@click="dropShow") aaa
-				//- .drop-down-content(v-show="dropVisibale")
 				van-dropdown-menu(class="dropdown89" )
 					van-dropdown-item(:options="option" v-model="value")
 		.definite-89-content
-			definite8(v-if="value===0")
-			definite9(v-if="value===1")
-			
-
-
+			newly4(v-if="value===0")
+			newly5(v-if="value===1")
 </template>
 
 <script>
-import definite8 from "../creditOverall/credit8";
-import definite9 from "../creditOverall/credit9";
 import { DropdownMenu, DropdownItem } from "vant";
+import newly4 from "../dailyInspection/newly-4";
+import newly5 from "../dailyInspection/newly-5";
 export default {
   components: {
     "van-dropdown-menu": DropdownMenu,
     "van-dropdown-item": DropdownItem,
-    definite8,
-    definite9
+    newly4,
+    newly5
   },
   data() {
     return {
       dropVisibale: false,
       value: 0,
       option: [
-        { text: "加工制造类企业适用", value: 0 },
-        { text: "贸易类/其他类企业适用", value: 1 }
+        { text: "房地产抵押担保适用", value: 0 },
+        { text: "融资担保机构担保适用", value: 1 }
       ]
     };
-  },
-  watch: {},
-  methods: {
-    dropShow() {
-      console.log("sss");
-      this.dropVisibale = !this.dropVisibale;
-    }
   }
 };
 </script>
@@ -73,9 +60,9 @@ export default {
     z-index: 120;
   }
   .definite-89-top {
-    height: px2rem(85);
+    height: px2rem(70);
     width: 100%;
-    flex: 0 0 px2rem(85);
+    flex: 0 0 px2rem(70);
     .definite-89-dropdown {
       width: 100%;
       height: px2rem(31);
