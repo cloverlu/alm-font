@@ -144,7 +144,7 @@ export default {
       width: 100%;
       height: px2rem(44);
       line-height: px2rem(44);
-      padding: 0 px2rem(10);
+      padding: 0 px2rem(16);
       display: flex;
       font-size: px2rem(14);
       box-sizing: border-box;
@@ -209,7 +209,13 @@ export default {
 .definte13 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(150) !important;
       font-size: px2rem(14);

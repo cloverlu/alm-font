@@ -15,11 +15,11 @@
         </div>
 
         <div class="formBody">
-          <mt-field
+          <mt-cell
             class="textFiled"
-            label="征信报告查询日期"
-            placeholder="2020-06-02"
-          ></mt-field>
+            title="征信报告查询日期"
+            value="2020-06-02"
+          ></mt-cell>
           <mt-cell
             class="textFiled"
             title="当前企业及实际控制人征信情况(注明征信查询分类结果)"
@@ -298,7 +298,7 @@ export default {
     width: 100%;
     height: px2rem(44);
     line-height: px2rem(44);
-    padding: 0 px2rem(10);
+    padding: 0 px2rem(16);
     display: flex;
     font-size: px2rem(14);
     box-sizing: border-box;
@@ -401,7 +401,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(10);
+      left: px2rem(16);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -414,7 +414,7 @@ export default {
       width: px2rem(120);
       line-height: px2rem(15);
       top: 50%;
-      left: 21%;
+      left: 22%;
       transform: translate(-50%, -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
@@ -431,7 +431,13 @@ export default {
 .newly2 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(200) !important;
       font-size: px2rem(14);

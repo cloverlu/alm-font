@@ -303,7 +303,7 @@ export default {
     width: 100%;
     height: px2rem(44);
     line-height: px2rem(44);
-    padding: 0 px2rem(10);
+    padding: 0 px2rem(16);
     display: flex;
     font-size: px2rem(14);
     box-sizing: border-box;
@@ -359,7 +359,7 @@ export default {
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
-    padding: 0 px2rem(15);
+    padding: 0 px2rem(16);
     background-color: #fff;
     border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
     .right {
@@ -456,7 +456,13 @@ textarea {
   resize: none;
 }
 .definte3 {
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(200) !important;
       font-size: px2rem(14);

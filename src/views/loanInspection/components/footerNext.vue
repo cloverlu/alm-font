@@ -85,6 +85,8 @@ export default {
         }
       } else if (currentType === "loanRepaymentInspection") {
         if (currentName === "repaymentInspectionIndex") {
+          this.$router.push({ name: "repaymentInspectionDefinite7" });
+        } else if (currentName === "repaymentInspectionDefinite7") {
           this.$router.push({ name: "processing4" });
         }
       } else if (currentType === "loanFastCreditFirst") {

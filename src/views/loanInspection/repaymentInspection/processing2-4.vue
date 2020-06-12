@@ -9,7 +9,7 @@
     <div class="processing4">
       <div class="formTitle">
         <span class="lightBlue"></span>
-        <span class="coName">一级支行/二级分行检查情况</span>
+        <span class="coNameBlack">一级支行/二级分行检查情况</span>
       </div>
       <div class="item1">
         <span class="tag1">是否存在风险预警信号</span>
@@ -154,7 +154,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(18);
+      left: px2rem(16);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -168,7 +168,7 @@ export default {
       line-height: px2rem(15);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(23), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
@@ -183,11 +183,11 @@ export default {
       line-height: px2rem(20);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(23), -50%);
       font-size: px2rem(15);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
-      color: rgba(113, 113, 113, 1);
+      color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
   }
@@ -212,7 +212,7 @@ export default {
     line-height: px2rem(44);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
-    padding: 0 px2rem(15);
+    padding: 0 px2rem(16);
     background-color: #fff;
     border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
@@ -259,7 +259,7 @@ export default {
     width: 100%;
     height: px2rem(44);
     line-height: px2rem(44);
-    padding: 0 px2rem(10);
+    padding: 0 px2rem(16);
     display: flex;
     font-size: px2rem(14);
     box-sizing: border-box;
@@ -315,7 +315,13 @@ textarea {
 .processing4 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(100) !important;
       font-size: px2rem(14);
