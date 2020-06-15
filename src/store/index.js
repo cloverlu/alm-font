@@ -6,6 +6,7 @@ import dailyInspection from "./modules/loanInspection/dailyInspection";
 import footerNext from "../store/modules/footerNext";
 import actions from "../store/action";
 import getters from "../store/getters";
+import userStore from "../store/modules/users/userStore";
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     creditFirst,
     creditRoutine,
     dailyInspection,
-    footerNext
+    footerNext,
+    userStore
   }
 });

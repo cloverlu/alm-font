@@ -37,6 +37,9 @@ const actions = {
   },
   setNewly1: ({ commit }, newly1) => {
     return commit("SET_Newly1", newly1);
+  },
+  setBizType: ({ commit }, bizType) => {
+    return commit("SET_BIZTYPE", bizType);
   }
 };
 
