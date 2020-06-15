@@ -645,6 +645,109 @@ const routes = [
               tag: "resave",
               footer: false
             }
+          },
+          //类型4,m4
+          //检查申请明细-7
+          {
+            path: "m4definite7",
+            name: "userReInsDefinite7",
+            component: definite7,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 流程2-4
+          {
+            path: "m4processing4",
+            name: "userReInsProcessing4",
+            component: processing4,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
+          },
+          //类型5,m5
+          //检查申请明细-16
+          {
+            path: "m5Definite16",
+            name: "userFastCreDefinite16",
+            component: definite16,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 申请明细3
+          {
+            path: "m5Definite3",
+            name: "userFastCreDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
+          },
+          // 类型6,m6
+          // 新增1-2
+          {
+            path: "m6newly2",
+            name: "userNewly2",
+            component: newly2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-3
+          {
+            path: "m6newly3",
+            name: "userNewly3",
+            component: newly3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 新增1-4
+          {
+            path: "m6newly45",
+            name: "userNewly45",
+            component: newly45,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+
+          //检查申请明细 16
+          {
+            path: "m6Definite16",
+            name: "userNewlyDefinite16",
+            component: definite16,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 申请明细3
+          {
+            path: "m6Definite3",
+            name: "userNewlyDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
           }
         ]
       }

@@ -21,10 +21,11 @@
 						span(class="info") {{this.$route.params.billNo}}
 			.select-content
 				definite1(v-if="params.bizType === 'm1'" ref="m1")
-				definite12(v-if="params.bizType === 'm2'" ref="m2")
-				newly18(v-if="params.bizType === 'm3'" ref="m3")
-				definite14(v-if="params.bizType === 'm5'" ref="m5")
-				newly1(v-if="params.bizType === 'm6'" ref="m6")
+				definite12(v-else-if="params.bizType === 'm2'" ref="m2")
+				newly18(v-else-if="params.bizType === 'm3'" ref="m3")
+				newly19(v-else-if="params.bizType === 'm4'" ref="m4")
+				definite14(v-else-if="params.bizType === 'm5'" ref="m5")
+				newly1(v-else-if="params.bizType === 'm6'" ref="m6")
 	router-view(v-else)
 
 
@@ -39,10 +40,19 @@ import definite12 from "../users/selectDefinite/definite-12";
 import newly18 from "../users/selectDefinite/newly18";
 import definite14 from "../users/selectDefinite/definite-14";
 import newly1 from "../users/selectDefinite/newly-1";
+import newly19 from "../users/selectDefinite/newly-9";
 import { loanInspectionMixin } from "../../utils/mixin";
 
 export default {
-  components: { almSelect, definite1, definite12, newly18, newly1, definite14 },
+  components: {
+    almSelect,
+    definite1,
+    definite12,
+    newly18,
+    newly1,
+    definite14,
+    newly19
+  },
   mixins: [loanInspectionMixin],
   data() {
     return {
@@ -89,7 +99,7 @@ export default {
       .definite-field {
         .item {
           .tag {
-            flex: 0 0 px2rem(100);
+            flex: 0 0 px2rem(85);
           }
         }
       }

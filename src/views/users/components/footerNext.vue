@@ -75,68 +75,31 @@ export default {
           } else if (currentName === "userOveralltDefinite17") {
             this.$router.push({ name: "userOveralltDefinite3" });
           }
+        } else if (bizType === "m4") {
+          if (currentName === "definiteUserAll") {
+            this.$router.push({ name: "userReInsDefinite7" });
+          } else if (currentName === "userReInsDefinite7") {
+            this.$router.push({ name: "userReInsProcessing4" });
+          }
+        } else if (bizType === "m5") {
+          if (currentName === "definiteUserAll") {
+            this.$router.push({ name: "userFastCreDefinite16" });
+          } else if (currentName === "userFastCreDefinite16") {
+            this.$router.push({ name: "userFastCreDefinite3" });
+          }
+        } else if (bizType === "m6") {
+          if (currentName === "definiteUserAll") {
+            this.$router.push({ name: "userNewly2" });
+          } else if (currentName === "userNewly2") {
+            this.$router.push({ name: "userNewly3" });
+          } else if (currentName === "userNewly3") {
+            this.$router.push({ name: "userNewly45" });
+          } else if (currentName === "userNewly45") {
+            this.$router.push({ name: "userNewlyDefinite16" });
+          } else if (currentName === "userNewlyDefinite16") {
+            this.$router.push({ name: "userNewlyDefinite3" });
+          }
         }
-        // if (currentType === "loanCreditFirst") {
-        //   if (currentName === "creditFirstIndex") {
-        //     this.$router.push({ name: "firstDefinite2" });
-        //   } else if (currentName === "firstDefinite2") {
-        //     this.$router.push({ name: "firstDefinite16" });
-        //   } else if (currentName === "firstDefinite16") {
-        //     this.$router.push({ name: "firstDefinite3" });
-        //   }
-        // } else if (currentType === "loanCreditRoutine") {
-        //   if (currentName === "creditRoutineIndex") {
-        //     this.$router.push({ name: "definite13" });
-        //   } else if (currentName === "definite13") {
-        //     this.$router.push({ name: "definite11" });
-        //   } else if (currentName === "definite11") {
-        //     this.$router.push({ name: "definite10" });
-        //   } else if (currentName === "definite10") {
-        //     this.$router.push({ name: "definite5" });
-        //   } else if (currentName === "definite5") {
-        //     this.$router.push({ name: "routineDefinite18" });
-        //   } else if (currentName === "routineDefinite18") {
-        //     this.$router.push({ name: "routineDefinite3" });
-        //   }
-        // } else if (currentType === "loanDailyInspection") {
-        //   if (currentName === "dailyInspectionIndex") {
-        //     this.$router.push({ name: "newly2" });
-        //   } else if (currentName === "newly2") {
-        //     this.$router.push({ name: "newly3" });
-        //   } else if (currentName === "newly3") {
-        //     this.$router.push({ name: "newly45" });
-        //   } else if (currentName === "newly45") {
-        //     this.$router.push({ name: "newlyDefinite16" });
-        //   } else if (currentName === "newlyDefinite16") {
-        //     this.$router.push({ name: "newlyDefinite3" });
-        //   }
-        // } else if (currentType === "loanCreditOverall") {
-        //   if (currentName === "creditOverallIndex") {
-        //     this.$router.push({ name: "overalltDefinite13" });
-        //   } else if (currentName === "overalltDefinite13") {
-        //     this.$router.push({ name: "overalltDefinite11" });
-        //   } else if (currentName === "overalltDefinite11") {
-        //     this.$router.push({ name: "overalltDefinite10" });
-        //   } else if (currentName === "overalltDefinite10") {
-        //     this.$router.push({ name: "overalltDefinite89" });
-        //   } else if (currentName === "overalltDefinite89") {
-        //     this.$router.push({ name: "overalltDefinite6" });
-        //   } else if (currentName === "overalltDefinite6") {
-        //     this.$router.push({ name: "overalltDefinite17" });
-        //   } else if (currentName === "overalltDefinite17") {
-        //     this.$router.push({ name: "overalltDefinite3" });
-        //   }
-        // } else if (currentType === "loanRepaymentInspection") {
-        //   if (currentName === "repaymentInspectionIndex") {
-        //     this.$router.push({ name: "processing4" });
-        //   }
-        // } else if (currentType === "loanFastCreditFirst") {
-        //   if (currentName === "fastCreditFirstIndex") {
-        //     this.$router.push({ name: "fastCreditFirstDefinite16" });
-        //   } else if (currentName === "fastCreditFirstDefinite16") {
-        //     this.$router.push({ name: "fastCreditFirstDefinite3" });
-        //   }
-        // }
       }
 
       //随机数
