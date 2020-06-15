@@ -132,7 +132,7 @@ export default {
   .newly-4-repeat {
     &.transa {
       transform: scaleX(0);
-      transition: transform 0.8s;
+      transition: transform 0.4s;
       transform-origin: top right;
     }
     .field-top {

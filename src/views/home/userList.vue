@@ -81,6 +81,7 @@ export default {
       text-align: center;
       color: #b2b2b2;
       font-size: px2rem(14);
+      line-height: 1;
       &:focus {
         outline: none;
       }
@@ -88,6 +89,10 @@ export default {
         text-align: center;
         color: #b2b2b2;
         font-size: px2rem(13);
+      }
+      &::-webkit-input-placeholder {
+        padding-top: px2rem(3);
+        line-height: normal;
       }
     }
   }

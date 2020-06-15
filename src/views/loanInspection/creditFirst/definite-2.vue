@@ -16,7 +16,7 @@
 				almSelect(:selectData="coordinate"  :defaultValue="params.cooperate" :triggerId="cooperate" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 				span(class="iconfont iconxiala arrow")
 			.item
-				span(class="tag big") 生产经营场所变动情况
+				span(class="tag big") 生产经营场所变动情况生产经
 				span(class="info")
 					input(v-model="params.addrChangedMsg" type="input" class="field-input" placeholder="请输入生产经营场所变动情况")
 			.item
@@ -88,7 +88,6 @@ export default {
   height: 100%;
   .definite-field {
     width: 100%;
-    height: px2rem(176);
   }
   .definite-smalltitle {
     height: px2rem(44);
@@ -96,7 +95,6 @@ export default {
   }
   .definite-2-field {
     width: 100%;
-    height: px2rem(236);
     background-color: #fff;
   }
   .definite-2-tag {
@@ -119,7 +117,6 @@ export default {
   }
   .field2 {
     width: 100%;
-    height: px2rem(162);
     margin-top: px2rem(10);
     .item {
       border: none;
