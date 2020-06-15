@@ -652,6 +652,21 @@ const caiwuEight = [
   }
 ];
 
+// 还款意愿数组
+const payIntentionsArr = [
+  {
+    key: 1,
+    value: "良好"
+  },
+  {
+    key: 2,
+    value: "较差"
+  },
+  {
+    key: 3,
+    value: "无"
+  }
+];
 //新增1-4
 const newly4 = [
   {
@@ -718,5 +733,6 @@ export {
   caiwuEight,
   bizTypes,
   newly4,
-  receipt1
+  receipt1,
+  payIntentionsArr
 };

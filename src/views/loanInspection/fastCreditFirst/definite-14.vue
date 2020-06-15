@@ -9,7 +9,7 @@
     <div class="definite14" v-if="hasRouterChild2">
       <div class="formTitle">
         <span class="lightBlue"></span>
-        <span class="coName">存货</span>
+        <span class="coNameBlack">存货</span>
       </div>
       <mt-cell
         class="textFiled"
@@ -76,7 +76,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <div class="formTitle">
+      <div class="formTitle1">
         <span class="lightBlue"></span>
         <span class="coName">检查内容</span>
       </div>
@@ -259,7 +259,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(18);
+      left: px2rem(10);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -273,7 +273,7 @@ export default {
       line-height: px2rem(15);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(16), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
@@ -288,14 +288,49 @@ export default {
       line-height: px2rem(20);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(16), -50%);
       font-size: px2rem(15);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
-      color: rgba(113, 113, 113, 1);
+      color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
   }
+
+  .formTitle1 {
+    width: 100%;
+    height: px2rem(44);
+    position: relative;
+    background-color: #f7f7f7;
+    .lightBlue {
+      position: absolute;
+      display: inline-block;
+      width: px2rem(3);
+      height: px2rem(14);
+      top: 50%;
+      left: px2rem(16);
+      transform: translate(-50%, -50%);
+      background: rgba(78, 120, 222, 1);
+      opacity: 1;
+      border-radius: px2rem(2);
+    }
+    .coName {
+      position: absolute;
+      display: inline-block;
+      height: px2rem(14);
+      width: 100%;
+      line-height: px2rem(15);
+      top: 50%;
+      // left: 21%;
+      transform: translate(px2rem(24), -50%);
+      font-size: px2rem(14);
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
+      color: rgba(78, 120, 222, 1);
+      opacity: 1;
+    }
+  }
+
   .mint-cell {
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-of-type {
@@ -307,7 +342,7 @@ export default {
     width: 100%;
     height: px2rem(44);
     line-height: px2rem(44);
-    padding: 0 px2rem(10);
+    padding: 0 px2rem(16);
     display: flex;
     font-size: px2rem(14);
     box-sizing: border-box;
@@ -333,6 +368,7 @@ export default {
       flex: 1;
       text-align: right;
       color: #9f9f9f;
+      width: px2rem(140);
       .pay-type {
         width: 100%;
         height: px2rem(145);
@@ -366,7 +402,13 @@ textarea {
 .definite14 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(224) !important;
       font-size: px2rem(14);
