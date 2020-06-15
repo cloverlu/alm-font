@@ -1,18 +1,13 @@
 <!--
- * @Descripttion: 流程1：检查申请明细-1
+ * @Descripttion: 类型m1:小企业授信业务首次跟踪检查
  * @Author: penglu
- * @Date: 2020-06-04 17:03:54
+ * @Date: 2020-06-12 15:34:53
 -->
+
 <template lang="pug">
 .credit-wrapper
-	.definite-1-wrapper(v-if="hasChildRouter1")
-		.definite-1-title
-			span(class="colum-blue")
-			span(class="title") {{detail.custName}}
+	.definite-1-wrapper
 		.definite-field
-			.item
-				span(class="tag") 检查类型
-				span(class="info") {{detail.bizType}}
 			.item
 				span(class="tag") 放款日期
 				span(class="info") {{detail.billBeginDate}}
@@ -42,13 +37,12 @@
 			span  特殊要求及落实情况
 		.definite-1-field2
 			fieldOne(:definite="definite1Field" ref="fieldTwo")
-	router-view(v-else)
 </template>
 
 <script>
 import { definite1, payType, definite1Field } from "../../../utils/dataMock.js";
-import almSelect from "../components/select";
-import fieldOne from "../components/fieldOne";
+import almSelect from "../../loanInspection/components/select";
+import fieldOne from "../../loanInspection/components/fieldOne";
 import { loanInspectionMixin } from "../../../utils/mixin";
 
 export default {
@@ -56,7 +50,6 @@ export default {
   components: { almSelect, fieldOne },
   data() {
     return {
-      hasChildRouter1: this.$route.params.hasChildRouter1,
       detail: definite1,
       payTypes: payType,
       definite1Field: definite1Field,
@@ -71,14 +64,7 @@ export default {
       }
     };
   },
-  beforeRouteEnter(to, from, next) {
-    to.params.hasChildRouter1 = to.name === "creditFirstIndex";
-    next();
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.hasChildRouter1 = to.name === "creditFirstIndex";
-    next();
-  },
+
   computed: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
@@ -93,7 +79,7 @@ export default {
   mounted() {},
   methods: {
     getSelect(data) {
-      this.params.payKind = data[0].key;
+      this.params.payKind = data.key;
     },
     aaa() {
       console.log(this.$refs.fieldOne.params);
@@ -115,7 +101,7 @@ export default {
     height: 100%;
 
     .definite-field {
-      height: px2rem(338);
+      height: px2rem(294);
     }
     .definite-smalltitle {
       height: px2rem(24);

@@ -25,6 +25,8 @@ import definite17 from "@/views/loanInspection/creditOverall/definite-17";
 import repaymentInspectionIndex from "@/views/loanInspection/repaymentInspection/newly-9";
 import processing4 from "@/views/loanInspection/repaymentInspection/processing2-4";
 import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
+import userIndex from "@/views/users/index.vue";
+import definiteUserAll from "@/views/users/definiteUserall.vue";
 
 Vue.use(VueRouter);
 
@@ -427,6 +429,222 @@ const routes = [
               footer: false
             },
             children: []
+          }
+        ]
+      }
+    ]
+  },
+  // 用户
+  //据列表信息-1
+  {
+    path: "/almHome/:mold/:userId",
+    name: "userIndex",
+    component: userIndex,
+    meta: {
+      // 头部标题，根据当前设计页的头部决定
+      title: "借据列表信息",
+      // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+      tag: "",
+      // 是否带上一步下一步
+      footer: false
+    },
+    children: [
+      {
+        path: ":billNo",
+        name: "definiteUserAll",
+        component: definiteUserAll,
+        meta: {
+          // 头部标题，根据当前设计页的头部决定
+          title: "检查申请明细",
+          // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+          tag: "resave",
+          // 是否带上一步下一步
+          footer: true
+        },
+        children: [
+          //类型1.m1
+          //检查申请明细-2
+          {
+            path: "m1definite2",
+            name: "userFirstDefinite2",
+            component: definite2,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-16
+          {
+            path: "m1definite16",
+            name: "userFirstDefinite16",
+            component: definite16,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-3
+          {
+            path: "m1definite3",
+            name: "userFirstDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
+          },
+          //类型2
+          // 申请明细13
+          {
+            path: "m2definite13",
+            name: "userRoutineDefinite13",
+            component: definite13,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细11
+          {
+            path: "m2definite11",
+            name: "userRoutineDefinite11",
+            component: definite11,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细10
+          {
+            path: "m2definite10",
+            name: "userRoutineDefinite10",
+            component: definite10,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          // 申请明细5
+          {
+            path: "m2definite5",
+            name: "userRoutineDefinite5",
+            component: definite5,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            },
+            children: []
+          },
+          //检查申请明细-17
+          {
+            path: "m2definite18",
+            name: "userRoutineDefinite18",
+            component: definite18,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          // 申请明细3
+          {
+            path: "m2definite3",
+            name: "userRoutineDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            },
+            children: []
+          },
+          //类型3，m3
+          //检查申请明细-13
+          {
+            path: "m3definite13",
+            name: "userOveralltDefinite13",
+            component: definite13,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-11
+          {
+            path: "m3definite11",
+            name: "userOveralltDefinite11",
+            component: definite11,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-10
+          {
+            path: "m3definite10",
+            name: "userOveralltDefinite10",
+            component: definite10,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细-8/检查申请明细-9
+          {
+            path: "m3definite89",
+            name: "userOveralltDefinite89",
+            component: definite89,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细6
+          {
+            path: "m3definite6",
+            name: "userOveralltDefinite6",
+            component: definite6,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细17
+          {
+            path: "m3definite17",
+            name: "userOveralltDefinite17",
+            component: definite17,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+          },
+          //检查申请明细3
+          {
+            path: "m3definite3",
+            name: "userOveralltDefinite3",
+            component: definite3,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: false
+            }
           }
         ]
       }

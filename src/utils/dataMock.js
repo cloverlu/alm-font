@@ -671,6 +671,22 @@ const newly4 = [
   }
 ];
 
+//借据列表信息-1
+const receipt1 = _ => {
+  const arr = [];
+  for (let i = 0; i <= 6; i++) {
+    arr.push({
+      id: i,
+      billNo: "0010100000-00000318-000000444", //借据编号
+      billBeginDate: "2020-05-01", //借据起期
+      billEndDate: "2020-05-01", //借据止期
+      billAmout: "800000", //借据金额
+      billBlance: "20000" //借据余额
+    });
+  }
+  return arr;
+};
+
 export {
   todoListTitle,
   loanInsList,
@@ -701,5 +717,6 @@ export {
   caiwuSeven,
   caiwuEight,
   bizTypes,
-  newly4
+  newly4,
+  receipt1
 };

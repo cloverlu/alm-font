@@ -9,7 +9,7 @@
 			input(class="search" v-model="userSearch" placeholder="搜索")
 		scroll(:top="88")
 			.user-wrapper
-				.item(v-for="item in usersMock" :key="item.custCode")
+				.item(v-for="item in usersMock" :key="item.custCode" @click="handleClick(item.id)")
 					.user-icon
 						span(class="iconfont iconkehuxinxi")
 					.user-info
@@ -31,6 +31,7 @@ export default {
       const userMocks = [];
       for (let i = 1; i <= 10; i++) {
         userMocks.push({
+          id: i,
           custName: `客户${i}`,
           custCode: `编号${i}12324345r4`
         });
@@ -41,6 +42,17 @@ export default {
       userSearch: "",
       usersMock: userMock()
     };
+  },
+  methods: {
+    handleClick(id) {
+      this.$router.push({
+        name: "userIndex",
+        params: {
+          mold: "myUser",
+          userId: id
+        }
+      });
+    }
   }
 };
 </script>

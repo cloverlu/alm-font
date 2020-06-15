@@ -11,7 +11,8 @@ export const loanInspectionMixin = {
       "definite10",
       "definite5",
       "definite4",
-      "routineDefinite3"
+      "routineDefinite3",
+      "bizType"
     ])
   },
 
@@ -26,7 +27,8 @@ export const loanInspectionMixin = {
       "setDefinite10",
       "setDefinite4",
       "setDefinite5",
-      "setRoutineDefinite3"
+      "setRoutineDefinite3",
+      "setBizType"
     ])
   }
 };
