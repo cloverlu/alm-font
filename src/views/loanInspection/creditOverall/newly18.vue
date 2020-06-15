@@ -129,7 +129,6 @@ export default {
     width: 100%;
     height: 100%;
     .definite-field {
-      height: px2rem(220);
       &.add-item {
         height: px2rem(264);
       }

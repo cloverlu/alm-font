@@ -120,10 +120,10 @@
 
 .definite-field .item {
   width: 100%;
-  height: 1.17333rem;
-  line-height: 1.17333rem;
-  padding: 0 0.42667rem 0 0.42667rem;
+  padding: 0.4rem;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 0.37333rem;
   box-sizing: border-box;
   border-bottom: 0.02667rem solid #e5e5e5;
@@ -184,7 +184,7 @@
   width: 100%;
   height: 1.2rem;
   line-height: 1.2rem;
-  padding: 0 0.24rem 0 0.24rem;
+  padding: 0 0.24rem;
   display: flex;
 }
 
@@ -236,12 +236,11 @@
 
 .field-input {
   border: none;
-  height: 1.06667rem;
+  height: 0.42667rem;
   width: 100%;
   text-align: right;
   color: #9F9F9F;
   font-size: 0.37333rem;
-  line-height: 1;
 }
 
 .field-input:focus {
@@ -251,6 +250,11 @@
 .field-input::placeholder {
   color: #9F9F9F;
   font-size: 0.37333rem;
+  line-height: 0.42667rem;
+}
+
+.field-input::-webkit-input-placeholder {
+  line-height: normal;
 }
 
 .image-upload-uploader .van-uploader__preview-image {

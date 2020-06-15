@@ -220,10 +220,11 @@ export default {
   padding: 0 px2rem(16);
   box-sizing: border-box;
   .image-upload-title {
-    @include lineHeight44;
+    // @include lineHeight44;
     @include fontColorBlack;
-    line-height: px2rem(44);
+    // line-height: px2rem(44);
     font-size: px2rem(14);
+    padding: px2rem(15) 0;
   }
   .image-upload {
     width: 100%;

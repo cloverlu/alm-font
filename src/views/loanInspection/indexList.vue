@@ -157,12 +157,13 @@ export default {
 .item-tag {
   color: #727272;
   font-size: px2rem(14);
-  flex: 0 0 px2rem(56);
+  flex: 0 0 px2rem(65);
   margin-right: px2rem(5);
 }
 .item-info {
   color: #090909;
   font-size: px2rem(14);
   flex: 1;
+  text-align: left;
 }
 </style>
