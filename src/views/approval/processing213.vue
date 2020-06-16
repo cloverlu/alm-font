@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 流程处理2
+ * @Descripttion: 流程处理2-13
  * @Author: sunhua
  * @Date: 2020-06-16 11:03:37
 -->
@@ -7,13 +7,13 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="processing2" ref="processing2">
+    <div class="processing213" ref="processing213">
       <!-- <div class="formTitle">
         <span class="lightBlue"></span>
         <span class="coNameBlack">一级支行/二级分行检查情况</span>
       </div> -->
       <div class="item1">
-        <span class="tag1">一级支行/二级分行复核意见</span>
+        <span class="tag1">一级支行/二级分行审核意见</span>
         <almSelect
           :selectData="agreeOrNot"
           :defaultValue="params.agreeResult"
@@ -55,7 +55,7 @@
         style="overflow:hidden"
         placeholder="sss"
       ></mt-field>
-      <mt-cell class="textFiled" title="复核意见及行动建议"></mt-cell>
+      <mt-cell class="textFiled" title="审核意见及行动建议"></mt-cell>
       <mt-field
         type="textarea"
         rows="3"
@@ -67,25 +67,12 @@
 
       <div class="signBox">
         <span class="left"
-          >复核人员（签字）：<span
+          >审核人员（签字）：<span
             class="iconfont iconqianzi"
             @click="goSign()"
           ></span
         ></span>
         <span class="right">2020-06-01</span>
-      </div>
-      <div class="item">
-        <span class="tag1">下一岗位处理人</span>
-        <almSelect
-          :selectData="nextPositionHandlersArr"
-          :defaultValue="params.nextEmplCode"
-          :triggerId="nextEmplCode"
-          :title="selectTitle3"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect3"
-          class="info"
-        ></almSelect>
-        <span class="iconfont iconxiala arrow"></span>
       </div>
       <div class="subBox">
         <div class="submit">
@@ -107,7 +94,7 @@
             <div class="enterpriseCredit">
               <div class="signBox">
                 <span class="left"
-                  >复核人员（签字）：<span class="iconfont iconqianzi"></span
+                  >审核人员（签字）：<span class="iconfont iconqianzi"></span
                 ></span>
                 <span class="right">2020-06-01</span>
               </div>
@@ -138,12 +125,7 @@
 </template>
 
 <script>
-import {
-  DetailsOfIOU,
-  yesNo,
-  agreeOrNot,
-  nextPositionHandlersArr
-} from "../../utils/dataMock";
+import { DetailsOfIOU, yesNo, agreeOrNot } from "../../utils/dataMock";
 import { Field, Cell, Button, Popup } from "mint-ui";
 import almSelect from "../loanInspection/components/select";
 export default {
@@ -159,21 +141,17 @@ export default {
       DetailsOfIOU: DetailsOfIOU,
       popupVisible: false,
       payType: 1,
-      selectTitle1: "一级支行/二级分行复核意见",
+      selectTitle1: "一级支行/二级分行审核意见",
       selectTitle2: "是否存在风险预警信号",
-      selectTitle3: "下一岗位处理人",
       fontColor: "blue",
       yesNo: yesNo,
       agreeOrNot: agreeOrNot,
-      nextPositionHandlersArr: nextPositionHandlersArr,
       existRisk: "existRisk",
       agreeResult: "agreeResult",
-      nextEmplCode: "nextEmplCode",
       params: {
         existRisk: 0, // 存在风险
-        agreeResult: 1, // 一级支行/二级分行复核意见
-        nextEmplCode: 1, // 下一岗位处理人
-        msg: "", // 一级支行/二级分行复核意见说明
+        agreeResult: 1, // 一级支行/二级分行审核意见
+        msg: "", // 一级支行/二级分行审核意见说明
         riskMsg: "xxx", // 风险说明
         suggest: "xxx", // 措施建议
         empSign: "" // 签名
@@ -195,9 +173,6 @@ export default {
     getSelect2: function(data) {
       this.params.existRisk = data.key;
     },
-    getSelect3: function(data) {
-      this.params.nextEmplCode = data.key;
-    },
     submit: function() {
       console.log(123);
     },
@@ -212,7 +187,7 @@ export default {
       this.popupVisible = true;
       this.lineCanvas({
         // el: this.$refs.canvas, //绘制canvas的父级div
-        box: this.$refs.processing2, // 拿到宽度
+        box: this.$refs.processing213, // 拿到宽度
         clearEl: this.$refs.clearCanvas, //清除按钮
         saveEl: this.$refs.saveCanvas //保存按钮
       });
@@ -309,7 +284,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/style/global.scss";
-.processing2 {
+.processing213 {
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -388,7 +363,8 @@ export default {
     background-color: #fff;
     position: relative;
     width: 100%;
-    height: px2rem(173);
+    height: px2rem(178);
+    margin-top: px2rem(10);
     .submit {
       position: absolute;
       width: calc(100% - 30px);
@@ -583,7 +559,7 @@ export default {
 <style lang="scss">
 @import "../../assets/style/global.scss";
 
-.processing2 {
+.processing213 {
   width: 100%;
   height: 100%;
   .mint-cell {
