@@ -16,7 +16,6 @@
           <mt-field
             class="textFiled"
             label="检查地点"
-            placeholder="10"
             v-model="params.checkAddr"
           ></mt-field>
           <!-- <mt-field
@@ -41,13 +40,11 @@
           <mt-field
             class="textFiled"
             label="生产经营场所变动情况"
-            placeholder="10"
             v-model="params.addrChangedMsg"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="接待人员"
-            placeholder="10"
             v-model="params.staff"
           ></mt-field>
         </div>

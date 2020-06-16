@@ -171,7 +171,16 @@ export default {
         "touchstart",
         function(e) {
           this.cxt.beginPath();
-          this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          // this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          this.cxt.moveTo(
+            e.changedTouches[0].clientX -
+              e.target.offsetLeft +
+              document.documentElement.scrollLeft,
+            e.changedTouches[0].clientY -
+              40 -
+              e.target.offsetTop +
+              document.documentElement.scrollTop
+          );
         }.bind(this),
         false
       );
@@ -179,7 +188,22 @@ export default {
       this.canvas.addEventListener(
         "touchmove",
         function(e) {
-          this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          // console.log(
+          //   e.changedTouches[0].clientY,
+          //   e.target.offsetLeft,
+          //   document.documentElement.scrollLeft,
+          //   e
+          // );
+          // this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          this.cxt.lineTo(
+            e.changedTouches[0].clientX -
+              e.target.offsetLeft +
+              document.documentElement.scrollLeft,
+            e.changedTouches[0].clientY -
+              40 -
+              e.target.offsetTop +
+              document.documentElement.scrollTop
+          );
           this.cxt.stroke();
         }.bind(this),
         false
