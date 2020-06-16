@@ -82,7 +82,6 @@ export default {
       payType: 1,
       selectTitle: "检查类型",
       fontColor: "blue",
-      bizType: "bizType",
       repayKind: "repayKind",
       params: {
         bizType: "小企业授信业务还款资金落实情况检查", // 检查类型

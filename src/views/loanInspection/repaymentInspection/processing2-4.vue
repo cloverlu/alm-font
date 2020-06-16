@@ -192,7 +192,10 @@ export default {
         "touchstart",
         function(e) {
           this.cxt.beginPath();
-          this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          this.cxt.moveTo(
+            e.changedTouches[0].pageX,
+            e.changedTouches[0].pageY - 40
+          );
         }.bind(this),
         false
       );
@@ -200,7 +203,10 @@ export default {
       this.canvas.addEventListener(
         "touchmove",
         function(e) {
-          this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+          this.cxt.lineTo(
+            e.changedTouches[0].pageX,
+            e.changedTouches[0].pageY - 40
+          );
           this.cxt.stroke();
         }.bind(this),
         false
