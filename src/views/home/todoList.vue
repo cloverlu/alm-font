@@ -30,7 +30,13 @@ export default {
   methods: {
     handleClick(id) {
       if (id === 2) {
-        this.$router.push({ name: "loanInspectionIndex" });
+        this.$router.push({
+          name: "loanInspectionIndex"
+        });
+      } else if (id === 1) {
+        this.$router.push({
+          name: "approvalIndex"
+        });
       }
     }
   }

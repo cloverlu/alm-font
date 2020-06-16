@@ -17,6 +17,7 @@
 			.loanIns-index-content
 				.content(:class="footerShow ? 'footershow' : ''")
 					loadInsList(v-if="hasChildRouter") 
+					//- loadInsList(v-if="hasChildRouter === 1") 
 					router-view(v-else)
 				.footer(v-if="footerShow") 
 					footerNext
@@ -41,7 +42,8 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    to.params.hasChildRouter = to.name === "loanInspectionIndex";
+    to.params.hasChildRouter =
+      to.name === "loanInspectionIndex" || to.name === "approvalIndex";
     next();
   },
   beforeRouteUpdate(to, from, next) {
@@ -55,7 +57,8 @@ export default {
     } else if (meta.tag === "footerNext") {
       this.operateTag = 3;
     }
-    this.hasChildRouter = to.name === "loanInspectionIndex";
+    this.hasChildRouter =
+      to.name === "loanInspectionIndex" || to.name === "approvalIndex";
     next();
   },
 

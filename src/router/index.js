@@ -27,6 +27,7 @@ import processing4 from "@/views/loanInspection/repaymentInspection/processing2-
 import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
 import userIndex from "@/views/users/index.vue";
 import definiteUserAll from "@/views/users/definiteUserall.vue";
+import checklist1 from "@/views/approval/checklist1.vue";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,36 @@ const routes = [
     },
     children: []
   },
+  //业务审批
+  {
+    path: "/almHome/approval",
+    name: "approvalIndex",
+    component: loanInspectionIndex,
+    meta: {
+      // 头部标题，根据当前设计页的头部决定
+      title: "贷后检查列表",
+      // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+      tag: "operateIcon",
+      // 是否带上一步下一步
+      footer: false
+    },
+    children: [
+      {
+        path: ":type/:bizId/checklist1",
+        name: "checklist1",
+        component: checklist1,
+        meta: {
+          // 头部标题，根据当前设计页的头部决定
+          title: "贷后检查流程处理",
+          // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+          tag: "footerNext",
+          // 是否带上一步下一步
+          footer: false
+        }
+      }
+    ]
+  },
+  //贷后检查列表
   {
     path: "/almHome/loanInspection",
     name: "loanInspectionIndex",

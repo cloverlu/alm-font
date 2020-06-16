@@ -51,26 +51,6 @@ const bizType = [
   "小企业法人快捷贷首次检查",
   "小企业法人快捷贷贷后日常检查"
 ];
-const loanInsList = _ => {
-  // 1-应做，2-未做，3-已做
-  const status = [1, 2, 3];
-  const bizStatus = [].concat(status, ...status);
-  const data = [];
-  const date = "2020-06-02";
-  for (let i = 0; i <= 6; i++) {
-    data.push({
-      bizType: bizType[i],
-      bizStatus: bizStatus[i],
-      noticeDate: date,
-      endDate: date,
-      bizId: i,
-      custNname: "张三",
-      custNo: "1111111111111111111",
-      billNo: "222222222222222222"
-    });
-  }
-  return data;
-};
 
 const DetailsOfIOU = {
   queryType: "1", // 查询类型
@@ -238,6 +218,52 @@ const bizTypes = [
     value: "小企业法人快捷贷贷后日常检查"
   }
 ];
+
+const loanInsList = _ => {
+  // shouldDo-应做，notDo-未做，alreadyDo-已做，inReview-审批中
+  const status = ["alreadyDo", "shouldDo", "notDo"];
+  const bizStatus = [].concat(status, ...status);
+  const bizTypesS = [].concat(bizTypes, ...bizTypes);
+
+  const data = [];
+  const date = "2020-06-02";
+  for (let i = 0; i <= 5; i++) {
+    data.push({
+      bizType: bizTypesS[i].key,
+      bizTypeName: bizTypesS[i].value,
+      bizStatus: bizStatus[i],
+      noticeDate: date,
+      endDate: date,
+      bizId: i,
+      custNname: "张三",
+      custNo: "1111111111111111111",
+      billNo: "222222222222222222"
+    });
+  }
+  return data;
+};
+
+const loanInsList2 = _ => {
+  // shouldDo-应做，notDo-未做，alreadyDo-已做，inReview-审批中
+  const status = ["inReview"];
+  const data = [];
+  const arr = [];
+  const date = "2020-06-02";
+  for (let i = 0; i <= 4; i++) {
+    data.push({
+      bizType: bizTypes[i].key,
+      bizTypeName: bizTypes[i].value,
+      bizStatus: status[0],
+      noticeDate: date,
+      endDate: date,
+      bizId: i,
+      custNname: "张三",
+      custNo: "1111111111111111111",
+      billNo: "222222222222222222"
+    });
+  }
+  return data;
+};
 
 //配合程度
 const coordinate = [
@@ -705,6 +731,7 @@ const receipt1 = _ => {
 export {
   todoListTitle,
   loanInsList,
+  loanInsList2,
   definite1,
   payType,
   DetailsOfIOU,
