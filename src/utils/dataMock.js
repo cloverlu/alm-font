@@ -277,6 +277,30 @@ const coordinate = [
   }
 ];
 
+//同意
+const agreeOrNot = [
+  {
+    key: 1,
+    value: "同意"
+  },
+  {
+    key: 0,
+    value: "不同意"
+  }
+];
+
+//下一岗位处理人
+const nextPositionHandlersArr = [
+  {
+    key: 1,
+    value: "张三"
+  },
+  {
+    key: 0,
+    value: "李四"
+  }
+];
+
 //是否
 const yesNo = [
   {
@@ -761,5 +785,7 @@ export {
   bizTypes,
   newly4,
   receipt1,
-  payIntentionsArr
+  payIntentionsArr,
+  agreeOrNot,
+  nextPositionHandlersArr
 };
