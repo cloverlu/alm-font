@@ -72,6 +72,7 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
+    console.log(from);
     to.params.hasChildRouter1 = to.name === "creditFirstIndex";
     next();
   },
