@@ -42,7 +42,7 @@ export default {
   height: 100%;
   .field-one-item {
     width: 100%;
-    height: px2rem(118);
+    // height: px2rem(118);
     @include borderTopColor;
     .field-one-item-tag,
     .field-one-item-field {

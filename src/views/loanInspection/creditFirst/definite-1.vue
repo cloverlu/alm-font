@@ -115,7 +115,6 @@ export default {
     height: 100%;
 
     .definite-field {
-      height: px2rem(338);
     }
     .definite-smalltitle {
       height: px2rem(24);
@@ -131,7 +130,6 @@ export default {
     }
     .definite-1-field2 {
       width: 100%;
-      height: px2rem(236);
       background-color: #fff;
     }
   }

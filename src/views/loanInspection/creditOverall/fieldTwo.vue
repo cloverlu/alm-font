@@ -33,11 +33,11 @@
 				.content-type2(v-else-if="type === 2")
 					.definite-field
 						.item
-							span(class="tag big") 近三个月的情况：
+							span() 近三个月的情况：
 						.item(class="item-textarea")
 							mt-field(v-model="params[item2.items.Inc3MSitu]" class="textArea" type="textarea" rows="3" placeholder="请输入")
 						.item
-							span(class="tag big") 如剔除季节性因素后变动超30%，原因
+							span() 如剔除季节性因素后变动超30%，原因
 						.item(class="item-textarea")
 							mt-field(v-model="params[item2.items.Chang30Msg]" class="textArea" type="textarea" rows="3" placeholder="请输入")
 							
