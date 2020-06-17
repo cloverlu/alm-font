@@ -37,7 +37,7 @@
           v-model="params.ownerStruSameMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业所在行业是否发生重大不利变化</span>
@@ -58,7 +58,7 @@
           v-model="params.IndustrycChangSiutMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业主营业务情况是否发生变更</span>
@@ -79,7 +79,7 @@
           v-model="params.mainBusIsChangedMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业是否有与主业无关的扩张计划</span>
@@ -100,7 +100,7 @@
           v-model="params.planExpandSituMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
 
         <div class="item">
@@ -122,7 +122,7 @@
           v-model="params.addrChangedMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业主要原材料或货物的采购成本是否明显上升</span>
@@ -143,7 +143,7 @@
           v-model="params.purchaseCostMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item1">
           <span class="tag"
@@ -166,7 +166,7 @@
           v-model="params.proAndOpeAbnormalSuitMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag1"
@@ -189,7 +189,7 @@
           v-model="params.saleAbnormalSuitMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业上下游核心客户是否发生重大变更</span>
@@ -210,7 +210,7 @@
           v-model="params.chainChangeMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag1"
@@ -233,7 +233,7 @@
           v-model="params.dailyCostDeclineMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业生产经营是否有安全隐患</span>
@@ -254,7 +254,7 @@
           v-model="params.hiddenTroubleSituMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体描述（每条必须有具体描述内容）"
+          placeholder="请输入"
         ></mt-field>
 
         <mt-field class="textFiled other" label="其他"></mt-field>
@@ -265,7 +265,7 @@
           v-model="params.otherSitu"
           class="textArea"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
 
         <div class="formTitle">
@@ -284,7 +284,7 @@
           v-model="params.cashLastToNow"
           class="textArea"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag1"
@@ -323,7 +323,7 @@
           v-model="params.cashOtherMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="formTitle">
           <span class="lightBlue"></span>
@@ -336,7 +336,7 @@
           v-model="params.summaryForCheck"
           class="textArea"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
       </div>
     </div>

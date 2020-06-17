@@ -31,7 +31,7 @@
         v-model="params.msg"
         class="text"
         style="overflow:hidden"
-        placeholder="理由"
+        placeholder="请输入理由"
       ></mt-field>
       <div class="item1">
         <span class="tag1">是否存在风险预警信号</span>
@@ -49,7 +49,7 @@
       <mt-field
         class="textFiled"
         label="发生阶段"
-        placeholder="一"
+        placeholder="请输入发生阶段"
         v-model="params.riskStage"
       ></mt-field>
       <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
@@ -59,7 +59,7 @@
         v-model="params.riskMsg"
         class="text"
         style="overflow:hidden"
-        placeholder="sss"
+        placeholder="请输入预警信号说明"
       ></mt-field>
       <mt-cell class="textFiled" title="审核意见及行动建议"></mt-cell>
       <mt-field
@@ -68,7 +68,7 @@
         v-model="params.suggest"
         class="text"
         style="overflow:hidden"
-        placeholder="sss"
+        placeholder="请输入审核意见及行动建议"
       ></mt-field>
 
       <div class="signBox">

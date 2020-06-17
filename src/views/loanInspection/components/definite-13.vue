@@ -17,13 +17,8 @@
             class="textFiled"
             label="检查地点"
             v-model="params.checkAddr"
+            placeholder="请输入"
           ></mt-field>
-          <!-- <mt-field
-          class="textFiled"
-          label="检查配合程度"
-          placeholder="10"
-          v-model="cooperate"
-        ></mt-field> -->
           <div class="item">
             <span class="tag">检查配合程度</span>
             <almSelect
@@ -40,11 +35,13 @@
           <mt-field
             class="textFiled"
             label="生产经营场所变动情况"
+            placeholder="请输入"
             v-model="params.addrChangedMsg"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="接待人员"
+            placeholder="请输入"
             v-model="params.staff"
           ></mt-field>
         </div>

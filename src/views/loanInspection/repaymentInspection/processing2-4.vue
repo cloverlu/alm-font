@@ -32,7 +32,7 @@
         v-model="params.stockChangSitu"
         class="text"
         style="overflow:hidden"
-        placeholder="sss"
+        placeholder="请输入"
       ></mt-field>
       <mt-cell class="textFiled" title="检查结论及措施建议"></mt-cell>
       <mt-field
@@ -41,7 +41,7 @@
         v-model="params.InspConAndSug"
         class="text"
         style="overflow:hidden"
-        placeholder="sss"
+        placeholder="请输入"
       ></mt-field>
       <div class="definite-13-wrapper">
         <div class="definite-smalltitle">

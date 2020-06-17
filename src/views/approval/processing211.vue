@@ -31,7 +31,7 @@
         v-model="params.msg"
         class="text"
         style="overflow:hidden"
-        placeholder="理由"
+        placeholder="请输入理由"
       ></mt-field>
       <mt-cell class="textFiled" title="抽查意见及行动建议"></mt-cell>
       <mt-field
@@ -40,7 +40,7 @@
         v-model="params.suggest"
         class="text"
         style="overflow:hidden"
-        placeholder="sss"
+        placeholder="请输入抽查意见及行动建议"
       ></mt-field>
 
       <div class="signBox">

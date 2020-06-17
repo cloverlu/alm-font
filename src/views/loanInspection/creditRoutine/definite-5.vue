@@ -17,7 +17,7 @@
           <mt-field
             class="textFiled"
             label="上次全面检查或调查时余额"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.stockLastBalance"
           ></mt-field>
           <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
@@ -27,7 +27,7 @@
             v-model="params.stockChangSitu"
             class="text"
             style="overflow:hidden"
-            placeholder="sss"
+            placeholder="请输入本次检查存货变动情况说明"
           ></mt-field>
         </div>
 
@@ -41,7 +41,7 @@
           <mt-field
             class="textFiled"
             label="上次全面检查或调查时余额"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.busIncLastBalance"
           ></mt-field>
           <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
@@ -51,7 +51,7 @@
             v-model="params.busIncChangSitu"
             class="text"
             style="overflow:hidden"
-            placeholder="xxx"
+            placeholder="请输入本次检查营业收入变动情况说明"
           ></mt-field>
 
           <!-- 加工制造类 -->
@@ -64,7 +64,7 @@
           <mt-field
             class="textFiled"
             label="上次全面检查或调查时余额"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.dailyExpenLastBalance"
           ></mt-field>
           <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
@@ -74,7 +74,7 @@
             v-model="params.dailyExpenChangSitu"
             class="text"
             style="overflow:hidden"
-            placeholder="xxx"
+            placeholder="请输入本次检查变动情况说明"
           ></mt-field>
 
           <mt-field
@@ -83,7 +83,7 @@
             class="text"
             v-model="params.proAndOpeAbnormalSuitMsg"
             style="overflow:hidden"
-            placeholder="xxx"
+            placeholder="根据财务信息及现场检查情况，判断企业是否生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，并详细阐述异常情况对企业偿债能力的影响。"
           ></mt-field>
         </div>
       </div>

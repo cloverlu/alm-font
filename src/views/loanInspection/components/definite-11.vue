@@ -32,7 +32,7 @@
           <mt-field
             class="textFiled"
             label="未结清贷款笔数"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.unPayOffLoanNum"
           ></mt-field>
           <!-- <mt-cell
@@ -42,19 +42,19 @@
           <mt-field
             class="textFiled"
             label="未结清贷款金额"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.unPayOffAmout"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="涉及金融机构"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.finInstitutionNum"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="未结清贷款结余"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.sumBalance"
           ></mt-field>
 
@@ -62,19 +62,19 @@
           <mt-field
             class="textFiled"
             label="对外担保笔数"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.guaranteeNum"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="对外担保金额"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.guaranteeAmout"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="对外担保结余"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.guaranteeBalance"
           ></mt-field>
 
@@ -83,7 +83,7 @@
           <!-- <mt-field
           class="textFiled"
           label="贷款期间借款企业是否发生逾期、欠息等不良信用记录"
-          placeholder="10"
+          placeholder="请输入"
           v-model="existBadRecord"
         ></mt-field> -->
           <div class="item">
@@ -107,32 +107,32 @@
             v-model="params.badRecordMsg"
             class="text"
             style="overflow:hidden"
-            placeholder="badRecordMsg"
+            placeholder="请输入"
           ></mt-field>
           <!-- （3）借款企业欠税情况 -->
           <div class="coNo2">（3）借款企业欠税情况</div>
           <mt-field
             class="textFiled"
             label="欠税记录"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.oweTaxRecordNum"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="民事判决"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.civilJudgmentRecordNum"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="强制执行记录"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.forceImpleRecordNum"
           ></mt-field>
           <mt-field
             class="textFiled"
             label="行政处罚记录"
-            placeholder="10"
+            placeholder="请输入"
             v-model="params.administRecordNum"
           ></mt-field>
 
@@ -158,7 +158,7 @@
             v-model="params.creditChageMsg1"
             class="text"
             style="overflow:hidden"
-            placeholder="changedMsg"
+            placeholder="请输入征信记录异常变化说明"
           ></mt-field>
 
           <!-- 2.关联企业征信： -->
@@ -183,7 +183,7 @@
             v-model="params.creditChageMsg2"
             class="text"
             style="overflow:hidden"
-            placeholder="changedMsg"
+            placeholder="请输入征信记录异常变化说明"
           ></mt-field>
 
           <!-- 3.法人保证人征信： -->
@@ -208,7 +208,7 @@
             v-model="params.creditChageMsg3"
             class="text"
             style="overflow:hidden"
-            placeholder="changedMsg"
+            placeholder="请输入征信记录异常变化说明"
           ></mt-field>
 
           <div class="nothing"></div>
@@ -220,7 +220,7 @@
             class="text"
             v-model="params.RecentNegativeInformation"
             style="overflow:hidden"
-            placeholder="RecentNegativeInformation"
+            placeholder="请输入近期负面信息情况说明"
           ></mt-field>
         </div>
       </div>
