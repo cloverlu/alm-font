@@ -50,25 +50,25 @@
         <mt-field
           class="textFiled"
           label="检查地点"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[0].practicableCheckAddr"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="接待人员"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[0].practicableStaff"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款资金来源"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[0].amoutSource"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="预计还款/付息时间"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[0].expectRepayDate"
         ></mt-field>
         <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
@@ -79,7 +79,7 @@
           v-model="params.stageData[0].practicableMsg"
           class="text"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
       </div>
       <div class="type2" v-if="second">
@@ -102,25 +102,25 @@
         <mt-field
           class="textFiled"
           label="检查地点"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[1].practicableCheckAddr"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="接待人员"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[1].practicableStaff"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款资金来源"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[1].amoutSource"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="预计还款/付息时间"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[1].expectRepayDate"
         ></mt-field>
         <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
@@ -131,7 +131,7 @@
           v-model="params.stageData[1].practicableMsg"
           class="text"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入还款资金落实情况说明"
         ></mt-field>
       </div>
       <div class="type3" v-if="three">
@@ -154,25 +154,25 @@
         <mt-field
           class="textFiled"
           label="检查地点"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[2].practicableCheckAddr"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="接待人员"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[2].practicableStaff"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款资金来源"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[2].amoutSource"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="预计还款/付息时间"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.stageData[2].expectRepayDate"
         ></mt-field>
         <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
@@ -183,7 +183,7 @@
           v-model="params.stageData[2].practicableMsg"
           class="text"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入还款资金落实情况说明"
         ></mt-field>
       </div>
     </div>

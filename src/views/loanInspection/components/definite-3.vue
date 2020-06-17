@@ -33,7 +33,7 @@
           v-model="params.riskMsg"
           class="text"
           style="overflow:hidden"
-          placeholder="riskMsg"
+          placeholder="请输入预警信号说明"
         ></mt-field>
 
         <mt-cell class="textFiled" title="检查结论及措施建议"></mt-cell>
@@ -43,7 +43,7 @@
           v-model="params.suggest"
           class="text"
           style="overflow:hidden"
-          placeholder="suggest"
+          placeholder="请输入检查结论及措施建议"
         ></mt-field>
         <div class="signBox">
           <span class="left"

@@ -32,7 +32,7 @@
           v-model="params.fiveClass"
           class="textArea"
           style="overflow:hidden"
-          placeholder="征信情况xxxxxxxx..."
+          placeholder="请输入征信情况"
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主征信是否有新增逾期记录</span>
@@ -53,7 +53,7 @@
           v-model="params.addedOverduesMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体为：xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行新增贷款</span>
@@ -74,7 +74,7 @@
           v-model="params.addedLoansMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体为：xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行收缩贷款规模</span>
@@ -95,7 +95,7 @@
           v-model="params.shrinkLoanScaleMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体为：xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有新增对外担保记录</span>
@@ -116,7 +116,7 @@
           v-model="params.addedGuaranteesMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体为：xxxx"
+          placeholder="请输入"
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有其他异常变化</span>
@@ -137,7 +137,7 @@
           v-model="params.otherSituMsg"
           class="textArea"
           style="overflow:hidden"
-          placeholder="具体为：xxxx"
+          placeholder="请输入"
         ></mt-field>
 
         <div class="formTitle">
@@ -150,7 +150,7 @@
           v-model="params.summaryForCheck"
           class="textArea"
           style="overflow:hidden"
-          placeholder="xxxx"
+          placeholder="请输入"
         ></mt-field>
       </div>
     </div>
