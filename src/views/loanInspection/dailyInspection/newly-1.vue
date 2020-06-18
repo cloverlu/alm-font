@@ -18,21 +18,24 @@
               class="textFiled"
               label="检查类型"
               v-model="params.checkType"
-              placeholder="小企业法人快捷贷贷后日常检查"
+              placeholder="请输入"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="贷后检查模式"
+              placeholder="请输入"
               v-model="params.checkModel"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="授信金额"
+              placeholder="请输入"
               v-model="params.lineAmout"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="授信余额"
+              placeholder="请输入"
               v-model="params.lineBalance"
             ></mt-field>
             <div class="item">
@@ -52,11 +55,13 @@
             <mt-field
               class="textFiled"
               label="还款方式"
+              placeholder="请输入"
               v-model="params.repayKind"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="检查地点"
+              placeholder="请输入"
               v-model="params.practicableCheckAddr"
             ></mt-field>
             <div class="item">

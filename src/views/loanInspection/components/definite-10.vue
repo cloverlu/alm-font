@@ -41,25 +41,25 @@
         <mt-field
           class="textFiled"
           label="未结清贷款笔数"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.unPayOffLoanNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.unPayOffAmoutCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="涉及金融机构"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.finInstitutionNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款结余"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.sumBalanceCon"
         ></mt-field>
         <!--  -->
@@ -68,13 +68,13 @@
         <mt-field
           class="textFiled"
           label="未销户贷记卡账户"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.debitCardNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未销户贷记卡担保金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.debitCardLineAmoutCon"
         ></mt-field>
 
@@ -83,19 +83,19 @@
         <mt-field
           class="textFiled"
           label="对外担保笔数"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeAmoutCon"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保结余"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeBalanceCon"
         ></mt-field>
 
@@ -121,7 +121,7 @@
           v-model="params.badRecordMsgCon"
           class="text"
           style="overflow:hidden"
-          placeholder="逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
+          placeholder="请输入逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
         ></mt-field>
         <!-- （3）征信记录 -->
         <div class="coNo2">（3）征信记录</div>
@@ -145,7 +145,7 @@
           v-model="params.creditChageMsg4"
           class="text"
           style="overflow:hidden"
-          placeholder="xxx"
+          placeholder="请输入征信记录异常变化说明"
         ></mt-field>
 
         <div class="titleBox">
@@ -163,25 +163,25 @@
         <mt-field
           class="textFiled"
           label="未结清贷款笔数"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.unPayOffLoanNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.unPayOffAmoutJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="涉及金融机构"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.finInstitutionNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未结清贷款结余"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.sumBalanceJur"
         ></mt-field>
 
@@ -190,13 +190,13 @@
         <mt-field
           class="textFiled"
           label="未销户贷记卡账户"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.debitCardNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="未销户贷记卡担保金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.debitCardLineAmoutJur"
         ></mt-field>
 
@@ -205,19 +205,19 @@
         <mt-field
           class="textFiled"
           label="对外担保笔数"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeAmoutJur"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="对外担保结余"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.guaranteeBalanceJur"
         ></mt-field>
 
@@ -241,7 +241,7 @@
           v-model="params.badRecordMsgJur"
           class="text"
           style="overflow:hidden"
-          placeholder="逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
+          placeholder="请输入逾期及违约信息概要(分析是否对我行贷款偿还产生不良影响）"
         ></mt-field>
         <!-- （3）征信记录 -->
         <div class="coNo2">（3）征信记录</div>
@@ -265,7 +265,7 @@
           v-model="params.creditChageMsg5"
           class="text"
           style="overflow:hidden"
-          placeholder="xx"
+          placeholder="请输入征信记录异常变化说明"
         ></mt-field>
         <!-- 3.法人保证人征信： -->
         <div class="coNo3">3.法人保证人征信：</div>
@@ -289,7 +289,7 @@
           v-model="params.creditChageMsg3"
           class="text"
           style="overflow:hidden"
-          placeholder="xxx"
+          placeholder="请输入征信记录异常变化说明"
         ></mt-field>
 
         <div class="nothing"></div>
@@ -301,7 +301,7 @@
           class="text"
           v-model="params.RecentNegativeInformation"
           style="overflow:hidden"
-          placeholder="xxx"
+          placeholder="请输入近期负面信息情况说明"
         ></mt-field>
       </div>
     </div>

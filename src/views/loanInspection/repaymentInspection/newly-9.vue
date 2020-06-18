@@ -40,19 +40,19 @@
         <mt-field
           class="textFiled"
           label="还款方式"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.repayKind"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款日期"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.repayDate"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款金额"
-          placeholder="10"
+          placeholder="请输入"
           v-model="params.repayAmout"
         ></mt-field>
       </div>

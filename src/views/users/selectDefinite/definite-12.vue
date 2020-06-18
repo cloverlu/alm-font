@@ -42,7 +42,7 @@
               v-model="params.requireCheck"
               class="text is-nolabel textArea"
               style="overflow:hidden"
-              placeholder="xxx1"
+              placeholder="请输入"
             ></mt-field>
             <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
             <mt-field
@@ -51,7 +51,7 @@
               v-model="params.checked"
               class="text textArea"
               style="overflow:hidden"
-              placeholder="xxx2"
+              placeholder="请输入"
             ></mt-field>
           </div>
         </div>
@@ -69,7 +69,7 @@
               v-model="params.specialRequireCheck"
               class="text"
               style="overflow:hidden"
-              placeholder="xxx3"
+              placeholder="请输入"
             ></mt-field>
             <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
             <mt-field
@@ -78,7 +78,7 @@
               v-model="params.specialChecked"
               class="text textArea"
               style="overflow:hidden"
-              placeholder="xxx4"
+              placeholder="请输入"
             ></mt-field>
           </div>
         </div>
@@ -99,7 +99,7 @@
               v-model="params.HoldPensonRisk"
               class="text textArea"
               style="overflow:hidden"
-              placeholder="xxx5"
+              placeholder="请输入"
             ></mt-field>
           </div>
         </div>
@@ -120,7 +120,7 @@
               v-model="params.managerRisk"
               class="text textArea"
               style="overflow:hidden"
-              placeholder="xxx6"
+              placeholder="请输入"
             ></mt-field>
           </div>
         </div>
@@ -137,7 +137,7 @@
               v-model="params.otherRisk"
               class="text textArea"
               style="overflow:hidden"
-              placeholder="xxx7"
+              placeholder="请输入"
             ></mt-field>
           </div>
         </div>

@@ -28,6 +28,18 @@ import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
 import userIndex from "@/views/users/index.vue";
 import definiteUserAll from "@/views/users/definiteUserall.vue";
 import checklist1 from "@/views/approval/checklist1.vue";
+import processing2 from "@/views/approval/processing2.vue";
+import processing27 from "@/views/approval/processing27.vue";
+import processing25 from "@/views/approval/processing25.vue";
+import processing29 from "@/views/approval/processing29.vue";
+import processing21 from "@/views/approval/processing21.vue";
+import processing23 from "@/views/approval/processing23.vue";
+import processing26 from "@/views/approval/processing26.vue";
+import processing210 from "@/views/approval/processing210.vue";
+import processing28 from "@/views/approval/processing28.vue";
+import processing213 from "@/views/approval/processing213.vue";
+import processing211 from "@/views/approval/processing211.vue";
+import processing212 from "@/views/approval/processing212.vue";
 
 Vue.use(VueRouter);
 

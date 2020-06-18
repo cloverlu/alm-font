@@ -44,13 +44,13 @@
       <mt-field
         class="textFiled"
         label="还款方式"
-        placeholder="10"
+        placeholder="请输入"
         v-model="params.repayKind"
       ></mt-field>
       <mt-field
         class="textFiled"
         label="还款日期"
-        placeholder="10"
+        placeholder="请输入"
         v-model="params.repayDate"
       ></mt-field>
       <mt-field class="textFiled" label="约定用途"></mt-field>
@@ -124,7 +124,7 @@
         v-model="params.msg"
         class="text"
         style="overflow:hidden"
-        placeholder="xxxx"
+        placeholder="请输入"
       ></mt-field>
       <div class="item1">
         <span class="tag">对我行检查的态度</span>
@@ -147,7 +147,7 @@
         v-model="params.otherSitu"
         class="text"
         style="overflow:hidden"
-        placeholder="xxxx"
+        placeholder="请输入"
       ></mt-field>
     </div>
     <router-view v-else></router-view>
