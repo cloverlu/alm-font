@@ -84,6 +84,20 @@ const routes = [
           // 是否带上一步下一步
           footer: false
         }
+      },
+      //流程处理2
+      {
+        path: ":role/processing2",
+        name: "checkProcessing2",
+        component: processing2,
+        meta: {
+          // 头部标题，根据当前设计页的头部决定
+          title: "流程处理 ",
+          // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+          tag: "resave",
+          // 是否带上一步下一步
+          footer: false
+        }
       }
     ]
   },

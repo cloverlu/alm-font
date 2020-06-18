@@ -175,8 +175,14 @@ export default {
     const definite18 = _ => {
       const definite18 = {};
       for (let i = 0; i < 11; i++) {
-        const a = "m2_" + i;
-        definite18[a] = i;
+        const a = `pic_${i + 1}s`;
+        definite18[a] = [
+          {
+            url: "",
+            longitude: "",
+            dimension: ""
+          }
+        ];
       }
       return definite18;
     };

@@ -125,8 +125,14 @@ export default {
     const definite16 = _ => {
       const definite16 = {};
       for (let i = 0; i < 11; i++) {
-        const a = "m5_" + i;
-        definite16[a] = i;
+        const a = `pic_${i + 1}s`;
+        definite16[a] = [
+          {
+            url: "",
+            longitude: "",
+            dimension: ""
+          }
+        ];
       }
       return definite16;
     };

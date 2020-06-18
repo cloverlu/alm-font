@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { test } from "../../api/approval";
 import { checklist1 } from "../../utils/dataMock.js";
 import m1 from "../approval/selectDefinite/m1/m1";
 import m2 from "../approval/selectDefinite/m2/m2";
@@ -81,6 +82,9 @@ export default {
       params: {}
     };
   },
+  mounted() {
+    // this.testLink();
+  },
   methods: {
     infoMore() {
       this.showVisible = !this.showVisible;
@@ -91,6 +95,14 @@ export default {
     linkMore() {
       this.max = checklist1.aproveInfo.length;
       this.showLink = false;
+    },
+    testLink() {
+      let params = {
+        id: "1"
+      };
+      test(this, { params }).then(res => {
+        console.log(res);
+      });
     }
   }
 };

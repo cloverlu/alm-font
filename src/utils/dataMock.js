@@ -396,11 +396,12 @@ const definte16 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m1_" + i;
+    const b = `pic_${i + 1}s`;
     definite16Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m1" + i
+      vModel: b,
+      vId: a
     });
   }
   return definite16Array;
@@ -424,11 +425,12 @@ const definte18 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m2_" + i;
+    const b = `pic_${i + 1}s`;
     definite18Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m2" + i
+      vModel: b,
+      vId: a
     });
   }
   return definite18Array;
@@ -453,11 +455,12 @@ const definte17 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m3_" + i;
+    const b = `pic_${i + 1}s`;
     definite17Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m3" + i
+      vModel: b,
+      vId: a
     });
   }
   return definite17Array;
@@ -482,11 +485,12 @@ const definte162 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m5_" + i;
+    const b = `pic_${i + 1}s`;
     definite17Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m5" + i
+      vModel: b,
+      vId: a
     });
   }
   return definite17Array;
@@ -510,11 +514,12 @@ const definte172 = _ => {
   ];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m6_" + i;
+    const b = `pic_${i + 1}s`;
     definite17Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m6" + i
+      vModel: b,
+      vId: a
     });
   }
   return definite17Array;
