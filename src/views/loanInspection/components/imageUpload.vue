@@ -4,18 +4,20 @@
  * @Date: 2020-06-09 15:06:56
 -->
 <template lang="pug">
-	.image-upload-wrapper(:id="item.vId")
+	.image-upload-wrapper(:id="item.vId" :class="uploadVisible ? '' : 'upload-none'")
 		.image-upload-title {{item.text}}
 		.image-upload
 			van-uploader(
 				accept="image/gif, image/jpeg ,image/png"
 				class="image-upload-uploader" 
-				v-model="fileList" 
+				v-model="fileList[item.vModel]" 
 				:before-delete="afterDelete"
 				:before-read="beforeRead"
 				:after-read="afterRead" 
 				@delete="deleteImage"
+				v-if="imageHas"
 			)
+			span(v-else-if="!imageHas") 无照片
 		//- img(id="img1" src="../../../assets/666.png")
 
 </template>
@@ -33,17 +35,34 @@ export default {
   data() {
     return {
       fileList: [],
-      images: []
+      images: [],
+      uploadVisible: true,
+      imageHas: false
     };
   },
   created() {
-    var itemVmodel = "";
-    if (this.itemVmodel) {
-      itemVmodel = this.itemVmodel;
+    if (this.itemVmodel && this.itemVmodel[this.item.vModel].length > 0) {
+      const arr = this.itemVmodel[this.item.vModel];
+      var url = [];
+      arr.map(e => {
+        if (e.url !== "") {
+          url.push(e.url);
+        }
+      });
+      if (url.length > 0) {
+        this.imageHas = true;
+      } else {
+        this.imageHas = false;
+      }
+      this.$set(this.fileList, this.item.vModel, url);
+      this.uploadVisible = false;
     } else {
-      itemVmodel = "";
+      this.$set(this.fileList, this.item.vModel, []);
+      this.uploadVisible = true;
+      this.imageHas = true;
     }
-    this.$set(this.fileList, this.item.vModel, itemVmodel[this.item.vModel]);
+
+    // console.log(this.fileList);
   },
   mounted() {
     // this.getOrientation();
@@ -221,7 +240,6 @@ export default {
 @import "../../../assets/style/global.scss";
 .image-upload-wrapper {
   width: 100%;
-  min-height: px2rem(123);
   padding: 0 px2rem(16);
   box-sizing: border-box;
   .image-upload-title {
@@ -233,8 +251,28 @@ export default {
   }
   .image-upload {
     width: 100%;
-    min-height: px2rem(79);
+    padding: px2rem(10) 0;
+    box-sizing: border-box;
     border-bottom: px2rem(1) solid rgba(237, 237, 237, 1);
+    span {
+      font-size: px2rem(14);
+      color: #4e78de;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+@import "../../../assets/style/global.scss";
+.image-upload-wrapper {
+  &.upload-none {
+    .van-uploader__upload {
+      display: none;
+    }
+  }
+  .van-uploader__file {
+    width: px2rem(60);
+    height: px2rem(60);
   }
 }
 </style>

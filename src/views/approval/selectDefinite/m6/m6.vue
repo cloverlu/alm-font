@@ -102,8 +102,14 @@ export default {
     const m6Imagelist = _ => {
       const m6Imagelist = {};
       for (let i = 0; i < 10; i++) {
-        const a = "m6_" + i;
-        m6Imagelist[a] = i;
+        const a = `pic_${i + 1}s`;
+        m6Imagelist[a] = [
+          {
+            url: "",
+            longitude: "",
+            dimension: ""
+          }
+        ];
       }
       return m6Imagelist;
     };

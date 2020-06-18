@@ -12,7 +12,7 @@
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2") 保存
-				span(v-else-if="operateTag === 3") 下一步
+				span(@click="topFooterNext" v-else-if="operateTag === 3") 下一步
 		scroll(:top="scrollTop" ref="scrollWrapper" )
 			.loanIns-index-content
 				.content(:class="footerShow ? 'footershow' : ''")
@@ -97,6 +97,22 @@ export default {
     back() {
       this.$router.go(-1);
       this.$refs.scrollWrapper.scrollTo(0, 0);
+    },
+    // 头部下一步
+    topFooterNext() {
+      console.log(this.$route);
+      const name = this.$route.name;
+      const role = "one";
+      var paramsName = "";
+      if (name === "checklist1") {
+        paramsName = "checkProcessing2";
+      }
+      this.$router.push({
+        name: paramsName,
+        params: {
+          role: role
+        }
+      });
     }
   }
 };

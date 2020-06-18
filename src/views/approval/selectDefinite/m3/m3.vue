@@ -96,8 +96,14 @@ export default {
     const definite17 = _ => {
       const definite17 = {};
       for (let i = 0; i < 12; i++) {
-        const a = "m3_" + i;
-        definite17[a] = i;
+        const a = `pic_${i + 1}s`;
+        definite17[a] = [
+          {
+            url: "",
+            longitude: "",
+            dimension: ""
+          }
+        ];
       }
       return definite17;
     };

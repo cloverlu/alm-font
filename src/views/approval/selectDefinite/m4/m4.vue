@@ -111,7 +111,13 @@ export default {
           ]
         },
         imagelist: {
-          m4_0: 0
+          pic_1s: [
+            {
+              dimension: "",
+              longitude: "",
+              url: ""
+            }
+          ]
         }
       }
     };
