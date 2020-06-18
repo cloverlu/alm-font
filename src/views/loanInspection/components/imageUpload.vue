@@ -8,7 +8,6 @@
 		.image-upload-title {{item.text}}
 		.image-upload
 			van-uploader(
-			
 				accept="image/gif, image/jpeg ,image/png"
 				class="image-upload-uploader" 
 				v-model="fileList" 
@@ -25,7 +24,7 @@
 import { Uploader, Toast } from "vant";
 import EXIF from "exif-js";
 export default {
-  props: ["item"],
+  props: ["item", "itemVmodel"],
   components: {
     "van-uploader": Uploader,
     Toast
@@ -38,7 +37,13 @@ export default {
     };
   },
   created() {
-    this.$set(this.fileList, this.item.vModel, "");
+    var itemVmodel = "";
+    if (this.itemVmodel) {
+      itemVmodel = this.itemVmodel;
+    } else {
+      itemVmodel = "";
+    }
+    this.$set(this.fileList, this.item.vModel, itemVmodel[this.item.vModel]);
   },
   mounted() {
     // this.getOrientation();

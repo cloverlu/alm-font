@@ -12,7 +12,8 @@ const getters = {
   definite4: state => state.creditRoutine.definite4,
   routineDefinite3: state => state.creditRoutine.routineDefinite3,
   newly1: state => state.dailyInspection.newly1,
-  bizType: state => state.userStore.bizType
+  bizType: state => state.userStore.bizType,
+  addmore: state => state.approvalStore.addmore
 };
 
 export default getters;

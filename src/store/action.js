@@ -40,6 +40,10 @@ const actions = {
   },
   setBizType: ({ commit }, bizType) => {
     return commit("SET_BIZTYPE", bizType);
+  },
+  // approval加载m3时，蓝色横条的初始位置
+  setAddmore: ({ commit }, addmore) => {
+    return commit("SET_ADDMORE", addmore);
   }
 };
 

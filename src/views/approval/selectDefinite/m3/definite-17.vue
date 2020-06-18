@@ -10,38 +10,27 @@
 			span(class="colum-blue")
 			span  影像维护
 		.definite-13-content
-			imageUpload(v-for="item in definte16" :key="item.id" :item="item")
+			imageUpload(v-for="item in definte17" :key="item.id" :item="item" :itemVmodel="detail")
 			
 </template>
 
 <script>
-import imageUpload from "../components/imageUpload";
-import { definte16, definte162, definte172 } from "../../../utils/dataMock";
+import imageUpload from "../../../loanInspection/components/imageUpload";
+import { definte17 } from "../../../../utils/dataMock";
 export default {
   components: { imageUpload },
+  props: ["detail"],
   data() {
     return {
-      definte16: []
+      definte17: definte17()
     };
   },
-  mounted() {
-    const type = this.$route.params.type;
-    switch (type) {
-      case "loanCreditFirst":
-        this.definte16 = definte16();
-        break;
-      case "loanFastCreditFirst":
-        this.definte16 = definte162();
-        break;
-      case "loanDailyInspection":
-        this.definte16 = definte172();
-    }
-  }
+  mounted() {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+@import "../../../../assets/style/global.scss";
 .definite-13-wrapper {
   width: 100%;
   height: 100%;
