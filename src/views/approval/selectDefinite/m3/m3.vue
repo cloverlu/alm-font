@@ -319,6 +319,7 @@ export default {
   .newly-18 {
     width: 100%;
     height: 100%;
+    margin-top: px2rem(-1);
     .definite-field {
       &.add-item {
         height: px2rem(264);

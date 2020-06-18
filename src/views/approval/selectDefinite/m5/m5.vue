@@ -176,6 +176,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  margin-top: px2rem(-1);
   .formTitle {
     width: 100%;
     height: px2rem(44);
