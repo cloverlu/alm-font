@@ -224,6 +224,7 @@ export default {
   .companyInformation {
     width: 100%;
     box-sizing: border-box;
+    margin-top: px2rem(-1);
 
     .formTitle {
       background-color: #f7f7f7;

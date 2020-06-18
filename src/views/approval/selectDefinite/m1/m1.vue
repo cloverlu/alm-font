@@ -134,6 +134,7 @@ export default {
 .credit-wrapper {
   width: 100%;
   height: 100%;
+  margin-top: px2rem(-1);
   .definite-1-wrapper {
     width: 100%;
     height: 100%;
