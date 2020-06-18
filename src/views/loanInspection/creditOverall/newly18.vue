@@ -10,9 +10,9 @@
 			.definite-1-title
 				span(class="colum-blue")
 				span(class="title") {{detail.custName}} 
-			.definite-field(:class="params.securityKind === 4 ? 'add-item' : ''")
+			.definite-field
 				.item
-					span(class="tag") 检查类型
+					span(class="tag") 检查类型11
 					span(class="info") {{detail.bizType}}
 				.item
 					span(class="tag") 授信金额
@@ -24,7 +24,7 @@
 					span(class="tag") 担保方式
 					almSelect(:selectData="info"  :defaultValue="params.securityKind" :triggerId="securityKindId" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 					span(class="iconfont iconxiala arrow") 
-				.item(class="input-item" v-if="params.securityKind === 4")
+				.item(class="input-item" v-if="params.securityKind === 5")
 					mt-field(v-model="params.otherSecurityKindMsg" class="textArea other-textArea" type="input"  placeholder="其他担保方式")
 				.item
 					span(class="tag") 还款方式
@@ -129,9 +129,6 @@ export default {
     width: 100%;
     height: 100%;
     .definite-field {
-      &.add-item {
-        height: px2rem(264);
-      }
       .input-item {
         padding: inherit;
         .other-textArea {
@@ -149,17 +146,7 @@ export default {
     }
     .newly-18-field {
       width: 100%;
-      height: px2rem(236);
       background-color: #fff;
-      &.small-one {
-        height: px2rem(118);
-      }
-      &.small-two {
-        height: px2rem(132);
-      }
-      &.small-three {
-        height: px2rem(74);
-      }
     }
   }
 }

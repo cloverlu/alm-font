@@ -9,7 +9,7 @@
 		.field-one-item(v-for="item in definite" :key="item.id")
 			.field-one-item-tag {{item.name}}
 			.field-one-item-field
-				mt-field(v-model="params[item.modelName]" class="textArea" type="textarea" rows="3" placeholder="请输入")
+				mt-field(v-model="params[item.modelName]" :disabled='disabeld' class="textArea" type="textarea" rows="3" )
 		
 </template>
 
@@ -19,17 +19,30 @@ export default {
     definite: {
       type: Array,
       default: () => []
+    },
+    info: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
     return {
-      params: {}
+      params: {},
+      disabeld: false
     };
   },
   watch: {},
   created() {
-    this.definite.forEach(item => {
-      this.$set(this.params, item.modelName, "");
+    var a = "";
+    if (!this.info) {
+      a;
+      this.disabeld = false;
+    } else {
+      a = this.info;
+      this.disabeld = true;
+    }
+    this.definite.forEach((item, index) => {
+      this.$set(this.params, item.modelName, a[item.modelName]);
     });
   }
 };

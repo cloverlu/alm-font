@@ -21,68 +21,89 @@
 						.item
 							span(class="tag big") 当前余额
 							span(class="info") 
-								input(v-model="params[item2.items.currentBalance]" type="input" class="field-input" placeholder="请输入")
+								input(v-model="params.currentBalance[item2.currentBalance]" :disabled="disabledVisible" type="input" class="field-input" placeholder="请输入")
 						.item
 							span(class="tag big") 上期检查（或调查）时点余额
 							span(class="info") 
-								input(v-model="params[item2.items.lastBalance]" type="input" class="field-input" placeholder="请输入")
+								input(v-model="params.lastBalance[item2.lastBalance]" :disabled="disabledVisible" type="input" class="field-input" placeholder="请输入")
 						.item
 							span(class="tag big") 如变动超过30%，原因
 						.item(class="item-textarea")
-							mt-field(v-model="params[item2.items.Chang30Msg]" class="textArea" type="textarea" rows="3" placeholder="请输入")
+							mt-field(v-model="params.Chang30Msg[item2.Chang30Msg]" :disabled="disabledVisible" class="textArea" type="textarea" rows="3" placeholder="请输入")
 				.content-type2(v-else-if="type === 2")
 					.definite-field
 						.item
 							span() 近三个月的情况：
 						.item(class="item-textarea")
-							mt-field(v-model="params[item2.items.Inc3MSitu]" class="textArea" type="textarea" rows="3" placeholder="请输入")
+							mt-field(v-model="params.Inc3MSitu[item2.Inc3MSitu]" :disabled="disabledVisible" class="textArea" type="textarea" rows="3" placeholder="请输入")
 						.item
 							span() 如剔除季节性因素后变动超30%，原因
 						.item(class="item-textarea")
-							mt-field(v-model="params[item2.items.Chang30Msg]" class="textArea" type="textarea" rows="3" placeholder="请输入")
+							mt-field(v-model="params.Chang30Msg[item2.Chang30Msg]" :disabled="disabledVisible" class="textArea" type="textarea" rows="3" placeholder="请输入")
 							
 </template>
 
 <script>
 import { realPx, px2rem } from "@/utils/utils";
+import { approvalMixin } from "../../../utils/mixin";
 
 export default {
-  props: ["info", "type"],
+  props: ["info", "type", "detail"],
+  mixins: [approvalMixin],
   data() {
     return {
+      disabledVisible: false,
       toggleNum: 1,
       itemClass: "",
-      params: {}
+      params: {
+        currentBalance: {},
+        lastBalance: {},
+        Chang30Msg: {},
+        Inc3MSitu: {}
+      }
     };
   },
   created() {
-    console.log(this.info);
-    this.info.forEach(item => {
-      this.$set(this.params, item.items, "");
+    var a = "";
+    if (!this.detail) {
+      a;
+      this.disabledVisible = false;
+    } else {
+      a = this.detail;
+      this.disabledVisible = true;
+    }
+    this.info.forEach((item, index) => {
+      this.$set(
+        this.params.currentBalance,
+        item.currentBalance,
+        a[item.currentBalance]
+      );
+      this.$set(this.params.lastBalance, item.lastBalance, a[item.lastBalance]);
+      this.$set(this.params.Chang30Msg, item.Chang30Msg, a[item.Chang30Msg]);
+      this.$set(this.params.Inc3MSitu, item.Inc3MSitu, a[item.Inc3MSitu]);
+      // console.log(this.params);
     });
   },
   mounted() {
     this.$nextTick(() => {
       // 页面加载完成蓝条的位置
-      const index = 0;
-      const item = "item" + index;
-      if (this.$refs[item][0]) {
-        const marginLeft = realPx(this.$refs[item][0].offsetLeft);
-        const width = realPx(this.$refs[item][0].offsetWidth);
-        const tx = px2rem(marginLeft - 10 + (width - 20) / 2) + "rem";
-        this.itemClass = `translateX(${tx})`;
-      }
+      this.bluePosition(0);
     });
   },
   watch: {
-    params(val, oldval) {
-      console.log(val);
+    // 监听是否触发了“点击更多”按钮,以解决点击更多以后蓝色横杠并没有回到初始的位置
+    addmore(val, oldval) {
+      this.bluePosition(0);
     }
   },
   methods: {
     toggle(id, index) {
       this.toggleNum = id;
       // 蓝条位置
+      this.bluePosition(index);
+    },
+    bluePosition(index) {
+      // const index = 0;
       const item = "item" + index;
       if (this.$refs[item][0]) {
         const marginLeft = realPx(this.$refs[item][0].offsetLeft);

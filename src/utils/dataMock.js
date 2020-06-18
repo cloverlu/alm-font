@@ -157,6 +157,30 @@ const definite1Field = [
     modelName: "checked"
   }
 ];
+const definite1FieldSpecial = [
+  {
+    name: "要求",
+    id: 1,
+    modelName: "specialRequireCheck"
+  },
+  {
+    name: "落实情况",
+    id: 2,
+    modelName: "specialChecked"
+  }
+];
+const definite1FieldRate = [
+  {
+    name: "要求",
+    id: 1,
+    modelName: "rateAndIntfinSerCheck"
+  },
+  {
+    name: "落实情况",
+    id: 2,
+    modelName: "rateAndIntfinSerChecked"
+  }
+];
 //definite2
 const definite2Field = [
   {
@@ -249,7 +273,7 @@ const loanInsList2 = _ => {
   const data = [];
   const arr = [];
   const date = "2020-06-02";
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i <= 5; i++) {
     data.push({
       bizType: bizTypes[i].key,
       bizTypeName: bizTypes[i].value,
@@ -354,6 +378,7 @@ const securityKindsArr = [
 ];
 
 //definte16,影像数据字段
+//类型m1
 const definte16 = _ => {
   const definite16Array = [];
   const valueArray = [
@@ -381,6 +406,7 @@ const definte16 = _ => {
   return definite16Array;
 };
 //definte18,影像维护字段
+////类型m2
 const definte18 = _ => {
   const definite18Array = [];
   const valueArray = [
@@ -408,24 +434,67 @@ const definte18 = _ => {
   return definite18Array;
 };
 
-// processing2-4 影像维护字段
-const processing4 = _ => {
-  const processing4Array = [];
-  const valueArray = ["其他"];
+//类型3.m3
+const definte17 = _ => {
+  const definite17Array = [];
+  const valueArray = [
+    "财务报表",
+    "纳税材料",
+    "水电费材料",
+    "银行流水",
+    "主要上下游客户合同单据",
+    "其他财务经营材料",
+    "企业办公场所（含企业大门）",
+    "企业生产车间（含重要生产或经营工序）",
+    "企业重要生产或经营设备、存货",
+    "检查人员现场检查的影像",
+    "抵押物影像",
+    "其他"
+  ];
   for (let i = 0; i < valueArray.length; i++) {
-    const a = "m4_" + i;
-    processing4Array.push({
+    const a = "m3_" + i;
+    definite17Array.push({
       id: i,
       text: valueArray[i],
       vModel: a,
-      vId: "m4" + i
+      vId: "m3" + i
     });
   }
-  return processing4Array;
+  return definite17Array;
+};
+
+//definte16,影像数据字段
+////类型m5
+const definte162 = _ => {
+  const definite17Array = [];
+  const valueArray = [
+    "《小企业授信业务额度借款支用单》或《用款申请》",
+    "《小企业贷款受托支付申请书》或自主支付清单",
+    "汇款凭证",
+    "账户流水",
+    "受托支付合同",
+    "入库单",
+    "贷款购买标的（如原材料、机器设备等）",
+    "企业大门",
+    "企业经营场地或生产车间",
+    "检查人员现场检查影像等",
+    "其他"
+  ];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m5_" + i;
+    definite17Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m5" + i
+    });
+  }
+  return definite17Array;
 };
 
 //definte17,影像数据字段
-const definte17 = _ => {
+////类型m6
+const definte172 = _ => {
   const definite17Array = [];
   const valueArray = [
     "能耗类材料",
@@ -451,6 +520,22 @@ const definte17 = _ => {
   return definite17Array;
 };
 
+// processing2-4 影像维护字段
+const processing4 = _ => {
+  const processing4Array = [];
+  const valueArray = ["其他"];
+  for (let i = 0; i < valueArray.length; i++) {
+    const a = "m4_" + i;
+    processing4Array.push({
+      id: i,
+      text: valueArray[i],
+      vModel: a,
+      vId: "m4" + i
+    });
+  }
+  return processing4Array;
+};
+
 //新增1-8
 const newly18 = {
   custName: "张三有限公司",
@@ -462,9 +547,9 @@ const newly18 = {
 const securityKinds = _ => {
   const kinds = ["信用", "抵押", "质押", "保证", "其它"];
   const data = [];
-  for (let i = 1; i < kinds.length; i++) {
+  for (let i = 0; i < kinds.length; i++) {
     data.push({
-      key: i,
+      key: i + 1,
       value: kinds[i]
     });
   }
@@ -505,38 +590,30 @@ const caiwuOne = [
   {
     id: 1,
     title: "应收票据",
-    items: {
-      currentBalance: "colDebtBalance", //当前余额
-      lastBalance: "colDebtLastBalance", //应收票据上期检查（或调查）时点余额
-      Chang30Msg: "colDebtChang30Msg" // 应收票据变动超过30%，原因
-    }
+    currentBalance: "colDebtBalance", //当前余额
+    lastBalance: "colDebtLastBalance", //应收票据上期检查（或调查）时点余额
+    Chang30Msg: "colDebtChang30Msg" // 应收票据变动超过30%，原因
   },
   {
     id: 2,
     title: "存货",
-    items: {
-      currentBalance: "stockChangSitu", //存货上次全面检查或调查时余额
-      lastBalance: "stockLastBalance", //存货本次检查存货变动情况
-      Chang30Msg: "stockChang30Msg" // 存货变动超过30%，原因
-    }
+    currentBalance: "stockChangSitu", //存货上次全面检查或调查时余额
+    lastBalance: "stockLastBalance", //存货本次检查存货变动情况
+    Chang30Msg: "stockChang30Msg" // 存货变动超过30%，原因
   },
   {
     id: 3,
     title: "私人借款",
-    items: {
-      currentBalance: "loanForPsonBalance", //私人借款当前余额
-      lastBalance: "loanForPsonLastBalance", //私人借款上期检查（或调查）时点余额
-      Chang30Msg: "loanForPsonChang30Msg" // 私人借款变动超过30%，原因
-    }
+    currentBalance: "loanForPsonBalance", //私人借款当前余额
+    lastBalance: "loanForPsonLastBalance", //私人借款上期检查（或调查）时点余额
+    Chang30Msg: "loanForPsonChang30Msg" // 私人借款变动超过30%，原因
   },
   {
     id: 4,
     title: "应付票据",
-    items: {
-      currentBalance: "payDebtBalance", //应付票据当前余额
-      lastBalance: "payDebtLastBalance", //应付票据上期检查（或调查）时点余额
-      Chang30Msg: "payDebtChang30Msg" // 应付票据变动超过30%，原因
-    }
+    currentBalance: "payDebtBalance", //应付票据当前余额
+    lastBalance: "payDebtLastBalance", //应付票据上期检查（或调查）时点余额
+    Chang30Msg: "payDebtChang30Msg" // 应付票据变动超过30%，原因
   }
 ];
 
@@ -544,29 +621,23 @@ const caiwuTwo = [
   {
     id: 1,
     title: "应收账款",
-    items: {
-      currentBalance: "colCapitalBalance", //应收账款当前余额
-      lastBalance: "colCapitalLastBalance", //应收账款上期检查（或调查）时点余额
-      Chang30Msg: "colCapitalChang30Msg" // 应收账款变动超过30%，原因
-    }
+    currentBalance: "colCapitalBalance", //应收账款当前余额
+    lastBalance: "colCapitalLastBalance", //应收账款上期检查（或调查）时点余额
+    Chang30Msg: "colCapitalChang30Msg" // 应收账款变动超过30%，原因
   },
   {
     id: 2,
     title: "银行借款",
-    items: {
-      currentBalance: "loanForBankBalance", //银行借款当前余额
-      lastBalance: "loanForBankLastBalance", //银行借款上期检查（或调查）时点余额
-      Chang30Msg: "loanForBankChang30Msg" // 银行借款变动超过30%，原因
-    }
+    currentBalance: "loanForBankBalance", //银行借款当前余额
+    lastBalance: "loanForBankLastBalance", //银行借款上期检查（或调查）时点余额
+    Chang30Msg: "loanForBankChang30Msg" // 银行借款变动超过30%，原因
   },
   {
     id: 3,
     title: "应付账款",
-    items: {
-      currentBalance: "payCapitalBalance", //应收账款当前余额
-      lastBalance: "payCapitalLastBalance", //应收账款上期检查（或调查）时点余额
-      Chang30Msg: "payCapitalChang30Msg" // 应收账款变动超过30%，原因}
-    }
+    currentBalance: "payCapitalBalance", //应收账款当前余额
+    lastBalance: "payCapitalLastBalance", //应收账款上期检查（或调查）时点余额
+    Chang30Msg: "payCapitalChang30Msg" // 应收账款变动超过30%，原因}
   }
 ];
 
@@ -574,34 +645,26 @@ const caiwuThree = [
   {
     id: 1,
     title: "营业收入",
-    items: {
-      Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
-      Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
-    }
+    Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
+    Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "日常消耗",
-    items: {
-      Inc3MSitu: "dailyExpen3MSitu", //近三个月的情况
-      Chang30Msg: "dailyExpenChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "dailyExpen3MSitu", //近三个月的情况
+    Chang30Msg: "dailyExpenChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "人工成本",
-    items: {
-      Inc3MSitu: "emplCost3M", //近三个月的情况
-      Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "emplCost3M", //近三个月的情况
+    Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "现金流",
-    items: {
-      Inc3MSitu: "cash3M", //近三个月的情况
-      Chang30Msg: "cashChang30Msg" // 应收账款变动超过30%，原因
-    }
+    Inc3MSitu: "cash3M", //近三个月的情况
+    Chang30Msg: "cashChang30Msg" // 应收账款变动超过30%，原因
   }
 ];
 
@@ -609,34 +672,26 @@ const caiwuFour = [
   {
     id: 1,
     title: "原材料成本",
-    items: {
-      Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
-      Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
-    }
+    Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
+    Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "财务费用",
-    items: {
-      Inc3MSitu: "financeCost3M", //近三个月的情况
-      Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "financeCost3M", //近三个月的情况
+    Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "纳税数额",
-    items: {
-      Inc3MSitu: "payTaxAmout3M", //近三个月的情况
-      Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "payTaxAmout3M", //近三个月的情况
+    Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "利润",
-    items: {
-      Inc3MSitu: "profit3M", //近三个月的情况
-      Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
-    }
+    Inc3MSitu: "profit3M", //近三个月的情况
+    Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
   }
 ];
 
@@ -644,34 +699,26 @@ const caiwuSeven = [
   {
     id: 1,
     title: "营业收入",
-    items: {
-      Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
-      Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
-    }
+    Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
+    Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "员工成本",
-    items: {
-      Inc3MSitu: "emplCost3M", //近三个月的情况
-      Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "emplCost3M", //近三个月的情况
+    Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "现金流",
-    items: {
-      Inc3MSitu: "cash3M", //近三个月的情况
-      Chang30Msg: "cashChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "cash3M", //近三个月的情况
+    Chang30Msg: "cashChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "利润",
-    items: {
-      Inc3MSitu: "profit3M", //近三个月的情况
-      Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
-    }
+    Inc3MSitu: "profit3M", //近三个月的情况
+    Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
   }
 ];
 
@@ -679,26 +726,20 @@ const caiwuEight = [
   {
     id: 1,
     title: "营业成本",
-    items: {
-      Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
-      Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
-    }
+    Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
+    Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "财务费用",
-    items: {
-      Inc3MSitu: "financeCost3M", //近三个月的情况
-      Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "financeCost3M", //近三个月的情况
+    Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "纳税数额",
-    items: {
-      Inc3MSitu: "payTaxAmout3M", //近三个月的情况
-      Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
-    }
+    Inc3MSitu: "payTaxAmout3M", //近三个月的情况
+    Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
   }
 ];
 
@@ -752,6 +793,39 @@ const receipt1 = _ => {
   return arr;
 };
 
+const checklist1 = {
+  bizType: "", //检查类型
+  custName: "", //客户名称
+  bizCode: "", //业务编号
+  aproveInfo: [
+    {
+      currentLinkName: "", //当前环节
+      reciveTime: "", //接收时间
+      linkName: "dsafdsfds", //环节
+      orgName: "", //处理机构
+      emplName: "", //处理人员
+      processTime: "", //处理时间
+      agreeResult: "" //意见
+    },
+    {
+      currentLinkName: "", //当前环节
+      reciveTime: "", //接收时间
+      linkName: "拉蓝色蓝色", //环节
+      orgName: "", //处理机构
+      emplName: "", //处理人员
+      processTime: "", //处理时间
+      agreeResult: "" //意见
+    }
+  ]
+};
+
+//definite12
+const definite16Normal = {
+  custName: "www", //客户名称
+  lineAmout: "", //授信金额
+  lineBalance: "" //贷款余额
+};
+
 export {
   todoListTitle,
   loanInsList,
@@ -761,6 +835,8 @@ export {
   DetailsOfIOU,
   cooperationType,
   definite1Field,
+  definite1FieldSpecial,
+  definite1FieldRate,
   definite2Field,
   definite2Field2,
   coordinate,
@@ -768,6 +844,8 @@ export {
   definte16,
   definte17,
   definte18,
+  definte172,
+  definte162,
   processing4,
   securityKindsArr,
   payKindsArr,
@@ -786,6 +864,8 @@ export {
   newly4,
   receipt1,
   payIntentionsArr,
+  checklist1,
+  definite16Normal,
   agreeOrNot,
   nextPositionHandlersArr
 };

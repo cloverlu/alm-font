@@ -69,18 +69,18 @@ export default {
             });
           } else if (type === "m3") {
             this.$router.push({
-              name: "dailyInspectionIndex",
-              params: {
-                bizId: id,
-                type: "loanDailyInspection"
-              }
-            });
-          } else if (type === "m4") {
-            this.$router.push({
               name: "creditOverallIndex",
               params: {
                 bizId: id,
                 type: "loanCreditOverall"
+              }
+            });
+          } else if (type === "m4") {
+            this.$router.push({
+              name: "repaymentInspectionIndex",
+              params: {
+                bizId: id,
+                type: "loanRepaymentInspection"
               }
             });
           } else if (type === "m5") {
@@ -93,10 +93,10 @@ export default {
             });
           } else if (type === "m6") {
             this.$router.push({
-              name: "repaymentInspectionIndex",
+              name: "dailyInspectionIndex",
               params: {
                 bizId: id,
-                type: "loanRepaymentInspection"
+                type: "loanDailyInspection"
               }
             });
           }

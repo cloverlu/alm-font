@@ -67,6 +67,10 @@ export default {
       background-color: #fff;
       border-radius: px2rem(3);
       margin-bottom: px2rem(10);
+      &:hover,
+      &:focus {
+        background: rgba(78, 120, 222, 0.81);
+      }
       .item-one,
       .item-two {
         width: 100%;
