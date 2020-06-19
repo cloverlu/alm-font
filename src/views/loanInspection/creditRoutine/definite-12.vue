@@ -159,9 +159,7 @@
 <script>
 import { DetailsOfIOU } from "../../../utils/dataMock";
 import { Cell, Field } from "mint-ui";
-import { loanInspectionMixin } from "../../../utils/mixin";
 export default {
-  mixins: [loanInspectionMixin],
   components: { "mt-cell": Cell, "mt-field": Field },
   data() {
     return {
@@ -191,7 +189,6 @@ export default {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite12里
-        this.setDefinite12({ params: this.params });
       }
     }
   }

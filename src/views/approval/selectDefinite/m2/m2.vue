@@ -154,14 +154,14 @@
 <script>
 import { definite16Normal } from "../../../../utils/dataMock.js";
 import { Cell, Field } from "mint-ui";
-import { loanInspectionMixin } from "../../../../utils/mixin";
+import { normalMixin } from "../../../../utils/mixin";
 import definite13 from "../m2/definite-13";
 import definite11 from "../m2/definite-11";
 import definite10 from "../m2/definite-10";
 import definite5 from "../m2/definite-5";
 import definite18 from "../m2/definite-18";
 export default {
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   components: {
     "mt-cell": Cell,
     "mt-field": Field,
@@ -304,7 +304,7 @@ export default {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite12里
-        this.setDefinite12({ params: this.params });
+        // this.setDefinite12({ params: this.params });
       }
     }
   }

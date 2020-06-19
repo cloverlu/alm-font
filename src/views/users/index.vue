@@ -28,10 +28,10 @@ import receipt1 from "../users/receipt1";
 import footerNext from "../users/components/footerNext";
 import Scroll from "../../components/Scroll";
 import { getListByParams } from "../../api/users";
-import { loanInspectionMixin } from "../../utils/mixin";
+import { normalMixin } from "../../utils/mixin";
 export default {
   components: { receipt1, Scroll, footerNext },
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   data() {
     return {
       hasUserChildRouter: this.$route.params.hasUserChildRouter,

@@ -50,12 +50,12 @@ import {
   definite1FieldSpecial
 } from "../../../../utils/dataMock.js";
 import fieldOne from "../../../loanInspection/components/fieldOne";
-import { loanInspectionMixin } from "../../../../utils/mixin";
+import { normalMixin } from "../../../../utils/mixin";
 import definite2 from "../m1/definite-2";
 import definite16 from "../m1/definite-16";
 
 export default {
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   components: { fieldOne, definite2, definite16 },
   data() {
     const definite16 = _ => {
@@ -125,7 +125,7 @@ export default {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite1里
-        this.setDefinite1({ params: this.params });
+        // this.setDefinite1({ params: this.params });
       }
     }
   },

@@ -104,9 +104,7 @@ import {
 } from "../../../utils/dataMock";
 import almSelect from "../../loanInspection/components/select";
 import { Field } from "mint-ui";
-import { loanInspectionMixin } from "../../../utils/mixin";
 export default {
-  mixins: [loanInspectionMixin],
   components: { "mt-field": Field, almSelect },
   data() {
     return {
@@ -151,15 +149,7 @@ export default {
       this.params.revalOfColl = data.key;
     }
   },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite12里
-    //     this.setDefinite12({ params: this.params });
-    //   }
-    // }
-  }
+  watch: {}
 };
 </script>
 

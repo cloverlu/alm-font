@@ -43,10 +43,8 @@
 import { definite1, payType, definite1Field } from "../../../utils/dataMock.js";
 import almSelect from "../../loanInspection/components/select";
 import fieldOne from "../../loanInspection/components/fieldOne";
-import { loanInspectionMixin } from "../../../utils/mixin";
 
 export default {
-  mixins: [loanInspectionMixin],
   components: { almSelect, fieldOne },
   data() {
     return {
@@ -68,12 +66,6 @@ export default {
   computed: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
-        this.setDefinite1({ params: this.params });
-      }
-    }
   },
 
   mounted() {},

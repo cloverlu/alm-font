@@ -28,10 +28,10 @@ import loadInsList from "../loanInspection/indexList";
 import footerNext from "../loanInspection/components/footerNext";
 import Scroll from "../../components/Scroll";
 import { getToDoList, getNoticeCheckList } from "../../api/loanlnspection";
-import { loanInspectionMixin } from "../../utils/mixin";
+import { normalMixin } from "../../utils/mixin";
 export default {
   components: { loadInsList, Scroll, footerNext },
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   data() {
     return {
       hasChildRouter: this.$route.params.hasChildRouter,

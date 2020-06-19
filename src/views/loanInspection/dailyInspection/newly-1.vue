@@ -120,9 +120,7 @@ import {
 } from "../../../utils/dataMock";
 import almSelect from "../components/select";
 import { Field } from "mint-ui";
-import { loanInspectionMixin } from "../../../utils/mixin";
 export default {
-  mixins: [loanInspectionMixin],
   components: { "mt-field": Field, almSelect },
   data() {
     return {
