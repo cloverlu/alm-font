@@ -27,6 +27,7 @@
 import loadInsList from "../loanInspection/indexList";
 import footerNext from "../loanInspection/components/footerNext";
 import Scroll from "../../components/Scroll";
+import { getToDoList, getNoticeCheckList } from "../../api/loanlnspection";
 import { loanInspectionMixin } from "../../utils/mixin";
 export default {
   components: { loadInsList, Scroll, footerNext },
@@ -73,6 +74,42 @@ export default {
     } else if (meta.tag === "footerNext") {
       this.operateTag = 3;
     }
+    //
+    // let params1 = {
+    //   op: "金林"
+    // };
+    let params2 = {
+      beginDate: "string",
+      billAmout: "string",
+      billBeginDate: "string",
+      billBlance: "string",
+      billEndDate: "string",
+      billLength: "string",
+      billNo: "string",
+      billUnit: "string",
+      bizId: "string",
+      bizStatus: "string",
+      bizType: "string",
+      checkModel: "string",
+      currency: "string",
+      custCode: "string",
+      custName: "string",
+      emplCode: "string",
+      emplName: "string",
+      endDate: "string",
+      firstTrackDate: "string",
+      lastComprehensiveDate: "string",
+      lastImplementDate: "string",
+      lastRoutineDate: "string",
+      noticeDate: "string",
+      orgName: "string"
+    };
+    // getToDoList(this, { params: params1 }).then(res => {
+    //   console.log(res);
+    // });
+    // getNoticeCheckList(this, { params: params2 }).then(res => {
+    //   console.log(res);
+    // });
   },
 
   watch: {
