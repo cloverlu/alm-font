@@ -41,7 +41,7 @@ import newly18 from "../users/selectDefinite/newly18";
 import definite14 from "../users/selectDefinite/definite-14";
 import newly1 from "../users/selectDefinite/newly-1";
 import newly19 from "../users/selectDefinite/newly-9";
-import { loanInspectionMixin } from "../../utils/mixin";
+import { normalMixin } from "../../utils/mixin";
 
 export default {
   components: {
@@ -53,7 +53,7 @@ export default {
     definite14,
     newly19
   },
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   data() {
     return {
       hasUserAllChildRouter: this.$route.params.hasUserAllChildRouter,

@@ -152,10 +152,8 @@ import {
   coordinate
 } from "../../../utils/dataMock";
 import { Field, Cell } from "mint-ui";
-import { loanInspectionMixin } from "../../../utils/mixin";
 import almSelect from "../../loanInspection/components/select";
 export default {
-  mixins: [loanInspectionMixin],
   components: {
     "mt-cell": Cell,
     "mt-field": Field,
@@ -216,7 +214,6 @@ export default {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite5里
-        this.setDefinite5({ params: this.params });
       }
     }
   }

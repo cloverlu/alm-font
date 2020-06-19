@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import { loanInspectionMixin } from "../../../utils/mixin";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin],
   computed: {},
   methods: {
     footerPrev() {

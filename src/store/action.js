@@ -5,38 +5,17 @@ const actions = {
   setPrevFooter: ({ commit }, prevFooter) => {
     return commit("SET_PREVFOOTER", prevFooter);
   },
-  setDefinite1: ({ commit }, definite1) => {
-    return commit("SET_DEFINITE1", definite1);
+  setm1Definite1: ({ commit }, m1Definite1) => {
+    return commit("SET_M1DEFINITE1", m1Definite1);
   },
-  setDefinite2: ({ commit }, definite2) => {
-    return commit("SET_DEFINITE2", definite2);
+  setm1Definite2: ({ commit }, m1Definite2) => {
+    return commit("SET_M1DEFINITE2", m1Definite2);
   },
-  setDefinite3: ({ commit }, definite3) => {
-    return commit("SET_DEFINITE3", definite3);
+  setm1Definite16: ({ commit }, m1Definite16) => {
+    return commit("SET_M1DEFINITE16", m1Definite16);
   },
-  setDefinite12: ({ commit }, definite12) => {
-    return commit("SET_DEFINITE12", definite12);
-  },
-  setDefinite13: ({ commit }, definite13) => {
-    return commit("SET_DEFINITE13", definite13);
-  },
-  setDefinite10: ({ commit }, definite10) => {
-    return commit("SET_DEFINITE10", definite10);
-  },
-  setDefinite11: ({ commit }, definite11) => {
-    return commit("SET_DEFINITE11", definite11);
-  },
-  setDefinite5: ({ commit }, definite5) => {
-    return commit("SET_DEFINITE5", definite5);
-  },
-  setDefinite4: ({ commit }, definite4) => {
-    return commit("SET_DEFINITE4", definite4);
-  },
-  setRoutineDefinite3: ({ commit }, routineDefinite3) => {
-    return commit("SET_RoutineDefinite3", routineDefinite3);
-  },
-  setNewly1: ({ commit }, newly1) => {
-    return commit("SET_Newly1", newly1);
+  setm1Definite3: ({ commit }, m1Definite3) => {
+    return commit("SET_M1DEFINITE1", m1Definite3);
   },
   setBizType: ({ commit }, bizType) => {
     return commit("SET_BIZTYPE", bizType);
