@@ -42,17 +42,17 @@
 			span  特殊要求及落实情况
 		.definite-1-field2
 			fieldOne(:definite="definite1Field" ref="fieldTwo")
-	router-view(v-else)
+	router-view(ref="rview" v-else)
 </template>
 
 <script>
 import { definite1, payType, definite1Field } from "../../../utils/dataMock.js";
 import almSelect from "../components/select";
 import fieldOne from "../components/fieldOne";
-import { loanInspectionMixin } from "../../../utils/mixin";
+import { normalMixin, loanInsM1 } from "../../../utils/mixin";
 
 export default {
-  mixins: [loanInspectionMixin],
+  mixins: [normalMixin, loanInsM1],
   components: { almSelect, fieldOne },
   data() {
     return {
@@ -68,11 +68,18 @@ export default {
       params: {
         loanPurpose: "",
         payKind: 1
-      }
+      },
+      footerVal: ""
     };
   },
+  // 父组件中返回要传给下级的数据
+  // provide() {
+  //   return {
+  //     reload: {}
+  //   };
+  // },
+
   beforeRouteEnter(to, from, next) {
-    console.log(from);
     to.params.hasChildRouter1 = to.name === "creditFirstIndex";
     next();
   },
@@ -85,8 +92,30 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite1里
-        this.setDefinite1({ params: this.params });
+        // this.footerVal = val.nextFooter;
+        // this._provided.reload = val.nextFooter;
+        // console.log(this.$route);
+        // const name = this.$route.name;
+        // const rview = this.$refs.rview;
+        // console.log(name);
+
+        // switch (name) {
+        //   // case "firstDefinite2":
+        //   //   this.setDefinite1({ definite1: this.params });
+        //   //   break;
+        //   case "firstDefinite2":
+        //     console.log(this.$refs.rview.params);
+        //     this.setDefinite2({ definite2: rview.params });
+        //     this.$router.push({ name: "firstDefinite16" });
+        // }
+        this.setm1Definite1({ params: this.params });
+        const currentName = this.$route.name;
+        if (currentName === "creditFirstIndex") {
+          this.footerRoute("loanCreditFirst", "creditFirstIndex");
+        }
+
+        // // 将数据存入vuex里的setDefinite1里
+        // this.setDefinite1({ a: this.params });
       }
     }
   },
@@ -101,6 +130,9 @@ export default {
       this.$router.push({
         name: "definite2"
       });
+    },
+    getScope(val) {
+      console.log(val);
     }
   }
 };

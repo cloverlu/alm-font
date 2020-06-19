@@ -8,7 +8,7 @@
 	.definite-2
 		.definite-field
 			.item
-				span(class="tag") 检查地点
+				span(class="tag" @click="Aaaa") 检查地点
 				span(class="info") 
 					input(v-model="params.checkAddr" type="input" class="field-input" placeholder="请输入检查地点")
 			.item
@@ -51,8 +51,11 @@ import {
 } from "../../../utils/dataMock.js";
 import fieldOne from "../components/fieldOne";
 import almSelect from "../components/select";
+import { normalMixin, loanInsM1 } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
+  mixins: [normalMixin, loanInsM1],
+  // inject: ["reload"],
   data() {
     return {
       definite2Field: definite2Field,
@@ -73,9 +76,30 @@ export default {
       }
     };
   },
+  mounted() {},
+  computed: {},
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.params = Object.assign(
+          {},
+          this.params,
+          this.$refs.fieldOne.params,
+          this.$refs.fieldTwo.params
+        );
+        console.log(this.params);
+        this.setm1Definite2({ params: this.params });
+        this.footerRoute("loanCreditFirst", "firstDefinite2");
+        // this.$router.push({ name: "firstDefinite16" });
+      }
+    }
+  },
   methods: {
     getSelect(data) {
       this.params.cooperate = data.key;
+    },
+    Aaaa() {
+      // console.log(this.$store.state.creditFirst.definite1);
     }
   }
 };

@@ -10,14 +10,14 @@
 			van-uploader(
 				accept="image/gif, image/jpeg ,image/png"
 				class="image-upload-uploader" 
-				v-model="fileList[item.vModel]" 
+				v-model="params.fileList[item.vModel]" 
 				:before-delete="afterDelete"
 				:before-read="beforeRead"
 				:after-read="afterRead" 
 				@delete="deleteImage"
 				v-if="imageHas"
 			)
-			span(v-else-if="!imageHas") 无照片
+			span(v-else-if="!imageHas") 无照片 
 		//- img(id="img1" src="../../../assets/666.png")
 
 </template>
@@ -26,7 +26,7 @@
 import { Uploader, Toast } from "vant";
 import EXIF from "exif-js";
 export default {
-  props: ["item", "itemVmodel"],
+  props: ["item", "itemVmodel", "read"],
   components: {
     "van-uploader": Uploader,
     Toast
@@ -37,11 +37,16 @@ export default {
       fileList: [],
       images: [],
       uploadVisible: true,
-      imageHas: false
+      imageHas: false,
+      coordinate: [],
+      params: {
+        fileList: [],
+        coordinate: []
+      }
     };
   },
   created() {
-    if (this.itemVmodel && this.itemVmodel[this.item.vModel].length > 0) {
+    if (this.itemVmodel[this.item.vModel]) {
       const arr = this.itemVmodel[this.item.vModel];
       var url = [];
       arr.map(e => {
@@ -52,14 +57,27 @@ export default {
       if (url.length > 0) {
         this.imageHas = true;
       } else {
+        if (!this.read) {
+          this.imageHas = true;
+        } else {
+          this.imageHas = false;
+        }
+      }
+      this.$set(this.params.fileList, this.item.vModel, url);
+      if (!this.read) {
+        this.uploadVisible = true;
+      } else {
+        this.uploadVisible = false;
+      }
+    } else {
+      this.$set(this.params.fileList, this.item.vModel, []);
+      if (!this.read) {
+        this.uploadVisible = true;
+        this.imageHas = true;
+      } else {
+        this.uploadVisible = false;
         this.imageHas = false;
       }
-      this.$set(this.fileList, this.item.vModel, url);
-      this.uploadVisible = false;
-    } else {
-      this.$set(this.fileList, this.item.vModel, []);
-      this.uploadVisible = true;
-      this.imageHas = true;
     }
 
     // console.log(this.fileList);
@@ -97,22 +115,44 @@ export default {
     // 获取图片坐标
     getOrientation(index) {
       var vModel = document.getElementById(this.item.vId);
+      console.log(vModel);
       var img1 = vModel.getElementsByClassName("van-image__img")[index - 1];
       // var img1 = document.getElementById("img1");
       console.log(img1);
       console.log(EXIF.getData(img1));
+      var coordinate = {};
+      if (!EXIF.getData(img1)) {
+        coordinate = {
+          dimension: "",
+          longitude: ""
+        };
+        this.params.coordinate.push(coordinate);
+        return false;
+      }
       EXIF.getData(img1, function() {
         const _GPSLongitude = JSON.stringify(EXIF.getTag(this, "GPSLongitude"));
         const _GPSLatitude = JSON.stringify(EXIF.getTag(this, "GPSLatitude"));
-        console.log(_GPSLatitude);
+        if (_GPSLongitude) {
+          coordinate = {
+            dimension: "",
+            longitude: ""
+          };
+        } else {
+          coordinate = {
+            dimension: _GPSLatitude,
+            longitude: _GPSLongitude
+          };
+        }
       });
+      this.params.coordinate.push(coordinate);
+      console.log(this.params.coordinate);
     },
     // 上传之前
     async beforeRead(file) {
       console.log(file, "beforeRead");
       return new Promise((resolve, reject) => {
         this.isloadImg = true;
-        let ishas = this.fileList.some(function(cur, i, arr) {
+        let ishas = this.params.fileList.some(function(cur, i, arr) {
           return cur.file.name === file.name;
         });
         if (ishas) {
@@ -142,9 +182,9 @@ export default {
       //上传完成
       console.log(this.item.vModel, "id");
       console.log(file, "afterRead");
-      console.log(this.fileList);
+      console.log(this.params.fileList[this.item.vModel]);
       this.$nextTick(() => {
-        this.getOrientation(this.fileList.length);
+        this.getOrientation(this.params.fileList[this.item.vModel].length);
       });
     },
     imgPreview(file) {

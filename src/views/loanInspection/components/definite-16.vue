@@ -10,18 +10,23 @@
 			span(class="colum-blue")
 			span  影像维护
 		.definite-13-content
-			imageUpload(v-for="item in definte16" :key="item.id" :item="item")
+			imageUpload(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params.images" :read="false" :ref="`definte16${i}`")
 			
 </template>
 
 <script>
 import imageUpload from "../components/imageUpload";
 import { definte16, definte162, definte172 } from "../../../utils/dataMock";
+import { normalMixin, loanInsM1 } from "../../../utils/mixin";
 export default {
   components: { imageUpload },
+  mixins: [normalMixin, loanInsM1],
   data() {
     return {
-      definte16: []
+      definte16: [],
+      params: {
+        images: []
+      }
     };
   },
   mounted() {
@@ -29,12 +34,43 @@ export default {
     switch (type) {
       case "loanCreditFirst":
         this.definte16 = definte16();
+        this.params.images = this.mVmodel(11);
         break;
       case "loanFastCreditFirst":
         this.definte16 = definte162();
+        // this.params.images = this.mVmodel(11);
         break;
       case "loanDailyInspection":
         this.definte16 = definte172();
+      // this.params.images = this.mVmodel(10);
+    }
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        console.log(this.params);
+        const i = 0;
+        console.log(this.$refs[`definte16${i}`][0].fileList);
+        this.setm1Definite16({ params: this.params });
+        this.footerRoute("loanCreditFirst", "firstDefinite16");
+        // this.$router.push({ name: "firstDefinite16" });
+      }
+    }
+  },
+  methods: {
+    mVmodel(num) {
+      const definite16 = {};
+      for (let i = 0; i < num; i++) {
+        const a = `pic_${i + 1}s`;
+        definite16[a] = [
+          {
+            url: "",
+            longitude: "",
+            dimension: ""
+          }
+        ];
+      }
+      return definite16;
     }
   }
 };
