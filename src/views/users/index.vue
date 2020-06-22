@@ -27,6 +27,7 @@
 import receipt1 from "../users/receipt1";
 import footerNext from "../users/components/footerNext";
 import Scroll from "../../components/Scroll";
+import { getListByParams } from "../../api/users";
 import { normalMixin } from "../../utils/mixin";
 export default {
   components: { receipt1, Scroll, footerNext },
@@ -75,6 +76,20 @@ export default {
     } else {
       this.operateTag = 4;
     }
+    //
+    // let params = {
+    //   billNo: "1",
+    //   custCode: "1",
+    //   custName: "1",
+    //   emplCode: "1",
+    //   emplName: "1",
+    //   no: 0,
+    //   orgName: "1",
+    //   queryType: "1"
+    // };
+    // getListByParams(this, { params }).then(res => {
+    //   console.log(res);
+    // });
   },
 
   watch: {

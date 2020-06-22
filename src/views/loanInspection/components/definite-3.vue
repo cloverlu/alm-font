@@ -46,18 +46,16 @@
           placeholder="请输入检查结论及措施建议"
         ></mt-field>
         <div class="signBox">
-          <span class="left"
-            >检查人员（签字）：<span
-              class="iconfont iconqianzi"
-              @click="goSign()"
-            ></span
-          ></span>
+          <span class="left">
+            检查人员（签字）：
+            <span class="iconfont iconqianzi" @click="goSign()"></span>
+          </span>
           <span class="right">2020-06-01</span>
         </div>
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large">提交审批</mt-button>
+          <mt-button type="primary" size="large" @click="submit()">提交审批</mt-button>
           <mt-button size="large" @click="goback()">上一步</mt-button>
         </div>
       </div>
@@ -69,9 +67,10 @@
           <div class="coInformation">
             <div class="enterpriseCredit">
               <div class="signBox">
-                <span class="left"
-                  >检查人员（签字）：<span class="iconfont iconqianzi"></span
-                ></span>
+                <span class="left">
+                  检查人员（签字）：
+                  <span class="iconfont iconqianzi"></span>
+                </span>
                 <span class="right">2020-06-01</span>
               </div>
               <!-- <div id="canvas" ref="canvas"></div> -->
@@ -79,21 +78,8 @@
             </div>
           </div>
           <div class="submit">
-            <button
-              id="clearCanvas"
-              ref="clearCanvas"
-              class="mint-button mint-button--default"
-            >
-              重置
-            </button>
-            <button
-              type="primary"
-              id="saveCanvas"
-              ref="saveCanvas"
-              class="mint-button"
-            >
-              保存
-            </button>
+            <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
+            <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
           </div>
         </div>
       </div>
@@ -105,6 +91,7 @@
 import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Cell, Field, Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
+import { SaveEditModelBusiness } from "../../../api/loanlnspection";
 export default {
   components: {
     "mt-cell": Cell,
@@ -134,6 +121,13 @@ export default {
   methods: {
     getSelect: function(data) {
       this.params.existRisk = data.key;
+    },
+    submit: function() {
+      // let params = {};
+      //
+      // SaveEditModelBusiness(this, { params: this.params }).then(res => {
+      //   console.log(res);
+      // });
     },
     goback: function() {
       history.go(-1);

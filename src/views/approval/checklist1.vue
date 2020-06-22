@@ -70,6 +70,7 @@ import m4 from "../approval/selectDefinite/m4/m4";
 import m5 from "../approval/selectDefinite/m5/m5";
 import m6 from "../approval/selectDefinite/m6/m6";
 import { approvalMixin } from "../../utils/mixin";
+import { queryForDtail } from "../../api/loanlnspection";
 export default {
   components: { m1, m2, m3, m4, m5, m6 },
   mixins: [approvalMixin],
@@ -83,7 +84,13 @@ export default {
     };
   },
   mounted() {
+    let params = {
+      bizId: "1"
+    };
     // this.testLink();
+    queryForDtail(this, { params }).then(res => {
+      console.log(res);
+    });
   },
   methods: {
     infoMore() {

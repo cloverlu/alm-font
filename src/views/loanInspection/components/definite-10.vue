@@ -12,32 +12,32 @@
         <div class="dailyCheck">
           <div class="formTitle">
             <span class="lightBlue2"></span>
-            <span class="coName"
-              >基于个人征信报告(对于关注类及以下贷款及风险隐患
-              客户每季度查询一次个人征信即可)</span
-            >
+            <span class="coName">
+              基于个人征信报告(对于关注类及以下贷款及风险隐患
+              客户每季度查询一次个人征信即可)
+            </span>
           </div>
-          <mt-cell
-            class="textFiled"
-            title="征信报告查询日期"
-            :value="queryDate"
-          ></mt-cell>
+          <mt-cell class="textFiled" title="征信报告查询日期" :value="queryDate"></mt-cell>
         </div>
       </div>
 
       <div class="enterpriseCredit">
         <div class="title">1.企业实际控制人及其配偶（若有）征信：</div>
+        <mt-field
+          class="textFiled"
+          label="征信分类"
+          placeholder="请输入"
+          v-model="params.creditClassification"
+        ></mt-field>
         <div class="formTitle1">
-          <span class="lightBlue"></span>
-          <span class="coNameBlack">征信分类</span>
+          <!-- <span class="lightBlue"></span>
+          <span class="coNameBlack">征信分类</span>-->
           <span class="lightBlue1"></span>
           <span class="coNameBlack1">征信情况</span>
         </div>
 
         <!-- （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况 -->
-        <div class="coNo1">
-          （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
-        </div>
+        <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
         <mt-field
           class="textFiled"
           label="未结清贷款笔数"
@@ -150,15 +150,19 @@
 
         <div class="titleBox">
           <div class="title">2.企业法定代表人及其配偶（若有）征信：</div>
+          <mt-field
+            class="textFiled"
+            label="征信分类"
+            placeholder="请输入"
+            v-model="params.creditClassification"
+          ></mt-field>
           <div class="formTitle1">
-            <span class="lightBlue"></span>
-            <span class="coNameBlack">征信分类</span>
+            <!-- <span class="lightBlue"></span>
+            <span class="coNameBlack">征信分类</span>-->
             <span class="lightBlue1"></span>
             <span class="coNameBlack1">征信情况</span>
           </div>
-          <div class="coNo1">
-            （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
-          </div>
+          <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
         </div>
         <mt-field
           class="textFiled"
@@ -294,7 +298,7 @@
 
         <div class="nothing"></div>
 
-        <mt-cell class="textFiled" title="近期负面信息情况"> </mt-cell>
+        <mt-cell class="textFiled" title="近期负面信息情况"></mt-cell>
         <mt-field
           type="textarea"
           rows="3"
@@ -333,6 +337,7 @@ export default {
       existCreditChage5: "existCreditChage5",
       existCreditChage3: "existCreditChage3",
       params: {
+        creditClassification: "", // 征信分类
         // 企业实际控制人部分
         unPayOffLoanNumCon: "", //未结清贷款笔数
         unPayOffAmoutCon: "", // 未结清贷款金额
@@ -417,7 +422,7 @@ export default {
   line-height: px2rem(20);
   color: rgba(9, 9, 9, 1);
   opacity: 1;
-  margin: px2rem(6) px2rem(17) px2rem(-8);
+  margin: px2rem(6) px2rem(17) px2rem(6);
 }
 
 .formTitle {
@@ -483,7 +488,7 @@ export default {
 .formTitle1 {
   width: 100%;
   box-sizing: border-box;
-  height: px2rem(65);
+  height: px2rem(35);
   position: relative;
   .lightBlue {
     position: absolute;
@@ -502,7 +507,7 @@ export default {
     display: inline-block;
     width: px2rem(3);
     height: px2rem(14);
-    top: 70%;
+    top: 50%;
     left: px2rem(18);
     transform: translate(-50%, -50%);
     background: rgba(78, 120, 222, 1);
@@ -529,7 +534,7 @@ export default {
     height: px2rem(14);
     width: px2rem(327);
     line-height: px2rem(15);
-    top: 70%;
+    top: 50%;
     transform: translate(px2rem(26), -50%);
     font-size: px2rem(14);
     // font-family: Source Han Sans CN;
@@ -540,13 +545,13 @@ export default {
 }
 
 .titleBox {
-  height: px2rem(103);
+  height: px2rem(135);
   padding-top: px2rem(5);
   background-color: #f7f7f7;
   .formTitle1 {
     width: 100%;
     box-sizing: border-box;
-    height: px2rem(65);
+    height: px2rem(35);
     position: relative;
     .lightBlue {
       position: absolute;
@@ -565,7 +570,7 @@ export default {
       display: inline-block;
       width: px2rem(3);
       height: px2rem(14);
-      top: 70%;
+      top: 50%;
       left: px2rem(18);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
@@ -592,7 +597,7 @@ export default {
       height: px2rem(14);
       width: px2rem(327);
       line-height: px2rem(15);
-      top: 70%;
+      top: 50%;
       transform: translate(px2rem(26), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
