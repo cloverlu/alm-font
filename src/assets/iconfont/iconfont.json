@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15567675",
+      "name": "勾-01",
+      "font_class": "gou-01",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "15567719",
+      "name": "差- 勾",
+      "font_class": "cha-01",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
       "icon_id": "15119220",
       "name": "筛选",
       "font_class": "shaixuan",

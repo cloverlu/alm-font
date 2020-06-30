@@ -3,27 +3,43 @@ import { mapGetters, mapActions } from "vuex";
 //普遍用到的状态
 export const normalMixin = {
   computed: {
-    ...mapGetters(["nextFooter", "prevFooter", "bizType"])
+    ...mapGetters([
+      "nextFooter",
+      "prevFooter",
+      "scrollToPo",
+      "forBizDetail",
+      "saveFlag"
+    ])
   },
   methods: {
-    ...mapActions(["setNextFooter", "setPrevFooter", "setBizType"]),
+    ...mapActions([
+      "setNextFooter",
+      "setPrevFooter",
+      "setScrollToPo",
+      "setforDizDetail",
+      "setSaveFlag"
+    ]),
     // 判断下一步路由该去的页面
-    footerRoute(currentType, currentName) {
-      console.log(currentType);
+    footerRoute(currentType, currentName, params) {
       switch (currentType) {
-        case "loanCreditFirst":
+        //m1
+        case "m1":
           switch (currentName) {
             case "creditFirstIndex":
+              // this.setm1Definite1({ params: params });
               this.$router.push({ name: "firstDefinite2" });
               break;
             case "firstDefinite2":
+              // this.setm1Definite2({ params: params });
               this.$router.push({ name: "firstDefinite16" });
               break;
             case "firstDefinite16":
+              // this.setm1Definite16({ params: params });
               this.$router.push({ name: "firstDefinite3" });
           }
           break;
-        case "loanCreditRoutine":
+        //m2
+        case "m2":
           switch (currentName) {
             case "creditRoutineIndex":
               this.$router.push({ name: "definite13" });
@@ -45,7 +61,8 @@ export const normalMixin = {
           }
 
           break;
-        case "loanDailyInspection":
+        //类型6
+        case "m6":
           switch (currentName) {
             case "dailyInspectionIndex":
               this.$router.push({ name: "newly2" });
@@ -63,7 +80,8 @@ export const normalMixin = {
               this.$router.push({ name: "newlyDefinite3" });
           }
           break;
-        case "loanCreditOverall":
+        //类型3
+        case "m3":
           switch (currentName) {
             case "creditOverallIndex":
               this.$router.push({ name: "overalltDefinite13" });
@@ -87,7 +105,8 @@ export const normalMixin = {
               this.$router.push({ name: "overalltDefinite3" });
           }
           break;
-        case "loanRepaymentInspection":
+        // 类型4
+        case "m4":
           switch (currentName) {
             case "repaymentInspectionIndex":
               this.$router.push({ name: "repaymentInspectionDefinite7" });
@@ -96,7 +115,8 @@ export const normalMixin = {
               this.$router.push({ name: "processing4" });
           }
           break;
-        case "loanFastCreditFirst":
+        //类型5
+        case "m5":
           switch (currentName) {
             case "fastCreditFirstIndex":
               this.$router.push({ name: "fastCreditFirstDefinite16" });
@@ -104,6 +124,28 @@ export const normalMixin = {
             case "fastCreditFirstDefinite16":
               this.$router.push({ name: "fastCreditFirstDefinite3" });
           }
+      }
+    },
+    //类型对应
+    bizType(item, type) {
+      switch (type) {
+        case "m1":
+          item.bizTypeName = "小企业授信业务首次跟踪检查";
+          break;
+        case "m2":
+          item.bizTypeName = "小企业授信业务贷后例行检查";
+          break;
+        case "m3":
+          item.bizTypeName = "小企业授信业务贷后全面检查";
+          break;
+        case "m4":
+          item.bizTypeName = "小企业授信业务还款资金落实情况检查";
+          break;
+        case "m5":
+          item.bizTypeName = "小企业法人快捷贷首次检查";
+          break;
+        case "m6":
+          item.bizTypeName = "小企业法人快捷贷贷后日常检查";
       }
     }
   }
@@ -186,9 +228,9 @@ export const approvalMixin = {
 // 用户管理
 export const userMixin = {
   computed: {
-    ...mapGetters([])
+    ...mapGetters(["bizType"])
   },
   methods: {
-    ...mapActions([])
+    ...mapActions(["setBizType"])
   }
 };

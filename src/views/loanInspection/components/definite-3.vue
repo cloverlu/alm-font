@@ -7,7 +7,7 @@
   <div class="checkDetail">
     <!--填写信息  -->
     <div class="definte3" ref="definte3">
-      <div class="enterpriseCredit">
+      <div class="enterpriseCredit fieldWrapper">
         <!--营业收入 -->
         <div class="formTitle">
           <span class="lightBlue"></span>
@@ -50,12 +50,16 @@
             检查人员（签字）：
             <span class="iconfont iconqianzi" @click="goSign()"></span>
           </span>
-          <span class="right">2020-06-01</span>
+        </div>
+        <div class="qianming">
+          <img :src="params.empSign" />
         </div>
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submit()">提交审批</mt-button>
+          <mt-button type="primary" size="large" @click="submit()"
+            >提交审批</mt-button
+          >
           <mt-button size="large" @click="goback()">上一步</mt-button>
         </div>
       </div>
@@ -71,15 +75,28 @@
                   检查人员（签字）：
                   <span class="iconfont iconqianzi"></span>
                 </span>
-                <span class="right">2020-06-01</span>
+                <!-- <span class="right">2020-06-01</span> -->
               </div>
               <!-- <div id="canvas" ref="canvas"></div> -->
               <canvas></canvas>
             </div>
           </div>
           <div class="submit">
-            <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
-            <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
+            <button
+              id="clearCanvas"
+              ref="clearCanvas"
+              class="mint-button mint-button--default"
+            >
+              重置
+            </button>
+            <button
+              type="primary"
+              id="saveCanvas"
+              ref="saveCanvas"
+              class="mint-button"
+            >
+              保存
+            </button>
           </div>
         </div>
       </div>
@@ -89,19 +106,21 @@
 
 <script>
 import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
-import { Cell, Field, Button, Popup } from "mint-ui";
+import { Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
-import { SaveEditModelBusiness } from "../../../api/loanlnspection";
+import { normalMixin, loanInsM1 } from "../../../utils/mixin";
+import { submitApprove } from "../../../api/loanlnspection";
 export default {
+  mixins: [normalMixin, loanInsM1],
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
     "mt-button": Button,
     "mt-popup": Popup,
     almSelect
   },
   data() {
     return {
+      bizId: this.$route.params.bizId,
+      type: "",
       DetailsOfIOU: DetailsOfIOU,
       yesNo: yesNo,
       popupVisible: false,
@@ -113,16 +132,83 @@ export default {
         existRisk: 1, // 是否存在风险预警信号
         riskMsg: "", // 预警信号说明
         suggest: "", // 建议
-        signSrc: "" // 签名
+        empSign: "" // 签名
       }
     };
   },
-  mounted() {},
+  mounted() {
+    const type = this.$route.params.type;
+    this.type = {
+      bizType: type
+    };
+    // 上一步下一步需要走的详情接口
+    if (this.$route.params.saveFlag === 1) {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name).bizApprove;
+      console.log(this.forBizDetail(this.$route.name).bizApprove);
+      return false;
+    } else {
+      this.saveFlag.forEach(item => {
+        if (item.currentName === this.$route.name && item.flag === true) {
+          this.setforDizDetail(this);
+          this.params = this.forBizDetail(this.$route.name).bizApprove;
+          console.log(this.forBizDetail(this.$route.name).bizApprove);
+          return false;
+        }
+      });
+    }
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        const pa = {
+          bizId: this.$route.params.bizId,
+          orgLevel: "1",
+          postCode: "23",
+          opType: "0"
+        };
+        this.params = Object.assign({}, this.params, pa);
+
+        console.log(this.params);
+        // this.setm1Definite16({ params: this.params });
+      }
+    }
+  },
   methods: {
     getSelect: function(data) {
       this.params.existRisk = data.key;
     },
-    submit: function() {
+    submit() {
+      this.$Indicator.open();
+      const pa = {
+        bizId: this.$route.params.bizId,
+        orgLevel: "1",
+        postCode: "23",
+        opType: "1"
+      };
+
+      const params = Object.assign({}, pa, this.params);
+      submitApprove(this, params).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          this.$Toast({
+            message: "提交成功！",
+            iconClass: "iconfont icongou-01",
+            duration: 1000
+          });
+          setTimeout(() => {
+            this.$router.push({ name: "loanInspectionIndex" });
+          }, 1200);
+        } else {
+          this.$Indicator.close();
+          this.$Toast({
+            message: "提交失败！",
+            iconClass: "iconfont iconcha-01",
+            duration: 5000
+          });
+        }
+      });
+      console.log(this.params);
       // let params = {};
       //
       // SaveEditModelBusiness(this, { params: this.params }).then(res => {
@@ -133,7 +219,7 @@ export default {
       history.go(-1);
     },
     goSign: function() {
-      this.params.signSrc = "";
+      this.params.empSign = "";
       this.popupVisible = true;
       this.lineCanvas({
         // el: this.$refs.canvas, //绘制canvas的父级div
@@ -209,7 +295,7 @@ export default {
           this.cxt.closePath();
           let imgBase64 = this.canvas.toDataURL();
           //console.log(imgBase64);
-          this.params.signSrc = imgBase64;
+          this.params.empSign = imgBase64;
         }.bind(this),
         false
       );
@@ -226,8 +312,7 @@ export default {
         "click",
         function() {
           let imgBase64 = this.canvas.toDataURL();
-          this.params.signSrc = imgBase64;
-          console.log("图片", this.params.signSrc);
+          this.params.empSign = imgBase64;
           setTimeout(() => {
             var c = document.getElementsByTagName("canvas")[0];
             c.innerHTML = "";
@@ -236,16 +321,6 @@ export default {
         }.bind(this),
         false
       );
-    }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite3里
-        this.setDefinite3({ params: this.params });
-        this.setRoutineDefinite3({ params: this.params });
-      }
     }
   }
 };
@@ -257,6 +332,8 @@ export default {
 .definte3 {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   .title {
     // width: px2rem(60);
     height: px2rem(23);
@@ -268,130 +345,147 @@ export default {
     opacity: 1;
     margin: px2rem(6) px2rem(17) px2rem(-8);
   }
-
-  .formTitle {
-    width: 100%;
-    height: px2rem(44);
-    position: relative;
-    .lightBlue {
-      position: absolute;
-      display: inline-block;
-      width: px2rem(3);
-      height: px2rem(14);
-      top: 50%;
-      left: px2rem(18);
-      transform: translate(-50%, -50%);
-      background: rgba(78, 120, 222, 1);
-      opacity: 1;
-      border-radius: px2rem(2);
-    }
-    .coName {
-      position: absolute;
-      display: inline-block;
-      height: px2rem(14);
-      width: 100%;
-      line-height: px2rem(15);
-      top: 50%;
-      // left: 21%;
-      transform: translate(px2rem(26), -50%);
-      font-size: px2rem(14);
-      // font-family: Source Han Sans CN;
-      // font-weight: bold;
-      color: rgba(78, 120, 222, 1);
-      opacity: 1;
-    }
-  }
-  .mint-cell {
-    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-    &:last-of-type {
-      border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
-    }
-  }
-
-  .text {
-    font-size: px2rem(12);
-    // font-family: Source Han Sans CN;
-    // font-weight: 500;
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-  }
-
-  .item1 {
+  .fieldWrapper {
+    flex: 1;
+    height: 100%;
     background-color: #fff;
-    width: 100%;
-    height: px2rem(44);
-    line-height: px2rem(44);
-    padding: 0 px2rem(16);
-    display: flex;
-    font-size: px2rem(14);
-    box-sizing: border-box;
-    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-    &:last-child {
-      border: none;
-      padding: 0;
+    .qianming {
+      width: 100%;
+      height: px2rem(120);
+      text-align: center;
+      img {
+        width: px2rem(120);
+        height: 100%;
+        margin: 0 auto;
+      }
+      img[src=""],
+      img:not([src]) {
+        opacity: 0;
+      }
     }
-    .tag {
-      // font-family: Source Han Sans CN;
-      // font-weight: bolder;
-      width: px2rem(270);
-      text-align: left;
-      color: #090909;
+    .formTitle {
+      width: 100%;
       height: px2rem(44);
-      font-size: px2rem(14);
-      line-height: px2rem(44);
-    }
-    .arrow {
-      font-size: px2rem(14);
-      color: #848484;
-      margin-left: px2rem(3);
-    }
-    .info {
-      flex: 1;
-      text-align: right;
-      color: #9f9f9f;
-      .pay-type {
+      position: relative;
+      background-color: #f7f7f7;
+      .lightBlue {
+        position: absolute;
+        display: inline-block;
+        width: px2rem(3);
+        height: px2rem(14);
+        top: 50%;
+        left: px2rem(18);
+        transform: translate(-50%, -50%);
+        background: rgba(78, 120, 222, 1);
+        opacity: 1;
+        border-radius: px2rem(2);
+      }
+      .coName {
+        position: absolute;
+        display: inline-block;
+        height: px2rem(14);
         width: 100%;
-        height: px2rem(145);
-        background-color: #fff;
-        .item {
+        line-height: px2rem(15);
+        top: 50%;
+        // left: 21%;
+        transform: translate(px2rem(26), -50%);
+        font-size: px2rem(14);
+        // font-family: Source Han Sans CN;
+        // font-weight: bold;
+        color: rgba(78, 120, 222, 1);
+        opacity: 1;
+      }
+    }
+    .mint-cell {
+      border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+      &:last-of-type {
+        border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+      }
+    }
+
+    .text {
+      font-size: px2rem(12);
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
+      color: rgba(9, 9, 9, 1);
+      opacity: 1;
+    }
+
+    .item1 {
+      background-color: #fff;
+      width: 100%;
+      height: px2rem(44);
+      line-height: px2rem(44);
+      padding: 0 px2rem(16);
+      display: flex;
+      font-size: px2rem(14);
+      box-sizing: border-box;
+      border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+      &:last-child {
+        border: none;
+        padding: 0;
+      }
+      .tag {
+        // font-family: Source Han Sans CN;
+        // font-weight: bolder;
+        width: px2rem(270);
+        text-align: left;
+        color: #090909;
+        height: px2rem(44);
+        font-size: px2rem(14);
+        line-height: px2rem(44);
+      }
+      .arrow {
+        font-size: px2rem(14);
+        color: #848484;
+        margin-left: px2rem(3);
+      }
+      .info {
+        flex: 1;
+        text-align: right;
+        color: #9f9f9f;
+        .pay-type {
           width: 100%;
-          height: px2rem(44);
-          border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
-          text-align: center;
-          font-size: px2rem(14);
-          justify-content: center;
-          align-items: center;
-          &:last-child {
-            border-bottom: none;
+          height: px2rem(145);
+          background-color: #fff;
+          .item {
+            width: 100%;
+            height: px2rem(44);
+            border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+            text-align: center;
+            font-size: px2rem(14);
+            justify-content: center;
+            align-items: center;
+            &:last-child {
+              border-bottom: none;
+            }
           }
         }
       }
     }
-  }
 
-  .signBox {
-    height: px2rem(44);
-    font-size: px2rem(14);
-    // font-family: Source Han Sans CN;
-    // font-weight: 500;
-    line-height: px2rem(44);
-    color: rgba(9, 9, 9, 1);
-    opacity: 1;
-    padding: 0 px2rem(16);
-    background-color: #fff;
-    border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
-    .right {
-      float: right;
+    .signBox {
+      height: px2rem(44);
+      font-size: px2rem(14);
+      // font-family: Source Han Sans CN;
+      // font-weight: 500;
+      line-height: px2rem(44);
+      color: rgba(9, 9, 9, 1);
+      opacity: 1;
+      padding: 0 px2rem(16);
+      background-color: #fff;
+      border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+      .right {
+        float: right;
+      }
     }
   }
 
   .subBox {
     background-color: #fff;
     position: relative;
-    width: 100%;
-    height: px2rem(229);
+    box-sizing: border-box;
     .submit {
-      position: absolute;
       width: calc(100% - 30px);
       // height: px2rem(200);
       bottom: px2rem(0);

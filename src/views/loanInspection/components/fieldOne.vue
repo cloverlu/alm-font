@@ -23,6 +23,11 @@ export default {
     info: {
       type: Object,
       default: () => {}
+    },
+    // 是否只读，只读的话disabled为true
+    read: {
+      type: Boolean,
+      default: () => false
     }
   },
   data() {
@@ -31,19 +36,39 @@ export default {
       disabeld: false
     };
   },
-  watch: {},
-  created() {
-    var a = "";
-    if (!this.info) {
-      a;
-      this.disabeld = false;
-    } else {
-      a = this.info;
-      this.disabeld = true;
+  watch: {
+    info(val, oldval) {
+      var a = {};
+      this.disabeld = this.read ? true : false;
+      if (!val) {
+        this.definite.forEach(item => {
+          a[item.modelName] = "";
+        });
+      } else {
+        a = val;
+      }
+      // console.log(a);
+      this.definite.forEach((item, index) => {
+        this.$set(this.params, item.modelName, a[item.modelName]);
+      });
     }
-    this.definite.forEach((item, index) => {
-      this.$set(this.params, item.modelName, a[item.modelName]);
-    });
+  },
+  mounted() {
+    // this.$nextTick(() => {
+    //   var a = {};
+    //   this.disabeld = this.read ? true : false;
+    //   if (!this.info) {
+    //     this.definite.forEach(item => {
+    //       a[item.modelName] = "";
+    //     });
+    //   } else {
+    //     a = this.info;
+    //   }
+    //   console.log(a);
+    //   this.definite.forEach((item, index) => {
+    //     this.$set(this.params, item.modelName, a[item.modelName]);
+    //   });
+    // });
   }
 };
 </script>

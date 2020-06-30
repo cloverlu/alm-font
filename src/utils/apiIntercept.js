@@ -1,6 +1,45 @@
 import Vue from "vue";
 import Axios from "axios";
 import router from "../router/index";
+import { Indicator, Toast } from "mint-ui";
+
+// let instance = Axios.create({
+//   transformRequest: [
+//     function transformRequest(data, headers) {
+//       normalizeHeaderName(headers, "Content-Type");
+//       if (
+//         utils.isFormData(data) ||
+//         utils.isArrayBuffer(data) ||
+//         utils.isBuffer(data) ||
+//         utils.isStream(data) ||
+//         utils.isFile(data) ||
+//         utils.isBlob(data)
+//       ) {
+//         return data;
+//       }
+//       if (utils.isArrayBufferView(data)) {
+//         return data.buffer;
+//       }
+//       if (utils.isURLSearchParams(data)) {
+//         setContentTypeIfUnset(
+//           headers,
+//           "application/x-www-form-urlencoded;charset=utf-8"
+//         );
+//         return data.toString();
+//       }
+//       /*改了这里*/
+//       if (utils.isObject(data)) {
+//         setContentTypeIfUnset(
+//           headers,
+//           "application/x-www-form-urlencoded;charset=utf-8"
+//         );
+//         let _data = Object.keys(data);
+//         return encodeURI(_data.map(name => `${name}=${data[name]}`).join("&"));
+//       }
+//       return data;
+//     }
+//   ]
+// });
 
 let apiIntercept = {};
 apiIntercept.install = vue => {
@@ -20,6 +59,7 @@ apiIntercept.install = vue => {
     }
   );
   // http response 拦截器
+
   Axios.interceptors.response.use(
     response => {
       if (response) {
@@ -43,12 +83,21 @@ apiIntercept.install = vue => {
     },
     err => {
       if (err && err.response) {
+        Indicator.close();
         switch (err.response.status) {
           case 401:
             router.replace({
               path: "/login"
             });
             break;
+          case 500:
+            Toast({ message: "网络有问题，请联系管理员", duration: 5000 });
+            break;
+          case 404:
+            Toast({ message: "当前数据不存在", duration: 5000 });
+            break;
+          case 405:
+            Toast({ message: err.response.statusText, duration: 5000 });
         }
       }
       return Promise.reject(err);

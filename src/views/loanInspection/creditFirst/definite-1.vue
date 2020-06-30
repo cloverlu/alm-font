@@ -12,7 +12,7 @@
 		.definite-field
 			.item
 				span(class="tag") 检查类型
-				span(class="info") {{detail.bizType}}
+				span(class="info") {{detail.bizTypeName}}
 			.item
 				span(class="tag") 放款日期
 				span(class="info") {{detail.billBeginDate}}
@@ -36,20 +36,31 @@
 			span(class="colum-blue")
 			span  检查要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1Field" ref="fieldOne")
+			fieldOne(:definite="definite1Field" :info="params" :read="false" ref="fieldOne")
 		.definite-smalltitle(class="definite-1-smalltitle2")
 			span(class="colum-blue")
 			span  特殊要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1Field" ref="fieldTwo")
-	router-view(ref="rview" v-else)
+			fieldOne(:definite="definite1FieldSpecial" :read="false" :info="params" ref="fieldTwo")
+	router-view( ref="rview"  v-else)
 </template>
 
 <script>
-import { definite1, payType, definite1Field } from "../../../utils/dataMock.js";
+import {
+  definite1,
+  payType,
+  definite1Field,
+  definite1FieldSpecial
+} from "../../../utils/dataMock.js";
 import almSelect from "../components/select";
 import fieldOne from "../components/fieldOne";
 import { normalMixin, loanInsM1 } from "../../../utils/mixin";
+import { unique } from "../../../utils/utils";
+import {
+  queryDetail,
+  infoDetail,
+  SaveEditModelBusiness
+} from "../../../api/loanlnspection";
 
 export default {
   mixins: [normalMixin, loanInsM1],
@@ -57,9 +68,10 @@ export default {
   data() {
     return {
       hasChildRouter1: this.$route.params.hasChildRouter1,
-      detail: definite1,
+      detail: "",
       payTypes: payType,
       definite1Field: definite1Field,
+      definite1FieldSpecial: definite1FieldSpecial,
       popupVisible: false,
       payType: 1,
       selectTitle: "贷款支付方式",
@@ -67,9 +79,12 @@ export default {
       payKind: "payKind",
       params: {
         loanPurpose: "",
-        payKind: 1
+        payKind: "1",
+        bizId: this.$route.params.bizId
       },
-      footerVal: ""
+      loanBusiness: {},
+      footerVal: "",
+      infoDetail: {}
     };
   },
   // 父组件中返回要传给下级的数据
@@ -88,40 +103,132 @@ export default {
     next();
   },
   computed: {},
+  async mounted() {
+    //判断是否是已经填了部分
+    if (this.$route.params.saveFlag === 1) {
+      await this.getInfoDetail(this.$route.params.bizId);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
+    }
+
+    this.getDetail(this.$route.params.bizId);
+
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({ x: 0, y: 0 });
+  },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // this.footerVal = val.nextFooter;
-        // this._provided.reload = val.nextFooter;
-        // console.log(this.$route);
-        // const name = this.$route.name;
-        // const rview = this.$refs.rview;
-        // console.log(name);
-
-        // switch (name) {
-        //   // case "firstDefinite2":
-        //   //   this.setDefinite1({ definite1: this.params });
-        //   //   break;
-        //   case "firstDefinite2":
-        //     console.log(this.$refs.rview.params);
-        //     this.setDefinite2({ definite2: rview.params });
-        //     this.$router.push({ name: "firstDefinite16" });
-        // }
-        this.setm1Definite1({ params: this.params });
+        this.$Indicator.open();
         const currentName = this.$route.name;
+        var loanBusiness = {};
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
         if (currentName === "creditFirstIndex") {
-          this.footerRoute("loanCreditFirst", "creditFirstIndex");
-        }
+          const fieldOne = this.$refs.fieldOne.params;
+          const fieldTwo = this.$refs.fieldTwo.params;
+          loanBusiness = Object.assign({}, this.params, fieldOne, fieldTwo);
+          this.infoSave(loanBusiness, val.tag);
 
-        // // 将数据存入vuex里的setDefinite1里
-        // this.setDefinite1({ a: this.params });
+          // this.setm1Definite1({ params: loanBusiness });
+        } else {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.rview.params, bizId);
+            console.log(loanBusiness);
+            this.infoSave(loanBusiness, val.tag);
+            // console.log(this.$refs.rview.params);
+          });
+        }
       }
     }
+    // 上一步回显
+    // prevFooter(val, oldval) {
+    //   console.log("prevFooter:" + this.$route.name);
+    //   const name = this.$route.name;
+    //   var params = {};
+    //   if (name === "firstDefinite2") {
+    //     params = this.m1Definite1.params;
+    //     this.params = params;
+    //   }
+    //   // else if (name === "firstDefinite16") {
+    //   //   params = this.m1Definite2.params;
+    //   //   this.infoDetail = params;
+    //   // } else if (name === "firstDefinite3") {
+    //   //   params = this.m1Definite16.params;
+    //   //   this.infoDetail = params;
+    //   // }
+    // }
   },
-
-  mounted() {},
   methods: {
+    // 保存
+    async infoSave(loanBusiness, tag) {
+      let res = await SaveEditModelBusiness(this, loanBusiness);
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        this.$Indicator.close();
+        this.$Toast({
+          message: "保存成功！",
+          iconClass: "iconfont icongou-01",
+          duration: 1000
+        });
+
+        const currentName = this.$route.name;
+        const type = this.$route.params.type;
+
+        // 保存saveFlag
+        const arr = [];
+        const pa = {
+          bizId: this.$route.params.bizId,
+          currentName: currentName,
+          flag: true
+        };
+        const saveFlags = this.saveFlag;
+        saveFlags.push(pa);
+        this.setSaveFlag(unique(saveFlags, "currentName"));
+
+        if (tag === "nextFooter") {
+          setTimeout(() => {
+            this.footerRoute(type, currentName, loanBusiness);
+          }, 1200);
+        }
+      } else {
+        this.$Toast({
+          message: "保存失败！",
+          iconClass: "iconfont iconcha-01",
+          duration: 5000
+        });
+      }
+    },
+    //获取详情
+    getDetail(id) {
+      const params = {
+        bizId: id
+      };
+      queryDetail(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          if (res.data.data) {
+            this.bizType(res.data.data, res.data.data.checkType);
+            this.detail = res.data.data;
+          }
+        }
+      });
+    },
+    //获取已填内容详情
+    getInfoDetail(id) {
+      const params = {
+        bizId: id
+      };
+      infoDetail(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          if (res.data.data) {
+            const params = res.data.data;
+            // this.params = params;
+          }
+        }
+      });
+    },
     getSelect(data) {
       this.params.payKind = data[0].key;
     },

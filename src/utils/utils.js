@@ -132,3 +132,16 @@ export function formatDate2(secs, type = 0) {
     return year + "-" + month + "-" + date;
   }
 }
+
+//数组去重
+export function unique(arr, key) {
+  var obj = {};
+  return arr.filter(function(item) {
+    return Object.prototype.hasOwnProperty.call(
+      obj,
+      typeof item[key] + item[key]
+    )
+      ? false
+      : (obj[typeof item[key] + item[key]] = true);
+  });
+}

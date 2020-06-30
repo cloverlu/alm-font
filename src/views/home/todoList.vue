@@ -18,14 +18,20 @@
 </template>
 
 <script>
-import { todoListTitle } from "../../utils/dataMock.js";
+import { todoListTitle, userInfo } from "../../utils/dataMock.js";
+import { getToDoList } from "../../api/home";
 import Scroll from "../../components/Scroll";
 export default {
   components: { Scroll },
   data() {
     return {
-      todoListTitle: todoListTitle
+      todoListTitle: todoListTitle,
+      userInfo: userInfo,
+      list: []
     };
+  },
+  mounted() {
+    this.getList();
   },
   methods: {
     handleClick(id) {
@@ -38,6 +44,20 @@ export default {
           name: "approvalIndex"
         });
       }
+    },
+    getList() {
+      this.$Indicator.open();
+      const params = this.userInfo;
+      getToDoList(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          res.data.dataList.filter((item, index) => {
+            if (index <= 6) {
+              this.todoListTitle[index].warningNumber = item.itemRecordNum;
+            }
+          });
+        }
+      });
     }
   }
 };

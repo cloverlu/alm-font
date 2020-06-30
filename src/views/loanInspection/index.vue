@@ -11,7 +11,7 @@
 			.title {{title}} 
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
-				span(v-else-if="operateTag === 2") 保存
+				span(v-else-if="operateTag === 2" @click="saveInfo") 保存
 				span(@click="topFooterNext" v-else-if="operateTag === 3") 下一步
 		scroll(:top="scrollTop" ref="scrollWrapper" )
 			.loanIns-index-content
@@ -116,9 +116,14 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.$nextTick(() => {
-          this.$refs.scrollWrapper.scrollTo(0, 0);
-        });
+        // 滑到下一页的头部，这边设置1000是因为保存成功还有一个1000的提示
+        if (val.tag === "nextFooter") {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.$refs.scrollWrapper.scrollTo(0, 0);
+            }, 1000);
+          });
+        }
       }
     },
     // 监听是否点击了上一步，用vuex里的nextFooter属性
@@ -150,6 +155,12 @@ export default {
           role: role
         }
       });
+    },
+    saveInfo() {
+      //随机数
+      const val = Date.now();
+      //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”,这边用了这个值判断有没有保存
+      this.setNextFooter({ nextFooter: val, tag: "save" });
     }
   }
 };

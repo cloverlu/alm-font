@@ -64,9 +64,13 @@ export default {
     };
   },
   created() {
-    var a = "";
+    var a = {};
     if (!this.detail) {
-      a;
+      this.info.forEach((item, index) => {
+        a[item.lastBalance] = "";
+        a[item.Chang30Msg] = "";
+        a[item.Inc3MSitu] = "";
+      });
       this.disabledVisible = false;
     } else {
       a = this.detail;

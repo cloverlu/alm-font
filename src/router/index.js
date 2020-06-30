@@ -118,7 +118,7 @@ const routes = [
       //类型1
       //检查申请明细-1
       {
-        path: "1/:type/:bizId",
+        path: "1/:type/:bizId/:saveFlag",
         name: "creditFirstIndex",
         component: definite1,
         meta: {
@@ -813,7 +813,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes
 });

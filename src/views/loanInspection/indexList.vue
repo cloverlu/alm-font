@@ -5,7 +5,7 @@
 -->
 <template lang="pug">
 	.loanIns-list
-		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item.bizStatus,item.bizType,item.bizId)")
+		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item.bizStatus,item.bizType,item.bizId,item.saveFlag)")
 			.item-header
 				.item-header-state(class="shoulddo" v-if="item.bizStatus === 'shouldDo'" ) 应做
 				.item-header-state(class="undo" v-if="item.bizStatus === 'notDo'" ) 未做
@@ -14,7 +14,7 @@
 				.item-header-title  {{item.bizTypeName}}
 			.item-username
 				span(class="item-tag") 客户名称
-				span(class="item-info") {{item.custNname}}
+				span(class="item-info") {{item.custName}}
 			.item-usercode
 				span(class="item-tag") 借据编号
 				span(class="item-info") {{item.billNo}}
@@ -24,89 +24,87 @@
 					span(class="item-info") {{item.noticeDate}}
 				.item-info-time 
 					span(class="item-tag") 截止时间
-					span(class="item-info") {{item.endDate}}
+					span(class="item-info") {{item.billEndDate}}
 </template>
 
 <script>
-import { loanInsList, loanInsList2 } from "../../utils/dataMock.js";
+import { loanInsList, loanInsList2, userInfo } from "../../utils/dataMock.js";
+import { getNoticeCheckList } from "../../api/loanlnspection";
+import { normalMixin } from "../../utils/mixin";
 
 export default {
+  mixins: [normalMixin],
   data() {
     return {
-      list: []
+      list: [],
+      userInfo: userInfo,
+      itemType: ""
     };
   },
   watch: {},
   mounted() {
     if (this.$route.name === "loanInspectionIndex") {
-      this.list = loanInsList();
+      // this.list = loanInsList();
+      this.itemType = "2";
     } else if (this.$route.name === "approvalIndex") {
-      this.list = loanInsList2();
+      this.itemType = "1";
     }
+    this.getList();
   },
   methods: {
-    handleClick(bizStatus, type, id) {
+    // 获取列表数据
+    getList() {
+      this.$Indicator.open();
+      const itemType = { itemType: this.itemType };
+      const params = Object.assign({}, this.userInfo, itemType);
+      getNoticeCheckList(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          if (res.data.data) {
+            res.data.data.filter(item => {
+              this.bizType(item, item.bizType);
+            });
+          }
+          this.list = res.data.data;
+        }
+      });
+    },
+    handleClick(bizStatus, type, id, saveFlag) {
       const moduleName = this.$route.name;
       const status = bizStatus;
+      var name = "";
       // console.log(moduleName);
       if (status !== "inReview") {
         if (moduleName === "loanInspectionIndex") {
           if (type === "m1") {
-            this.$router.push({
-              name: "creditFirstIndex",
-              params: {
-                bizId: id,
-                type: "loanCreditFirst"
-              }
-            });
+            name = "creditFirstIndex";
           } else if (type === "m2") {
-            this.$router.push({
-              name: "creditRoutineIndex",
-              params: {
-                bizId: id,
-                type: "loanCreditRoutine"
-              }
-            });
+            name = "creditRoutineIndex";
           } else if (type === "m3") {
-            this.$router.push({
-              name: "creditOverallIndex",
-              params: {
-                bizId: id,
-                type: "loanCreditOverall"
-              }
-            });
+            name = "creditOverallIndex";
           } else if (type === "m4") {
-            this.$router.push({
-              name: "repaymentInspectionIndex",
-              params: {
-                bizId: id,
-                type: "loanRepaymentInspection"
-              }
-            });
+            name = "repaymentInspectionIndex";
           } else if (type === "m5") {
-            this.$router.push({
-              name: "fastCreditFirstIndex",
-              params: {
-                bizId: id,
-                type: "loanFastCreditFirst"
-              }
-            });
+            name = "fastCreditFirstIndex";
           } else if (type === "m6") {
-            this.$router.push({
-              name: "dailyInspectionIndex",
-              params: {
-                bizId: id,
-                type: "loanDailyInspection"
-              }
-            });
+            name = "dailyInspectionIndex";
           }
+          this.$router.push({
+            name: name,
+            params: {
+              bizId: id,
+              type: type,
+              saveFlag: saveFlag
+            }
+          });
         }
       } else {
         this.$router.push({
           name: "checklist1",
           params: {
             bizId: id,
-            type: type
+            type: type,
+            saveFlag: saveFlag
           }
         });
       }

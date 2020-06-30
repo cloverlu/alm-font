@@ -32,12 +32,12 @@
 			span(class="colum-blue")
 			span  检查要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1Field" :info="detail.fieldOne" ref="fieldOne")
+			fieldOne(:definite="definite1Field" :info="detail.fieldOne" :read="true" ref="fieldOne")
 		.definite-smalltitle(class="definite-1-smalltitle2")
 			span(class="colum-blue")
 			span  特殊要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1FieldSpecial" :info="detail.fieldTwo" ref="fieldTwo")
+			fieldOne(:definite="definite1FieldSpecial" :info="detail.fieldTwo" :read="true" ref="fieldTwo")
 		definite2(:detail="detail.definite2")
 		definite16(:detail="detail.definite16")
 </template>

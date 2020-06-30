@@ -10,7 +10,7 @@
 			span(class="colum-blue")
 			span  影像维护
 		.definite-13-content
-			imageUpload(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params.images" :read="false" :ref="`definte16${i}`")
+			imageUpload(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params" :read="false" :ref="`definte16${i}`")
 			
 </template>
 
@@ -23,37 +23,65 @@ export default {
   mixins: [normalMixin, loanInsM1],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       definte16: [],
-      params: {
-        images: []
-      }
+      params: {},
+      type: ""
     };
   },
   mounted() {
     const type = this.$route.params.type;
     switch (type) {
-      case "loanCreditFirst":
+      case "m1":
+        this.type = {
+          bizType: "m1"
+        };
         this.definte16 = definte16();
-        this.params.images = this.mVmodel(11);
+        this.params = this.mVmodel(11);
         break;
-      case "loanFastCreditFirst":
+      case "m5":
+        this.type = {
+          bizType: "m5"
+        };
         this.definte16 = definte162();
-        // this.params.images = this.mVmodel(11);
+        this.params = this.mVmodel(11);
         break;
-      case "loanDailyInspection":
+      case "m6":
+        this.type = {
+          bizType: "m6"
+        };
         this.definte16 = definte172();
-      // this.params.images = this.mVmodel(10);
+        this.params = this.mVmodel(10);
+    }
+    // 上一步下一步需要走的详情接口
+    if (this.$route.params.saveFlag === 1) {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+      console.log(this.forBizDetail(this.$route.name));
+      return false;
+    } else {
+      this.saveFlag.forEach(item => {
+        if (item.currentName === this.$route.name && item.flag === true) {
+          this.setforDizDetail(this);
+          this.params = this.forBizDetail(this.$route.name);
+          console.log(this.forBizDetail(this.$route.name));
+          return false;
+        }
+      });
     }
   },
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
+        var arrs = {};
+        for (let i = 0; i < this.definte16.length; i++) {
+          const a = `pic_${i + 1}s`;
+          arrs[a] = this.$refs[`definte16${i}`][0].fileList[a];
+        }
+        this.params = Object.assign({}, this.type, arrs);
+
         console.log(this.params);
-        const i = 0;
-        console.log(this.$refs[`definte16${i}`][0].fileList);
-        this.setm1Definite16({ params: this.params });
-        this.footerRoute("loanCreditFirst", "firstDefinite16");
-        // this.$router.push({ name: "firstDefinite16" });
+        // this.setm1Definite16({ params: this.params });
       }
     }
   },
@@ -64,7 +92,7 @@ export default {
         const a = `pic_${i + 1}s`;
         definite16[a] = [
           {
-            url: "",
+            url: ``,
             longitude: "",
             dimension: ""
           }
