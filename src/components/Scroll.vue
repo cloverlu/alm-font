@@ -13,8 +13,10 @@
 
 <script>
 import { realPx } from "@/utils/utils";
+import { normalMixin } from "../utils/mixin";
 
 export default {
+  mixins: [normalMixin],
   props: {
     top: {
       type: Number,
@@ -38,6 +40,20 @@ export default {
       }
     }
   },
+  watch: {
+    scrollToPo(val) {
+      console.log(val);
+      this.$refs.scrollWrapper.scrollTo(val.x, val.y);
+    }
+  },
+  mounted() {
+    this.refresh();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.scrollTo(realPx(this.initPosition.x), realPx(this.initPosition.y));
+      }, 1);
+    });
+  },
   methods: {
     handleScroll(e) {
       const offsetY =
@@ -54,14 +70,6 @@ export default {
         this.$refs.scrollWrapper.addEventListener("scroll", this.handleScroll);
       }
     }
-  },
-  mounted() {
-    this.refresh();
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.scrollTo(realPx(this.initPosition.x), realPx(this.initPosition.y));
-      }, 1);
-    });
   }
 };
 </script>

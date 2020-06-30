@@ -27,7 +27,7 @@
 			span(class="colum-blue")
 			span  检查内容
 		.definite-2-field
-			fieldOne(:definite="definite2Field" ref="fieldOne" )
+			fieldOne(:definite="definite2Field" :info="params" :read="false" ref="fieldOne" )
 		.definite-2-tag
 			.tag ※注：
 			.content 1、贷款发放如采用贷款人受托支付方式，信息来源包括《小企业授信业务额度借款支用单》、《小企业贷款受托支付申请书》、汇款凭证、账户流水、合同、入库单、贷款购买标的(如原材料、机器设备等)等。<br>2、贷款发放如采用借款人自主支付方式，信息来源包括《实际支付清单》、汇款凭证、合同、入库单、贷款购买标的( 如原材料、机器设备等)等。
@@ -37,7 +37,7 @@
 				almSelect(:selectData="yesNo"  :defaultValue="params.useAmoutByContract" :triggerId="useAmoutByContract" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 				span(class="iconfont iconxiala arrow")
 			.item2
-				fieldOne(:definite="definite2Field2" ref="fieldTwo" )
+				fieldOne(:definite="definite2Field2"  :info="params" :read="false" ref="fieldTwo" )
 		
 				
 </template>
@@ -55,9 +55,16 @@ import { normalMixin, loanInsM1 } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
   mixins: [normalMixin, loanInsM1],
+  // props: {
+  //   infoDetail: {
+  //     type: Object,
+  //     default: () => {}
+  //   }
+  // },
   // inject: ["reload"],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       definite2Field: definite2Field,
       definite2Field2: definite2Field2,
       coordinate: coordinate,
@@ -67,6 +74,7 @@ export default {
       fontColor: "blue",
       useAmoutByContract: "useAmoutByContract",
       cooperate: "cooperate",
+      parentsDraw: false,
       params: {
         cooperate: 1,
         useAmoutByContract: 1,
@@ -76,7 +84,37 @@ export default {
       }
     };
   },
-  mounted() {},
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     if (from.name === "firstDefinite16") {
+  //       console.log(vm.m1Definite2.params);
+  //       vm.params = vm.m1Definite2.params;
+  //     }
+  //   });
+  // },
+  mounted() {
+    // const params = this.m1Definite2.params;
+    // const bizId = this.$route.params.bizId;
+    // if (params.bizId === bizId) {
+    //   this.params = this.m1Definite2.params;
+    // }
+    // 上一步下一步需要走的详情接口
+    if (this.$route.params.saveFlag === 1) {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+      console.log(this.forBizDetail(this.$route.name));
+      return false;
+    } else {
+      this.saveFlag.forEach(item => {
+        if (item.currentName === this.$route.name && item.flag === true) {
+          this.setforDizDetail(this);
+          this.params = this.forBizDetail(this.$route.name);
+          console.log(this.forBizDetail(this.$route.name));
+          return false;
+        }
+      });
+    }
+  },
   computed: {},
   watch: {
     nextFooter(val, oldval) {
@@ -87,16 +125,23 @@ export default {
           this.$refs.fieldOne.params,
           this.$refs.fieldTwo.params
         );
-        console.log(this.params);
-        this.setm1Definite2({ params: this.params });
-        this.footerRoute("loanCreditFirst", "firstDefinite2");
+        // this.setm1Definite2({ params: this.params });
+        // this.footerRoute("loanCreditFirst", "firstDefinite2");
         // this.$router.push({ name: "firstDefinite16" });
       }
+    },
+    // 上一步回显
+    // prevFooter(val, oldval) {
+    //   const params = this.m1Definite2.params;
+    //   this.params = params;
+    // }
+    infoDetail(val, oldval) {
+      console.log(val);
     }
   },
   methods: {
     getSelect(data) {
-      this.params.cooperate = data.key;
+      this.params.cooperate = data[0].key;
     },
     Aaaa() {
       // console.log(this.$store.state.creditFirst.definite1);

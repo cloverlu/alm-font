@@ -32,7 +32,7 @@ export default {
       //随机数
       const val = Date.now();
       //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”
-      this.setNextFooter({ nextFooter: val });
+      this.setNextFooter({ nextFooter: val, tag: "nextFooter" });
 
       const currentName = this.$route.name;
       const currentType = this.$route.params.type;

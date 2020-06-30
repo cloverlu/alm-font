@@ -3,25 +3,25 @@ const todoListTitle = [
     id: 1,
     text: "业务审批流程待处理提醒",
     icon: "iconfont icontixing2",
-    warningNumber: 17
+    warningNumber: ""
   },
   {
     id: 2,
     text: "贷后检查待处理提醒",
     icon: "iconfont icondaikuan2",
-    warningNumber: 188
+    warningNumber: ""
   },
   {
     id: 3,
     text: "客户账户余额不足提醒",
     icon: "iconfont iconzhanghuyue2",
-    warningNumber: 100
+    warningNumber: ""
   },
   {
     id: 4,
     text: "贷款到期提醒",
     icon: "iconfont icondaikuanshenqing1",
-    warningNumber: 1
+    warningNumber: ""
   },
   {
     id: 5,
@@ -33,7 +33,7 @@ const todoListTitle = [
     id: 6,
     text: "信贷运营监控风险提示",
     icon: "iconfont iconfengxiantishi2",
-    warningNumber: 1
+    warningNumber: ""
   },
   {
     id: 7,
@@ -131,15 +131,15 @@ const definite1 = {
 // const payType = ["贷款人受托支付", "借款人自主支付", "受托支付+自主支付"];
 const payType = [
   {
-    key: 1,
+    key: "1",
     value: "贷款人受托支付"
   },
   {
-    key: 2,
+    key: "2",
     value: "借款人自主支付"
   },
   {
-    key: 3,
+    key: "3",
     value: "受托支付+自主支付"
   }
 ];
@@ -149,7 +149,7 @@ const definite1Field = [
   {
     name: "要求",
     id: 1,
-    modelName: "equireCheck"
+    modelName: "requireCheck"
   },
   {
     name: "落实情况",
@@ -831,6 +831,11 @@ const definite16Normal = {
   lineBalance: "" //贷款余额
 };
 
+//api公用用户（当前没有用户接口接入）
+const userInfo = {
+  emplName: "金林"
+};
+
 export {
   todoListTitle,
   loanInsList,
@@ -872,5 +877,6 @@ export {
   checklist1,
   definite16Normal,
   agreeOrNot,
-  nextPositionHandlersArr
+  nextPositionHandlersArr,
+  userInfo
 };
