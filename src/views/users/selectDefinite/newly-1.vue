@@ -129,7 +129,7 @@ export default {
         lineAmout: "", // 授信金额
         lineBalance: "", // 授信余额
         securityKind: 1, // 担保方式
-        cooperate: 1, // 检查配合程度
+        cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
       }

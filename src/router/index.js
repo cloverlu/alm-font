@@ -164,7 +164,7 @@ const routes = [
       },
       // 类型2
       {
-        path: "2/:type/:bizId",
+        path: "2/:type/:bizId/:saveFlag",
         name: "creditRoutineIndex",
         component: creditRoutineIndex,
         meta: {
@@ -260,7 +260,7 @@ const routes = [
       //类型3
       //新增1-8
       {
-        path: "3/:type/:bizId",
+        path: "3/:type/:bizId/:saveFlag",
         name: "creditOverallIndex",
         component: creditOverallIndex,
         meta: {
@@ -350,7 +350,7 @@ const routes = [
       },
       // 类型4
       {
-        path: "4/:type/:bizId",
+        path: "4/:type/:bizId/:saveFlag",
         name: "repaymentInspectionIndex",
         component: repaymentInspectionIndex,
         meta: {
@@ -385,7 +385,7 @@ const routes = [
       },
       // 类型5
       {
-        path: "5/:type/:bizId",
+        path: "5/:type/:bizId/:saveFlag",
         name: "fastCreditFirstIndex",
         component: definite14,
         meta: {
@@ -421,7 +421,7 @@ const routes = [
       },
       // 类型6 新增1
       {
-        path: "6/:type/:bizId",
+        path: "6/:type/:bizId/:saveFlag",
         name: "dailyInspectionIndex",
         component: newly1,
         meta: {

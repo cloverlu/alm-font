@@ -9,14 +9,15 @@
 		.newly-18(v-if="hasOverallChildRouter")
 			.definite-1-title
 				span(class="colum-blue")
-				span(class="title") {{detail.custName}} 
+				span(class="title") {{detail.custName}}
 			.definite-field
 				.item
-					span(class="tag") 检查类型11
-					span(class="info") {{detail.bizType}}
+					span(class="tag") 检查类型
+					span(class="info") {{detail.bizTypeName}}
 				.item
 					span(class="tag") 授信金额
-					span(class="info") {{detail.lineAmout}}
+					span(class="info") 
+						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
 					span(class="tag") 授信余额
 					span(class="info") {{detail.lineBalance}}
@@ -24,7 +25,7 @@
 					span(class="tag") 担保方式
 					almSelect(:selectData="info"  :defaultValue="params.securityKind" :triggerId="securityKindId" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 					span(class="iconfont iconxiala arrow") 
-				.item(class="input-item" v-if="params.securityKind === 5")
+				.item(class="input-item" v-if="params.securityKind ==='5' ")
 					mt-field(v-model="params.otherSecurityKindMsg" class="textArea other-textArea" type="input"  placeholder="其他担保方式")
 				.item
 					span(class="tag") 还款方式
@@ -36,70 +37,78 @@
 				span(class="colum-blue")
 				span  审批意见中贷后日常检查要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldOne" )
+				fieldOne(:definite="definite1Field" :info="params" :read="false" ref="fieldOne" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  产品贷后日常检查特殊要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldTwo" )
+				fieldOne(:definite="definite1FieldSpecial" :info="params" :read="false" ref="fieldTwo" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  利率及综合金融服务的要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldThree" )
+				fieldOne(:definite="definite1FieldRate" :info="params" :read="false" ref="fieldThree" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  实际控制人或法定代表人风险点
 			.newly-18-field(class="small-one")
-				fieldOne(:definite="newly18One" ref="fieldThree" )
+				fieldOne(:definite="newly18One" :info="params" :read="false" ref="fieldFour" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  管理层风险点
 			.newly-18-field(class="small-two")
-				fieldOne(:definite="newly18Two" ref="fieldThree" )
+				fieldOne(:definite="newly18Two" :info="params" :read="false" ref="fieldFive" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  近期检查发现的其他风险点
 			.newly-18-field(class="small-three")
 				mt-field(v-model="params.otherRisk" class="textArea" type="textarea" rows="3" placeholder="请输入")
-		router-view(v-else)
+		router-view(ref="m3rview" v-else)
 </template>
 
 <script>
 import {
   newly18,
-  securityKinds,
+  securityKindsArr,
   definite1Field,
   newly18One,
-  newly18Two
+  newly18Two,
+  definite1FieldSpecial,
+  definite1FieldRate
 } from "../../../utils/dataMock.js";
 import almSelect from "../components/select";
 import fieldOne from "../components/fieldOne";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       hasOverallChildRouter: this.$route.params.hasOverallChildRouter,
-      detail: newly18,
-      info: securityKinds(),
+      detail: {},
+      info: securityKindsArr,
       definite1Field: definite1Field,
+      definite1FieldSpecial: definite1FieldSpecial,
+      definite1FieldRate: definite1FieldRate,
       newly18One: newly18One,
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
       securityKindId: "securityKind",
       params: {
-        securityKind: 1,
+        lineAmout: "",
+        securityKind: "1",
         otherSecurityKindMsg: "",
         repayKind: "",
-        requireCheck: "", //审批意见中贷后日常检查要求及落实情况
-        checked: "", //审批意见中贷后日常检查要求及落实情况
-        specialRequireCheck: "", //产品贷后日常检查特殊要求及落实情况
-        specialChecked: "", //产品贷后日常检查特殊要求及落实情况
-        rateAndIntfinSerCheck: "", // 利率及综合金融服务的要求及落实情况
-        rateAndIntfinSerChecked: "", // 利率及综合金融服务的要求及落实情况
-        HoldPensonRisk: "", //实际控制人或法定代表人风险点
-        managerRisk: "", //管理层风险点
+        // requireCheck: "", //审批意见中贷后日常检查要求及落实情况
+        // checked: "", //审批意见中贷后日常检查要求及落实情况
+        // specialRequireCheck: "", //产品贷后日常检查特殊要求及落实情况
+        // specialChecked: "", //产品贷后日常检查特殊要求及落实情况
+        // rateAndIntfinSerCheck: "", // 利率及综合金融服务的要求及落实情况
+        // rateAndIntfinSerChecked: "", // 利率及综合金融服务的要求及落实情况
+        // HoldPensonRisk: "", //实际控制人或法定代表人风险点
+        // managerRisk: "", //管理层风险点
         otherRisk: "" //近期检查发现的其他风险点
       }
     };
@@ -111,8 +120,75 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.hasOverallChildRouter = to.name === "creditOverallIndex";
     next();
+    // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
+    if (from.name === "overalltDefinite13") {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    }
   },
-  mounted() {},
+  async mounted() {
+    // 基本详情与流程详情的接口写在了vuex里
+    //保存接口写在了Mixin里
+    // 获取基本详情
+    await this.setqueryDetail(this);
+    this.bizType(this.queryDetail, this.queryDetail.checkType);
+    this.detail = this.queryDetail;
+
+    //判断是否是已经填了部分
+    if (
+      this.$route.params.saveFlag === 1 ||
+      this.$route.params.saveFlag === "1"
+    ) {
+      await this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
+    }
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.$Indicator.open();
+        const currentName = this.$route.name;
+        const type = this.$route.params.type;
+        var loanBusiness = {};
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
+        if (currentName === "creditOverallIndex") {
+          loanBusiness = Object.assign(
+            {},
+            this.params,
+            this.$refs.fieldOne.params,
+            this.$refs.fieldTwo.params,
+            this.$refs.fieldThree.params,
+            this.$refs.fieldFour.params,
+            this.$refs.fieldFive.params,
+            bizId
+          );
+          this.infoSave(loanBusiness, currentName, type, val.tag);
+        } else if (currentName === "overalltDefinite3") {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m3rview.params, bizId);
+            // 审批页面的保存走审批接口，只是传的对象不同
+            this.submit(loanBusiness);
+          });
+        } else {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m3rview.params, bizId);
+            this.infoSave(loanBusiness, currentName, type, val.tag);
+          });
+        }
+      }
+    }
+  },
   methods: {
     getSelect(val) {
       this.params.securityKind = val[0].key;

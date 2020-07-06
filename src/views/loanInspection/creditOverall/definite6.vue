@@ -14,10 +14,10 @@
 		.definite-field
 			.item
 				span(class="tag big-max") 企业所在行业是否发生重大不利变化
-				almSelect(:selectData="yesNo"  :defaultValue="params.IndustrycChangSiut" :triggerId="triggerId1" :title="selectTitle1" :fontColor="fontColor" @getSelectValue="IndustrycChangSiut" class="info" ) 
+				almSelect(:selectData="yesNo"  :defaultValue="params.industrycChangSiut" :triggerId="triggerId1" :title="selectTitle1" :fontColor="fontColor" @getSelectValue="IndustrycChangSiut" class="info" ) 
 				span(class="iconfont iconxiala arrow") 
 			.item(class="item-textarea")
-				mt-field(v-model="params.IndustrycChangSiutMsg" class="textArea" type="textarea" rows="3" placeholder="请输入")
+				mt-field(v-model="params.industrycChangSiutMsg" class="textArea" type="textarea" rows="3" placeholder="请输入")
 			.item
 				span(class="tag big-max") 企业是否有与主业无关的扩张计划
 				almSelect(:selectData="yesNo"  :defaultValue="params.planExpandSitu" :triggerId="triggerId2" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="planExpandSitu" class="info" ) 
@@ -41,7 +41,8 @@
 			.item
 				span(class="tag big") 上次抵质押物评估或重估日期
 				span(class="info" @click="a") 
-					span {{params.collEstimateDate}}
+					input(v-model="params.collEstimateDate" type="input" class="field-input" placeholder="请输入")
+				
 			.item
 				span(class="tag big") 上次抵质押物评估或重估金额
 				span(class="info") 
@@ -62,15 +63,18 @@ import { DatetimePicker } from "mint-ui";
 import { formatDate2 } from "@/utils/utils";
 import almSelect from "../components/select";
 import { yesNo } from "../../../utils/dataMock.js";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { "mt-datetime-picker": DatetimePicker, almSelect },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       params: {
-        IndustrycChangSiut: 0,
+        industrycChangSiut: 0,
         planExpandSitu: 0,
         hiddenTroubleSitu: 0,
-        IndustrycChangSiutMsg: "",
+        industrycChangSiutMsg: "",
         planExpandSituMsg: "",
         hiddenTroubleSituMsg: "",
         collEstimateDate: "",
@@ -88,18 +92,39 @@ export default {
       yesNo: yesNo
     };
   },
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        const bizId = {
+          bizId: this.bizId
+        };
+        this.params = Object.assign({}, this.params, bizId);
+      }
+    }
+  },
   methods: {
     a() {
       this.$refs.picker.open();
     },
     handleConfirm() {
-      console.log(formatDate2(this.pickerValue, 1));
       this.params.collEstimateDate = formatDate2(this.pickerValue, 1);
       this.$refs.picker.close();
     },
-    IndustrycChangSiut() {},
-    planExpandSitu() {},
-    hiddenTroubleSitu() {}
+    IndustrycChangSiut(val) {
+      this.params.industrycChangSiut = val[0].key;
+    },
+    planExpandSitu(val) {
+      this.params.planExpandSitu = val[0].key;
+    },
+    hiddenTroubleSitu(val) {
+      this.params.hiddenTroubleSitu = val[0].key;
+    }
   }
 };
 </script>

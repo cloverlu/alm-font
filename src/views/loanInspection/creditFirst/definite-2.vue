@@ -8,7 +8,7 @@
 	.definite-2
 		.definite-field
 			.item
-				span(class="tag" @click="Aaaa") 检查地点
+				span(class="tag" ) 检查地点
 				span(class="info") 
 					input(v-model="params.checkAddr" type="input" class="field-input" placeholder="请输入检查地点")
 			.item
@@ -51,10 +51,10 @@ import {
 } from "../../../utils/dataMock.js";
 import fieldOne from "../components/fieldOne";
 import almSelect from "../components/select";
-import { normalMixin, loanInsM1 } from "../../../utils/mixin";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
-  mixins: [normalMixin, loanInsM1],
+  mixins: [normalMixin],
   // props: {
   //   infoDetail: {
   //     type: Object,
@@ -76,7 +76,7 @@ export default {
       cooperate: "cooperate",
       parentsDraw: false,
       params: {
-        cooperate: 1,
+        cooperate: "1",
         useAmoutByContract: 1,
         checkAddr: "",
         addrChangedMsg: "",
@@ -84,36 +84,12 @@ export default {
       }
     };
   },
-  // beforeRouteEnter(to, from, next) {
-  //   next(vm => {
-  //     if (from.name === "firstDefinite16") {
-  //       console.log(vm.m1Definite2.params);
-  //       vm.params = vm.m1Definite2.params;
-  //     }
-  //   });
-  // },
+
   mounted() {
-    // const params = this.m1Definite2.params;
-    // const bizId = this.$route.params.bizId;
-    // if (params.bizId === bizId) {
-    //   this.params = this.m1Definite2.params;
-    // }
     // 上一步下一步需要走的详情接口
-    if (this.$route.params.saveFlag === 1) {
-      this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-      console.log(this.forBizDetail(this.$route.name));
-      return false;
-    } else {
-      this.saveFlag.forEach(item => {
-        if (item.currentName === this.$route.name && item.flag === true) {
-          this.setforDizDetail(this);
-          this.params = this.forBizDetail(this.$route.name);
-          console.log(this.forBizDetail(this.$route.name));
-          return false;
-        }
-      });
-    }
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
   },
   computed: {},
   watch: {
@@ -129,22 +105,11 @@ export default {
         // this.footerRoute("loanCreditFirst", "firstDefinite2");
         // this.$router.push({ name: "firstDefinite16" });
       }
-    },
-    // 上一步回显
-    // prevFooter(val, oldval) {
-    //   const params = this.m1Definite2.params;
-    //   this.params = params;
-    // }
-    infoDetail(val, oldval) {
-      console.log(val);
     }
   },
   methods: {
     getSelect(data) {
       this.params.cooperate = data[0].key;
-    },
-    Aaaa() {
-      // console.log(this.$store.state.creditFirst.definite1);
     }
   }
 };

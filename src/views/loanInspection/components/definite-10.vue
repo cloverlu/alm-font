@@ -17,7 +17,12 @@
               客户每季度查询一次个人征信即可)
             </span>
           </div>
-          <mt-cell class="textFiled" title="征信报告查询日期" :value="queryDate"></mt-cell>
+          <mt-field
+            class="textFiled"
+            label="征信报告查询日期"
+            placeholder="请输入"
+            v-model="params.queryDateForPer"
+          ></mt-field>
         </div>
       </div>
 
@@ -37,7 +42,9 @@
         </div>
 
         <!-- （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况 -->
-        <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
+        <div class="coNo1">
+          （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+        </div>
         <mt-field
           class="textFiled"
           label="未结清贷款笔数"
@@ -154,7 +161,7 @@
             class="textFiled"
             label="征信分类"
             placeholder="请输入"
-            v-model="params.creditClassification"
+            v-model="params.creditClassificationJur"
           ></mt-field>
           <div class="formTitle1">
             <!-- <span class="lightBlue"></span>
@@ -162,7 +169,9 @@
             <span class="lightBlue1"></span>
             <span class="coNameBlack1">征信情况</span>
           </div>
-          <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
+          <div class="coNo1">
+            （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+          </div>
         </div>
         <mt-field
           class="textFiled"
@@ -303,7 +312,7 @@
           type="textarea"
           rows="3"
           class="text"
-          v-model="params.RecentNegativeInformation"
+          v-model="params.msg"
           style="overflow:hidden"
           placeholder="请输入近期负面信息情况说明"
         ></mt-field>
@@ -313,18 +322,17 @@
 </template>
 
 <script>
-import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
-import { Cell, Field } from "mint-ui";
+import { yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
     almSelect
   },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
       queryDate: "2020-06-03",
       yesNo: yesNo,
       popupVisible: false,
@@ -337,7 +345,9 @@ export default {
       existCreditChage5: "existCreditChage5",
       existCreditChage3: "existCreditChage3",
       params: {
+        queryDateForPer: "",
         creditClassification: "", // 征信分类
+        creditClassificationJur: "",
         // 企业实际控制人部分
         unPayOffLoanNumCon: "", //未结清贷款笔数
         unPayOffAmoutCon: "", // 未结清贷款金额
@@ -375,36 +385,47 @@ export default {
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
-        RecentNegativeInformation: "",
+        msg: "",
         addedOverdues: false,
         pickerVisible: false
-      }
+      },
+      freezeParams: {}
     };
   },
-  methods: {
-    getSelect1(data) {
-      this.params.existBadRecordCon = data.key;
-    },
-    getSelect2(data) {
-      this.params.existBadRecordJur = data.key;
-    },
-    getSelect3(data) {
-      this.params.existCreditChage4 = data.key;
-    },
-    getSelect4(data) {
-      this.params.existCreditChage5 = data.key;
-    },
-    getSelect5(data) {
-      this.params.existCreditChage3 = data.key;
-    }
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
   },
+
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite10里
-        this.setDefinite10({ params: this.params });
+        this.params = {
+          creditInfo: this.params,
+          msg: this.params.msg,
+          bizId: this.$route.params.bizId
+        };
       }
+    }
+  },
+  methods: {
+    getSelect1(data) {
+      this.params.existBadRecordCon = data[0].key;
+    },
+    getSelect2(data) {
+      this.params.existBadRecordJur = data[0].key;
+    },
+    getSelect3(data) {
+      this.params.existCreditChage4 = data[0].key;
+    },
+    getSelect4(data) {
+      this.params.existCreditChage5 = data[0].key;
+    },
+    getSelect5(data) {
+      this.params.existCreditChage3 = data[0].key;
     }
   }
 };

@@ -47,6 +47,9 @@ export default {
     };
   },
   created() {
+    // console.log(this.fileList);
+  },
+  mounted() {
     const arr = this.itemVmodel[this.item.vModel];
     if (arr && arr[0]) {
       if (arr.length > 0) {
@@ -78,11 +81,37 @@ export default {
         this.imageHas = false;
       }
     }
-
-    // console.log(this.fileList);
   },
-  mounted() {
-    // this.getOrientation();
+  watch: {
+    itemVmodel(val, oldval) {
+      const arr = val[this.item.vModel];
+      if (arr && arr[0]) {
+        if (arr.length > 0) {
+          this.imageHas = true;
+        } else {
+          if (!this.read) {
+            this.imageHas = true;
+          } else {
+            this.imageHas = false;
+          }
+        }
+        if (!this.read) {
+          this.uploadVisible = true;
+        } else {
+          this.uploadVisible = false;
+        }
+        this.$set(this.fileList, this.item.vModel, val[this.item.vModel]);
+      } else {
+        this.$set(this.fileList, this.item.vModel, []);
+        if (!this.read) {
+          this.uploadVisible = true;
+          this.imageHas = true;
+        } else {
+          this.uploadVisible = false;
+          this.imageHas = false;
+        }
+      }
+    }
   },
   methods: {
     //删除文件

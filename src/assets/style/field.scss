@@ -223,3 +223,15 @@ input:disabled {
     background-color: #4e78de;
   }
 }
+
+.mint-cell-wrapper{
+	background-image: none !important;
+	padding: px2rem(15) !important;
+	.mint-field-core{
+		color:#9F9F9F !important;
+		&::placeholder {
+			color: #9f9f9f;
+			font-size: px2rem(14);
+		}
+	}
+}

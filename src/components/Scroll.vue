@@ -42,7 +42,6 @@ export default {
   },
   watch: {
     scrollToPo(val) {
-      console.log(val);
       this.$refs.scrollWrapper.scrollTo(val.x, val.y);
     }
   },

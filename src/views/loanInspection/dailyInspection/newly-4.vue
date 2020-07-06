@@ -5,12 +5,12 @@
 -->
 <template lang="pug">
 	.newly4
-		.newly-4-repeat(v-for="(item,index) in info" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''" )
+		.newly-4-repeat(v-for="(item,index) in info.assitInfoForPledge" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''" )
 			.repeat-operation(v-if="index !== 0")
 				.repeat-operation-title 新增 {{item.id}}
 				.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
 			.definite-field
-				.item
+				.item 
 					span(class="tag big") 押品名称
 					span(class="info") 
 						input(v-model="item.assitName" type="input" class="field-input" placeholder="请输入")
@@ -60,7 +60,7 @@
 		.add
 			mt-button(class="add-primary" type="primary" @click="addInfo") + 增加
 		.newly-4-norepeat
-			fieldOne(:definite="newly4" ref="fieldOne")
+			fieldOne(:definite="newly4" :info="info" ref="fieldOne")
 
 		
 
@@ -70,31 +70,50 @@
 import { newly4 } from "../../../utils/dataMock.js";
 import { Button } from "mint-ui";
 import fieldOne from "../components/fieldOne";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { "mt-button": Button, fieldOne },
+  props: ["detail"],
+  mixins: [normalMixin],
   data() {
     return {
       params: {},
       trasIndex: "",
-      info: [
-        {
-          id: 1,
-          i: 0,
-          assitName: "", //押品名称
-          assitAddr: "", //押品位置地址
-          firstEstimateDate: "", //首次评估情况
-          firstEstimateValue: "", //我行认定价值
-          firstMortAndpleRate: "", //抵质押率
-          LastEstimateDate: "", //最近一次评估情况
-          LastEstimateValue: "", //我行认定价值
-          LastMortAndpleRate: "", //抵质押率
-          thisEstimateDate: "", //本次评估情况
-          thisEstimateValue: "", //我行认定价值
-          thisMortAndpleRate: "" //抵质押率
-        }
-      ],
+      info: {
+        assitInfoForPledge: [
+          {
+            id: 1,
+            assitName: "", //押品名称
+            assitAddr: "", //押品位置地址
+            firstEstimateDate: "", //首次评估情况
+            firstEstimateValue: "", //我行认定价值
+            firstMortAndpleRate: "", //抵质押率
+            LastEstimateDate: "", //最近一次评估情况
+            LastEstimateValue: "", //我行认定价值
+            LastMortAndpleRate: "", //抵质押率
+            thisEstimateDate: "", //本次评估情况
+            thisEstimateValue: "", //我行认定价值
+            thisMortAndpleRate: "" //抵质押率
+          }
+        ]
+      },
       newly4: newly4
     };
+  },
+  mounted() {
+    this.info = this.detail;
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.params = Object.assign({}, this.info, this.$refs.fieldOne.params);
+        this.$emit("upperParams4", this.params);
+      }
+    },
+    detail(val, oldval) {
+      this.info = val;
+      console.log(this.info);
+    }
   },
   methods: {
     addInfo() {
@@ -112,13 +131,13 @@ export default {
         thisEstimateValue: "", //我行认定价值
         thisMortAndpleRate: "" //抵质押率
       };
-      this.info.push(item);
+      this.info.assitInfoForPledge.push(item);
     },
     operateDelete(index, id) {
       this.trasIndex = id;
       setTimeout(() => {
-        this.info.splice(index, 1);
-      }, 500);
+        this.info.assitInfoForPledge.splice(index, 1);
+      }, 300);
     }
   }
 };
@@ -132,7 +151,7 @@ export default {
   .newly-4-repeat {
     &.transa {
       transform: scaleX(0);
-      transition: transform 0.4s;
+      transition: transform 0.2s;
       transform-origin: top right;
     }
     .field-top {
@@ -155,7 +174,7 @@ export default {
       .repeat-operation-delete {
         color: #db3822;
         font-size: px2rem(12);
-        flex: 1;
+        flex: 0 0 px2rem(30);
         text-align: right;
       }
     }

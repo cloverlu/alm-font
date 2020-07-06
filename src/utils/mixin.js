@@ -1,4 +1,6 @@
 import { mapGetters, mapActions } from "vuex";
+import { SaveEditModelBusiness, submitApprove } from "../api/loanlnspection";
+import { unique, nowData } from "../utils/utils";
 
 //普遍用到的状态
 export const normalMixin = {
@@ -8,7 +10,8 @@ export const normalMixin = {
       "prevFooter",
       "scrollToPo",
       "forBizDetail",
-      "saveFlag"
+      "saveFlag",
+      "queryDetail"
     ])
   },
   methods: {
@@ -17,7 +20,8 @@ export const normalMixin = {
       "setPrevFooter",
       "setScrollToPo",
       "setforDizDetail",
-      "setSaveFlag"
+      "setSaveFlag",
+      "setqueryDetail"
     ]),
     // 判断下一步路由该去的页面
     footerRoute(currentType, currentName, params) {
@@ -147,6 +151,207 @@ export const normalMixin = {
         case "m6":
           item.bizTypeName = "小企业法人快捷贷贷后日常检查";
       }
+    },
+    //保存信息
+    async infoSave(loanBusiness, currentName, type, tag) {
+      let res = await SaveEditModelBusiness(this, loanBusiness);
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        this.$Indicator.close();
+        this.$Toast({
+          message: "保存成功！",
+          iconClass: "iconfont icongou-01",
+          duration: 1000
+        });
+
+        // 保存saveFlag
+        const pa = {
+          bizId: this.$route.params.bizId,
+          currentName: currentName,
+          flag: true
+        };
+        const saveFlags = this.saveFlag;
+        saveFlags.push(pa);
+        this.setSaveFlag(unique(saveFlags, "currentName"));
+
+        if (tag === "nextFooter") {
+          setTimeout(() => {
+            this.footerRoute(type, currentName, loanBusiness);
+          }, 1200);
+        }
+      } else {
+        this.$Toast({
+          message: "保存失败！",
+          iconClass: "iconfont iconcha-01",
+          duration: 5000
+        });
+      }
+    },
+    // 提交审批页面的保存（opType: "0"）和提交（opType: "1"）
+    async submit(params) {
+      var message = "";
+      if (params.opType === "0") {
+        message = "保存";
+      } else if (params.opType === "1") {
+        message = "提交";
+      }
+      await submitApprove(this, params).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "成功！",
+            iconClass: "iconfont icongou-01",
+            duration: 1000
+          });
+          if (params.opType === "1") {
+            setTimeout(() => {
+              this.$router.push({ name: "loanInspectionIndex" });
+            }, 1200);
+          } else {
+            this.$MessageBox
+              .confirm("回到列表页吗？")
+              .then(action => {
+                if (action === "confirm") {
+                  this.$router.push({ name: "loanInspectionIndex" });
+                }
+                if (action === "cancel") {
+                  return false;
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          }
+        } else {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "失败！",
+            iconClass: "iconfont iconcha-01",
+            duration: 5000
+          });
+        }
+      });
+    },
+    // mounted中需要判断是否走详情接口的内容
+    mountedTag(flag, name) {
+      if (flag === 1 || flag === "1") {
+        this.setforDizDetail(this);
+        this.params = this.forBizDetail(name);
+        if (name === "processing4") {
+          this.params2 = {
+            pic_1s: this.forBizDetail(name).imageList
+          };
+        }
+        console.log(this.forBizDetail(name));
+        //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+        this.setScrollToPo({
+          x: 0,
+          y: 0,
+          ratenum: Date.now(),
+          tag: "nextFooter"
+        });
+        return false;
+      } else {
+        this.saveFlag.forEach(item => {
+          if (item.currentName === name && item.flag === true) {
+            this.setforDizDetail(this);
+            this.params = this.forBizDetail(name);
+            if (name === "processing4") {
+              this.params2 = this.forBizDetail(name);
+            }
+            console.log(this.forBizDetail(name));
+            //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+            this.setScrollToPo({
+              x: 0,
+              y: 0,
+              ratenum: Date.now(),
+              tag: "nextFooter"
+            });
+            return false;
+          }
+        });
+      }
+    },
+    // 图像模块匹配
+    mVmodel(num) {
+      const definite16 = {};
+      for (let i = 0; i < num; i++) {
+        const a = `pic_${i + 1}s`;
+        definite16[a] = [
+          {
+            url: ``,
+            longitude: "",
+            dimension: ""
+          }
+        ];
+      }
+      return definite16;
+    },
+    // promise
+    promiseFun(url, params) {
+      return new Promise((resolve, reject) => {
+        url(this, params).then(
+          res => {
+            if (res.status === 200 && res.data.returnCode === "200000") {
+              console.log(res);
+              resolve(res);
+            }
+          },
+          err => {
+            reject(err.json());
+          }
+        );
+      });
+    },
+    // 照片保存与保存审批页面同时存在，用promise all，只要一个失败即失败
+    bindSave(params, params2) {
+      let appreove = this.promiseFun(submitApprove, params);
+      let editSave = this.promiseFun(SaveEditModelBusiness, params2);
+      var message = "";
+      if (params.opType === "0") {
+        message = "保存";
+      } else if (params.opType === "1") {
+        message = "提交";
+      }
+
+      // 使用 Promise.all()
+      Promise.all([appreove, editSave])
+        .then(res => {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "成功！",
+            iconClass: "iconfont icongou-01",
+            duration: 1000
+          });
+          if (params.opType === "1") {
+            setTimeout(() => {
+              this.$router.push({ name: "loanInspectionIndex" });
+            }, 1200);
+          } else {
+            setTimeout(() => {
+              this.$MessageBox
+                .confirm("回到列表页吗？")
+                .then(action => {
+                  if (action === "confirm") {
+                    this.$router.push({ name: "loanInspectionIndex" });
+                  }
+                  if (action === "cancel") {
+                    return false;
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            }, 1200);
+          }
+        })
+        .catch(err => {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "失败！",
+            iconClass: "iconfont iconcha-01",
+            duration: 5000
+          });
+        });
     }
   }
 };

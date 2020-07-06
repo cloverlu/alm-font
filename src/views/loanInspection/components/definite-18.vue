@@ -10,21 +10,56 @@
 			span(class="colum-blue")
 			span  影像维护
 		.definite-13-content
-			imageUpload(v-for="item in definte18" :key="item.id" :item="item")
+			imageUpload(v-for="(item,i) in definte18" :key="i" :item="item" :itemVmodel="params" :read="false" :ref="`definte18${i}`")
 			
 </template>
 
 <script>
 import imageUpload from "../components/imageUpload";
 import { definte18 } from "../../../utils/dataMock";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { imageUpload },
+  mixins: [normalMixin],
   data() {
     return {
-      definte18: definte18()
+      bizId: this.$route.params.bizId,
+      params: {},
+      definte18: [],
+      type: {}
     };
   },
-  mounted() {}
+  mounted() {
+    const type = this.$route.params.type;
+    switch (type) {
+      case "m2":
+        this.type = {
+          bizType: "m2"
+        };
+        this.definte18 = definte18();
+        this.params = this.mVmodel(11);
+        console.log(this.params);
+    }
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        var arrs = {};
+        for (let i = 0; i < this.definte18.length; i++) {
+          const a = `pic_${i + 1}s`;
+          arrs[a] = this.$refs[`definte18${i}`][0].fileList[a];
+        }
+        this.params = Object.assign({}, this.type, arrs);
+
+        console.log(this.params);
+        // this.setm1Definite16({ params: this.params });
+      }
+    }
+  }
 };
 </script>
 

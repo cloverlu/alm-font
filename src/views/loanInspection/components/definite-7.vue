@@ -30,161 +30,81 @@
           </van-checkbox-group>
         </van-collapse-item>
       </van-collapse>
-      <div class="type1">
-        <div class="formTitle1">
-          <span class="coName">第一阶段</span>
+      <div class="definite7-wrapper">
+        <div
+          class="type1"
+          v-for="item in params.stageData"
+          :key="item.checkStage"
+        >
+          <div class="formTitle1">
+            <span class="coName" v-if="item.checkStage === '1'">第一阶段</span>
+            <span class="coName" v-if="item.checkStage === '2'">第二阶段</span>
+            <span class="coName" v-if="item.checkStage === '3'">第三阶段</span>
+          </div>
+          <div class="item1">
+            <span class="tag1">还款意愿</span>
+            <almSelect
+              :selectData="payIntentionsArr"
+              :defaultValue="item.payIntention"
+              :triggerId="payIntention(item.checkStage)"
+              :title="selectTitle"
+              :fontColor="fontColor"
+              @getSelectValue="getSelect(arguments, item.checkStage)"
+              class="info"
+            ></almSelect>
+            <span class="iconfont iconxiala arrow"></span>
+          </div>
+          <mt-field
+            class="textFiled"
+            label="检查地点"
+            placeholder="请输入"
+            v-model="item.practicableCheckAddr"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="接待人员"
+            placeholder="请输入"
+            v-model="item.practicableStaff"
+          ></mt-field>
+          <mt-field
+            class="textFiled"
+            label="还款资金来源"
+            placeholder="请输入"
+            v-model="item.amoutSource"
+          ></mt-field>
+          <div class="definite-field">
+            <div class="item">
+              <span class="tag big">
+                预计还款/付息时间
+              </span>
+              <span class="info" @click="timepickerVisible(item.checkStage)">
+                <input
+                  v-model="item.expectRepayDate"
+                  type="input"
+                  class="field-input"
+                  placeholder="请输入"
+                />
+              </span>
+            </div>
+          </div>
+          <mt-datetime-picker
+            :ref="'picker' + item.checkStage"
+            type="date"
+            v-model="item.expectRepayDate"
+            @confirm="handleConfirm(item.checkStage)"
+          ></mt-datetime-picker>
+
+          <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
+          <div class="msg">还款资金落实情况说明</div>
+          <mt-field
+            type="textarea"
+            rows="3"
+            v-model="item.practicableMsg"
+            class="text"
+            style="overflow:hidden"
+            placeholder="请输入"
+          ></mt-field>
         </div>
-        <div class="item1">
-          <span class="tag1">还款意愿</span>
-          <almSelect
-            :selectData="payIntentionsArr"
-            :defaultValue="params.stageData[0].payIntention"
-            :triggerId="payIntention1"
-            :title="selectTitle"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect1"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          class="textFiled"
-          label="检查地点"
-          placeholder="请输入"
-          v-model="params.stageData[0].practicableCheckAddr"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="接待人员"
-          placeholder="请输入"
-          v-model="params.stageData[0].practicableStaff"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款资金来源"
-          placeholder="请输入"
-          v-model="params.stageData[0].amoutSource"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="预计还款/付息时间"
-          placeholder="请输入"
-          v-model="params.stageData[0].expectRepayDate"
-        ></mt-field>
-        <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
-        <div class="msg">还款资金落实情况说明</div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.stageData[0].practicableMsg"
-          class="text"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
-      </div>
-      <div class="type2" v-if="second">
-        <div class="formTitle1">
-          <span class="coName">第二阶段</span>
-        </div>
-        <div class="item1">
-          <span class="tag1">还款意愿</span>
-          <almSelect
-            :selectData="payIntentionsArr"
-            :defaultValue="params.stageData[1].payIntention"
-            :triggerId="payIntention2"
-            :title="selectTitle"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect2"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          class="textFiled"
-          label="检查地点"
-          placeholder="请输入"
-          v-model="params.stageData[1].practicableCheckAddr"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="接待人员"
-          placeholder="请输入"
-          v-model="params.stageData[1].practicableStaff"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款资金来源"
-          placeholder="请输入"
-          v-model="params.stageData[1].amoutSource"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="预计还款/付息时间"
-          placeholder="请输入"
-          v-model="params.stageData[1].expectRepayDate"
-        ></mt-field>
-        <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
-        <div class="msg">还款资金落实情况说明</div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.stageData[1].practicableMsg"
-          class="text"
-          style="overflow:hidden"
-          placeholder="请输入还款资金落实情况说明"
-        ></mt-field>
-      </div>
-      <div class="type3" v-if="three">
-        <div class="formTitle1">
-          <span class="coName">第三阶段</span>
-        </div>
-        <div class="item1">
-          <span class="tag1">还款意愿</span>
-          <almSelect
-            :selectData="payIntentionsArr"
-            :defaultValue="params.stageData[2].payIntention"
-            :triggerId="payIntention3"
-            :title="selectTitle"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect3"
-            class="info"
-          ></almSelect>
-          <span class="iconfont iconxiala arrow"></span>
-        </div>
-        <mt-field
-          class="textFiled"
-          label="检查地点"
-          placeholder="请输入"
-          v-model="params.stageData[2].practicableCheckAddr"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="接待人员"
-          placeholder="请输入"
-          v-model="params.stageData[2].practicableStaff"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款资金来源"
-          placeholder="请输入"
-          v-model="params.stageData[2].amoutSource"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="预计还款/付息时间"
-          placeholder="请输入"
-          v-model="params.stageData[2].expectRepayDate"
-        ></mt-field>
-        <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
-        <div class="msg">还款资金落实情况说明</div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.stageData[2].practicableMsg"
-          class="text"
-          style="overflow:hidden"
-          placeholder="请输入还款资金落实情况说明"
-        ></mt-field>
       </div>
     </div>
   </div>
@@ -194,6 +114,9 @@
 import { payIntentionsArr } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field } from "mint-ui";
+import { DatetimePicker } from "mint-ui";
+import { formatDate2 } from "@/utils/utils";
+import { normalMixin } from "../../../utils/mixin";
 import {
   Collapse,
   CollapseItem,
@@ -212,11 +135,15 @@ export default {
     "mt-field": Field,
     "van-collapse": Collapse,
     "van-collapse-item": CollapseItem,
-    almSelect
+    almSelect,
+    "mt-datetime-picker": DatetimePicker
   },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       popupVisible: false,
+      pickerValue: "",
       payType: 1,
       selectTitle: "还款意愿",
       fontColor: "blue",
@@ -233,85 +160,135 @@ export default {
       params: {
         stageData: [
           // 还款资金落实阶段数组
-          {
-            checkStage: 1, // 检查阶段
-            payIntention: 1, // 还款意愿
-            practicableCheckAddr: "", // 检查地点
-            practicableStaff: "xx", // 接待人员
-            amoutSource: "xc", // 还款资金来源
-            expectRepayDate: "2040-08-25", // 预计还款/付息时间
-            practicableMsg: "xxx" // 还款资金落实情况说明
-          },
-          {
-            checkStage: 2, // 检查阶段
-            payIntention: 1, // 还款意愿
-            practicableCheckAddr: "", // 检查地点
-            practicableStaff: "xx", // 接待人员
-            amoutSource: "xc", // 还款资金来源
-            expectRepayDate: "2040-08-25", // 预计还款/付息时间
-            practicableMsg: "xxx" // 还款资金落实情况说明
-          },
-          {
-            checkStage: 3, // 检查阶段
-            payIntention: 1, // 还款意愿
-            practicableCheckAddr: "", // 检查地点
-            practicableStaff: "xx", // 接待人员
-            amoutSource: "xc", // 还款资金来源
-            expectRepayDate: "2040-08-25", // 预计还款/付息时间
-            practicableMsg: "xxx" // 还款资金落实情况说明
-          }
+          // {
+          //   checkStage: "1", // 检查阶段
+          //   payIntention: "1", // 还款意愿
+          //   practicableCheckAddr: "", // 检查地点
+          //   practicableStaff: "", // 接待人员
+          //   amoutSource: "", // 还款资金来源
+          //   expectRepayDate: "", // 预计还款/付息时间
+          //   practicableMsg: "" // 还款资金落实情况说明
+          // }
         ]
       }
     };
   },
-  beforeRouteEnter(to, from, next) {
-    to.params.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
-  },
   mounted() {
-    this.change();
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+
+    if (this.params.stageData) {
+      var arr = [];
+      var a = "";
+      this.params.stageData.forEach(item => {
+        //时间转换格式
+        var expectRepayDate = new Date(item.expectRepayDate);
+        item.expectRepayDate =
+          expectRepayDate.getFullYear() +
+          "-" +
+          (expectRepayDate.getMonth() + 1) +
+          "-" +
+          expectRepayDate.getDate();
+
+        // checkbox显示
+        switch (item.checkStage) {
+          case "1":
+            a = "一";
+            break;
+          case "2":
+            a = "二";
+            break;
+          case "3":
+            a = "三";
+            break;
+        }
+        arr.push(a);
+      });
+    }
+    this.result = arr;
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        const bizId = {
+          bizId: this.bizId
+        };
+        this.params = Object.assign({}, this.params, bizId);
+      }
+    }
   },
   methods: {
-    getSelect1: function(data) {
-      this.params.stageData[0].payIntention = data.key;
+    payIntention(index) {
+      return `payIntention1${index}`;
     },
-    getSelect2: function(data) {
-      this.params.stageData[1].payIntention = data.key;
+    getSelect(data, checkStage) {
+      this.params.stageData.forEach(item => {
+        if (item.checkStage === checkStage) {
+          item.payIntention = data[0][0].key;
+        }
+      });
     },
-    getSelect3: function(data) {
-      this.params.stageData[2].payIntention = data.key;
+    //时间界面调出
+    timepickerVisible(checkStage) {
+      this.$refs[`picker${checkStage}`][0].open();
+    },
+    // 选定时间确定
+    handleConfirm(checkStage) {
+      this.params.stageData.forEach(item => {
+        if (item.checkStage === checkStage) {
+          item.expectRepayDate = formatDate2(item.expectRepayDate, 1);
+        }
+      });
+      this.$refs[`picker${checkStage}`][0].close();
     },
 
     toggle(index) {
-      if (index == 0 && this.$refs.checkboxes[0].checked === true) {
-        this.$refs.checkboxes[index].toggle(true);
-      }
-      this.$refs.checkboxes[index].toggle();
-      if (index == 1) {
-        // this.$refs.checkboxes[index].toggle(true);
-        this.second = !this.second;
+      console.log(this.result);
+      var checkStage = "";
+      const checked = this.$refs.checkboxes[index].checked;
+      if (index == 0) {
+        checkStage = "1";
+      } else if (index == 1) {
+        checkStage = "2";
       } else if (index == 2) {
-        // this.$refs.checkboxes[index].toggle(true);
-        this.three = !this.three;
+        checkStage = "3";
       }
-      console.log(this.second, this.three);
+      if (checked === false) {
+        const item = {
+          checkStage: checkStage, // 检查阶段
+          payIntention: "1", // 还款意愿
+          practicableCheckAddr: "", // 检查地点
+          practicableStaff: "", // 接待人员
+          amoutSource: "", // 还款资金来源
+          expectRepayDate: "", // 预计还款/付息时间
+          practicableMsg: "" // 还款资金落实情况说明
+        };
+        // this.params.stageData.forEach((item, index) => {
+        //   if (item.checkStage === checkStage) {
+        //     this.params.stageData[index] =
+        //   }
+        // });
+        this.params.stageData.push(item);
+        // 无论用户怎么选择阶段的顺序，都是按一二三阶段的顺序来添加
+        this.params.stageData.sort(this.sortId);
+      } else {
+        this.params.stageData.forEach((item, index) => {
+          if (item.checkStage === checkStage) {
+            this.params.stageData.splice(index, 1);
+            return false;
+          }
+        });
+      }
     },
     change() {
       this.$refs.checkboxes[0].checked = true;
+    },
+    //数组排序
+    sortId(a, b) {
+      return parseInt(a.checkStage) - parseInt(b.checkStage);
     }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite5里
-    //     this.setDefinite5({ params: this.params });
-    //   }
-    // }
   }
 };
 </script>
@@ -322,6 +299,11 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  .definite-field {
+    .item {
+      border-bottom: none !important;
+    }
+  }
   .formTitle {
     width: 100%;
     height: px2rem(44);

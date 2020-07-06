@@ -15,11 +15,25 @@
         </div>
 
         <div class="formBody">
-          <mt-cell
-            class="textFiled"
-            title="征信报告查询日期"
-            value="2020-06-02"
-          ></mt-cell>
+          <div class="definite-field">
+            <div class="item">
+              <span class="tag big">征信报告查询日期</span>
+              <span class="info" @click="a">
+                <input
+                  v-model="params.queryDate"
+                  type="input"
+                  class="field-input"
+                  placeholder="请输入"
+                />
+              </span>
+            </div>
+          </div>
+          <mt-datetime-picker
+            ref="picker"
+            type="date"
+            v-model="pickerValue"
+            @confirm="handleConfirm()"
+          ></mt-datetime-picker>
           <mt-cell
             class="textFiled"
             title="当前企业及实际控制人征信情况(注明征信查询分类结果)"
@@ -158,19 +172,22 @@
 </template>
 
 <script>
-import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
-import { Cell, Field } from "mint-ui";
+import { yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
+import { normalMixin } from "../../../utils/mixin";
+import { DatetimePicker } from "mint-ui";
+import { formatDate2 } from "@/utils/utils";
 export default {
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
-    almSelect
+    almSelect,
+    "mt-datetime-picker": DatetimePicker
   },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
       yesNo: yesNo,
+      pickerValue: "",
       addedOverdues: "addedOverdues",
       addedLoans: "addedLoans",
       shrinkLoanScale: "shrinkLoanScale",
@@ -185,6 +202,7 @@ export default {
       selectTitle4: "企业或企业主是否有新增对外担保记录",
       selectTitle5: "企业或企业主是否有其他异常变化",
       params: {
+        queryDate: "",
         fiveClass: "", // 当前企业及实际控制人征信情况（注明征信查询分类结果)
         addedOverdues: 0, // 企业或企业主征信是否有新增逾期记录  客户资信检查
         addedOverduesMsg: "", // 当前企业及实际控制人征信情况 说明
@@ -195,9 +213,26 @@ export default {
         addedGuarantees: 0, // 企业或企业主是否有新增对外担保记录  客户资信检查
         addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
         otherSitu: 0, // 企业或企业主是否有其他异常变化  客户资信检查
-        otherSituMsg: "" // 企业或企业主是否有其他异常变化 说明
+        otherSituMsg: "", // 企业或企业主是否有其他异常变化 说明
+        summaryForCheck: ""
       }
     };
+  },
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.params = {
+          assetCreditInfo: this.params,
+          summaryForCheck: this.params.summaryForCheck
+        };
+      }
+    }
   },
   methods: {
     getSelect1(data) {
@@ -214,15 +249,13 @@ export default {
     },
     getSelect5(data) {
       this.params.otherSitu = data.key;
-    }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite5里
-        this.setDefinite5({ params: this.params });
-      }
+    },
+    a() {
+      this.$refs.picker.open();
+    },
+    handleConfirm() {
+      this.params.queryDate = formatDate2(this.pickerValue, 1);
+      this.$refs.picker.close();
     }
   }
 };
@@ -243,6 +276,9 @@ export default {
     color: rgba(9, 9, 9, 1);
     opacity: 1;
     margin: px2rem(6) px2rem(17) px2rem(-8);
+  }
+  .definite-field {
+    border-top: none !important;
   }
 
   .formTitle1 {

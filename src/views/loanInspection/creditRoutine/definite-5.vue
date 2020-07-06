@@ -92,16 +92,12 @@
 </template>
 
 <script>
-import { DetailsOfIOU } from "../../../utils/dataMock";
-import { Cell, Field } from "mint-ui";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: {
-    "mt-cell": Cell,
-    "mt-field": Field
-  },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
       params: {
         stockLastBalance: "", // 上次全面检查或调查时余额  存货
         stockChangSitu: "", // 本次检查存货变动情况  存货
@@ -113,13 +109,23 @@ export default {
       }
     };
   },
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
   methods: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite5里
-        this.setDefinite5({ params: this.params });
+
+        this.params = {
+          financeInfo: this.params,
+          bizId: this.$route.params.bizId
+        };
       }
     }
   }

@@ -9,15 +9,15 @@
     <div class="newly1-wrapper" v-if="hasRouterChild6">
       <div class="newly1">
         <div class="companyInformation">
-          <div class="formTitle">
-            <span class="lightBlue"></span>
-            <span class="coName">张三有限责任公司</span>
+          <div class="definite-1-title">
+            <span class="colum-blue"></span>
+            <span class="title">{{ detail.custName }}</span>
           </div>
           <div class="formBody">
             <mt-field
               class="textFiled"
               label="检查类型"
-              v-model="params.checkType"
+              v-model="detail.bizTypeName"
               placeholder="请输入"
             ></mt-field>
             <mt-field
@@ -49,9 +49,19 @@
                 @getSelectValue="getSelect1"
                 class="info"
               ></almSelect>
+
               <span class="iconfont iconxiala arrow"></span>
             </div>
-            <mt-field class="textFiled" label="其他xxxx"></mt-field>
+            <mt-field
+              v-if="params.securityKind === '5'"
+              type="textarea"
+              rows="1"
+              v-model="params.otherSecurityKindMsg"
+              class="text"
+              style="overflow:hidden"
+              placeholder="其他"
+            ></mt-field>
+            <!-- <mt-field class="textFiled" label="其他xxxx"></mt-field> -->
             <mt-field
               class="textFiled"
               label="还款方式"
@@ -62,7 +72,7 @@
               class="textFiled"
               label="检查地点"
               placeholder="请输入"
-              v-model="params.practicableCheckAddr"
+              v-model="params.checkAddr"
             ></mt-field>
             <div class="item">
               <span class="tag">检查配合程度</span>
@@ -107,25 +117,22 @@
         </div>
       </div>
     </div>
-    <router-view v-else></router-view>
+    <router-view ref="m6rview" v-else></router-view>
   </div>
 </template>
 
 <script>
-import {
-  DetailsOfIOU,
-  coordinate,
-  securityKindsArr,
-  yesNo
-} from "../../../utils/dataMock";
+import { coordinate, securityKindsArr, yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
-import { Field } from "mint-ui";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: { "mt-field": Field, almSelect },
+  components: { almSelect },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
+      detail: {},
       hasRouterChild6: this.$route.params.hasRouterChild6,
-      DetailsOfIOU: DetailsOfIOU,
       coordinate: coordinate,
       securityKindsArr: securityKindsArr,
       yesNo: yesNo,
@@ -141,31 +148,47 @@ export default {
       yearlyInspection: "yearlyInspection",
       fontColor: "blue",
       params: {
-        checkType: "", // 检查类型
+        otherSecurityKindMsg: "",
+        repayKind: "",
+        checkAddr: "",
         checkModel: "", // 检查模式
         lineAmout: "", // 授信金额
         lineBalance: "", // 授信余额
-        securityKind: 1, // 担保方式
-        cooperate: 1, // 检查配合程度
+        securityKind: "1", // 担保方式
+        cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
       }
     };
   },
-  methods: {
-    getSelect1(data) {
-      this.params.securityKind = data.key;
-    },
-    getSelect2(data) {
-      this.params.cooperate = data.key;
-    },
-    getSelect3(data) {
-      this.params.yearlyInspection = data.key;
-    },
-    getSelect4(data) {
-      this.params.revalOfColl = data.key;
+  async mounted() {
+    // 基本详情与流程详情的接口写在了vuex里
+    //保存接口写在了Mixin里
+    // 获取基本详情
+    await this.setqueryDetail(this);
+    this.bizType(this.queryDetail, this.queryDetail.bizType);
+    this.detail = this.queryDetail;
+
+    //判断是否是已经填了部分
+    if (
+      this.$route.params.saveFlag === 1 ||
+      this.$route.params.saveFlag === "1"
+    ) {
+      await this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
     }
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+    console.log(this.params);
   },
+
   beforeRouteEnter(to, from, next) {
     to.params.hasRouterChild6 = to.name === "dailyInspectionIndex";
     next();
@@ -173,15 +196,53 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.hasRouterChild6 = to.name === "dailyInspectionIndex";
     next();
+    // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
+    if (from.name === "newly2") {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    }
   },
   watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite12里
-    //     this.setDefinite12({ params: this.params });
-    //   }
-    // }
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.$Indicator.open();
+        const currentName = this.$route.name;
+        const type = this.$route.params.type;
+        var loanBusiness = {};
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
+        if (currentName === "dailyInspectionIndex") {
+          loanBusiness = Object.assign({}, this.params, bizId);
+          this.infoSave(loanBusiness, currentName, type, val.tag);
+        } else if (currentName === "newlyDefinite3") {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m6rview.params, bizId);
+            // 审批页面的保存走审批接口，只是传的对象不同
+            this.submit(loanBusiness);
+          });
+        } else {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m6rview.params, bizId);
+            this.infoSave(loanBusiness, currentName, type, val.tag);
+          });
+        }
+      }
+    }
+  },
+  methods: {
+    getSelect1(data) {
+      this.params.securityKind = data[0].key;
+    },
+    getSelect2(data) {
+      this.params.cooperate = data[0].key;
+    },
+    getSelect3(data) {
+      this.params.yearlyInspection = data[0].key;
+    },
+    getSelect4(data) {
+      this.params.revalOfColl = data[0].key;
+    }
   }
 };
 </script>

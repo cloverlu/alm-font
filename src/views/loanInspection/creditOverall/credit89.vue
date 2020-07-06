@@ -16,8 +16,8 @@
 				van-dropdown-menu(class="dropdown89" )
 					van-dropdown-item(:options="option" v-model="value")
 		.definite-89-content
-			definite8(v-if="value===0")
-			definite9(v-if="value===1")
+			definite8(@childParams="childParams" :detail="params8" v-if="value==='1'")
+			definite9(@childParams2="childParams2" :detail="params9" v-if="value==='2'")
 			
 
 
@@ -27,6 +27,7 @@
 import definite8 from "../creditOverall/credit8";
 import definite9 from "../creditOverall/credit9";
 import { DropdownMenu, DropdownItem } from "vant";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: {
     "van-dropdown-menu": DropdownMenu,
@@ -34,21 +35,51 @@ export default {
     definite8,
     definite9
   },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       dropVisibale: false,
-      value: 0,
+      value: "1",
       option: [
-        { text: "加工制造类企业适用", value: 0 },
-        { text: "贸易类/其他类企业适用", value: 1 }
-      ]
+        { text: "加工制造类企业适用", value: "1" },
+        { text: "贸易类/其他类企业适用", value: "2" }
+      ],
+      params: {},
+      params8: {},
+      params9: {}
     };
   },
-  watch: {},
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+    this.value = this.params.financeClassification;
+    if (this.params.financeClassification === "1") {
+      this.params8 = this.params;
+      this.params9 = {};
+    } else if (this.params.financeClassification === "2") {
+      this.params9 = this.params;
+      this.params8 = {};
+    }
+  },
   methods: {
     dropShow() {
-      console.log("sss");
       this.dropVisibale = !this.dropVisibale;
+    },
+    childParams(val) {
+      this.params = {
+        financeInfo: val,
+        bizId: this.$route.params.bizId
+      };
+    },
+    childParams2(val) {
+      console.log(val);
+      this.params = {
+        financeInfo: val,
+        bizId: this.$route.params.bizId
+      };
     }
   }
 };

@@ -15,7 +15,7 @@
         <span class="tag1">是否存在风险预警信号</span>
         <almSelect
           :selectData="yesNo"
-          :defaultValue="params.existSignal"
+          :defaultValue="params.existRisk"
           :triggerId="existSignal"
           :title="selectTitle"
           :fontColor="fontColor"
@@ -24,12 +24,17 @@
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <mt-cell class="textFiled" title="发生阶段"></mt-cell>
+      <mt-field
+        class="textFiled"
+        label="发生阶段"
+        placeholder="请输入"
+        v-model="params.riskStage"
+      ></mt-field>
       <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
       <mt-field
         type="textarea"
         rows="3"
-        v-model="params.stockChangSitu"
+        v-model="params.riskMsg"
         class="text"
         style="overflow:hidden"
         placeholder="请输入"
@@ -38,7 +43,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="params.InspConAndSug"
+        v-model="params.suggest"
         class="text"
         style="overflow:hidden"
         placeholder="请输入"
@@ -50,9 +55,12 @@
         </div>
         <div class="definite-13-content">
           <imageUpload
-            v-for="item in processing4"
-            :key="item.id"
+            v-for="(item, i) in processing4"
             :item="item"
+            :key="i"
+            :itemVmodel="params2"
+            :read="false"
+            :ref="`processing4${i}`"
           />
         </div>
       </div>
@@ -63,11 +71,17 @@
             @click="goSign()"
           ></span
         ></span>
-        <span class="right">2020-06-01</span>
+        <!-- <span class="right">2020-06-01</span> -->
+      </div>
+      <div class="qianming">
+        <img :src="params.empSign" />
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large">提交审批</mt-button>
+          <mt-button type="primary" size="large" @click="submit()"
+            >提交审批</mt-button
+          >
+          <mt-button size="large" @click="goback()">上一步</mt-button>
         </div>
       </div>
     </div>
@@ -78,10 +92,11 @@
           <div class="coInformation">
             <div class="enterpriseCredit">
               <div class="signBox">
-                <span class="left"
-                  >检查人员（签字）：<span class="iconfont iconqianzi"></span
-                ></span>
-                <span class="right">2020-06-01</span>
+                <span class="left">
+                  检查人员（签字）：
+                  <span class="iconfont iconqianzi"></span>
+                </span>
+                <!-- <span class="right">2020-06-01</span> -->
               </div>
               <!-- <div id="canvas" ref="canvas"></div> -->
               <canvas></canvas>
@@ -115,6 +130,7 @@ import { DetailsOfIOU, yesNo, processing4 } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field, Cell, Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: {
     "mt-cell": Cell,
@@ -124,9 +140,11 @@ export default {
     almSelect,
     imageUpload
   },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
+      type: "",
       processing4: processing4(),
       popupVisible: false,
       payType: 1,
@@ -135,29 +153,58 @@ export default {
       yesNo: yesNo,
       existSignal: "existSignal",
       params: {
-        existSignal: 0, // 检查类型
-        InspConAndSug: "", // 客户名称
-        loanAmout: "1000000000", // 贷款金额
-        loanBalance: "999999", // 贷款余额
-        loanLength: "2040-08-25", // 贷款期限
-        repayKind: "", // 还款方式
-        repayDate: "", // 还款日期
-        repayAmout: "", // 还款金额
+        riskStage: "",
+        riskMsg: "",
+        suggest: "",
+        existRisk: 0,
         signSrc: "" // 签名
-      }
+      },
+      params2: {}
     };
   },
-  beforeRouteEnter(to, from, next) {
-    to.params.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
+  mounted() {
+    const type = this.$route.params.type;
+    this.type = {
+      bizType: type
+    };
+    this.params2 = this.mVmodel(1);
+
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+    console.log(this.params);
+    console.log(this.params2);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        // 保存审批页面
+        const pa = {
+          bizId: this.$route.params.bizId,
+          orgLevel: "1",
+          postCode: "23",
+          opType: "0"
+        };
+        this.params = Object.assign({}, this.params, pa);
+
+        //保存照片
+        var arrs = {};
+        for (let i = 0; i < this.processing4.length; i++) {
+          const a = `pic_${i + 1}s`;
+          arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
+        }
+        this.params2 = Object.assign({}, this.type, arrs);
+
+        console.log(this.params);
+        console.log(this.params2);
+      }
+    }
   },
+
   methods: {
     getSelect: function(data) {
-      this.params.existSignal = data.key;
+      this.params.existRisk = data[0].key;
     },
     goSign: function() {
       this.params.signSrc = "";
@@ -192,9 +239,15 @@ export default {
         "touchstart",
         function(e) {
           this.cxt.beginPath();
+          // this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
           this.cxt.moveTo(
-            e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
+            e.changedTouches[0].clientX -
+              e.target.offsetLeft +
+              document.documentElement.scrollLeft,
+            e.changedTouches[0].clientY -
+              40 -
+              e.target.offsetTop +
+              document.documentElement.scrollTop
           );
         }.bind(this),
         false
@@ -203,9 +256,21 @@ export default {
       this.canvas.addEventListener(
         "touchmove",
         function(e) {
+          // console.log(
+          //   e.changedTouches[0].clientY,
+          //   e.target.offsetLeft,
+          //   document.documentElement.scrollLeft,
+          //   e
+          // );
+          // this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
           this.cxt.lineTo(
-            e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
+            e.changedTouches[0].clientX -
+              e.target.offsetLeft +
+              document.documentElement.scrollLeft,
+            e.changedTouches[0].clientY -
+              40 -
+              e.target.offsetTop +
+              document.documentElement.scrollTop
           );
           this.cxt.stroke();
         }.bind(this),
@@ -218,7 +283,7 @@ export default {
           this.cxt.closePath();
           let imgBase64 = this.canvas.toDataURL();
           //console.log(imgBase64);
-          this.params.signSrc = imgBase64;
+          this.params.empSign = imgBase64;
         }.bind(this),
         false
       );
@@ -235,8 +300,7 @@ export default {
         "click",
         function() {
           let imgBase64 = this.canvas.toDataURL();
-          this.params.signSrc = imgBase64;
-          console.log("图片", this.params.signSrc);
+          this.params.empSign = imgBase64;
           setTimeout(() => {
             var c = document.getElementsByTagName("canvas")[0];
             c.innerHTML = "";
@@ -245,16 +309,23 @@ export default {
         }.bind(this),
         false
       );
+    },
+    goback() {
+      history.go(-1);
+    },
+    // 提交审批
+    async submit() {
+      this.$Indicator.open();
+      const pa = {
+        bizId: this.$route.params.bizId,
+        orgLevel: "1",
+        postCode: "23",
+        opType: "1"
+      };
+
+      const params = Object.assign({}, pa, this.params);
+      await this.submit(params);
     }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite5里
-    //     this.setDefinite5({ params: this.params });
-    //   }
-    // }
   }
 };
 </script>
@@ -265,6 +336,20 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  .qianming {
+    width: 100%;
+    height: px2rem(120);
+    text-align: center;
+    img {
+      width: px2rem(120);
+      height: 100%;
+      margin: 0 auto;
+    }
+    img[src=""],
+    img:not([src]) {
+      opacity: 0;
+    }
+  }
   .formTitle {
     width: 100%;
     height: px2rem(44);
@@ -346,10 +431,8 @@ export default {
   .subBox {
     background-color: #fff;
     position: relative;
-    width: 100%;
-    height: px2rem(84);
+    box-sizing: border-box;
     .submit {
-      position: absolute;
       width: calc(100% - 30px);
       // height: px2rem(200);
       bottom: px2rem(0);

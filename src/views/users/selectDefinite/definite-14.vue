@@ -190,7 +190,7 @@ export default {
         detailMsg4useAmout: "", // 资金使用情况详细说明
         useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
         executeCon: 1, //是否履行合同约定
-        cooperate: 1, //对我行检查的态度
+        cooperate: "1", //对我行检查的态度
         otherSitu: "" // 其他
       }
     };

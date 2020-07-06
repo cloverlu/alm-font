@@ -54,21 +54,20 @@ export default {
     }
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   var a = {};
-    //   this.disabeld = this.read ? true : false;
-    //   if (!this.info) {
-    //     this.definite.forEach(item => {
-    //       a[item.modelName] = "";
-    //     });
-    //   } else {
-    //     a = this.info;
-    //   }
-    //   console.log(a);
-    //   this.definite.forEach((item, index) => {
-    //     this.$set(this.params, item.modelName, a[item.modelName]);
-    //   });
-    // });
+    this.$nextTick(() => {
+      var a = {};
+      this.disabeld = this.read ? true : false;
+      if (!this.info) {
+        this.definite.forEach(item => {
+          a[item.modelName] = "";
+        });
+      } else {
+        a = this.info;
+      }
+      this.definite.forEach((item, index) => {
+        this.$set(this.params, item.modelName, a[item.modelName]);
+      });
+    });
   }
 };
 </script>

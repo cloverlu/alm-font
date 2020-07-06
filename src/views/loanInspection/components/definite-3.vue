@@ -108,10 +108,10 @@
 import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
-import { normalMixin, loanInsM1 } from "../../../utils/mixin";
+import { normalMixin } from "../../../utils/mixin";
 import { submitApprove } from "../../../api/loanlnspection";
 export default {
-  mixins: [normalMixin, loanInsM1],
+  mixins: [normalMixin],
   components: {
     "mt-button": Button,
     "mt-popup": Popup,
@@ -142,21 +142,9 @@ export default {
       bizType: type
     };
     // 上一步下一步需要走的详情接口
-    if (this.$route.params.saveFlag === 1) {
-      this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name).bizApprove;
-      console.log(this.forBizDetail(this.$route.name).bizApprove);
-      return false;
-    } else {
-      this.saveFlag.forEach(item => {
-        if (item.currentName === this.$route.name && item.flag === true) {
-          this.setforDizDetail(this);
-          this.params = this.forBizDetail(this.$route.name).bizApprove;
-          console.log(this.forBizDetail(this.$route.name).bizApprove);
-          return false;
-        }
-      });
-    }
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
   },
   watch: {
     nextFooter(val, oldval) {
@@ -170,15 +158,15 @@ export default {
         this.params = Object.assign({}, this.params, pa);
 
         console.log(this.params);
-        // this.setm1Definite16({ params: this.params });
       }
     }
   },
   methods: {
     getSelect: function(data) {
-      this.params.existRisk = data.key;
+      this.params.existRisk = data[0].key;
     },
-    submit() {
+    // 提交审批
+    async submit() {
       this.$Indicator.open();
       const pa = {
         bizId: this.$route.params.bizId,
@@ -188,32 +176,7 @@ export default {
       };
 
       const params = Object.assign({}, pa, this.params);
-      submitApprove(this, params).then(res => {
-        if (res.status === 200 && res.data.returnCode === "200000") {
-          this.$Indicator.close();
-          this.$Toast({
-            message: "提交成功！",
-            iconClass: "iconfont icongou-01",
-            duration: 1000
-          });
-          setTimeout(() => {
-            this.$router.push({ name: "loanInspectionIndex" });
-          }, 1200);
-        } else {
-          this.$Indicator.close();
-          this.$Toast({
-            message: "提交失败！",
-            iconClass: "iconfont iconcha-01",
-            duration: 5000
-          });
-        }
-      });
-      console.log(this.params);
-      // let params = {};
-      //
-      // SaveEditModelBusiness(this, { params: this.params }).then(res => {
-      //   console.log(res);
-      // });
+      await this.submit(params);
     },
     goback: function() {
       history.go(-1);

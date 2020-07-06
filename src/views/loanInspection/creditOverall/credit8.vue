@@ -5,16 +5,18 @@
 -->
 <template lang="pug">
 	.definite-8-wrapper
-		fieldTwo(:info="caiwuOne" :type="typeOne" ref="caiwuone")
-		fieldTwo(:info="caiwuTwo" :type="typeOne" ref="caiwutwo")
-		fieldTwo(:info="caiwuThree" :type="typeTwo" ref="caiwuthree")
-		fieldTwo(:info="caiwuFour" :type="typeTwo" ref="caiwufour")
+		fieldTwo(:info="caiwuOne" :type="typeOne" :detail="detail" :read="false" ref="caiwuone")
+		fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail" :read="false" ref="caiwutwo")
+		fieldTwo(:info="caiwuThree" :type="typeTwo" :detail="detail" :read="false" ref="caiwuthree")
+		fieldTwo(:info="caiwuFour" :type="typeTwo" :detail="detail" :read="false" ref="caiwufour")
 		.war-tag
 			span 根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。
 </template>
 
 <script>
 import fieldTwo from "../creditOverall/fieldTwo";
+import { normalMixin } from "../../../utils/mixin";
+
 import {
   caiwuOne,
   caiwuTwo,
@@ -23,6 +25,8 @@ import {
 } from "../../../utils/dataMock.js";
 export default {
   components: { fieldTwo },
+  mixins: [normalMixin],
+  props: ["detail"],
   data() {
     return {
       typeOne: 1,
@@ -30,8 +34,32 @@ export default {
       caiwuOne: caiwuOne,
       caiwuTwo: caiwuTwo,
       caiwuThree: caiwuThree,
-      caiwuFour: caiwuFour
+      caiwuFour: caiwuFour,
+      params: {}
     };
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        const financeClassification = {
+          financeClassification: "1"
+        };
+        this.params = Object.assign(
+          {},
+          financeClassification,
+          this.params,
+          this.$refs.caiwuone.params,
+          this.$refs.caiwutwo.params,
+          this.$refs.caiwuthree.params,
+          this.$refs.caiwufour.params
+        );
+        console.log(this.params);
+        this.$emit("childParams", this.params);
+        // this.setm1Definite2({ params: this.params });
+        // this.footerRoute("loanCreditFirst", "firstDefinite2");
+        // this.$router.push({ name: "firstDefinite16" });
+      }
+    }
   }
 };
 </script>

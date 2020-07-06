@@ -8,8 +8,10 @@ const footerNext = {
         prevFooter: "",
         // 滚动条位置
         scrollToPo: {},
-        // 详情信息
+        // 流程详情信息
         forBizDetail: {},
+        //基本信息详情
+        queryDetail: {},
         // 前端判断有没有有保存操作
         saveFlag: []
       },
@@ -25,6 +27,9 @@ const footerNext = {
     },
     SET_FORBIZDETAIL: (state, forBizDetail) => {
       state.forBizDetail = forBizDetail;
+    },
+    SET_QUERYDETAIL: (state, queryDetail) => {
+      state.queryDetail = queryDetail;
     },
     SET_SAVEFLAG: (state, saveFlag) => {
       state.saveFlag = saveFlag;

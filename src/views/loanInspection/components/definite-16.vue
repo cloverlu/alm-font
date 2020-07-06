@@ -17,10 +17,10 @@
 <script>
 import imageUpload from "../components/imageUpload";
 import { definte16, definte162, definte172 } from "../../../utils/dataMock";
-import { normalMixin, loanInsM1 } from "../../../utils/mixin";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { imageUpload },
-  mixins: [normalMixin, loanInsM1],
+  mixins: [normalMixin],
   data() {
     return {
       bizId: this.$route.params.bizId,
@@ -54,21 +54,10 @@ export default {
         this.params = this.mVmodel(10);
     }
     // 上一步下一步需要走的详情接口
-    if (this.$route.params.saveFlag === 1) {
-      this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-      console.log(this.forBizDetail(this.$route.name));
-      return false;
-    } else {
-      this.saveFlag.forEach(item => {
-        if (item.currentName === this.$route.name && item.flag === true) {
-          this.setforDizDetail(this);
-          this.params = this.forBizDetail(this.$route.name);
-          console.log(this.forBizDetail(this.$route.name));
-          return false;
-        }
-      });
-    }
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+    console.log(this.params);
   },
   watch: {
     nextFooter(val, oldval) {
@@ -85,22 +74,7 @@ export default {
       }
     }
   },
-  methods: {
-    mVmodel(num) {
-      const definite16 = {};
-      for (let i = 0; i < num; i++) {
-        const a = `pic_${i + 1}s`;
-        definite16[a] = [
-          {
-            url: ``,
-            longitude: "",
-            dimension: ""
-          }
-        ];
-      }
-      return definite16;
-    }
-  }
+  methods: {}
 };
 </script>
 
