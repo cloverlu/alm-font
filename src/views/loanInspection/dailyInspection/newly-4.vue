@@ -118,6 +118,7 @@ export default {
   methods: {
     addInfo() {
       const item = {
+        assitClassification: "1",
         id: Date.now(),
         assitName: "", //押品名称
         assitAddr: "", //押品位置地址

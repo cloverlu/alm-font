@@ -74,6 +74,7 @@ export default {
     },
     addInfo() {
       const item = {
+        assitClassification: "2",
         id: Date.now(),
         assitName: "", //担保公司名称
         CooperatStatus: "", //我行合作状态
