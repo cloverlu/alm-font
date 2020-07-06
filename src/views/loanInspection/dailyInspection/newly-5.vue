@@ -6,7 +6,7 @@
 <template lang="pug">
 	.newly5-wrapper
 		.wrapper
-			.newly-5-repeat(v-for="(item,index) in info" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
+			.newly-5-repeat(v-for="(item,index) in info.assitInfoForGuarantee" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
 				.repeat-operation(v-if="index !== 0")
 					.repeat-operation-title 新增 {{item.id}}
 					.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
@@ -29,40 +29,58 @@
 
 <script>
 import { Button } from "mint-ui";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { "mt-button": Button },
+  props: ["detail"],
+  mixins: [normalMixin],
   data() {
     return {
-      info: [
-        {
-          id: 1,
-          assitName: "", //担保公司名称
-          CooperatStatus: "", //我行合作状态
-          assitFiveClass: "" //风险分类
-        }
-      ],
+      info: {
+        assitInfoForGuarantee: [
+          {
+            id: 1,
+            assitName: "", //担保公司名称
+            CooperatStatus: "", //我行合作状态
+            assitFiveClass: "" //风险分类
+          }
+        ]
+      },
       trasIndex: "",
       params: {}
     };
   },
-  methods: {
-    getSelect1(data) {
-      this.params.securityKind = data.key;
+  mounted() {
+    this.info = this.detail;
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.params = this.info;
+        this.$emit("upperParams5", this.params);
+        console.log(this.params);
+      }
     },
+    detail(val, oldval) {
+      this.info = val;
+    }
+  },
+  methods: {
     operateDelete(index, id) {
       this.trasIndex = id;
       setTimeout(() => {
-        this.info.splice(index, 1);
+        this.info.assitInfoForGuarantee.splice(index, 1);
       }, 100);
     },
     addInfo() {
       const item = {
+        assitClassification: "2",
         id: Date.now(),
         assitName: "", //担保公司名称
         CooperatStatus: "", //我行合作状态
         assitFiveClass: "" //风险分类
       };
-      this.info.push(item);
+      this.info.assitInfoForGuarantee.push(item);
     }
   }
 };
@@ -101,7 +119,7 @@ export default {
         .repeat-operation-delete {
           color: #db3822;
           font-size: px2rem(12);
-          flex: 1;
+          flex: 0 0 px2rem(30);
           text-align: right;
         }
       }
@@ -113,6 +131,7 @@ export default {
     width: 100%;
     padding: px2rem(11) px2rem(15);
     box-sizing: border-box;
+    margin-top: px2rem(20);
   }
 }
 </style>

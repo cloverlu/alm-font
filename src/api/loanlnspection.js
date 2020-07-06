@@ -41,7 +41,7 @@ const imageUpload = ({ $axios }, data) =>
   //   }
   // });
   $axios({
-    url: `/alm/upload`,
+    url: `/alm/postLoan/business/uploadModelFile`,
     method: "post",
     data: data,
     headers: {

@@ -8,30 +8,32 @@
     <div class="definte12-wrapper" v-if="hasRouterChild2">
       <!-- 公司信息 -->
       <div class="companyInformation">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">{{ DetailsOfIOU.orgName }}</span>
+        <div class="definite-1-title">
+          <span class="colum-blue"></span>
+          <span class="title">{{ detail.custName }}</span>
         </div>
         <div class="formBody">
           <mt-cell
             class="textFiled"
             title="检查类型"
-            :value="DetailsOfIOU.checkType"
+            :value="detail.bizTypeName"
           ></mt-cell>
           <mt-cell
             class="textFiled"
             title="客户名称"
-            :value="DetailsOfIOU.custName"
+            :value="detail.custName"
           ></mt-cell>
-          <mt-cell
+          <mt-field
             class="textFiled"
-            title="授信金额"
-            :value="DetailsOfIOU.lineAmout"
-          ></mt-cell>
+            label="授信金额"
+            placeholder="请输入"
+            v-model="params.lineAmout"
+          ></mt-field>
+
           <mt-cell
             class="textFiled"
             title="贷款余额"
-            :value="DetailsOfIOU.lineBalance"
+            :value="detail.lineBalance"
           ></mt-cell>
         </div>
       </div>
@@ -49,7 +51,7 @@
               type="textarea"
               rows="3"
               v-model="params.requireCheck"
-              class="text is-nolabel textArea"
+              class="text  textArea"
               style="overflow:hidden"
               placeholder="请输入审批意见中贷后日常检查要求"
             ></mt-field>
@@ -76,7 +78,7 @@
               type="textarea"
               rows="3"
               v-model="params.specialRequireCheck"
-              class="text"
+              class="text textArea"
               style="overflow:hidden"
               placeholder="请输入产品贷后日常检查特殊要求"
             ></mt-field>
@@ -105,7 +107,7 @@
             <mt-field
               type="textarea"
               rows="3"
-              v-model="params.HoldPensonRisk"
+              v-model="params.holdPensonRisk"
               class="text textArea"
               style="overflow:hidden"
               placeholder="请输入"
@@ -152,27 +154,28 @@
         </div>
       </div>
     </div>
-    <router-view v-else></router-view>
+    <router-view ref="m2rview" v-else></router-view>
   </div>
 </template>
 
 <script>
-import { DetailsOfIOU } from "../../../utils/dataMock";
-import { Cell, Field } from "mint-ui";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: { "mt-cell": Cell, "mt-field": Field },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       hasRouterChild2: this.$route.params.hasRouterChild2,
-      DetailsOfIOU: DetailsOfIOU,
+      detail: {},
       params: {
         requireCheck: "", // 审批意见要求
         checked: "", // 审批意见落实情况
         specialRequireCheck: "", // 产品贷后要求
         specialChecked: "", // 产品贷后落实情况
-        HoldPensonRisk: "", // 实际控制人或法定代表人风险点
+        holdPensonRisk: "", // 实际控制人或法定代表人风险点
         managerRisk: "", // 管理层风险点
-        otherRisk: "" // 其他风险点
+        otherRisk: "", // 其他风险点
+        lineAmout: ""
       }
     };
   },
@@ -183,15 +186,81 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.hasRouterChild2 = to.name === "creditRoutineIndex";
     next();
+
+    // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
+    if (from.name === "definite13") {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+      console.log(this.params);
+    }
+  },
+  async mounted() {
+    // 基本详情与流程详情的接口写在了vuex里
+    //保存接口写在了Mixin里
+    // 获取基本详情
+    await this.setqueryDetail(this);
+    this.bizType(this.queryDetail, this.queryDetail.checkType);
+    this.detail = this.queryDetail;
+
+    //判断是否是已经填了部分
+    if (
+      this.$route.params.saveFlag === 1 ||
+      this.$route.params.saveFlag === "1"
+    ) {
+      await this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
+    }
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
   },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite12里
+        if (val !== oldval) {
+          this.$Indicator.open();
+          const currentName = this.$route.name;
+          const type = this.$route.params.type;
+          var loanBusiness = {};
+          const bizId = {
+            bizId: this.$route.params.bizId
+          };
+          if (currentName === "creditRoutineIndex") {
+            loanBusiness = Object.assign({}, this.params, bizId);
+            this.infoSave(loanBusiness, currentName, type, val.tag);
+          } else if (currentName === "routineDefinite3") {
+            this.$nextTick(() => {
+              loanBusiness = Object.assign(
+                {},
+                this.$refs.m2rview.params,
+                bizId
+              );
+              // 审批页面的保存走审批接口，只是传的对象不同
+              this.submit(loanBusiness);
+            });
+          } else {
+            this.$nextTick(() => {
+              loanBusiness = Object.assign(
+                {},
+                this.$refs.m2rview.params,
+                bizId
+              );
+              // console.log(loanBusiness);
+              this.infoSave(loanBusiness, currentName, type, val.tag);
+            });
+          }
+        }
       }
     }
-  }
+  },
+  methods: {}
 };
 </script>
 
@@ -221,7 +290,7 @@ export default {
       position: absolute;
       display: inline-block;
       height: px2rem(14);
-      width: px2rem(120);
+      width: 100%;
       line-height: px2rem(15);
       top: 50%;
       left: 21%;

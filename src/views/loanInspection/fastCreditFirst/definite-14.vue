@@ -6,7 +6,7 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="definite14" v-if="hasRouterChild2">
+    <div class="definite14" v-if="hasRouterChildM5">
       <div class="formTitle">
         <span class="lightBlue"></span>
         <span class="coNameBlack">存货</span>
@@ -14,45 +14,58 @@
       <mt-cell
         class="textFiled"
         title="检查类型"
-        :value="params.bizType"
+        :value="detail.bizTypeName"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="客户名称"
-        :value="params.custName"
+        :value="detail.custName"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="合同编号"
-        :value="params.contractNo"
+        :value="detail.contractNo"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="授信业务小类"
-        :value="params.bizSubKind"
+        :value="detail.bizSubKind"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款金额"
-        :value="params.loanAmout"
+        :value="detail.loanAmout"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款期限"
-        :value="params.loanLength"
+        :value="detail.loanLength"
       ></mt-cell>
-      <mt-field
+      <!-- <mt-cell
         class="textFiled"
-        label="还款方式"
-        placeholder="请输入"
-        v-model="params.repayKind"
-      ></mt-field>
-      <mt-field
-        class="textFiled"
-        label="还款日期"
-        placeholder="请输入"
-        v-model="params.repayDate"
-      ></mt-field>
+        title="还款方式"
+        :value="detail.repayKind"
+      ></mt-cell> -->
+      <div class="definite-field">
+        <div class="item">
+          <span class="tag big">放款日期</span>
+          <span class="info" @click="a">
+            <input
+              v-model="params.loanDate"
+              type="input"
+              class="field-input"
+              placeholder="请输入"
+            />
+          </span>
+        </div>
+      </div>
+      <mt-datetime-picker
+        ref="picker"
+        type="date"
+        v-model="pickerValue"
+        @confirm="handleConfirm()"
+      ></mt-datetime-picker>
+
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
         type="textarea"
@@ -144,34 +157,35 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="params.otherSitu"
+        v-model="params.cooperateMsg"
         class="text"
         style="overflow:hidden"
         placeholder="请输入"
       ></mt-field>
     </div>
-    <router-view v-else></router-view>
+    <router-view ref="m5rview" v-else></router-view>
   </div>
 </template>
 
 <script>
+import { DatetimePicker } from "mint-ui";
+import { formatDate2 } from "@/utils/utils";
+import { normalMixin } from "../../../utils/mixin";
 import {
   DetailsOfIOU,
   payKindsArr,
   yesNo,
   coordinate
 } from "../../../utils/dataMock";
-import { Field, Cell } from "mint-ui";
 import almSelect from "../components/select";
 export default {
-  components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
-    almSelect
-  },
+  components: { "mt-datetime-picker": DatetimePicker, almSelect },
+  mixins: [normalMixin],
   data() {
     return {
-      hasRouterChild2: this.$route.params.hasRouterChild2,
+      bizId: this.$route.params.bizId,
+      pickerValue: "",
+      hasRouterChildM5: this.$route.params.hasRouterChildM5,
       DetailsOfIOU: DetailsOfIOU,
       payKindsArr: payKindsArr,
       coordinate: coordinate,
@@ -187,53 +201,107 @@ export default {
       useAmoutByContract: "useAmoutByContract",
       executeCon: "executeCon",
       cooperate: "cooperate",
+      detail: {},
       params: {
-        bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
-        custName: "王健林", // 客户名称
-        contractNo: "440000002200111", //  合同编号
-        bizSubKind: "xx", //  授信业务小类
-        loanAmout: "1000000000", // 贷款金额
-        loanLength: "2040-08-25", // 贷款期限
-        payKind: 1, // 贷款支付方式
-        repayKind: "", // 还款方式
-        repayDate: "", // 还款日期
+        payKind: "1",
+        // repayKind: "", // 还款方式
+        loanDate: "", // 还款日期
         loanPurpose: "", // 约定用途
         detailMsg4useAmout: "", // 资金使用情况详细说明
         useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
         executeCon: 1, //是否履行合同约定
-        cooperate: 1, //对我行检查的态度
-        otherSitu: "" // 其他
+        cooperate: "1", //对我行检查的态度
+        cooperateMsg: "", // 其他
+        msg: ""
       }
     };
   },
+  async mounted() {
+    // 基本详情与流程详情的接口写在了vuex里
+    //保存接口写在了Mixin里
+    // 获取基本详情
+    await this.setqueryDetail(this);
+    this.bizType(this.queryDetail, this.queryDetail.bizType);
+    this.detail = this.queryDetail;
+
+    //判断是否是已经填了部分
+    if (
+      this.$route.params.saveFlag === 1 ||
+      this.$route.params.saveFlag === "1"
+    ) {
+      await this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
+    }
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
   beforeRouteEnter(to, from, next) {
-    to.params.hasRouterChild2 = to.name === "fastCreditFirstIndex";
+    to.params.hasRouterChildM5 = to.name === "fastCreditFirstIndex";
     next();
   },
   beforeRouteUpdate(to, from, next) {
-    this.hasRouterChild2 = to.name === "fastCreditFirstIndex";
+    this.hasRouterChildM5 = to.name === "fastCreditFirstIndex";
     next();
-  },
-  methods: {
-    getSelect1: function(data) {
-      this.params.payKind = data.key;
-    },
-    getSelect2: function(data) {
-      this.params.useAmoutByContract = data.key;
-    },
-    getSelect3: function(data) {
-      this.params.executeCon = data.key;
-    },
-    getSelect4: function(data) {
-      this.params.cooperate = data.key;
+    // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
+    if (from.name === "fastCreditFirstDefinite16") {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
     }
   },
   watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite5里
+        this.$Indicator.open();
+        const currentName = this.$route.name;
+        const type = this.$route.params.type;
+        var loanBusiness = {};
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
+        if (currentName === "fastCreditFirstIndex") {
+          loanBusiness = Object.assign({}, this.params, bizId);
+          this.infoSave(loanBusiness, currentName, type, val.tag);
+        } else if (currentName === "fastCreditFirstDefinite3") {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m5rview.params, bizId);
+            // 审批页面的保存走审批接口，只是传的对象不同
+            this.submit(loanBusiness);
+          });
+        } else {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m5rview.params, bizId);
+            this.infoSave(loanBusiness, currentName, type, val.tag);
+          });
+        }
       }
+    }
+  },
+  methods: {
+    getSelect1: function(data) {
+      this.params.payKind = data[0].key;
+    },
+    getSelect2: function(data) {
+      this.params.useAmoutByContract = data[0].key;
+    },
+    getSelect3: function(data) {
+      this.params.executeCon = data[0].key;
+    },
+    getSelect4: function(data) {
+      this.params.cooperate = data[0].key;
+    },
+    a() {
+      this.$refs.picker.open();
+    },
+    handleConfirm() {
+      this.params.loanDate = formatDate2(this.pickerValue, 1);
+      this.$refs.picker.close();
     }
   }
 };

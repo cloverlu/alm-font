@@ -18,7 +18,7 @@
 				.content(:class="footerShow ? 'footershow' : ''")
 					loadInsList(v-if="hasChildRouter") 
 					//- loadInsList(v-if="hasChildRouter === 1") 
-					router-view(v-else)
+					router-view(ref="allView" v-else)
 				.footer(v-if="footerShow") 
 					footerNext
 </template>
@@ -74,58 +74,9 @@ export default {
     } else if (meta.tag === "footerNext") {
       this.operateTag = 3;
     }
-    //
-    // let params1 = {
-    //   op: "金林"
-    // };
-    let params2 = {
-      beginDate: "string",
-      billAmout: "string",
-      billBeginDate: "string",
-      billBlance: "string",
-      billEndDate: "string",
-      billLength: "string",
-      billNo: "string",
-      billUnit: "string",
-      bizId: "string",
-      bizStatus: "string",
-      bizType: "string",
-      checkModel: "string",
-      currency: "string",
-      custCode: "string",
-      custName: "string",
-      emplCode: "string",
-      emplName: "string",
-      endDate: "string",
-      firstTrackDate: "string",
-      lastComprehensiveDate: "string",
-      lastImplementDate: "string",
-      lastRoutineDate: "string",
-      noticeDate: "string",
-      orgName: "string"
-    };
-    // getToDoList(this, { params: params1 }).then(res => {
-    //   console.log(res);
-    // });
-    // getNoticeCheckList(this, { params: params2 }).then(res => {
-    //   console.log(res);
-    // });
   },
 
   watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 滑到下一页的头部，这边设置1000是因为保存成功还有一个1000的提示
-        if (val.tag === "nextFooter") {
-          this.$nextTick(() => {
-            setTimeout(() => {
-              this.$refs.scrollWrapper.scrollTo(0, 0);
-            }, 1000);
-          });
-        }
-      }
-    },
     // 监听是否点击了上一步，用vuex里的nextFooter属性
     prevFooter(val, oldval) {
       if (val !== oldval) {

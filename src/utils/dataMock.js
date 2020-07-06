@@ -292,11 +292,15 @@ const loanInsList2 = _ => {
 //配合程度
 const coordinate = [
   {
-    key: 1,
+    key: "1",
     value: "配合"
   },
   {
-    key: 0,
+    key: "2",
+    value: "一般"
+  },
+  {
+    key: "3",
     value: "不配合"
   }
 ];
@@ -340,15 +344,15 @@ const yesNo = [
 // 贷款支付方式
 const payKindsArr = [
   {
-    key: 1,
+    key: "1",
     value: "贷款人受托支付"
   },
   {
-    key: 2,
+    key: "2",
     value: "借款人自主支付"
   },
   {
-    key: 3,
+    key: "3",
     value: "受托支付+自主支付"
   }
 ];
@@ -356,23 +360,23 @@ const payKindsArr = [
 // 担保方式
 const securityKindsArr = [
   {
-    key: 1,
+    key: "1",
     value: "信用"
   },
   {
-    key: 2,
+    key: "2",
     value: "抵押"
   },
   {
-    key: 3,
+    key: "3",
     value: "质押"
   },
   {
-    key: 4,
+    key: "4",
     value: "保证"
   },
   {
-    key: 5,
+    key: "5",
     value: "其他"
   }
 ];
@@ -531,11 +535,12 @@ const processing4 = _ => {
   const valueArray = ["其他"];
   for (let i = 0; i < valueArray.length; i++) {
     const a = "m4_" + i;
+    const b = `pic_${i + 1}s`;
     processing4Array.push({
       id: i,
       text: valueArray[i],
-      vModel: a,
-      vId: "m4" + i
+      vModel: b,
+      vId: a
     });
   }
   return processing4Array;
@@ -554,7 +559,7 @@ const securityKinds = _ => {
   const data = [];
   for (let i = 0; i < kinds.length; i++) {
     data.push({
-      key: i + 1,
+      key: (i + 1).toString(),
       value: kinds[i]
     });
   }
@@ -566,7 +571,7 @@ const newly18One = [
   {
     name: "健康、 嗜好、家庭关系等方面",
     id: 1,
-    modelName: "HoldPensonRisk"
+    modelName: "holdPensonRisk"
   }
 ];
 //新增1-8里的内容
@@ -751,15 +756,15 @@ const caiwuEight = [
 // 还款意愿数组
 const payIntentionsArr = [
   {
-    key: 1,
+    key: "1",
     value: "良好"
   },
   {
-    key: 2,
+    key: "2",
     value: "较差"
   },
   {
-    key: 3,
+    key: "3",
     value: "无"
   }
 ];

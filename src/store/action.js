@@ -1,9 +1,19 @@
 // import { infoDetail } from "../api/loanlnspection";
 const api = {
-  // 类型编码唯一性校验
+  // 流程详情
   infoDetail(data) {
     return data.$axios({
       url: `/alm/postLoan/business/queryForBizDtail`,
+      method: "GET",
+      params: {
+        bizId: data.bizId
+      }
+    });
+  },
+  //基本信息详情
+  queryDetail(data) {
+    return data.$axios({
+      url: `/alm/postLoan/business/queryForDtail`,
       method: "GET",
       params: {
         bizId: data.bizId
@@ -50,6 +60,17 @@ const actions = {
       }
     });
     return commit("SET_FORBIZDETAIL", params);
+  },
+  // 基本信息
+  async setqueryDetail({ commit }, data) {
+    const params = await api.queryDetail(data).then(res => {
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        if (res.data.data) {
+          return res.data.data;
+        }
+      }
+    });
+    return commit("SET_QUERYDETAIL", params);
   },
   setSaveFlag: ({ commit }, saveFlag) => {
     return commit("SET_SAVEFLAG", saveFlag);

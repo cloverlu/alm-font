@@ -43,7 +43,7 @@
           <span class="tag">企业所在行业是否发生重大不利变化</span>
           <almSelect
             :selectData="yesNo"
-            :defaultValue="params.IndustrycChangSiut"
+            :defaultValue="params.industrycChangSiut"
             :triggerId="IndustrycChangSiut"
             :title="selectTitle2"
             :fontColor="fontColor"
@@ -55,7 +55,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="params.IndustrycChangSiutMsg"
+          v-model="params.industrycChangSiutMsg"
           class="textArea"
           style="overflow:hidden"
           placeholder="请输入"
@@ -344,17 +344,17 @@
 </template>
 
 <script>
-import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
-import { Cell, Field } from "mint-ui";
+import { yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: {
-    "mt-field": Field,
     almSelect
   },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
       yesNo: yesNo,
       ownerStruSame: "ownerStruSame",
       IndustrycChangSiut: "IndustrycChangSiut",
@@ -393,8 +393,8 @@ export default {
       params: {
         ownerStruSame: 0, // 企业实际股权结构是否与上述工商信息网查询一致
         ownerStruSameMsg: "", // 实际股权结构与工商信息网查询说明
-        IndustrycChangSiut: 0, // 企业所在行业是否发生重大不利变化
-        IndustrycChangSiutMsg: "", // 企业所在行业是否发生重大不利变化具体情况
+        industrycChangSiut: 0, // 企业所在行业是否发生重大不利变化
+        industrycChangSiutMsg: "", // 企业所在行业是否发生重大不利变化具体情况
         mainBusIsChanged: 0, // 企业主营业务情况是否发生变更
         mainBusIsChangedMsg: "", // 企业主营业务情况是否发生变更情况
         planExpandSitu: 0, // 企业是否有与主业无关的扩张计划
@@ -424,57 +424,54 @@ export default {
       }
     };
   },
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
   methods: {
     getSelectOwnerStruSame(data) {
-      this.params.ownerStruSame = data.key;
+      this.params.ownerStruSame = data[0].key;
     },
     getSelectIndustrycChangSiut(data) {
-      this.params.IndustrycChangSiut = data.key;
+      this.params.IndustrycChangSiut = data[0].key;
     },
     getSelectMainBusIsChanged(data) {
-      this.params.mainBusIsChanged = data.key;
+      this.params.mainBusIsChanged = data[0].key;
     },
     getSelectPlanExpandSitu(data) {
-      this.params.planExpandSitu = data.key;
+      this.params.planExpandSitu = data[0].key;
     },
     getSelectAddrIsChanged(data) {
-      this.params.addrIsChanged = data.key;
+      this.params.addrIsChanged = data[0].key;
     },
     getSelectHiddenTroubleSitu(data) {
-      this.params.hiddenTroubleSitu = data.key;
+      this.params.hiddenTroubleSitu = data[0].key;
     },
     getSelectPurchaseCost(data) {
-      this.params.purchaseCost = data.key;
+      this.params.purchaseCost = data[0].key;
     },
     getSelectProAndOpeAbnormalSuit(data) {
-      this.params.proAndOpeAbnormalSuit = data.key;
+      this.params.proAndOpeAbnormalSuit = data[0].key;
     },
     getSelectSaleAbnormalSuit(data) {
-      this.params.saleAbnormalSuit = data.key;
+      this.params.saleAbnormalSuit = data[0].key;
     },
     getSelectChainChange(data) {
-      this.params.chainChange = data.key;
+      this.params.chainChange = data[0].key;
     },
     getSelectDailyCostDecline(data) {
-      this.params.dailyCostDecline = data.key;
+      this.params.dailyCostDecline = data[0].key;
     },
     // getSelectOrderDecline(data) {
     //   this.params.orderDecline = data.key;
     // },
     getSelectCashDecline(data) {
-      this.params.cashDecline = data.key;
+      this.params.cashDecline = data[0].key;
     },
     getSelectCashMatchesAndProAndOpe(data) {
-      this.params.cashMatchesAndProAndOpe = data.key;
-    }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite5里
-        this.setDefinite5({ params: this.params });
-      }
+      this.params.cashMatchesAndProAndOpe = data[0].key;
     }
   }
 };

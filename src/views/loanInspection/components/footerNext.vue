@@ -34,8 +34,8 @@ export default {
       //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”
       this.setNextFooter({ nextFooter: val, tag: "nextFooter" });
 
-      const currentName = this.$route.name;
-      const currentType = this.$route.params.type;
+      // const currentName = this.$route.name;
+      // const currentType = this.$route.params.type;
       // this.footerRoute(currentType, currentName);
 
       // // console.log(this.$route);

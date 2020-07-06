@@ -51,14 +51,15 @@
 </template>
 
 <script>
-import { DetailsOfIOU, coordinate } from "../../../utils/dataMock";
+import { coordinate } from "../../../utils/dataMock";
 import almSelect from "../components/select";
-import { Field } from "mint-ui";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: { "mt-field": Field, almSelect },
+  components: { almSelect },
+  mixins: [normalMixin],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.$route.params.bizId,
       coordinate: coordinate,
       cooperate: "cooperate",
       popupVisible: false,
@@ -67,25 +68,33 @@ export default {
       fontColor: "blue",
       params: {
         checkAddr: "",
-        cooperate: 1,
+        cooperate: "1",
         addrChangedMsg: "",
         staff: ""
       }
     };
   },
-  methods: {
-    getSelect(data) {
-      this.params.cooperate = data.key;
-    }
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
   },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite13里
-        console.log(this.params);
-        this.setDefinite13({ params: this.params });
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
+        this.params = Object.assign({}, this.params, bizId);
       }
+    }
+  },
+  methods: {
+    getSelect(data) {
+      this.params.cooperate = data[0].key;
     }
   }
 };

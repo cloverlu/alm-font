@@ -15,82 +15,97 @@
         <mt-cell
           class="textFiled"
           title="检查类型"
-          :value="params.bizType"
+          :value="detail.bizTypeName"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="客户名称"
-          :value="params.custName"
+          :value="detail.custName"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款金额"
-          :value="params.loanAmout"
+          :value="detail.loanAmout"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款余额"
-          :value="params.loanBalance"
+          :value="detail.loanBalance"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款期限"
-          :value="params.loanLength"
+          :value="detail.loanLength"
         ></mt-cell>
-        <mt-field
+        <mt-cell
           class="textFiled"
-          label="还款方式"
-          placeholder="请输入"
-          v-model="params.repayKind"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款日期"
-          placeholder="请输入"
-          v-model="params.repayDate"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款金额"
-          placeholder="请输入"
-          v-model="params.repayAmout"
-        ></mt-field>
+          title="还款方式"
+          :value="detail.repayKind"
+        ></mt-cell>
+        <div class="definite-field">
+          <div class="item">
+            <span class="tag big">
+              还款日期
+            </span>
+            <span class="info" @click="a">
+              <input
+                v-model="params.repayDate"
+                type="input"
+                class="field-input"
+                placeholder="请输入"
+              />
+            </span>
+          </div>
+          <div class="item">
+            <span class="tag big">
+              还款金额
+            </span>
+            <span class="info">
+              <input
+                v-model="params.repayAmout"
+                type="input"
+                class="field-input"
+                placeholder="请输入"
+              />
+            </span>
+          </div>
+        </div>
+        <mt-datetime-picker
+          ref="picker"
+          type="date"
+          v-model="pickerValue"
+          @confirm="handleConfirm()"
+        ></mt-datetime-picker>
       </div>
     </div>
-    <router-view v-else></router-view>
+    <router-view ref="m4rview" v-else></router-view>
   </div>
 </template>
 
 <script>
-import { DetailsOfIOU, bizTypes } from "../../../utils/dataMock";
-import { Field, Cell } from "mint-ui";
-import almSelect from "../components/select";
+import { DatetimePicker } from "mint-ui";
+import { formatDate2 } from "@/utils/utils";
+import { bizTypes } from "../../../utils/dataMock";
+import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: {
-    "mt-cell": Cell,
-    "mt-field": Field
-    // almSelect
-  },
+  components: { "mt-datetime-picker": DatetimePicker },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       hasRouterChild4: this.$route.params.hasRouterChild4,
-      DetailsOfIOU: DetailsOfIOU,
       bizTypes: bizTypes,
       popupVisible: false,
       payType: 1,
       selectTitle: "检查类型",
       fontColor: "blue",
       repayKind: "repayKind",
+      pickerValue: "",
       params: {
-        bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
-        custName: "王健林", // 客户名称
-        loanAmout: "1000000000", // 贷款金额
-        loanBalance: "999999", // 贷款余额
-        loanLength: "2040-08-25", // 贷款期限
-        repayKind: "", // 还款方式
         repayDate: "", // 还款日期
         repayAmout: "" // 还款金额
-      }
+      },
+      detail: {}
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -100,23 +115,80 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.hasRouterChild4 = to.name === "repaymentInspectionIndex";
     next();
+    // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
+    if (from.name === "repaymentInspectionDefinite7") {
+      this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    }
   },
-  methods: {
-    // getSelect: function(data) {
-    //   this.params.bizType = data.key;
-    // },
-    // getSelect1: function(data) {
-    //   this.params.repayKind = data.key;
-    // }
+  async mounted() {
+    // 基本详情与流程详情的接口写在了vuex里
+    //保存接口写在了Mixin里
+    // 获取基本详情
+    await this.setqueryDetail(this);
+    this.bizType(this.queryDetail, this.queryDetail.bizType);
+    this.detail = this.queryDetail;
+
+    //判断是否是已经填了部分
+    if (
+      this.$route.params.saveFlag === 1 ||
+      this.$route.params.saveFlag === "1"
+    ) {
+      await this.setforDizDetail(this);
+      this.params = this.forBizDetail(this.$route.name);
+    } else {
+      this.setSaveFlag([]);
+    }
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
   },
   watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    // nextFooter(val, oldval) {
-    //   if (val !== oldval) {
-    //     // 将数据存入vuex里的setDefinite5里
-    //     this.setDefinite5({ params: this.params });
-    //   }
-    // }
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.$Indicator.open();
+        const currentName = this.$route.name;
+        const type = this.$route.params.type;
+        var loanBusiness = {};
+        const bizId = {
+          bizId: this.$route.params.bizId
+        };
+        if (currentName === "repaymentInspectionIndex") {
+          loanBusiness = Object.assign({}, this.params, bizId);
+          this.infoSave(loanBusiness, currentName, type, val.tag);
+        } else if (currentName === "processing4") {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m4rview.params, bizId);
+            delete loanBusiness.imageList;
+            const loanBusiness2 = Object.assign(
+              {},
+              this.$refs.m4rview.params2,
+              bizId
+            );
+            // 两个接口并发，都成功后才走操作
+            this.bindSave(loanBusiness, loanBusiness2);
+          });
+        } else {
+          this.$nextTick(() => {
+            loanBusiness = Object.assign({}, this.$refs.m4rview.params, bizId);
+            this.infoSave(loanBusiness, currentName, type, val.tag);
+          });
+        }
+      }
+    }
+  },
+  methods: {
+    a() {
+      this.$refs.picker.open();
+    },
+    handleConfirm() {
+      this.params.repayDate = formatDate2(this.pickerValue, 1);
+      this.$refs.picker.close();
+    }
   }
 };
 </script>
@@ -127,6 +199,9 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  .definite-field {
+    border-top: none;
+  }
   .formTitle {
     width: 100%;
     height: px2rem(44);

@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getSelect(data) {
-      this.params.cooperate = data.key;
+      this.params.cooperate = data[0].key;
     }
   }
 };

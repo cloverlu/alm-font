@@ -6,37 +6,57 @@
 
 <template lang="pug">
 	.definite-89-wrapper
-		.definite-89-top
-			.definite-1-title2
+		.definite-89
+			.definite-1-title2(class="definite-89-top")
 				span(class="title") 担保情况检查
-			.definite-89-dropdown
-				van-dropdown-menu(class="dropdown89" )
-					van-dropdown-item(:options="option" v-model="value")
-		.definite-89-content
-			newly4(v-if="value===0")
-			newly5(v-if="value===1")
+			.wrapper-89
+				.definite-89-title1 
+					.titil-89 {{option[0].text}}
+				.definite-89-content
+					newly4(:detail="params" @upperParams4="upperParams4")
+			.wrapper-89
+				.definite-89-title1
+					.titil-89 {{option[1].text}}
+				.definite-89-content
+					newly5(:detail="params" @upperParams5="upperParams5")
 </template>
 
 <script>
-import { DropdownMenu, DropdownItem } from "vant";
 import newly4 from "../dailyInspection/newly-4";
 import newly5 from "../dailyInspection/newly-5";
+import { normalMixin } from "../../../utils/mixin";
 export default {
   components: {
-    "van-dropdown-menu": DropdownMenu,
-    "van-dropdown-item": DropdownItem,
     newly4,
     newly5
   },
+  mixins: [normalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       dropVisibale: false,
       value: 0,
       option: [
         { text: "房地产抵押担保适用", value: 0 },
         { text: "融资担保机构担保适用", value: 1 }
-      ]
+      ],
+      params: {}
     };
+  },
+  mounted() {
+    // 上一步下一步需要走的详情接口
+    const flag = this.$route.params.saveFlag;
+    const name = this.$route.name;
+    this.mountedTag(flag, name);
+  },
+
+  methods: {
+    upperParams4(val) {
+      this.params = Object.assign({}, this.params, val);
+    },
+    upperParams5(val) {
+      this.params = Object.assign({}, this.params, val);
+    }
   }
 };
 </script>
@@ -46,23 +66,16 @@ export default {
 .definite-89-wrapper {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  .mask {
+  .definite-89 {
     width: 100%;
     height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 120;
+    display: flex;
+    flex-direction: column;
   }
+
   .definite-89-top {
-    height: px2rem(70);
+    height: px2rem(40);
     width: 100%;
-    flex: 0 0 px2rem(70);
     .definite-89-dropdown {
       width: 100%;
       height: px2rem(31);
@@ -101,8 +114,29 @@ export default {
       }
     }
   }
-  .definite-89-content {
-    flex: 1;
+  .wrapper-89 {
+    &:last-child {
+      margin-top: px2rem(15);
+    }
+    .definite-89-title1 {
+      width: 100%;
+      height: px2rem(31);
+      line-height: px2rem(31);
+      padding: 0 px2rem(6);
+      box-sizing: border-box;
+      .titil-89 {
+        padding: 0 px2rem(10);
+        box-sizing: border-box;
+        color: #fff;
+        background-color: rgba(78, 120, 222, 0.81);
+        border-top-left-radius: px2rem(3);
+        border-top-right-radius: px2rem(3);
+        font-size: px2rem(14);
+        box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
+      }
+    }
+    .definite-89-content {
+    }
   }
 }
 </style>
