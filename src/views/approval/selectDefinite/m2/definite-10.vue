@@ -17,13 +17,21 @@
               客户每季度查询一次个人征信即可)
             </span>
           </div>
-          <mt-cell class="textFiled" title="征信报告查询日期" :value="detail.queryDateForPer"></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="征信报告查询日期"
+            :value="detail.queryDateForPer"
+          ></mt-cell>
         </div>
       </div>
 
       <div class="enterpriseCredit">
         <div class="title">1.企业实际控制人及其配偶（若有）征信：</div>
-        <mt-cell class="textFiled" title="征信分类" :value="detail.creditClassification"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="征信分类"
+          :value="detail.creditClassification"
+        ></mt-cell>
         <div class="formTitle1">
           <!-- <span class="lightBlue"></span>
           <span class="coNameBlack">征信分类</span>-->
@@ -32,22 +40,60 @@
         </div>
 
         <!-- （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况 -->
-        <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
-        <mt-cell class="textFiled" title="未结清贷款笔数" :value="detail.unPayOffLoanNumCon"></mt-cell>
-        <mt-cell class="textFiled" title="未结清贷款金额" :value="detail.unPayOffAmoutCon"></mt-cell>
-        <mt-cell class="textFiled" title="涉及金融机构" :value="detail.finInstitutionNumCon"></mt-cell>
-        <mt-cell class="textFiled" title="未结清贷款结余" :value="detail.sumBalanceCon"></mt-cell>
+        <div class="coNo1">
+          （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+        </div>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款笔数"
+          :value="detail.unPayOffLoanNumCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款金额"
+          :value="detail.unPayOffAmoutCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="涉及金融机构"
+          :value="detail.finInstitutionNumCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款结余"
+          :value="detail.sumBalanceCon"
+        ></mt-cell>
         <!--  -->
         <div class="nothing"></div>
         <!--  -->
-        <mt-cell class="textFiled" title="未销户贷记卡账户" :value="detail.debitCardNumCon"></mt-cell>
-        <mt-cell class="textFiled" title="未销户贷记卡担保金额" :value="detail.debitCardLineAmoutCon"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未销户贷记卡账户"
+          :value="detail.debitCardNumCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未销户贷记卡担保金额"
+          :value="detail.debitCardLineAmoutCon"
+        ></mt-cell>
 
         <div class="nothing"></div>
         <!--  -->
-        <mt-cell class="textFiled" title="对外担保笔数" :value="detail.guaranteeNumCon"></mt-cell>
-        <mt-cell class="textFiled" title="对外担保金额" :value="detail.guaranteeAmoutCon"></mt-cell>
-        <mt-cell class="textFiled" title="对外担保结余" :value="detail.guaranteeBalanceCon"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保笔数"
+          :value="detail.guaranteeNumCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保金额"
+          :value="detail.guaranteeAmoutCon"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保结余"
+          :value="detail.guaranteeBalanceCon"
+        ></mt-cell>
 
         <!-- （2）逾期及违约 -->
         <div class="coNo2">（2）逾期及违约</div>
@@ -55,7 +101,9 @@
         <div class="item1">
           <span class="tag">是否存在逾期及违约记录</span>
           <span class="info" v-if="detail.existBadRecordCon === 1">是</span>
-          <span class="info" v-else-if="detail.existBadRecordCon === 0">否</span>
+          <span class="info" v-else-if="detail.existBadRecordCon === 0"
+            >否</span
+          >
         </div>
         <mt-field
           type="textarea"
@@ -71,7 +119,9 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info" v-if="detail.existBadRecordJur === 1">是</span>
-          <span class="info" v-else-if="detail.existBadRecordJur === 0">否</span>
+          <span class="info" v-else-if="detail.existBadRecordJur === 0"
+            >否</span
+          >
         </div>
         <mt-field
           type="textarea"
@@ -84,36 +134,80 @@
 
         <div class="titleBox">
           <div class="title">2.企业法定代表人及其配偶（若有）征信：</div>
-          <mt-cell class="textFiled" title="征信分类" :value="detail.creditClassification"></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="征信分类"
+            :value="detail.creditClassification"
+          ></mt-cell>
           <div class="formTitle1">
             <!-- <span class="lightBlue"></span>
             <span class="coNameBlack">征信分类</span>-->
             <span class="lightBlue1"></span>
             <span class="coNameBlack1">征信情况</span>
           </div>
-          <div class="coNo1">（1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况</div>
+          <div class="coNo1">
+            （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
+          </div>
         </div>
-        <mt-cell class="textFiled" title="未结清贷款笔数" :value="detail.unPayOffLoanNumJur"></mt-cell>
-        <mt-cell class="textFiled" title="未结清贷款金额" :value="detail.unPayOffAmoutJur"></mt-cell>
-        <mt-cell class="textFiled" title="涉及金融机构" :value="detail.finInstitutionNumJur"></mt-cell>
-        <mt-cell class="textFiled" title="未结清贷款结余" :value="detail.sumBalanceJur"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款笔数"
+          :value="detail.unPayOffLoanNumJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款金额"
+          :value="detail.unPayOffAmoutJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="涉及金融机构"
+          :value="detail.finInstitutionNumJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未结清贷款结余"
+          :value="detail.sumBalanceJur"
+        ></mt-cell>
 
         <div class="nothing"></div>
         <!--  -->
-        <mt-cell class="textFiled" title="未销户贷记卡账户" :value="detail.debitCardNumJur"></mt-cell>
-        <mt-cell class="textFiled" title="未销户贷记卡担保金额" :value="detail.debitCardLineAmoutJur"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未销户贷记卡账户"
+          :value="detail.debitCardNumJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="未销户贷记卡担保金额"
+          :value="detail.debitCardLineAmoutJur"
+        ></mt-cell>
 
         <div class="nothing"></div>
         <!--  -->
-        <mt-cell class="textFiled" title="对外担保笔数" :value="detail.guaranteeNumJur"></mt-cell>
-        <mt-cell class="textFiled" title="对外担保金额" :value="detail.guaranteeAmoutJur"></mt-cell>
-        <mt-cell class="textFiled" title="对外担保结余" :value="detail.guaranteeBalanceJur"></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保笔数"
+          :value="detail.guaranteeNumJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保金额"
+          :value="detail.guaranteeAmoutJur"
+        ></mt-cell>
+        <mt-cell
+          class="textFiled"
+          title="对外担保结余"
+          :value="detail.guaranteeBalanceJur"
+        ></mt-cell>
 
         <div class="coNo2">（2）逾期及违约</div>
         <div class="item1">
           <span class="tag">是否存在逾期及违约记录</span>
           <span class="info" v-if="detail.existCreditChage4 === 1">是</span>
-          <span class="info" v-else-if="detail.existCreditChage4 === 0">否</span>
+          <span class="info" v-else-if="detail.existCreditChage4 === 0"
+            >否</span
+          >
         </div>
         <mt-field
           type="textarea"
@@ -129,7 +223,9 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info" v-if="detail.existCreditChage5 === 1">是</span>
-          <span class="info" v-else-if="detail.existCreditChage5 === 0">否</span>
+          <span class="info" v-else-if="detail.existCreditChage5 === 0"
+            >否</span
+          >
         </div>
         <mt-field
           type="textarea"
@@ -145,7 +241,9 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info" v-if="detail.existCreditChage3 === 1">是</span>
-          <span class="info" v-else-if="detail.existCreditChage3 === 0">否</span>
+          <span class="info" v-else-if="detail.existCreditChage3 === 0"
+            >否</span
+          >
         </div>
         <mt-field
           type="textarea"
@@ -163,7 +261,7 @@
           type="textarea"
           rows="3"
           class="text"
-          v-model="detail.RecentNegativeInformation"
+          v-model="detail.msg"
           style="overflow:hidden"
           :disabled="true"
         ></mt-field>

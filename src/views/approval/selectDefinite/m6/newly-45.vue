@@ -10,12 +10,12 @@
 			.definite-1-title
 				span(class="colum-blue")
 				span(class="title") 担保情况检查
-		.definite-89-content(v-if="detail.assitInfoForPledge.length > 0")
+		.definite-89-content(v-if="detail.assitInfoForPledge && detail.assitInfoForPledge.length > 0")
 			.newly-45-title
 				span 房地产抵押担保适用
 			.newly-45-content
 				newly4(:detail="detail" )
-		.definite-89-content(class="content2" v-if="detail.assitInfoForGuarantee.length > 0")
+		.definite-89-content(class="content2" v-if="detail.assitInfoForGuarantee && detail.assitInfoForGuarantee.length > 0")
 			.newly-45-title
 				span 融资担保机构担保适用
 			.newly-45-content

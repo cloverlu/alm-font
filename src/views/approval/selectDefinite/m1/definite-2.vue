@@ -12,7 +12,9 @@
 				span(class="info")  {{detail.checkAddr}}
 			.item
 				span(class="tag") 检查配合程度
-				span(class="info")  {{detail.coordinate}}
+				span(class="info" v-if="detail.cooperate === '1'")  配合
+				span(class="info" v-if="detail.cooperate === '2'")  一般
+				span(class="info" v-if="detail.cooperate === '3'")  不配合
 			.item
 				span(class="tag big") 生产经营场所变动情况
 				span(class="info")  {{detail.addrChangedMsg}}
@@ -23,7 +25,7 @@
 			span(class="colum-blue")
 			span  检查内容
 		.definite-2-field
-			fieldOne(:definite="definite2Field" :info="detail.fieldOne" ref="fieldOne" )
+			fieldOne(:definite="definite2Field" :info="detail" :read="true" ref="fieldOne" )
 		.definite-2-tag
 			.tag ※注：
 			.content 1、贷款发放如采用贷款人受托支付方式，信息来源包括《小企业授信业务额度借款支用单》、《小企业贷款受托支付申请书》、汇款凭证、账户流水、合同、入库单、贷款购买标的(如原材料、机器设备等)等。<br>2、贷款发放如采用借款人自主支付方式，信息来源包括《实际支付清单》、汇款凭证、合同、入库单、贷款购买标的( 如原材料、机器设备等)等。
@@ -33,7 +35,7 @@
 				span(class="info" v-if="detail.useAmoutByContract === 0")  否
 				span(class="info" v-if="detail.useAmoutByContract === 1")  是
 			.item2
-				fieldOne(:definite="definite2Field2" :info="detail.fieldTwo" ref="fieldTwo" )
+				fieldOne(:definite="definite2Field2" :info="detail" :read="true" ref="fieldTwo" )
 		
 				
 </template>

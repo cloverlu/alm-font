@@ -7,55 +7,61 @@
   <div class="checkDetail">
     <!--填写信息  -->
     <div class="definite14">
-      <mt-cell
+      <!-- <mt-cell
         class="textFiled"
         title="客户名称"
-        :value="detail.custName"
+        :value="detail.definite14.custName"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="合同编号"
-        :value="detail.contractNo"
-      ></mt-cell>
+        :value="detail.definite14.contractNo"
+      ></mt-cell> -->
       <mt-cell
         class="textFiled"
         title="授信业务小类"
-        :value="detail.bizSubKind"
+        :value="detail.definite14.bizSubKind"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款金额"
-        :value="detail.loanAmout"
+        :value="detail.definite14.loanAmout"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款期限"
-        :value="detail.loanLength"
+        :value="detail.definite14.loanLength"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="还款方式"
-        :value="detail.repayKind"
+        :value="detail.definite14.repayKind"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="还款日期"
-        :value="detail.repayDate"
+        :value="detail.definite14.repayDate"
       ></mt-cell>
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
         type="textarea"
         rows="3"
-        v-model="detail.loanPurpose"
+        v-model="detail.definite14.loanPurpose"
         class="text"
         style="overflow:hidden"
         :disabled="true"
       ></mt-field>
       <div class="item1">
         <span class="tag">贷款支付方式</span>
-        <span class="info" v-if="detail.payKind === 1"> 贷款人受托支付 </span>
-        <span class="info" v-if="detail.payKind === 2">借款人自主支付 </span>
-        <span class="info" v-if="detail.payKind === 3"> 受托支付+自主支付</span>
+        <span class="info" v-if="detail.definite14.payKind === '1'">
+          贷款人受托支付
+        </span>
+        <span class="info" v-if="detail.definite14.payKind === '2'"
+          >借款人自主支付
+        </span>
+        <span class="info" v-if="detail.definite14.payKind === '3'">
+          受托支付+自主支付</span
+        >
       </div>
 
       <div class="formTitle">
@@ -67,42 +73,53 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="detail.detailMsg4useAmout"
+        v-model="detail.definite14.detailMsg4useAmout"
         class="text"
         style="overflow:hidden"
         :disabled="true"
       ></mt-field>
       <div class="item1">
         <span class="tag">是否按合同约定的用途使用信贷资金</span>
-        <span class="info" v-if="detail.useAmoutByContract === 1">是</span>
-        <span class="info" v-if="detail.useAmoutByContract === 0">否</span>
+        <span class="info" v-if="detail.definite14.useAmoutByContract === 1"
+          >是</span
+        >
+        <span class="info" v-if="detail.definite14.useAmoutByContract === 0"
+          >否</span
+        >
       </div>
       <div class="item1">
         <span class="tag">是否履行合同约定</span>
-        <span class="info" v-if="detail.executeCon === 1">是</span>
-        <span class="info" v-if="detail.executeCon === 0">否</span>
+        <span class="info" v-if="detail.definite14.executeCon === 1">是</span>
+        <span class="info" v-if="detail.definite14.executeCon === 0">否</span>
       </div>
 
       <mt-field class="textFiled" label="情况说明"></mt-field>
       <mt-field
         type="textarea"
         rows="3"
-        v-model="detail.msg"
+        v-model="detail.definite14.msg"
         class="text"
         style="overflow:hidden"
         :disabled="true"
       ></mt-field>
       <div class="item1">
         <span class="tag">对我行检查的态度</span>
-        <span class="info" v-if="detail.cooperate === 1">配合</span>
-        <span class="info" v-if="detail.cooperate === 0">不配合</span>
+        <span class="info" v-if="detail.definite14.cooperate === '1'"
+          >配合</span
+        >
+        <span class="info" v-if="detail.definite14.cooperate === '2'"
+          >一般</span
+        >
+        <span class="info" v-if="detail.definite14.cooperate === '3'"
+          >不配合</span
+        >
       </div>
 
       <mt-field class="textFiled" label="情况说明"></mt-field>
       <mt-field
         type="textarea"
         rows="3"
-        v-model="detail.otherSitu"
+        v-model="detail.definite14.cooperateMsg"
         class="text"
         style="overflow:hidden"
         :disabled="true"
@@ -113,58 +130,27 @@
 </template>
 
 <script>
-import { Field, Cell } from "mint-ui";
 import definite16 from "../m5/definite-16";
+import { normalMixin, approvalMixin } from "../../../../utils/mixin";
 export default {
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
     definite16
   },
+  mixins: [normalMixin, approvalMixin],
   data() {
-    const definite16 = _ => {
-      const definite16 = {};
-      for (let i = 0; i < 11; i++) {
-        const a = `pic_${i + 1}s`;
-        definite16[a] = [
-          {
-            url: "",
-            longitude: "",
-            dimension: ""
-          }
-        ];
-      }
-      return definite16;
-    };
     return {
-      params: {
-        bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
-        custName: "王健林", // 客户名称
-        contractNo: "440000002200111", //  合同编号
-        bizSubKind: "xx", //  授信业务小类
-        loanAmout: "1000000000", // 贷款金额
-        loanLength: "2040-08-25", // 贷款期限
-        payKind: 1, // 贷款支付方式
-        repayKind: "", // 还款方式
-        repayDate: "", // 还款日期
-        loanPurpose: "", // 约定用途
-        detailMsg4useAmout: "", // 资金使用情况详细说明
-        useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
-        executeCon: 1, //是否履行合同约定
-        cooperate: 1, //对我行检查的态度
-        otherSitu: "", // 其他
-        definite16: definite16()
+      bizId: this.$route.params.bizId,
+      detail: {
+        definite14: {},
+        definite16: {}
       }
     };
   },
-  computed: {
-    detail() {
-      const newDetail = this.params;
-      console.log(newDetail);
-      return newDetail;
-    }
+  computed: {},
+  async mounted() {
+    await this.setApproveDetail(this);
+    this.detail = this.approveDetail(this.$route.params.type);
   },
-
   methods: {},
   watch: {}
 };

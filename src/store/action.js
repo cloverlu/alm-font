@@ -74,6 +74,17 @@ const actions = {
   },
   setSaveFlag: ({ commit }, saveFlag) => {
     return commit("SET_SAVEFLAG", saveFlag);
+  },
+  // 审批详情（点击更多出现的详情）
+  async setApproveDetail({ commit }, data) {
+    const params = await api.infoDetail(data).then(res => {
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        if (res.data.data) {
+          return res.data.data;
+        }
+      }
+    });
+    return commit("SET_APPROVEDETAIL", params);
   }
 };
 

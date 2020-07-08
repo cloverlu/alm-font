@@ -17,14 +17,19 @@
         :key="item.checkStage"
       >
         <div class="formTitle1">
-          <span class="coName" v-if="item.checkStage === 1">第一阶段</span>
-          <span class="coName" v-else-if="item.checkStage === 2">第二阶段</span>
-          <span class="coName" v-else-if="item.checkStage === 3">第三阶段</span>
+          <span class="coName" v-if="item.checkStage === '1'">第一阶段</span>
+          <span class="coName" v-else-if="item.checkStage === '2'"
+            >第二阶段</span
+          >
+          <span class="coName" v-else-if="item.checkStage === '3'"
+            >第三阶段</span
+          >
         </div>
         <div class="item1">
           <span class="tag1">还款意愿</span>
-          <span class="info" v-if="item.payIntention === 1">是</span>
-          <span class="info" v-if="item.payIntention === 0">否</span>
+          <span class="info" v-if="item.payIntention === '1'">良好</span>
+          <span class="info" v-if="item.payIntention === '2'">较差</span>
+          <span class="info" v-if="item.payIntention === '3'">无</span>
         </div>
         <mt-cell
           class="textFiled"

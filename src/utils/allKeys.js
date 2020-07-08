@@ -30,7 +30,7 @@ const loanlnspection = {
       addrChangedMsg: "",
       bizId: "",
       checkAddr: "",
-      cooperate: 1,
+      cooperate: "1",
       detailMsg4useAmout: "",
       msg: "",
       msgSource: "",

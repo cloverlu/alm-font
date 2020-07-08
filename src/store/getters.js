@@ -133,7 +133,120 @@ const getters = {
   m1Definite16: state => state.creditFirst.m1Definite16,
   m1Definite3: state => state.creditFirst.m1Definite3,
   bizType: state => state.userStore.bizType,
-  addmore: state => state.approvalStore.addmore
+  addmore: state => state.approvalStore.addmore,
+  approveDetail: state => type => {
+    var approveData = "";
+    approveData = state.approvalStore.approveDetail;
+    var obj = {};
+    switch (type) {
+      case "m1":
+        var params = {
+          billBeginDate: "",
+          billAmout: "",
+          billLength: ""
+        };
+        obj.definite1 = Object.assign({}, loanlnspection.m1.definite1, params);
+        obj.definite2 = loanlnspection.m1.definite2;
+        obj.definite16 = loanlnspection.m1.definite16;
+        break;
+      case "m2":
+        var params12 = {
+          custName: "",
+          lineAmout: "",
+          lineBalance: ""
+        };
+        obj.definite12 = Object.assign(
+          {},
+          loanlnspection.m2.definite12,
+          params12
+        );
+        obj.definite13 = loanlnspection.m2.definite13;
+        obj.definite11 = loanlnspection.m2.definite11.creditInfo;
+        obj.definite10 = loanlnspection.m2.definite10.creditInfo;
+        obj.definite5 = loanlnspection.m2.definite5.financeInfo;
+        obj.definite18 = loanlnspection.m2.definite18;
+        break;
+      case "m3":
+        var params18 = {
+          lineBalance: ""
+        };
+        obj.newly18 = Object.assign({}, loanlnspection.m3.newly18, params18);
+        obj.definite13 = loanlnspection.m3.definite13;
+        obj.definite11 = loanlnspection.m3.definite11.creditInfo;
+        obj.definite10 = loanlnspection.m3.definite10.creditInfo;
+        obj.credit89 = loanlnspection.m3.credit89.financeInfo;
+        obj.definite6 = loanlnspection.m3.definite6;
+        obj.definite17 = loanlnspection.m3.definite17;
+        break;
+      case "m4":
+        var params9 = {
+          custName: ""
+        };
+        var imageList = {
+          pic_1s: []
+        };
+        obj.newly9 = Object.assign({}, loanlnspection.m4.newly9, params9);
+        obj.definite7 = loanlnspection.m4.definite7;
+        obj.imageList = imageList;
+        break;
+      case "m5":
+        var params14 = {
+          custName: "",
+          contractNo: "",
+          bizSubKind: "",
+          loanAmout: "",
+          loanLength: "",
+          repayKind: "",
+          repayDate: ""
+        };
+
+        obj.definite14 = Object.assign(
+          {},
+          loanlnspection.m5.definite14,
+          params14
+        );
+        obj.definite16 = loanlnspection.m5.definite16;
+        break;
+      case "m6":
+        var params1 = {
+          checkModel: ""
+        };
+
+        obj.newly1 = Object.assign({}, loanlnspection.m6.newly1, params1);
+        obj.newly2 = loanlnspection.m6.newly2.assetCreditInfo;
+        obj.newly3 = loanlnspection.m6.newly3;
+        obj.newly45 = loanlnspection.m6.newly45;
+        obj.definite16 = loanlnspection.m6.definite16;
+        break;
+    }
+    Object.keys(obj).forEach(key => {
+      if (key) {
+        if (key === "definite11" || key === "definite10") {
+          approveData = state.approvalStore.approveDetail.creditInfo;
+        } else if (key === "definite5" || key === "credit89") {
+          approveData = state.approvalStore.approveDetail.financeInfo;
+        } else if (key === "newly2") {
+          approveData = state.approvalStore.approveDetail.assetCreditInfo;
+        } else {
+          approveData = state.approvalStore.approveDetail;
+        }
+
+        Object.keys(obj[key]).forEach(k => {
+          if (approveData) {
+            obj[key][k] = approveData[k];
+          }
+        });
+        if (key === "definite10" || key === "definite11") {
+          obj[key].msg = state.approvalStore.approveDetail.msg;
+        } else if (key === "newly2") {
+          obj[key].summaryForCheck =
+            state.approvalStore.approveDetail.summaryForCheck;
+        }
+      }
+    });
+
+    return obj;
+  }
 };
 
 export default getters;

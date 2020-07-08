@@ -17,14 +17,20 @@
           <mt-cell
             class="textFiled"
             title="检查配合程度"
-            value="是"
-            v-if="detail.cooperate === 1"
+            value="配合"
+            v-if="detail.cooperate === '1'"
           ></mt-cell>
           <mt-cell
             class="textFiled"
             title="检查配合程度"
-            value="否"
-            v-else-if="detail.cooperate === 0"
+            value="一般"
+            v-if="detail.cooperate === '2'"
+          ></mt-cell>
+          <mt-cell
+            class="textFiled"
+            title="检查配合程度"
+            value="不配合"
+            v-if="detail.cooperate === '3'"
           ></mt-cell>
           <!-- <div class="item">
             <span class="tag">检查配合程度</span>
@@ -47,9 +53,7 @@
 
 <script>
 import { DetailsOfIOU, coordinate } from "../../../../utils/dataMock.js";
-import { Cell } from "mint-ui";
 export default {
-  components: { "mt-cell": Cell },
   props: ["detail"],
   data() {
     return {};
@@ -60,8 +64,6 @@ export default {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite13里
-        console.log(this.params);
-        this.setDefinite13({ params: this.params });
       }
     }
   }

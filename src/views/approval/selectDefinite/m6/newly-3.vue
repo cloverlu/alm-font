@@ -31,11 +31,13 @@
           style="overflow:hidden"
           :disabled="true"
         ></mt-field>
-        <div class="item"></div>
+        <div class="item">
+          <span class="tag">企业所在行业是否发生重大不利变化</span>
+        </div>
         <mt-field
           type="textarea"
           rows="3"
-          v-model="detail.IndustrycChangSiutMsg"
+          v-model="detail.industrycChangSiutMsg"
           class="textArea"
           style="overflow:hidden"
           :disabled="true"
@@ -202,7 +204,7 @@
           <span class="info" v-if="detail.cashDecline === 0">否</span>
         </div>
         <div class="item noBorder">
-          <span class="tag">现金流与营业收入是否基本匹配</span>
+          <span class="tag">现金流与营业收入是否基本匹配 </span>
           <span class="info" v-if="detail.cashMatchesAndProAndOpe === 1"
             >是</span
           >

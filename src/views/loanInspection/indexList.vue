@@ -73,38 +73,39 @@ export default {
       const moduleName = this.$route.name;
       const status = bizStatus;
       var name = "";
-      // console.log(moduleName);
-      if (status !== "inReview") {
-        if (moduleName === "loanInspectionIndex") {
-          if (type === "m1") {
-            name = "creditFirstIndex";
-          } else if (type === "m2") {
-            name = "creditRoutineIndex";
-          } else if (type === "m3") {
-            name = "creditOverallIndex";
-          } else if (type === "m4") {
-            name = "repaymentInspectionIndex";
-          } else if (type === "m5") {
-            name = "fastCreditFirstIndex";
-          } else if (type === "m6") {
-            name = "dailyInspectionIndex";
-          }
-          this.$router.push({
-            name: name,
-            params: {
-              bizId: id,
-              type: type,
-              saveFlag: saveFlag
-            }
-          });
+      console.log(moduleName);
+
+      if (moduleName === "loanInspectionIndex") {
+        if (type === "m1") {
+          name = "creditFirstIndex";
+        } else if (type === "m2") {
+          name = "creditRoutineIndex";
+        } else if (type === "m3") {
+          name = "creditOverallIndex";
+        } else if (type === "m4") {
+          name = "repaymentInspectionIndex";
+        } else if (type === "m5") {
+          name = "fastCreditFirstIndex";
+        } else if (type === "m6") {
+          name = "dailyInspectionIndex";
         }
-      } else {
+        this.$router.push({
+          name: name,
+          params: {
+            bizId: id,
+            type: type,
+            saveFlag: saveFlag,
+            status: bizStatus
+          }
+        });
+      } else if (moduleName === "approvalIndex") {
         this.$router.push({
           name: "checklist1",
           params: {
             bizId: id,
             type: type,
-            saveFlag: saveFlag
+            saveFlag: saveFlag,
+            status: bizStatus
           }
         });
       }

@@ -77,14 +77,14 @@
             title="本次检查变动情况"
             :value="detail.dailyExpenChangSitu"
           ></mt-cell>
-          <mt-field
+          <!-- <mt-field
             type="textarea"
             rows="3"
             v-model="detail.dailyExpenChangSitu"
             class="text"
             style="overflow:hidden"
             :disabled="true"
-          ></mt-field>
+          ></mt-field> -->
 
           <mt-field
             type="textarea"

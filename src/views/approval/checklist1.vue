@@ -9,10 +9,10 @@
 		.definite-1-title
 			span(class="colum-blue")
 			span(class="title") 业务信息
-		.definite-field
+		.definite-field(class="not-margin")
 			.item
 				span(class="tag") 检查类型
-				span(class="info") {{info.bizType}}
+				span(class="info") {{info.bizTypeName}}
 			.item
 				span(class="tag") 客户名称
 				span(class="info") {{info.custName}}
@@ -27,7 +27,7 @@
 				span(class="info") {{info.reciveTime}}
 			.item1(v-show="!showVisible")
 				a(@click="infoMore") 查看更多 »
-		.definite-more(v-show="showVisible")
+		.definite-more(v-if="showVisible")
 			m1(v-if="$route.params.type === 'm1'")
 			m2(v-else-if="$route.params.type === 'm2'")
 			m3(v-else-if="$route.params.type === 'm3'")
@@ -41,9 +41,9 @@
 		.definite-field(:class="index === 0 ? 'not-margin' : ''" v-for="(item,index) in info.aproveInfo" :key="index" v-show="index < max")
 			.definite-item-title
 				span 环节：{{item.linkName}}
-			.item
-				span(class="tag") 环节
-				span(class="info") {{item.linkName}}
+			//- .item
+			//- 	span(class="tag") 环节
+			//- 	span(class="info") {{item.linkName}}
 			.item
 				span(class="tag") 处理机构
 				span(class="info") {{item.orgName}}
@@ -61,38 +61,46 @@
 </template>
 
 <script>
-import { test } from "../../api/approval";
-import { checklist1 } from "../../utils/dataMock.js";
+import { approvalMixin, normalMixin } from "../../utils/mixin";
 import m1 from "../approval/selectDefinite/m1/m1";
 import m2 from "../approval/selectDefinite/m2/m2";
 import m3 from "../approval/selectDefinite/m3/m3";
 import m4 from "../approval/selectDefinite/m4/m4";
 import m5 from "../approval/selectDefinite/m5/m5";
 import m6 from "../approval/selectDefinite/m6/m6";
-import { approvalMixin } from "../../utils/mixin";
-import { queryForDtail } from "../../api/loanlnspection";
+import { approveBaseDetail } from "../../api/approval";
 export default {
   components: { m1, m2, m3, m4, m5, m6 },
-  mixins: [approvalMixin],
+  mixins: [approvalMixin, normalMixin],
+
   data() {
     return {
       showVisible: false,
       showLink: true,
-      info: checklist1,
+      info: {},
       max: 1,
       params: {}
     };
   },
   mounted() {
-    let params = {
-      bizId: "1"
-    };
-    // this.testLink();
-    queryForDtail(this, { params }).then(res => {
-      console.log(res);
-    });
+    this.getBaseDetail();
   },
   methods: {
+    // 基本详情
+    getBaseDetail() {
+      let params = {
+        bizId: this.$route.params.bizId
+      };
+      approveBaseDetail(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.info = res.data.data;
+          this.bizType(this.info, this.info.bizType);
+          if (this.info.aproveInfo.length === 1) {
+            this.showLink = false;
+          }
+        }
+      });
+    },
     infoMore() {
       this.showVisible = !this.showVisible;
       // 点击更多的时候，为按钮添加一个随机数，用于监听是否点击了按钮
@@ -100,16 +108,8 @@ export default {
       this.setAddmore({ addmore: val });
     },
     linkMore() {
-      this.max = checklist1.aproveInfo.length;
+      this.max = this.info.aproveInfo.length;
       this.showLink = false;
-    },
-    testLink() {
-      let params = {
-        id: "1"
-      };
-      test(this, { params }).then(res => {
-        console.log(res);
-      });
     }
   }
 };
