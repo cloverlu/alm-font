@@ -18,7 +18,7 @@
 					.item
 						span(class="tag") 我行合作状态
 						span(class="info") 
-							input(v-model="item.CooperatStatus" type="input" class="field-input" placeholder="请输入")
+							input(v-model="item.cooperatStatus" type="input" class="field-input" placeholder="请输入")
 					.item
 						span(class="tag") 风险分类
 						span(class="info") 
@@ -41,7 +41,7 @@ export default {
           {
             id: 1,
             assitName: "", //担保公司名称
-            CooperatStatus: "", //我行合作状态
+            cooperatStatus: "", //我行合作状态
             assitFiveClass: "" //风险分类
           }
         ]
@@ -77,7 +77,7 @@ export default {
         assitClassification: "2",
         id: Date.now(),
         assitName: "", //担保公司名称
-        CooperatStatus: "", //我行合作状态
+        cooperatStatus: "", //我行合作状态
         assitFiveClass: "" //风险分类
       };
       this.info.assitInfoForGuarantee.push(item);

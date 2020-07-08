@@ -57,7 +57,7 @@
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submit()"
+          <mt-button type="primary" size="large" @click="submitApprove()"
             >提交审批</mt-button
           >
           <mt-button size="large" @click="goback()">上一步</mt-button>
@@ -166,7 +166,8 @@ export default {
       this.params.existRisk = data[0].key;
     },
     // 提交审批
-    async submit() {
+    async submitApprove() {
+      console.log(this.params);
       this.$Indicator.open();
       const pa = {
         bizId: this.$route.params.bizId,
@@ -176,6 +177,7 @@ export default {
       };
 
       const params = Object.assign({}, pa, this.params);
+      console.log(params);
       await this.submit(params);
     },
     goback: function() {

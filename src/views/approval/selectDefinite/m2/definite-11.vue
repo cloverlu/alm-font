@@ -17,7 +17,7 @@
           <mt-cell
             class="textFiled"
             title="征信报告查询日期"
-            :value="detail.queryDate"
+            :value="detail.queryDateForPer"
           ></mt-cell>
         </div>
 
@@ -163,7 +163,7 @@
             type="textarea"
             rows="3"
             class="text"
-            v-model="detail.RecentNegativeInformation"
+            v-model="detail.msg"
             style="overflow:hidden"
             :disabled="true"
           ></mt-field>

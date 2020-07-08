@@ -15,37 +15,37 @@
         <mt-cell
           class="textFiled"
           title="客户名称"
-          :value="detail.custName"
+          :value="detail.newly9.custName"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款金额"
-          :value="detail.loanAmout"
+          :value="detail.newly9.loanAmout"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款余额"
-          :value="detail.loanBalance"
+          :value="detail.newly9.loanBalance"
         ></mt-cell>
         <mt-cell
           class="textFiled"
           title="贷款期限"
-          :value="detail.loanLength"
+          :value="detail.newly9.loanLength"
         ></mt-cell>
         <mt-field
           class="textFiled"
           label="还款方式"
-          v-model="detail.repayKind"
+          v-model="detail.newly9.repayKind"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款日期"
-          v-model="detail.repayDate"
+          v-model="detail.newly9.repayDate"
         ></mt-field>
         <mt-field
           class="textFiled"
           label="还款金额"
-          v-model="detail.repayAmout"
+          v-model="detail.newly9.repayAmout"
         ></mt-field>
       </div>
       <definite7 :detail="detail.definite7"></definite7>
@@ -58,7 +58,8 @@
           v-for="item in imageList"
           :key="item.id"
           :item="item"
-          :itemVmodel="detail.imagelist"
+          :itemVmodel="detail.imageList"
+          :read="true"
         ></imageUpload>
       </div>
     </div>
@@ -66,71 +67,40 @@
 </template>
 
 <script>
-import { Field, Cell } from "mint-ui";
 import definite7 from "../m4/definite-7";
 import imageUpload from "../../../loanInspection/components/imageUpload";
-
+import { normalMixin, approvalMixin } from "../../../../utils/mixin";
 export default {
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
     definite7,
     imageUpload
   },
+  mixins: [normalMixin, approvalMixin],
   data() {
     return {
+      bizId: this.$route.params.bizId,
       imageList: [
         {
           id: 0,
           text: "其它",
-          vModel: "m4_0",
+          vModel: "pic_1s",
           vId: "m40"
         }
       ],
-      params: {
-        bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
-        custName: "王健林", // 客户名称
-        loanAmout: "1000000000", // 贷款金额
-        loanBalance: "999999", // 贷款余额
-        loanLength: "2040-08-25", // 贷款期限
-        repayKind: "", // 还款方式
-        repayDate: "", // 还款日期
-        repayAmout: "", // 还款金额
-        definite7: {
-          stageData: [
-            // 还款资金落实阶段数组
-            {
-              checkStage: 1, // 检查阶段
-              payIntention: 1, // 还款意愿
-              practicableCheckAddr: "", // 检查地点
-              practicableStaff: "xx", // 接待人员
-              amoutSource: "xc", // 还款资金来源
-              expectRepayDate: "2040-08-25", // 预计还款/付息时间
-              practicableMsg: "xxx" // 还款资金落实情况说明
-            }
-          ]
-        },
-        imagelist: {
-          pic_1s: [
-            {
-              dimension: "",
-              longitude: "",
-              url: ""
-            }
-          ]
-        }
+      detail: {
+        newly9: {},
+        definite7: {},
+        imageList: {}
       }
     };
   },
-  computed: {
-    detail() {
-      const newDetail = this.params;
-      console.log(newDetail);
-      return newDetail;
-    }
+  computed: {},
+  async mounted() {
+    await this.setApproveDetail(this);
+    this.detail = this.approveDetail(this.$route.params.type);
   },
-  methods: {},
-  watch: {}
+  watch: {},
+  methods: {}
 };
 </script>
 

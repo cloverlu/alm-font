@@ -5,7 +5,7 @@ const footerNext = {
         //下一步
         nextFooter: {},
         //上一步
-        prevFooter: "",
+        prevFooter: {},
         // 滚动条位置
         scrollToPo: {},
         // 流程详情信息

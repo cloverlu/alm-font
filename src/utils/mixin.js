@@ -360,15 +360,10 @@ export const normalMixin = {
 //m1 loanInsM1
 export const loanInsM1 = {
   computed: {
-    ...mapGetters(["m1Definite1", "m1Definite2", "m1Definite16", "m1Definite3"])
+    ...mapGetters([])
   },
   methods: {
-    ...mapActions([
-      "setm1Definite1",
-      "setm1Definite2",
-      "setm1Definite16",
-      "setm1Definite3"
-    ])
+    ...mapActions([])
   }
 };
 //m2 loanInsM2
@@ -423,10 +418,10 @@ export const loanInsM6 = {
 //业务审批
 export const approvalMixin = {
   computed: {
-    ...mapGetters(["addmore"])
+    ...mapGetters(["addmore", "approveDetail"])
   },
   methods: {
-    ...mapActions(["setAddmore"])
+    ...mapActions(["setAddmore", "setApproveDetail"])
   }
 };
 

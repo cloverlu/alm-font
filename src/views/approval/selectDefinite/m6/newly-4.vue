@@ -7,7 +7,7 @@
 	.newly4
 		.newly-4-repeat(v-for="(item,index) in detail.assitInfoForPledge" :key="index"  )
 			.repeat-operation
-				.repeat-operation-title 新增 {{index + 1}}
+				.repeat-operation-title 新增 {{item.id}}
 			.definite-field
 				.item
 					span(class="tag big") 押品名称

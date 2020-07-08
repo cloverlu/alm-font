@@ -12,7 +12,7 @@
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2" @click="saveInfo") 保存
-				span(@click="topFooterNext" v-else-if="operateTag === 3") 下一步
+				span(@click="topFooterNext" v-else-if="(operateTag === 3) && nextVisible") 下一步
 		scroll(:top="scrollTop" ref="scrollWrapper" )
 			.loanIns-index-content
 				.content(:class="footerShow ? 'footershow' : ''")
@@ -39,7 +39,8 @@ export default {
       operateTag: 1,
       footerShow: false,
       that: this,
-      scrollTop: 44
+      scrollTop: 44,
+      nextVisible: true
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -49,6 +50,13 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     const meta = to.meta;
+    const status = to.params.status;
+
+    if (status === "inReview") {
+      this.nextVisible = false;
+    } else {
+      this.nextVisible = true;
+    }
     this.title = meta.title;
     this.footerShow = meta.footer;
     if (meta.tag === "operateIcon") {
@@ -65,6 +73,12 @@ export default {
 
   mounted() {
     const meta = this.$route.meta;
+    const status = this.$route.params.status;
+    if (status === "inReview") {
+      this.nextVisible = false;
+    } else {
+      this.nextVisible = true;
+    }
     this.title = meta.title;
     this.footerShow = meta.footer;
     if (meta.tag === "operateIcon") {

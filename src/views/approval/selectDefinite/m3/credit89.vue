@@ -12,20 +12,20 @@
 				span(class="title") 企业财务情况
 			.definite-smalltitle
 				span(class="colum-blue")
-				span(class="title" v-if="detail.financeClassification === 1") 加工制造类企业适用
-				span(class="title" v-else-if="detail.financeClassification === 2") 贸易类/其他类企业适用
-		.definite-89-content(v-if="detail.financeClassification === 1")
-			fieldTwo(:info="caiwuOne" :type="typeOne" :detail="detail.caiwuOne" ref="caiwuone")
-			fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail.caiwuTwo" ref="caiwutwo")
-			fieldTwo(:info="caiwuThree" :type="typeTwo" :detail="detail.caiwuThree" ref="caiwuthree")
-			fieldTwo(:info="caiwuFour" :type="typeTwo" :detail="detail.caiwuFour" ref="caiwufour")
+				span(class="title" v-if="detail.financeClassification === '1'") 加工制造类企业适用
+				span(class="title" v-else-if="detail.financeClassification === '2'") 贸易类/其他类企业适用
+		.definite-89-content(v-if="detail.financeClassification === '1'")
+			fieldTwo(:info="caiwuOne" :type="typeOne" :detail="detail" :read="true" ref="caiwuone")
+			fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail" :read="true" ref="caiwutwo")
+			fieldTwo(:info="caiwuThree" :type="typeTwo" :detail="detail" :read="true" ref="caiwuthree")
+			fieldTwo(:info="caiwuFour" :type="typeTwo" :detail="detail" :read="true" ref="caiwufour")
 			.war-tag
 				span 根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。
-		.definite-89-content(v-if="detail.financeClassification === 2")
-			fieldTwo(:info="caiwuOne" :type="typeOne"  :detail="detail.caiwuOne" ref="caiwufive")
-			fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail.caiwuTwo" ref="caiwuseven")
-			fieldTwo(:info="caiwuSeven" :type="typeTwo" :detail="detail.caiwuSeven" ref="caiwuseven")
-			fieldTwo(:info="caiwuEight" :type="typeTwo" :detail="detail.caiwuEight" ref="caiwueight")
+		.definite-89-content(v-if="detail.financeClassification === '2'")
+			fieldTwo(:info="caiwuOne" :type="typeOne"  :detail="detail" :read="true" ref="caiwufive")
+			fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail" :read="true" ref="caiwuseven")
+			fieldTwo(:info="caiwuSeven" :type="typeTwo" :detail="detail" :read="true" ref="caiwuseven")
+			fieldTwo(:info="caiwuEight" :type="typeTwo" :detail="detail" :read="true" ref="caiwueight")
 			.war-tag
 				span 根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。
 			

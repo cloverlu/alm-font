@@ -8,14 +8,14 @@
 		.wrapper
 			.newly-5-repeat(v-for="(item,index) in detail.assitInfoForGuarantee" :key="index" )
 				.repeat-operation
-					.repeat-operation-title 新增 {{index + 1}}
+					.repeat-operation-title 新增 {{item.id}}
 				.definite-field
 					.item
 						span(class="tag") 担保公司名称
 						span(class="info") {{item.assitName}}
 					.item
 						span(class="tag") 我行合作状态
-						span(class="info") {{item.CooperatStatus}}
+						span(class="info") {{item.cooperatStatus}}
 					.item
 						span(class="tag") 风险分类
 						span(class="info") {{item.assitFiveClass}}

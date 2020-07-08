@@ -35,15 +35,15 @@
 				.item
 					span(class="tag big") 最近一次评估情况
 					span(class="info") 
-						input(v-model="item.LastEstimateDate" type="input" class="field-input" placeholder="请输入")
+						input(v-model="item.lastEstimateDate" type="input" class="field-input" placeholder="请输入")
 				.item
 					span(class="tag big") 我行认定价值
 					span(class="info") 
-						input(v-model="item.LastEstimateValue" type="input" class="field-input" placeholder="请输入")
+						input(v-model="item.lastEstimateValue" type="input" class="field-input" placeholder="请输入")
 				.item
 					span(class="tag big") 抵质押率
 					span(class="info") 
-						input(v-model="item.LastMortAndpleRate" type="input" class="field-input" placeholder="请输入")
+						input(v-model="item.lastMortAndpleRate" type="input" class="field-input" placeholder="请输入")
 			.definite-field(class="field-top")
 				.item
 					span(class="tag big") 本次评估情况
@@ -88,9 +88,9 @@ export default {
             firstEstimateDate: "", //首次评估情况
             firstEstimateValue: "", //我行认定价值
             firstMortAndpleRate: "", //抵质押率
-            LastEstimateDate: "", //最近一次评估情况
-            LastEstimateValue: "", //我行认定价值
-            LastMortAndpleRate: "", //抵质押率
+            lastEstimateDate: "", //最近一次评估情况
+            lastEstimateValue: "", //我行认定价值
+            lastMortAndpleRate: "", //抵质押率
             thisEstimateDate: "", //本次评估情况
             thisEstimateValue: "", //我行认定价值
             thisMortAndpleRate: "" //抵质押率
@@ -125,9 +125,9 @@ export default {
         firstEstimateDate: "", //首次评估情况
         firstEstimateValue: "", //我行认定价值
         firstMortAndpleRate: "", //抵质押率
-        LastEstimateDate: "", //最近一次评估情况
-        LastEstimateValue: "", //我行认定价值
-        LastMortAndpleRate: "", //抵质押率
+        lastEstimateDate: "", //最近一次评估情况
+        lastEstimateValue: "", //我行认定价值
+        lastMortAndpleRate: "", //抵质押率
         thisEstimateDate: "", //本次评估情况
         thisEstimateValue: "", //我行认定价值
         thisMortAndpleRate: "" //抵质押率

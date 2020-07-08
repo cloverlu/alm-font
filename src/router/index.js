@@ -65,7 +65,7 @@ const routes = [
     component: loanInspectionIndex,
     meta: {
       // 头部标题，根据当前设计页的头部决定
-      title: "贷后检查列表",
+      title: "贷后检查审批列表",
       // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
       tag: "operateIcon",
       // 是否带上一步下一步
@@ -73,7 +73,7 @@ const routes = [
     },
     children: [
       {
-        path: ":type/:bizId/checklist1",
+        path: ":type/:bizId/:status/checklist1",
         name: "checklist1",
         component: checklist1,
         meta: {
@@ -118,7 +118,7 @@ const routes = [
       //类型1
       //检查申请明细-1
       {
-        path: "1/:type/:bizId/:saveFlag",
+        path: "1/:type/:bizId/:status/:saveFlag",
         name: "creditFirstIndex",
         component: definite1,
         meta: {
@@ -164,7 +164,7 @@ const routes = [
       },
       // 类型2
       {
-        path: "2/:type/:bizId/:saveFlag",
+        path: "2/:type/:bizId/:status/:saveFlag",
         name: "creditRoutineIndex",
         component: creditRoutineIndex,
         meta: {
@@ -260,7 +260,7 @@ const routes = [
       //类型3
       //新增1-8
       {
-        path: "3/:type/:bizId/:saveFlag",
+        path: "3/:type/:bizId/:status/:saveFlag",
         name: "creditOverallIndex",
         component: creditOverallIndex,
         meta: {
@@ -350,7 +350,7 @@ const routes = [
       },
       // 类型4
       {
-        path: "4/:type/:bizId/:saveFlag",
+        path: "4/:type/:bizId/:status/:saveFlag",
         name: "repaymentInspectionIndex",
         component: repaymentInspectionIndex,
         meta: {
@@ -385,7 +385,7 @@ const routes = [
       },
       // 类型5
       {
-        path: "5/:type/:bizId/:saveFlag",
+        path: "5/:type/:bizId/:status/:saveFlag",
         name: "fastCreditFirstIndex",
         component: definite14,
         meta: {
@@ -421,7 +421,7 @@ const routes = [
       },
       // 类型6 新增1
       {
-        path: "6/:type/:bizId/:saveFlag",
+        path: "6/:type/:bizId/:status/:saveFlag",
         name: "dailyInspectionIndex",
         component: newly1,
         meta: {

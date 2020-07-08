@@ -13,64 +13,85 @@
             <mt-cell
               class="textFiled"
               title="贷后检查模式"
-              :value="detail.checkModel"
+              :value="detail.newly1.checkModel"
             ></mt-cell>
             <mt-cell
               class="textFiled"
               title="授信金额"
-              :value="detail.lineAmout"
+              :value="detail.newly1.lineAmout"
             ></mt-cell>
             <mt-cell
               class="textFiled"
               title="授信余额"
-              :value="detail.lineBalance"
+              :value="detail.newly1.lineBalance"
             ></mt-cell>
             <div class="item m6-item">
               <span class="tag">担保方式</span>
-              <span class="info" v-if="detail.securityKind === 1">信用</span>
-              <span class="info" v-else-if="detail.securityKind === 2"
+              <span class="info" v-if="detail.newly1.securityKind === '1'"
+                >信用</span
+              >
+              <span class="info" v-else-if="detail.newly1.securityKind === '2'"
                 >抵押</span
               >
-              <span class="info" v-else-if="detail.securityKind === 3"
+              <span class="info" v-else-if="detail.newly1.securityKind === '3'"
                 >质押</span
               >
-              <span class="info" v-else-if="detail.securityKind === 4"
+              <span class="info" v-else-if="detail.newly1.securityKind === '4'"
                 >保证</span
               >
-              <span class="info" v-else-if="detail.securityKind === 5"
+              <span class="info" v-else-if="detail.newly1.securityKind === '5'"
                 >其它</span
               >
             </div>
             <mt-field
-              v-if="detail.securityKind === 5"
-              class="textFiled"
-              label="其他xxxx"
+              v-if="detail.newly1.securityKind === '5'"
+              type="textarea"
+              rows="1"
+              v-model="detail.newly1.otherSecurityKindMsg"
+              class="text"
+              style="overflow:hidden"
+              placeholder="其他"
               :disabled="true"
             ></mt-field>
             <mt-cell
               class="textFiled"
               title="还款方式"
-              :value="detail.repayKind"
+              :value="detail.newly1.repayKind"
             ></mt-cell>
             <mt-cell
               class="textFiled"
               title="检查地点"
-              :value="detail.practicableCheckAddr"
+              :value="detail.newly1.checkAddr"
             ></mt-cell>
             <div class="item">
               <span class="tag">检查配合程度</span>
-              <span class="info" v-if="detail.cooperate === 1">配合</span>
-              <span class="info" v-else-if="detail.cooperate === 0"
+              <span class="info" v-if="detail.newly1.cooperate === '1'"
+                >配合</span
+              >
+              <span class="info" v-else-if="detail.newly1.cooperate === '2'"
+                >一般</span
+              >
+              <span class="info" v-else-if="detail.newly1.cooperate === '3'"
                 >不配合</span
               >
             </div>
             <div class="item">
               <span class="tag">额度年检</span>
-              <span class="info">{{ detail.yearlyInspection }}</span>
+              <span class="info" v-if="detail.newly1.yearlyInspection === 0"
+                >否</span
+              >
+              <span class="info" v-if="detail.newly1.yearlyInspection === 1"
+                >是</span
+              >
             </div>
             <div class="item">
               <span class="tag">押品重估</span>
-              <span class="info">{{ detail.revalOfColl }}</span>
+              <span class="info" v-if="detail.newly1.revalOfColl === 0"
+                >否</span
+              >
+              <span class="info" v-if="detail.newly1.revalOfColl === 1"
+                >是</span
+              >
             </div>
           </div>
         </div>
@@ -79,7 +100,7 @@
     <newly2 :detail="detail.newly2"></newly2>
     <newly3 :detail="detail.newly3"></newly3>
     <newly45 :detail="detail.newly45"></newly45>
-    <definite16 :detail="detail.m6Imagelist"></definite16>
+    <definite16 :detail="detail.definite16"></definite16>
   </div>
 </template>
 
@@ -88,16 +109,16 @@ import newly2 from "../m6/newly-2";
 import newly3 from "../m6/newly-3";
 import newly45 from "../m6/newly-45";
 import definite16 from "../m6/definite-16";
-import { Field, Cell } from "mint-ui";
+import { normalMixin, approvalMixin } from "../../../../utils/mixin";
+
 export default {
   components: {
-    "mt-field": Field,
-    "mt-cell": Cell,
     newly2,
     newly3,
     newly45,
     definite16
   },
+  mixins: [normalMixin, approvalMixin],
   data() {
     const m6Imagelist = _ => {
       const m6Imagelist = {};
@@ -114,99 +135,20 @@ export default {
       return m6Imagelist;
     };
     return {
-      params: {
-        checkType: "", // 检查类型
-        checkModel: "", // 检查模式
-        lineAmout: "", // 授信金额
-        lineBalance: "", // 授信余额
-        securityKind: 1, // 担保方式
-        cooperate: 1, // 检查配合程度
-        yearlyInspection: 1, // 额度年检
-        revalOfColl: 1, // 押品重估
-        newly2: {
-          fiveClass: "", // 当前企业及实际控制人征信情况（注明征信查询分类结果)
-          addedOverdues: 0, // 企业或企业主征信是否有新增逾期记录  客户资信检查
-          addedOverduesMsg: "", // 当前企业及实际控制人征信情况 说明
-          addedLoans: 0, // 企业或企业主是否有他行新增贷款  客户资信检查
-          addedLoansMsg: "", // 企业或企业主是否有他行新增贷款情况 说明
-          shrinkLoanScale: 0, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
-          shrinkLoanScaleMsg: "", // 企业或企业主是否有他行收缩贷款规模 说明
-          addedGuarantees: 0, // 企业或企业主是否有新增对外担保记录  客户资信检查
-          addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
-          otherSitu: 0, // 企业或企业主是否有其他异常变化  客户资信检查
-          otherSituMsg: "" // 企业或企业主是否有其他异常变化 说明
-        },
-        newly3: {
-          ownerStruSame: 0, // 企业实际股权结构是否与上述工商信息网查询一致
-          ownerStruSameMsg: "", // 实际股权结构与工商信息网查询说明
-          IndustrycChangSiut: 0, // 企业所在行业是否发生重大不利变化
-          IndustrycChangSiutMsg: "", // 企业所在行业是否发生重大不利变化具体情况
-          mainBusIsChanged: 0, // 企业主营业务情况是否发生变更
-          mainBusIsChangedMsg: "", // 企业主营业务情况是否发生变更情况
-          planExpandSitu: 0, // 企业是否有与主业无关的扩张计划
-          planExpandSituMsg: "", // 企业是否有与主业无关的扩张计划具体情况
-          addrIsChanged: 0, // 生产经营场所是否发生变化
-          addrChangedMsg: "", // 生产经营场所变动情况
-          hiddenTroubleSitu: 0, // 生产经营是否存在安全隐患
-          hiddenTroubleSituMsg: "", // 生产经营是否存在安全隐患具体情况
-          purchaseCost: 0, // 企业主要原材料或货物的采购成本是否明显上升
-          purchaseCostMsg: "", // 企业主要原材料或货物的采购成本是否明显上升情况
-          proAndOpeAbnormalSuit: 0, // 企业生产经营是否出现异常情况
-          proAndOpeAbnormalSuitMsg: "", // 企业生产经营是否出现异常情况说明
-          saleAbnormalSuit: 0, // 企业销售是否出现异常情况
-          saleAbnormalSuitMsg: "", // 企业销售是否出现异常情况说明
-          chainChange: 0, // 企业上下游核心客户是否发生重大变更
-          chainChangeMsg: "", // 企业上下游核心客户发生重大变更说明
-          dailyCostDecline: 0, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
-          dailyCostDeclineMsg: "", // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）shuoming
-          // orderDecline: 0, // 企业订单是否出现大幅下降（降幅达30%）
-          // orderDeclinemsg: "", // 企业订单出现大幅下降（降幅达30%）说明
-          cashLastToNow: "", // 上次检查（或调查）至本次检查期间的现金
-          cashDecline: 0, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
-          cashMatchesAndProAndOpe: 0, // 现金流与营业收入是否基本匹配
-          cashOtherMsg: "", // 现金流其他说明
-          summaryForCheck: "", // 检查要点小结
-          otherSitu: "" // 其他情况
-        },
-        newly45: {
-          assitInfoForPledge: [
-            {
-              assitName: "", //押品名称
-              assitAddr: "", //押品位置地址
-              firstEstimateDate: "", //首次评估情况
-              firstEstimateValue: "", //我行认定价值
-              firstMortAndpleRate: "", //抵质押率
-              LastEstimateDate: "", //最近一次评估情况
-              LastEstimateValue: "", //我行认定价值
-              LastMortAndpleRate: "", //抵质押率
-              thisEstimateDate: "", //本次评估情况
-              thisEstimateValue: "", //我行认定价值
-              thisMortAndpleRate: "" //抵质押率
-            }
-          ],
-          fieldOne: {
-            assitChangeSuit: "", //押品价值及变现能力变动情况
-            assitOtherSuit: "", //押品其他情况
-            summaryForAssit: "" //押品检查小结
-          },
-          assitInfoForGuarantee: [
-            {
-              assitName: "", //担保公司名称
-              CooperatStatus: "", //我行合作状态
-              assitFiveClass: "" //风险分类
-            }
-          ]
-        },
-        m6Imagelist: m6Imagelist()
+      bizId: this.$route.params.bizId,
+      detail: {
+        newly1: {},
+        newly2: {},
+        newly3: {},
+        newly45: {},
+        definite16: {}
       }
     };
   },
-  computed: {
-    detail() {
-      const newDetail = this.params;
-      console.log(newDetail);
-      return newDetail;
-    }
+  computed: {},
+  async mounted() {
+    await this.setApproveDetail(this);
+    this.detail = this.approveDetail(this.$route.params.type);
   },
   methods: {},
   watch: {
