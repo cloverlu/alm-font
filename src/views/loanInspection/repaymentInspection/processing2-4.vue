@@ -78,7 +78,7 @@
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submit()"
+          <mt-button type="primary" size="large" @click="submitApprove()"
             >提交审批</mt-button
           >
           <mt-button size="large" @click="goback()">上一步</mt-button>
@@ -157,7 +157,7 @@ export default {
         riskMsg: "",
         suggest: "",
         existRisk: 0,
-        signSrc: "" // 签名
+        empSign: "" // 签名
       },
       params2: {}
     };
@@ -182,8 +182,10 @@ export default {
         // 保存审批页面
         const pa = {
           bizId: this.$route.params.bizId,
-          orgLevel: "1",
-          postCode: "23",
+          // orgLevel: "1",
+          // postCode: "23",
+          postCode: this.$route.params.currPost,
+          orgName: this.$route.params.orgName,
           opType: "0"
         };
         this.params = Object.assign({}, this.params, pa);
@@ -207,7 +209,7 @@ export default {
       this.params.existRisk = data[0].key;
     },
     goSign: function() {
-      this.params.signSrc = "";
+      this.params.empSign = "";
       this.popupVisible = true;
       this.lineCanvas({
         // el: this.$refs.canvas, //绘制canvas的父级div
@@ -314,12 +316,14 @@ export default {
       history.go(-1);
     },
     // 提交审批
-    async submit() {
+    async submitApprove() {
       this.$Indicator.open();
       const pa = {
         bizId: this.$route.params.bizId,
-        orgLevel: "1",
-        postCode: "23",
+        // orgLevel: "1",
+        // postCode: "23",
+        postCode: this.$route.params.currPost,
+        orgName: this.$route.params.orgName,
         opType: "1"
       };
 

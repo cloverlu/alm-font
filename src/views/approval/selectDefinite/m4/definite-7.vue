@@ -11,6 +11,7 @@
         <span class="lightBlue"></span>
         <span class="coName">检查阶段</span>
       </div>
+      <div class="zanwu" v-if="detail.stageData.length < 1">暂无信息</div>
       <div
         class="type1 "
         v-for="item in detail.stageData"
@@ -93,6 +94,10 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  .zanwu {
+    font-size: px2rem(14);
+    padding: px2rem(10) px2rem(15);
+  }
   .formTitle {
     width: 100%;
     height: px2rem(44);

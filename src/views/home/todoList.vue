@@ -54,6 +54,7 @@ export default {
           res.data.dataList.filter((item, index) => {
             if (index <= 6) {
               this.todoListTitle[index].warningNumber = item.itemRecordNum;
+              this.todoListTitle[index].postCode = item.postCode;
             }
           });
         }

@@ -5,7 +5,9 @@ const approvalStore = {
         // approval加载m3时，蓝色横条的初始位置
         addmore: "",
         // 点击更多出现的详情
-        approveDetail: {}
+        approveDetail: {},
+        // 下一阶段处理人
+        handleParams: {}
       },
 
   mutations: {
@@ -14,6 +16,9 @@ const approvalStore = {
     },
     SET_APPROVEDETAIL: (state, approveDetail) => {
       state.approveDetail = approveDetail;
+    },
+    SET_HANDLEPARAMS: (state, handleParams) => {
+      state.handleParams = handleParams;
     }
   }
 };

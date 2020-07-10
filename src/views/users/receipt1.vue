@@ -8,7 +8,7 @@
 	.receipt-1-wrapper
 		.definite-1-title
 			span(class="colum-blue")
-			span(class="title") 张三有限责任公司
+			span(class="title") {{$route.params.custName}}
 		.receipt-content
 			.receipt-content-item(v-for="item in info" :key="item.id" @click="handleClick(item.billNo)")
 				.item-one
@@ -33,11 +33,15 @@
 
 <script>
 import { receipt1 } from "../../utils/dataMock";
+import { loanReceiptParams } from "../../api/users";
 export default {
   data() {
     return {
-      info: receipt1()
+      info: []
     };
+  },
+  mounted() {
+    this.getList();
   },
   methods: {
     handleClick(id) {
@@ -45,6 +49,20 @@ export default {
         name: "definiteUserAll",
         params: {
           billNo: id
+        }
+      });
+    },
+    getList() {
+      this.$Indicator.open();
+      var params = {
+        queryType: this.$route.params.queryType,
+        custName: this.$route.params.custName,
+        emplName: this.$route.params.emplName
+      };
+      loanReceiptParams(this, params).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          this.info = res.data.data;
         }
       });
     }

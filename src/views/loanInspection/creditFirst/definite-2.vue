@@ -11,12 +11,12 @@
 				span(class="tag" ) 检查地点
 				span(class="info") 
 					input(v-model="params.checkAddr" type="input" class="field-input" placeholder="请输入检查地点")
-			.item
+			.item()
 				span(class="tag") 检查配合程度
 				almSelect(:selectData="coordinate"  :defaultValue="params.cooperate" :triggerId="cooperate" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 				span(class="iconfont iconxiala arrow")
 			.item
-				span(class="tag big") 生产经营场所变动情况生产经
+				span(class="tag big") 生产经营场所变动情况
 				span(class="info")
 					input(v-model="params.addrChangedMsg" type="input" class="field-input" placeholder="请输入生产经营场所变动情况")
 			.item
@@ -34,7 +34,7 @@
 		.definite-field(class="field2")
 			.item
 				span(class="big-max") 是否按合同约定的用途使用信贷资金
-				almSelect(:selectData="yesNo"  :defaultValue="params.useAmoutByContract" :triggerId="useAmoutByContract" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
+				almSelect(:selectData="yesNo"  :defaultValue="params.useAmoutByContract" :triggerId="useAmoutByContract" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="getSelect2" class="info" ) 
 				span(class="iconfont iconxiala arrow")
 			.item2
 				fieldOne(:definite="definite2Field2"  :info="params" :read="false" ref="fieldTwo" )
@@ -109,7 +109,14 @@ export default {
   },
   methods: {
     getSelect(data) {
+      console.log(data);
       this.params.cooperate = data[0].key;
+    },
+    getSelect2(data) {
+      this.params.useAmoutByContract = data[0].key;
+    },
+    aaa() {
+      console.log("aaa");
     }
   }
 };

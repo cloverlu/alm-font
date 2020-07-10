@@ -5,7 +5,7 @@
 -->
 <template lang="pug">
 	.loanIns-list
-		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item.bizStatus,item.bizType,item.bizId,item.saveFlag)")
+		.item(v-for="item in list" :key="item.bizId" @click="handleClick(item)")
 			.item-header
 				.item-header-state(class="shoulddo" v-if="item.bizStatus === 'shouldDo'" ) 应做
 				.item-header-state(class="undo" v-if="item.bizStatus === 'notDo'" ) 未做
@@ -13,9 +13,9 @@
 				.item-header-state(class="inreview" v-if="item.bizStatus === 'inReview'" ) 审批中
 				.item-header-title  {{item.bizTypeName}}
 			.item-username
-				span(class="item-tag") 客户名称
+				span(class="item-tag") 客户名称 
 				span(class="item-info") {{item.custName}}
-			.item-usercode
+			.item-usercode 
 				span(class="item-tag") 借据编号
 				span(class="item-info") {{item.billNo}}
 			.item-info
@@ -69,35 +69,55 @@ export default {
         }
       });
     },
-    handleClick(bizStatus, type, id, saveFlag) {
+    handleClick(item) {
+      //item.bizStatus,item.bizType,item.bizId,item.saveFlag,item.biggerThan500,item.belongBranch,item.currPost
+      const status = item.bizStatus;
       const moduleName = this.$route.name;
-      const status = bizStatus;
+      const type = item.bizType;
+      const id = item.bizId;
+      const saveFlag = item.saveFlag;
+      const biggerThan500 = item.biggerThan500;
+      const belongBranch = item.belongBranch;
+      const currPost = item.currPost;
+      const orgName = item.orgName;
       var name = "";
-      console.log(moduleName);
-
       if (moduleName === "loanInspectionIndex") {
-        if (type === "m1") {
-          name = "creditFirstIndex";
-        } else if (type === "m2") {
-          name = "creditRoutineIndex";
-        } else if (type === "m3") {
-          name = "creditOverallIndex";
-        } else if (type === "m4") {
-          name = "repaymentInspectionIndex";
-        } else if (type === "m5") {
-          name = "fastCreditFirstIndex";
-        } else if (type === "m6") {
-          name = "dailyInspectionIndex";
-        }
-        this.$router.push({
-          name: name,
-          params: {
-            bizId: id,
-            type: type,
-            saveFlag: saveFlag,
-            status: bizStatus
+        if (status === "inReview") {
+          this.$router.push({
+            name: "checklist2",
+            params: {
+              bizId: id,
+              type: type,
+              status: status
+            }
+          });
+        } else {
+          if (type === "m1") {
+            name = "creditFirstIndex";
+          } else if (type === "m2") {
+            name = "creditRoutineIndex";
+          } else if (type === "m3") {
+            name = "creditOverallIndex";
+          } else if (type === "m4") {
+            name = "repaymentInspectionIndex";
+          } else if (type === "m5") {
+            name = "fastCreditFirstIndex";
+          } else if (type === "m6") {
+            name = "dailyInspectionIndex";
           }
-        });
+
+          this.$router.push({
+            name: name,
+            params: {
+              bizId: id,
+              type: type,
+              saveFlag: saveFlag,
+              status: status,
+              currPost: currPost,
+              orgName: orgName
+            }
+          });
+        }
       } else if (moduleName === "approvalIndex") {
         this.$router.push({
           name: "checklist1",
@@ -105,7 +125,11 @@ export default {
             bizId: id,
             type: type,
             saveFlag: saveFlag,
-            status: bizStatus
+            status: status,
+            currPost: currPost,
+            biggerThan500: biggerThan500,
+            belongBranch: belongBranch,
+            orgName: orgName
           }
         });
       }

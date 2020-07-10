@@ -1,5 +1,5 @@
 <!--
- * @Descripttion: 流程处理2-11
+ * @Descripttion: 流程处理2-10
  * @Author: sunhua
  * @Date: 2020-06-16 11:03:37
 -->
@@ -7,10 +7,10 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="processing211" ref="processing211">
+    <div class="processing210">
       <div class="formTitle">
         <span class="lightBlue"></span>
-        <span class="coNameBlack">二级分行/一级分行抽查意见</span>
+        <span class="coNameBlack">二级分行/一级分行审核意见</span>
       </div>
       <div class="item1">
         <span class="tag1">是否同意检查结论</span>
@@ -33,211 +33,56 @@
         style="overflow:hidden"
         placeholder="请输入理由"
       ></mt-field>
-      <mt-cell class="textFiled" title="抽查意见及行动建议"></mt-cell>
+      <mt-cell class="textFiled" title="审核意见及行动建议"></mt-cell>
       <mt-field
         type="textarea"
         rows="3"
         v-model="params.suggest"
         class="text"
         style="overflow:hidden"
-        placeholder="请输入抽查意见及行动建议"
+        placeholder="请输入审核意见及行动建议"
       ></mt-field>
-
-      <div class="signBox">
-        <span class="left"
-          >抽查人员（签字）：<span
-            class="iconfont iconqianzi"
-            @click="goSign()"
-          ></span
-        ></span>
-        <span class="right">2020-06-01</span>
-      </div>
-      <div class="subBox">
-        <div class="submit">
-          <mt-button type="primary" size="large" @click.native="submit()"
-            >提交</mt-button
-          >
-          <mt-button size="large" @click.native="goback()">回退</mt-button>
-          <mt-button size="large" @click.native="gobackLast()"
-            >退回上一岗位</mt-button
-          >
-        </div>
-      </div>
     </div>
-    <mt-popup v-model="popupVisible" popup-transition="popup-fade">
-      <div class="tanchaung">
-        <div class="definite4">
-          <!--填写信息  -->
-          <div class="coInformation">
-            <div class="enterpriseCredit">
-              <div class="signBox">
-                <span class="left"
-                  >抽查人员（签字）：<span class="iconfont iconqianzi"></span
-                ></span>
-                <span class="right">2020-06-01</span>
-              </div>
-              <canvas></canvas>
-            </div>
-          </div>
-          <div class="submit">
-            <button
-              id="clearCanvas"
-              ref="clearCanvas"
-              class="mint-button mint-button--default"
-            >
-              重置
-            </button>
-            <button
-              type="primary"
-              id="saveCanvas"
-              ref="saveCanvas"
-              class="mint-button"
-            >
-              保存
-            </button>
-          </div>
-        </div>
-      </div>
-    </mt-popup>
   </div>
 </template>
 
 <script>
-import { DetailsOfIOU, yesNo } from "../../utils/dataMock";
-import { Field, Cell, Button, Popup } from "mint-ui";
-import almSelect from "../loanInspection/components/select";
+import { yesNo } from "../../../utils/dataMock";
+import almSelect from "../../loanInspection/components/select";
+import { mapActions } from "vuex";
 export default {
   components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
-    "mt-button": Button,
-    "mt-popup": Popup,
     almSelect
   },
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
       popupVisible: false,
       payType: 1,
-      selectTitle1: "抽查人员",
+      selectTitle1: "是否同意检查结论",
       fontColor: "blue",
       yesNo: yesNo,
       agreeResult: "agreeResult",
       params: {
-        agreeResult: 1, // 二级分行/一级分行抽查意见
-        msg: "", // 二级分行/一级分行抽查意见说明
-        suggest: "xxx", // 措施建议
-        empSign: "" // 签名
+        agreeResult: 0, // 一级支行/二级分行复核意见
+        msg: "", // 一级支行/二级分行复核意见说明
+        suggest: "xxx" // 措施建议
       }
     };
   },
-  beforeRouteEnter(to, from, next) {
-    to.params.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
+  mounted() {
+    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
   },
-  beforeRouteUpdate(to, from, next) {
-    this.hasRouterChild2 = to.name === "repaymentInspectionIndex";
-    next();
-  },
+
   methods: {
+    ...mapActions(["setScrollToPo"]),
     getSelect1: function(data) {
-      this.params.agreeResult = data.key;
-    },
-    submit: function() {
-      console.log(123);
-    },
-    goback: function() {
-      console.log(123);
-    },
-    gobackLast: function() {
-      console.log(123);
-    },
-    goSign: function() {
-      this.params.empSign = "";
-      this.popupVisible = true;
-      this.lineCanvas({
-        // el: this.$refs.canvas, //绘制canvas的父级div
-        box: this.$refs.processing211, // 拿到宽度
-        clearEl: this.$refs.clearCanvas, //清除按钮
-        saveEl: this.$refs.saveCanvas //保存按钮
-      });
-    },
-    lineCanvas(obj) {
-      this.linewidth = 2;
-      this.color = "#000000";
-      this.background = "rgba(0, 0, 0, 0)";
-      for (var i in obj) {
-        this[i] = obj[i];
-      }
-      // this.canvas = document.createElement("canvas");
-      this.canvas = document.getElementsByTagName("canvas")[0];
-      // this.el.appendChild(this.canvas);
-      this.cxt = this.canvas.getContext("2d");
-      this.canvas.width = this.box.clientWidth;
-      this.canvas.height = 400;
-      this.cxt.fillStyle = this.background;
-      this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.width);
-      this.cxt.strokeStyle = this.color;
-      this.cxt.lineWidth = this.linewidth;
-      this.cxt.lineCap = "round";
-      //开始绘制
-      this.canvas.addEventListener(
-        "touchstart",
-        function(e) {
-          this.cxt.beginPath();
-          this.cxt.moveTo(
-            e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
-          );
-        }.bind(this),
-        false
-      );
-      //绘制中
-      this.canvas.addEventListener(
-        "touchmove",
-        function(e) {
-          this.cxt.lineTo(
-            e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
-          );
-          this.cxt.stroke();
-        }.bind(this),
-        false
-      );
-      //结束绘制
-      this.canvas.addEventListener(
-        "touchend",
-        function() {
-          this.cxt.closePath();
-          let imgBase64 = this.canvas.toDataURL();
-          //console.log(imgBase64);
-          this.params.empSign = imgBase64;
-        }.bind(this),
-        false
-      );
-      //清除画布
-      this.clearEl.addEventListener(
-        "click",
-        function() {
-          this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        }.bind(this),
-        false
-      );
-      //保存图片，直接转base64
-      this.saveEl.addEventListener(
-        "click",
-        function() {
-          let imgBase64 = this.canvas.toDataURL();
-          this.params.empSign = imgBase64;
-          console.log("图片", this.params.empSign);
-          setTimeout(() => {
-            var c = document.getElementsByTagName("canvas")[0];
-            c.innerHTML = "";
-            this.popupVisible = false;
-          }, 200);
-        }.bind(this),
-        false
-      );
+      this.params.agreeResult = data[0].key;
     }
   },
   watch: {
@@ -253,8 +98,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
-.processing211 {
+@import "../../../assets/style/global.scss";
+.processing210 {
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -527,9 +372,9 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../assets/style/global.scss";
+@import "../../../assets/style/global.scss";
 
-.processing211 {
+.processing210 {
   width: 100%;
   height: 100%;
   .mint-cell {

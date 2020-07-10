@@ -194,6 +194,7 @@ export const normalMixin = {
       } else if (params.opType === "1") {
         message = "提交";
       }
+      this.$Indicator.open();
       await submitApprove(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
@@ -207,19 +208,21 @@ export const normalMixin = {
               this.$router.push({ name: "loanInspectionIndex" });
             }, 1200);
           } else {
-            this.$MessageBox
-              .confirm("回到列表页吗？")
-              .then(action => {
-                if (action === "confirm") {
-                  this.$router.push({ name: "loanInspectionIndex" });
-                }
-                if (action === "cancel") {
-                  return false;
-                }
-              })
-              .catch(err => {
-                console.log(err);
-              });
+            setTimeout(() => {
+              this.$MessageBox
+                .confirm("回到列表页吗？")
+                .then(action => {
+                  if (action === "confirm") {
+                    this.$router.push({ name: "loanInspectionIndex" });
+                  }
+                  if (action === "cancel") {
+                    return false;
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            }, 1200);
           }
         } else {
           this.$Indicator.close();
@@ -418,10 +421,10 @@ export const loanInsM6 = {
 //业务审批
 export const approvalMixin = {
   computed: {
-    ...mapGetters(["addmore", "approveDetail"])
+    ...mapGetters(["addmore", "approveDetail", "handleParams"])
   },
   methods: {
-    ...mapActions(["setAddmore", "setApproveDetail"])
+    ...mapActions(["setAddmore", "setApproveDetail", "setHandleParams"])
   }
 };
 
