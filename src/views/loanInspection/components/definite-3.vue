@@ -151,8 +151,9 @@ export default {
       if (val !== oldval) {
         const pa = {
           bizId: this.$route.params.bizId,
-          orgLevel: "1",
-          postCode: "23",
+          // orgLevel: "1",
+          postCode: this.$route.params.currPost,
+          orgName: this.$route.params.orgName,
           opType: "0"
         };
         this.params = Object.assign({}, this.params, pa);
@@ -171,13 +172,14 @@ export default {
       this.$Indicator.open();
       const pa = {
         bizId: this.$route.params.bizId,
-        orgLevel: "1",
-        postCode: "23",
-        opType: "1"
+        // orgLevel: "1",
+        // postCode: "23",
+        opType: "1",
+        postCode: this.$route.params.currPost,
+        orgName: this.$route.params.orgName
       };
 
       const params = Object.assign({}, pa, this.params);
-      console.log(params);
       await this.submit(params);
     },
     goback: function() {

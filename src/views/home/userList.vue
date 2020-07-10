@@ -6,10 +6,10 @@
 <template lang="pug">
 	.user-list 
 		.user-search
-			input(class="search" v-model="userSearch" placeholder="搜索")
+			input(class="search" v-model="userSearch" @change="userChange" placeholder="根据客户名称搜索")
 		scroll(:top="88")
 			.user-wrapper
-				.item(v-for="item in usersMock" :key="item.custCode" @click="handleClick(item.id)")
+				.item(v-for="(item,index) in info" :key="index" @click="handleClick(item)")
 					.user-icon
 						span(class="iconfont iconkehuxinxi")
 					.user-info
@@ -23,6 +23,8 @@
 
 <script>
 import Scroll from "../../components/Scroll";
+import { loanReceiptParams } from "../../api/users";
+import { userInfo } from "../../utils/dataMock";
 
 export default {
   components: { Scroll },
@@ -40,18 +42,46 @@ export default {
     };
     return {
       userSearch: "",
-      usersMock: userMock()
+      userInfo: userInfo,
+      usersMock: userMock(),
+      info: [],
+      params: {
+        queryType: "3"
+      }
     };
   },
+  mounted() {
+    this.getList();
+  },
   methods: {
-    handleClick(id) {
+    handleClick(item) {
+      const custName = item.custName;
+
       this.$router.push({
         name: "userIndex",
         params: {
-          mold: "myUser",
-          userId: id
+          queryType: "2",
+          custName: custName,
+          emplName: this.userInfo.emplName
         }
       });
+    },
+    //获取客户列表
+    getList() {
+      this.$Indicator.open();
+      // this.userInfo.emplCode = "123456";
+      this.userInfo.orgName = "南京";
+      const params = Object.assign({}, this.params, userInfo);
+      loanReceiptParams(this, params).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          this.info = res.data.data;
+        }
+      });
+    },
+    userChange() {
+      this.userInfo.emplName = this.userSearch;
+      this.getList();
     }
   }
 };

@@ -107,19 +107,12 @@ export default {
     },
     // 头部下一步
     topFooterNext() {
-      console.log(this.$route);
       const name = this.$route.name;
-      const role = "one";
-      var paramsName = "";
       if (name === "checklist1") {
-        paramsName = "checkProcessing2";
+        this.$router.push({
+          name: "approve"
+        });
       }
-      this.$router.push({
-        name: paramsName,
-        params: {
-          role: role
-        }
-      });
     },
     saveInfo() {
       //随机数

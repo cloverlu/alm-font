@@ -28,18 +28,7 @@ import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
 import userIndex from "@/views/users/index.vue";
 import definiteUserAll from "@/views/users/definiteUserall.vue";
 import checklist1 from "@/views/approval/checklist1.vue";
-import processing2 from "@/views/approval/processing2.vue";
-import processing27 from "@/views/approval/processing27.vue";
-import processing25 from "@/views/approval/processing25.vue";
-import processing29 from "@/views/approval/processing29.vue";
-import processing21 from "@/views/approval/processing21.vue";
-import processing23 from "@/views/approval/processing23.vue";
-import processing26 from "@/views/approval/processing26.vue";
-import processing210 from "@/views/approval/processing210.vue";
-import processing28 from "@/views/approval/processing28.vue";
-import processing213 from "@/views/approval/processing213.vue";
-import processing211 from "@/views/approval/processing211.vue";
-import processing212 from "@/views/approval/processing212.vue";
+import approve from "@/views/approval/approve.vue";
 
 Vue.use(VueRouter);
 
@@ -73,7 +62,8 @@ const routes = [
     },
     children: [
       {
-        path: ":type/:bizId/:status/checklist1",
+        path:
+          ":type/:bizId/:status/:currPost/:biggerThan500/:belongBranch/:orgName/checklist1",
         name: "checklist1",
         component: checklist1,
         meta: {
@@ -83,21 +73,23 @@ const routes = [
           tag: "footerNext",
           // 是否带上一步下一步
           footer: false
-        }
-      },
-      //流程处理2
-      {
-        path: ":role/processing2",
-        name: "checkProcessing2",
-        component: processing2,
-        meta: {
-          // 头部标题，根据当前设计页的头部决定
-          title: "流程处理 ",
-          // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
-          tag: "resave",
-          // 是否带上一步下一步
-          footer: false
-        }
+        },
+        children: [
+          //approve
+          {
+            path: "approve",
+            name: "approve",
+            component: approve,
+            meta: {
+              // 头部标题，根据当前设计页的头部决定
+              title: "流程处理 ",
+              // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+              tag: "resave",
+              // 是否带上一步下一步
+              footer: false
+            }
+          }
+        ]
       }
     ]
   },
@@ -115,10 +107,24 @@ const routes = [
       footer: false
     },
     children: [
+      // 审批中的预览
+      {
+        path: ":type/:bizId/:status/checklist2",
+        name: "checklist2",
+        component: checklist1,
+        meta: {
+          // 头部标题，根据当前设计页的头部决定
+          title: "贷后检查流程处理",
+          // 头部右上角的显示：1、图标：operateIcon；2、保存:resave；3、下一步：footerNext
+          tag: "footerNext",
+          // 是否带上一步下一步
+          footer: false
+        }
+      },
       //类型1
       //检查申请明细-1
       {
-        path: "1/:type/:bizId/:status/:saveFlag",
+        path: "1/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "creditFirstIndex",
         component: definite1,
         meta: {
@@ -164,7 +170,7 @@ const routes = [
       },
       // 类型2
       {
-        path: "2/:type/:bizId/:status/:saveFlag",
+        path: "2/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "creditRoutineIndex",
         component: creditRoutineIndex,
         meta: {
@@ -260,7 +266,7 @@ const routes = [
       //类型3
       //新增1-8
       {
-        path: "3/:type/:bizId/:status/:saveFlag",
+        path: "3/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "creditOverallIndex",
         component: creditOverallIndex,
         meta: {
@@ -350,7 +356,7 @@ const routes = [
       },
       // 类型4
       {
-        path: "4/:type/:bizId/:status/:saveFlag",
+        path: "4/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "repaymentInspectionIndex",
         component: repaymentInspectionIndex,
         meta: {
@@ -385,7 +391,7 @@ const routes = [
       },
       // 类型5
       {
-        path: "5/:type/:bizId/:status/:saveFlag",
+        path: "5/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "fastCreditFirstIndex",
         component: definite14,
         meta: {
@@ -421,7 +427,7 @@ const routes = [
       },
       // 类型6 新增1
       {
-        path: "6/:type/:bizId/:status/:saveFlag",
+        path: "6/:type/:bizId/:status/:saveFlag/:currPost/:orgName",
         name: "dailyInspectionIndex",
         component: newly1,
         meta: {
@@ -494,7 +500,7 @@ const routes = [
   // 用户
   //据列表信息-1
   {
-    path: "/almHome/:mold/:userId",
+    path: "/userIndex/:queryType/:custName/:emplName",
     name: "userIndex",
     component: userIndex,
     meta: {

@@ -246,7 +246,8 @@ const getters = {
     });
 
     return obj;
-  }
+  },
+  handleParams: state => state.approvalStore.handleParams
 };
 
 export default getters;

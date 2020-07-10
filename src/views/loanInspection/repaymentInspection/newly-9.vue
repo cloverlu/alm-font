@@ -126,7 +126,7 @@ export default {
     //保存接口写在了Mixin里
     // 获取基本详情
     await this.setqueryDetail(this);
-    this.bizType(this.queryDetail, this.queryDetail.bizType);
+    this.bizType(this.queryDetail, this.queryDetail.checkType);
     this.detail = this.queryDetail;
 
     //判断是否是已经填了部分

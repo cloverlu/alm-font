@@ -19,6 +19,17 @@ const api = {
         bizId: data.bizId
       }
     });
+  },
+  //下一阶段处理人
+  handleQuery(data) {
+    return data.$axios({
+      url: `/alm/employee/getListByParams`,
+      method: "GET",
+      params: {
+        orgName: data.orgName,
+        postCode: data.postCode
+      }
+    });
   }
 };
 const actions = {
@@ -85,6 +96,17 @@ const actions = {
       }
     });
     return commit("SET_APPROVEDETAIL", params);
+  },
+  // 下一阶段处理人
+  async setHandleParams({ commit }, data) {
+    const params = await api.handleQuery(data).then(res => {
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        if (res.data.data) {
+          return res.data.data;
+        }
+      }
+    });
+    return commit("SET_HANDLEPARAMS", params);
   }
 };
 

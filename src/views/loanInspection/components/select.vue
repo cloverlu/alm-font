@@ -18,27 +18,32 @@ export default {
   computed: {
     defaultval: function() {
       var defaultval = "";
-      this.selectData.filter(item => {
-        if (this.defaultValue === item.key) {
-          defaultval = item.value;
-        }
-      });
+      if (this.selectData) {
+        this.selectData.filter(item => {
+          if (this.defaultValue === item.key) {
+            defaultval = item.value;
+          }
+        });
+      }
       return defaultval;
     }
   },
   mounted() {
     this.mobileSelect();
   },
+  watch: {},
   methods: {
     mobileSelect() {
-      new MobileSelect({
-        trigger: "#" + this.triggerId,
-        title: this.title,
-        wheels: [{ data: this.selectData }],
-        callback: (indexArr, data) => {
-          this.$emit("getSelectValue", data);
-        }
-      });
+      if (this.selectData) {
+        new MobileSelect({
+          trigger: "#" + this.triggerId,
+          title: this.title,
+          wheels: [{ data: this.selectData }],
+          callback: (indexArr, data) => {
+            this.$emit("getSelectValue", data);
+          }
+        });
+      }
     }
   }
 };
