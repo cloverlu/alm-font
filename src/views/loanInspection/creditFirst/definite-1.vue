@@ -15,7 +15,7 @@
 				span(class="info") {{detail.bizTypeName}}
 			.item
 				span(class="tag") 放款日期
-				span(class="info") {{detail.billBeginDate}}
+				span(class="info") {{detail.loanDate}}
 			.item
 				span(class="tag") 贷款金额
 				span(class="info") {{detail.billAmout}}

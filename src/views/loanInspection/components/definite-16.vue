@@ -17,47 +17,55 @@
 <script>
 import imageUpload from "../components/imageUpload";
 import { definte16, definte162, definte172 } from "../../../utils/dataMock";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: { imageUpload },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       definte16: [],
-      params: {},
-      type: ""
+      params: {}
+      // type: ""
     };
   },
+  computed: {
+    type() {
+      if (this.$route.params.type) {
+        return { bizType: this.$route.params.type };
+      } else {
+        return { bizType: this.userBizType.bizType };
+      }
+    }
+  },
   mounted() {
-    const type = this.$route.params.type;
+    const type = this.type.bizType;
     switch (type) {
       case "m1":
-        this.type = {
-          bizType: "m1"
-        };
         this.definte16 = definte16();
         this.params = this.mVmodel(11);
         break;
       case "m5":
-        this.type = {
-          bizType: "m5"
-        };
         this.definte16 = definte162();
         this.params = this.mVmodel(11);
         break;
       case "m6":
-        this.type = {
-          bizType: "m6"
-        };
         this.definte16 = definte172();
         this.params = this.mVmodel(10);
     }
     // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
-    console.log(this.params);
+    const moduleName = this.$route.params.moduleName;
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
   watch: {
     nextFooter(val, oldval) {
@@ -68,9 +76,6 @@ export default {
           arrs[a] = this.$refs[`definte16${i}`][0].fileList[a];
         }
         this.params = Object.assign({}, this.type, arrs);
-
-        console.log(this.params);
-        // this.setm1Definite16({ params: this.params });
       }
     }
   },

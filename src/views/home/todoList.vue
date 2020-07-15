@@ -37,7 +37,10 @@ export default {
     handleClick(id) {
       if (id === 2) {
         this.$router.push({
-          name: "loanInspectionIndex"
+          name: "loanInspectionIndex",
+          params: {
+            moduleName: "loanInspection"
+          }
         });
       } else if (id === 1) {
         this.$router.push({

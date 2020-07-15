@@ -130,7 +130,7 @@ import { DetailsOfIOU, yesNo, processing4 } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field, Cell, Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: {
     "mt-cell": Cell,
@@ -140,11 +140,11 @@ export default {
     almSelect,
     imageUpload
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
-      type: "",
+      bizId: this.$route.params.bizId || this.uBizId,
       processing4: processing4(),
       popupVisible: false,
       payType: 1,
@@ -162,26 +162,37 @@ export default {
       params2: {}
     };
   },
+  computed: {
+    type() {
+      if (this.$route.params.type) {
+        return { bizType: this.$route.params.type };
+      } else {
+        return { bizType: this.userBizType.bizType };
+      }
+    }
+  },
   mounted() {
-    const type = this.$route.params.type;
-    this.type = {
-      bizType: type
-    };
+    const type = this.type.bizType;
     this.params2 = this.mVmodel(1);
 
     // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
-    console.log(this.params);
-    console.log(this.params2);
+    const moduleName = this.$route.params.moduleName;
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
         // 保存审批页面
         const pa = {
-          bizId: this.$route.params.bizId,
           // orgLevel: "1",
           // postCode: "23",
           postCode: this.$route.params.currPost,
@@ -317,18 +328,27 @@ export default {
     },
     // 提交审批
     async submitApprove() {
+      const moduleName = this.$route.params.moduleName;
       this.$Indicator.open();
-      const pa = {
-        bizId: this.$route.params.bizId,
-        // orgLevel: "1",
-        // postCode: "23",
-        postCode: this.$route.params.currPost,
-        orgName: this.$route.params.orgName,
-        opType: "1"
-      };
-
-      const params = Object.assign({}, pa, this.params);
-      await this.submit(params);
+      var pa;
+      if (moduleName === "custmer") {
+        pa = {
+          bizId: this.bizId,
+          orgName: this.$route.params.orgName,
+          opType: "1"
+        };
+        const params = Object.assign({}, pa, this.params);
+        await this.userSubmit(params);
+      } else {
+        pa = {
+          bizId: this.bizId,
+          postCode: this.$route.params.currPost,
+          orgName: this.$route.params.orgName,
+          opType: "1"
+        };
+        const params = Object.assign({}, pa, this.params);
+        await this.submit(params);
+      }
     }
   }
 };

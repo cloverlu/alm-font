@@ -24,30 +24,43 @@
 <script>
 import newly4 from "../dailyInspection/newly-4";
 import newly5 from "../dailyInspection/newly-5";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: {
     newly4,
     newly5
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       dropVisibale: false,
       value: 0,
       option: [
         { text: "房地产抵押担保适用", value: 0 },
         { text: "融资担保机构担保适用", value: 1 }
       ],
-      params: {}
+      params: {
+        assitInfoForPledge: [],
+        assitInfoForGuarantee: []
+      }
     };
   },
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
 
   methods: {

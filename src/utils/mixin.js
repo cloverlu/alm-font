@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { SaveEditModelBusiness, submitApprove } from "../api/loanlnspection";
-import { unique, nowData } from "../utils/utils";
+import { unique, formatDate } from "../utils/utils";
 
 //普遍用到的状态
 export const normalMixin = {
@@ -243,6 +243,45 @@ export const normalMixin = {
           this.params2 = {
             pic_1s: this.forBizDetail(name).imageList
           };
+        } else if (name === "overalltDefinite89") {
+          this.value = this.params.financeClassification;
+          if (this.params.financeClassification === "1") {
+            this.params8 = this.params;
+            this.params9 = {};
+          } else if (this.params.financeClassification === "2") {
+            this.params9 = this.params;
+            this.params8 = {};
+          }
+        } else if (name === "repaymentInspectionDefinite7") {
+          if (this.params.stageData) {
+            var arr = [];
+            var a = "";
+            this.params.stageData.forEach(item => {
+              //时间转换格式
+              var expectRepayDate = new Date(item.expectRepayDate);
+              item.expectRepayDate =
+                expectRepayDate.getFullYear() +
+                "-" +
+                (expectRepayDate.getMonth() + 1) +
+                "-" +
+                expectRepayDate.getDate();
+
+              // checkbox显示
+              switch (item.checkStage) {
+                case "1":
+                  a = "一";
+                  break;
+                case "2":
+                  a = "二";
+                  break;
+                case "3":
+                  a = "三";
+                  break;
+              }
+              arr.push(a);
+              this.result = arr;
+            });
+          }
         }
         console.log(this.forBizDetail(name));
         //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
@@ -306,7 +345,7 @@ export const normalMixin = {
       });
     },
     // 照片保存与保存审批页面同时存在，用promise all，只要一个失败即失败
-    bindSave(params, params2) {
+    bindSave(params, params2, moduleName) {
       let appreove = this.promiseFun(submitApprove, params);
       let editSave = this.promiseFun(SaveEditModelBusiness, params2);
       var message = "";
@@ -327,7 +366,11 @@ export const normalMixin = {
           });
           if (params.opType === "1") {
             setTimeout(() => {
-              this.$router.push({ name: "loanInspectionIndex" });
+              if (moduleName === "custmer") {
+                this.$router.push({ name: "userIndex" });
+              } else {
+                this.$router.push({ name: "loanInspectionIndex" });
+              }
             }, 1200);
           } else {
             setTimeout(() => {
@@ -335,7 +378,11 @@ export const normalMixin = {
                 .confirm("回到列表页吗？")
                 .then(action => {
                   if (action === "confirm") {
-                    this.$router.push({ name: "loanInspectionIndex" });
+                    if (moduleName === "custmer") {
+                      this.$router.push({ name: "userIndex" });
+                    } else {
+                      this.$router.push({ name: "loanInspectionIndex" });
+                    }
                   }
                   if (action === "cancel") {
                     return false;
@@ -431,9 +478,268 @@ export const approvalMixin = {
 // 用户管理
 export const userMixin = {
   computed: {
-    ...mapGetters(["bizType"])
+    ...mapGetters(["userBizType", "userBizId", "userForBizDetail"]),
+    vuexBizId() {
+      if (!this.$route.params.bizId && !this.uBizId) {
+        var bizId;
+        const allTag = this.userBizType.bizType + this.$route.params.billNo;
+        this.userBizId.map(item => {
+          if (item.allTag === allTag) {
+            bizId = item.bizId;
+          }
+        });
+      }
+      return bizId;
+    }
   },
   methods: {
-    ...mapActions(["setBizType"])
+    ...mapActions(["setBizType", "setUserBizId", "setUserforDizDetail"]),
+    // user判断下一步路由该去的页面
+    footerUserRoute(currentType, currentName) {
+      switch (currentType) {
+        //m1
+        case "m1":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userFirstDefinite2" });
+              break;
+            case "userFirstDefinite2":
+              this.$router.push({ name: "userFirstDefinite16" });
+              break;
+            case "userFirstDefinite16":
+              this.$router.push({ name: "userFirstDefinite3" });
+          }
+          break;
+        //m2
+        case "m2":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userRoutineDefinite13" });
+              break;
+            case "userRoutineDefinite13":
+              this.$router.push({ name: "userRoutineDefinite11" });
+              break;
+            case "userRoutineDefinite11":
+              this.$router.push({ name: "userRoutineDefinite10" });
+              break;
+            case "userRoutineDefinite10":
+              this.$router.push({ name: "userRoutineDefinite5" });
+              break;
+            case "userRoutineDefinite5":
+              this.$router.push({ name: "userRoutineDefinite18" });
+              break;
+            case "userRoutineDefinite18":
+              this.$router.push({ name: "userRoutineDefinite3" });
+          }
+
+          break;
+        //类型6
+        case "m6":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userNewly2" });
+              break;
+            case "userNewly2":
+              this.$router.push({ name: "userNewly3" });
+              break;
+            case "userNewly3":
+              this.$router.push({ name: "userNewly45" });
+              break;
+            case "userNewly45":
+              this.$router.push({ name: "userNewlyDefinite16" });
+              break;
+            case "userNewlyDefinite16":
+              this.$router.push({ name: "userNewlyDefinite3" });
+          }
+          break;
+        //类型3
+        case "m3":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userOveralltDefinite13" });
+              break;
+            case "userOveralltDefinite13":
+              this.$router.push({ name: "userOveralltDefinite11" });
+              break;
+            case "userOveralltDefinite11":
+              this.$router.push({ name: "userOveralltDefinite10" });
+              break;
+            case "userOveralltDefinite10":
+              this.$router.push({ name: "userOveralltDefinite89" });
+              break;
+            case "userOveralltDefinite89":
+              this.$router.push({ name: "userOveralltDefinite6" });
+              break;
+            case "userOveralltDefinite6":
+              this.$router.push({ name: "userOveralltDefinite17" });
+              break;
+            case "userOveralltDefinite17":
+              this.$router.push({ name: "userOveralltDefinite3" });
+          }
+          break;
+        // 类型4
+        case "m4":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userReInsDefinite7" });
+              break;
+            case "userReInsDefinite7":
+              this.$router.push({ name: "userReInsProcessing4" });
+          }
+          break;
+        //类型5
+        case "m5":
+          switch (currentName) {
+            case "definiteUserAll":
+              this.$router.push({ name: "userFastCreDefinite16" });
+              break;
+            case "userFastCreDefinite16":
+              this.$router.push({ name: "userFastCreDefinite3" });
+          }
+      }
+    },
+    //保存信息
+    async userInfoSave(loanBusiness, currentName, type, tag) {
+      let res = await SaveEditModelBusiness(this, loanBusiness);
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        this.$Indicator.close();
+        this.$Toast({
+          message: "保存成功！",
+          iconClass: "iconfont icongou-01",
+          duration: 1000
+        });
+
+        const pa = {
+          bizId: res.data.bizId,
+          billNo: this.$route.params.billNo,
+          bizType: type,
+          currentName: currentName,
+          allTag: type + this.$route.params.billNo,
+          uniqueTag: type + this.$route.params.billNo + currentName
+        };
+
+        const userBizId = this.userBizId;
+        userBizId.push(pa);
+        this.setUserBizId(unique(userBizId, "uniqueTag"));
+
+        if (tag === "nextFooter") {
+          setTimeout(() => {
+            this.footerUserRoute(type, currentName, loanBusiness);
+          }, 1200);
+        }
+      } else {
+        this.$Toast({
+          message: "保存失败！",
+          iconClass: "iconfont iconcha-01",
+          duration: 5000
+        });
+      }
+    },
+    // mounted操作
+    // mounted中需要判断是否走详情接口的内容
+    userMountedTag(type, billNo, name) {
+      const uniquetag = type + billNo + name;
+      this.userBizId.map(async item => {
+        if (item.uniqueTag === uniquetag) {
+          await this.setUserforDizDetail(this);
+          const params = this.userForBizDetail(name, type);
+
+          if (name === "userReInsProcessing4") {
+            this.params2 = {
+              pic_1s: params.imageList
+            };
+          } else if (name === "userOveralltDefinite89") {
+            this.value = params.financeClassification;
+            if (params.financeClassification === "1") {
+              this.params8 = params;
+              this.params9 = {};
+            } else if (params.financeClassification === "2") {
+              this.params9 = params;
+              this.params8 = {};
+            }
+          } else if (name === "userReInsDefinite7") {
+            if (params.stageData) {
+              var arr = [];
+              var a = "";
+              params.stageData.forEach(item => {
+                // checkbox显示
+                switch (item.checkStage) {
+                  case "1":
+                    a = "一";
+                    break;
+                  case "2":
+                    a = "二";
+                    break;
+                  case "3":
+                    a = "三";
+                    break;
+                }
+                arr.push(a);
+                this.result = arr;
+              });
+            }
+          }
+          this.params = params;
+          console.log(this.params);
+
+          //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+          this.setScrollToPo({
+            x: 0,
+            y: 0,
+            ratenum: Date.now(),
+            tag: "nextFooter"
+          });
+          return false;
+        }
+      });
+    },
+    // 提交审批页面的保存（opType: "0"）和提交（opType: "1"）
+    async userSubmit(params) {
+      var message = "";
+      if (params.opType === "0") {
+        message = "保存";
+      } else if (params.opType === "1") {
+        message = "提交";
+      }
+      this.$Indicator.open();
+      await submitApprove(this, params).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "成功！",
+            iconClass: "iconfont icongou-01",
+            duration: 1000
+          });
+          if (params.opType === "1") {
+            setTimeout(() => {
+              this.$router.push({ name: "userIndex" });
+            }, 1200);
+          } else {
+            setTimeout(() => {
+              this.$MessageBox
+                .confirm("回到列表页吗？")
+                .then(action => {
+                  if (action === "confirm") {
+                    this.$router.push({ name: "userIndex" });
+                  }
+                  if (action === "cancel") {
+                    return false;
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            }, 1200);
+          }
+        } else {
+          this.$Indicator.close();
+          this.$Toast({
+            message: message + "失败！",
+            iconClass: "iconfont iconcha-01",
+            duration: 5000
+          });
+        }
+      });
+    }
   }
 };

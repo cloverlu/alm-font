@@ -1,10 +1,20 @@
 const userStore = {
-  state: {
-    bizType: ""
-  },
+  state: sessionStorage.getItem("store")
+    ? JSON.parse(sessionStorage.getItem("store")).userStore
+    : {
+        userBizType: "",
+        userBizId: [],
+        userForBizDetail: {}
+      },
   mutations: {
-    SET_BIZTYPE: (state, bizType) => {
-      state.bizType = bizType;
+    SET_USERBIZTYPE: (state, userBizType) => {
+      state.userBizType = userBizType;
+    },
+    SET_USERBIZID: (state, userBizId) => {
+      state.userBizId = userBizId;
+    },
+    SET_USERFORBIZDETAIL: (state, userForBizDetail) => {
+      state.userForBizDetail = userForBizDetail;
     }
   }
 };

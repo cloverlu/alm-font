@@ -770,11 +770,11 @@ const payIntentionsArr = [
 ];
 //新增1-4
 const newly4 = [
-  {
-    id: 1,
-    name: "押品价值及变现能力变动情况",
-    modelName: "assitChangeSuit"
-  },
+  // {
+  //   id: 1,
+  //   name: "押品价值及变现能力变动情况",
+  //   modelName: "assitChangeSuit"
+  // },
   {
     id: 2,
     name: "押品其他情况",

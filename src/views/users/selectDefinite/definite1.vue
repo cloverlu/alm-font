@@ -1,16 +1,15 @@
 <!--
- * @Descripttion: 类型m1:小企业授信业务首次跟踪检查
+ * @Descripttion: 流程1：检查申请明细-1
  * @Author: penglu
- * @Date: 2020-06-12 15:34:53
+ * @Date: 2020-06-04 17:03:54
 -->
-
 <template lang="pug">
 .credit-wrapper
-	.definite-1-wrapper
+	.definite-1-wrapper()
 		.definite-field
 			.item
 				span(class="tag") 放款日期
-				span(class="info") {{detail.billBeginDate}}
+				span(class="info") {{detail.loanDate}}
 			.item
 				span(class="tag") 贷款金额
 				span(class="info") {{detail.billAmout}}
@@ -31,26 +30,37 @@
 			span(class="colum-blue")
 			span  检查要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1Field" ref="fieldOne")
+			fieldOne(:definite="definite1Field" :info="params" :read="false" ref="fieldOne")
 		.definite-smalltitle(class="definite-1-smalltitle2")
 			span(class="colum-blue")
 			span  特殊要求及落实情况
 		.definite-1-field2
-			fieldOne(:definite="definite1Field" ref="fieldTwo")
+			fieldOne(:definite="definite1FieldSpecial" :read="false" :info="params" ref="fieldTwo")
+	//- router-view( ref="rview"  v-else)
 </template>
 
 <script>
-import { definite1, payType, definite1Field } from "../../../utils/dataMock.js";
+import {
+  definite1,
+  payType,
+  definite1Field,
+  definite1FieldSpecial
+} from "../../../utils/dataMock";
 import almSelect from "../../loanInspection/components/select";
 import fieldOne from "../../loanInspection/components/fieldOne";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 
 export default {
+  mixins: [normalMixin, userMixin],
   components: { almSelect, fieldOne },
+  props: ["detail", "uBizId"],
   data() {
     return {
-      detail: definite1,
+      bizId: this.uBizId,
+      // detail: "",
       payTypes: payType,
       definite1Field: definite1Field,
+      definite1FieldSpecial: definite1FieldSpecial,
       popupVisible: false,
       payType: 1,
       selectTitle: "贷款支付方式",
@@ -58,26 +68,46 @@ export default {
       payKind: "payKind",
       params: {
         loanPurpose: "",
-        payKind: 1
-      }
+        payKind: "1"
+      },
+      loanBusiness: {},
+      footerVal: "",
+      infoDetail: {}
     };
   },
-
+  // 父组件中返回要传给下级的数据
+  // provide() {
+  //   return {
+  //     reload: {}
+  //   };
+  // },
   computed: {},
+  async mounted() {
+    const type = this.userBizType.bizType;
+    const name = this.$route.name;
+
+    if (this.bizId) {
+      await this.setUserforDizDetail(this);
+      this.params = this.userForBizDetail(name, type);
+    }
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      const fieldOne = this.$refs.fieldOne.params;
+      const fieldTwo = this.$refs.fieldTwo.params;
+      this.params = Object.assign({}, this.params, fieldOne, fieldTwo);
+    }
   },
-
-  mounted() {},
   methods: {
     getSelect(data) {
-      this.params.payKind = data.key;
-    },
-    aaa() {
-      console.log(this.$refs.fieldOne.params);
-      this.$router.push({
-        name: "definite2"
-      });
+      this.params.payKind = data[0].key;
     }
   }
 };
@@ -93,7 +123,6 @@ export default {
     height: 100%;
 
     .definite-field {
-      height: px2rem(294);
     }
     .definite-smalltitle {
       height: px2rem(24);
@@ -109,7 +138,6 @@ export default {
     }
     .definite-1-field2 {
       width: 100%;
-      height: px2rem(236);
       background-color: #fff;
     }
   }

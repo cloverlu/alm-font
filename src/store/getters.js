@@ -132,7 +132,7 @@ const getters = {
   m1Definite2: state => state.creditFirst.m1Definite2,
   m1Definite16: state => state.creditFirst.m1Definite16,
   m1Definite3: state => state.creditFirst.m1Definite3,
-  bizType: state => state.userStore.bizType,
+  userBizType: state => state.userStore.userBizType,
   addmore: state => state.approvalStore.addmore,
   approveDetail: state => type => {
     var approveData = "";
@@ -247,7 +247,134 @@ const getters = {
 
     return obj;
   },
-  handleParams: state => state.approvalStore.handleParams
+  handleParams: state => state.approvalStore.handleParams,
+  userBizId: state => state.userStore.userBizId,
+  userForBizDetail: state => (name, type) => {
+    var forBizDetail = "";
+    forBizDetail = state.userStore.userForBizDetail;
+
+    var obj2 = {};
+    switch (name) {
+      case "definiteUserAll":
+        switch (type) {
+          case "m1":
+            obj2 = loanlnspection.m1.definite1;
+            break;
+          case "m2":
+            obj2 = loanlnspection.m2.definite12;
+            break;
+          case "m3":
+            obj2 = loanlnspection.m3.newly18;
+            break;
+          case "m4":
+            obj2 = loanlnspection.m4.newly9;
+            break;
+          case "m5":
+            obj2 = loanlnspection.m5.definite14;
+            break;
+          case "m6":
+            obj2 = loanlnspection.m6.newly1;
+        }
+        break;
+      case "userFirstDefinite2":
+        obj2 = loanlnspection.m1.definite2;
+        break;
+      case "userFirstDefinite16":
+        obj2 = loanlnspection.m1.definite16;
+        break;
+      case "userFirstDefinite3":
+        obj2 = loanlnspection.m1.definite3;
+        break;
+      case "userRoutineDefinite13":
+        obj2 = loanlnspection.m2.definite13;
+        break;
+      case "userRoutineDefinite11":
+        obj2 = loanlnspection.m2.definite11.creditInfo;
+        forBizDetail = state.userStore.userForBizDetail.creditInfo;
+        break;
+      case "userRoutineDefinite10":
+        obj2 = loanlnspection.m2.definite10.creditInfo;
+        forBizDetail = state.userStore.userForBizDetail.creditInfo;
+
+        break;
+      case "userRoutineDefinite5":
+        obj2 = loanlnspection.m2.definite5.financeInfo;
+        forBizDetail = state.userStore.userForBizDetail.financeInfo;
+        break;
+      case "userRoutineDefinite18":
+        obj2 = loanlnspection.m2.definite18;
+        break;
+      case "userRoutineDefinite3":
+        obj2 = loanlnspection.m2.definite3;
+        break;
+      case "userOveralltDefinite13":
+        obj2 = loanlnspection.m3.definite13;
+        break;
+      case "userOveralltDefinite11":
+        obj2 = loanlnspection.m3.definite11.creditInfo;
+        forBizDetail = state.userStore.userForBizDetail.creditInfo;
+        break;
+      case "userOveralltDefinite10":
+        obj2 = loanlnspection.m3.definite10.creditInfo;
+        forBizDetail = state.userStore.userForBizDetail.creditInfo;
+        break;
+      case "userOveralltDefinite89":
+        obj2 = loanlnspection.m3.credit89.financeInfo;
+        forBizDetail = state.userStore.userForBizDetail.financeInfo;
+        break;
+      case "userOveralltDefinite6":
+        obj2 = loanlnspection.m3.definite6;
+        break;
+      case "userOveralltDefinite17":
+        obj2 = loanlnspection.m3.definite17;
+        break;
+      case "userOveralltDefinite3":
+        obj2 = loanlnspection.m3.definite3;
+        break;
+      case "userReInsDefinite7":
+        obj2 = loanlnspection.m4.definite7;
+        break;
+      case "userReInsProcessing4":
+        obj2 = loanlnspection.m4.processing4;
+        break;
+      case "userFastCreDefinite16":
+        obj2 = loanlnspection.m5.definite16;
+        break;
+      case "userFastCreDefinite3":
+        obj2 = loanlnspection.m5.definite3;
+        break;
+      case "userNewly2":
+        obj2 = loanlnspection.m6.newly2.assetCreditInfo;
+        forBizDetail = state.userStore.userForBizDetail.assetCreditInfo;
+        break;
+      case "userNewly3":
+        obj2 = loanlnspection.m6.newly3;
+        break;
+      case "userNewly45":
+        obj2 = loanlnspection.m6.newly45;
+        break;
+      case "userNewlyDefinite16":
+        obj2 = loanlnspection.m6.definite16;
+        break;
+      case "userNewlyDefinite3":
+        obj2 = loanlnspection.m6.definite3;
+        break;
+    }
+    Object.keys(obj2).forEach(key => {
+      if (forBizDetail) {
+        obj2[key] = forBizDetail[key];
+      }
+    });
+    if (name === "userRoutineDefinite10" || name === "userOveralltDefinite10") {
+      obj2.msg = state.userStore.userForBizDetail.msg;
+    } else if (name === "userReInsProcessing4") {
+      obj2.imageList = state.userStore.userForBizDetail.pic_1s;
+    } else if (name === "userNewly2") {
+      obj2.summaryForCheck = state.userStore.userForBizDetail.summaryForCheck;
+    }
+
+    return obj2;
+  }
 };
 
 export default getters;

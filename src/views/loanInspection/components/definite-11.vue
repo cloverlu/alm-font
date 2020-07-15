@@ -232,15 +232,16 @@
 <script>
 import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: {
     almSelect
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       queryDate: "2020-06-03",
       yesNo: yesNo,
       popupVisible: false,
@@ -282,22 +283,28 @@ export default {
     };
   },
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    console.log(this.bizId);
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite11里
-
         this.params = {
-          creditInfo: this.params,
-          bizId: this.$route.params.bizId
+          creditInfo: this.params
         };
-        console.log(this.params);
       }
     }
   },

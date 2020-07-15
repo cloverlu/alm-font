@@ -95,7 +95,7 @@ const routes = [
   },
   //贷后检查列表
   {
-    path: "/almHome/loanInspection",
+    path: "/almHome/:moduleName",
     name: "loanInspectionIndex",
     component: loanInspectionIndex,
     meta: {
@@ -500,7 +500,7 @@ const routes = [
   // 用户
   //据列表信息-1
   {
-    path: "/userIndex/:queryType/:custName/:emplName",
+    path: "/:moduleName/:queryType/:custName/:emplName",
     name: "userIndex",
     component: userIndex,
     meta: {
@@ -513,7 +513,7 @@ const routes = [
     },
     children: [
       {
-        path: ":billNo",
+        path: ":billNo/:orgName",
         name: "definiteUserAll",
         component: definiteUserAll,
         meta: {

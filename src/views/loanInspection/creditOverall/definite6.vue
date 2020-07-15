@@ -50,9 +50,10 @@
 		mt-datetime-picker(
 			ref="picker"
 			type="date"
-			v-model="pickerValue"
-			@confirm="handleConfirm()"
-			)
+			v-model="pickerValue" 
+			:startDate="startDate" 
+			:endDate="endDate"
+			@confirm="handleConfirm()")
 		.war-tag
 			span 根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。
 	  
@@ -60,16 +61,17 @@
 
 <script>
 import { DatetimePicker } from "mint-ui";
-import { formatDate2 } from "@/utils/utils";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
 import almSelect from "../components/select";
 import { yesNo } from "../../../utils/dataMock.js";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: { "mt-datetime-picker": DatetimePicker, almSelect },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       params: {
         industrycChangSiut: 0,
         planExpandSitu: 0,
@@ -81,6 +83,8 @@ export default {
         collEstimateValue: "",
         otherSitu: ""
       },
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       triggerId1: "IndustrycChangSiut",
       triggerId2: "planExpandSitu",
       triggerId3: "hiddenTroubleSitu",
@@ -93,27 +97,30 @@ export default {
     };
   },
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
-  },
-  watch: {
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        const bizId = {
-          bizId: this.bizId
-        };
-        this.params = Object.assign({}, this.params, bizId);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
       }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
     }
   },
+  watch: {},
   methods: {
     a() {
       this.$refs.picker.open();
     },
     handleConfirm() {
-      this.params.collEstimateDate = formatDate2(this.pickerValue, 1);
+      if (!this.pickerValue) {
+        this.pickerValue = this.startDate;
+      }
+      this.params.collEstimateDate = formatDate(this.pickerValue);
       this.$refs.picker.close();
     },
     IndustrycChangSiut(val) {
