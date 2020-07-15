@@ -87,8 +87,8 @@ export default {
         existRisk: 0, // 存在风险
         agreeResult: 1, // 第二经营主责任人审核意见
         msg: "", // 第二经营主责任人审核意见说明
-        riskMsg: "xxx", // 风险说明
-        suggest: "xxx" // 措施建议
+        riskMsg: "", // 风险说明
+        suggest: "" // 措施建议
       }
     };
   },

@@ -33,7 +33,7 @@
       <div class="definite7-wrapper">
         <div
           class="type1"
-          v-for="item in params.stageData"
+          v-for="(item, i) in params.stageData"
           :key="item.checkStage"
         >
           <div class="formTitle1">
@@ -90,8 +90,10 @@
           <mt-datetime-picker
             :ref="'picker' + item.checkStage"
             type="date"
-            v-model="item.expectRepayDate"
-            @confirm="handleConfirm(item.checkStage)"
+            :startDate="startDate"
+            :endDate="endDate"
+            v-model="timePicker[i].timeP"
+            @confirm="handleConfirm(item.checkStage, i)"
           ></mt-datetime-picker>
 
           <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
@@ -115,8 +117,8 @@ import { payIntentionsArr } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field } from "mint-ui";
 import { DatetimePicker } from "mint-ui";
-import { formatDate2 } from "@/utils/utils";
-import { normalMixin } from "../../../utils/mixin";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 import {
   Collapse,
   CollapseItem,
@@ -138,10 +140,11 @@ export default {
     almSelect,
     "mt-datetime-picker": DatetimePicker
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       popupVisible: false,
       pickerValue: "",
       payType: 1,
@@ -152,6 +155,19 @@ export default {
       payIntention2: "payIntention2",
       payIntention3: "payIntention3",
       activeNames: ["1"],
+      timePicker: [
+        {
+          timeP: ""
+        },
+        {
+          timeP: ""
+        },
+        {
+          timeP: ""
+        }
+      ],
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       list: ["一", "二", "三"],
       result: [],
       first: true,
@@ -174,51 +190,21 @@ export default {
     };
   },
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
-
-    if (this.params.stageData) {
-      var arr = [];
-      var a = "";
-      this.params.stageData.forEach(item => {
-        //时间转换格式
-        var expectRepayDate = new Date(item.expectRepayDate);
-        item.expectRepayDate =
-          expectRepayDate.getFullYear() +
-          "-" +
-          (expectRepayDate.getMonth() + 1) +
-          "-" +
-          expectRepayDate.getDate();
-
-        // checkbox显示
-        switch (item.checkStage) {
-          case "1":
-            a = "一";
-            break;
-          case "2":
-            a = "二";
-            break;
-          case "3":
-            a = "三";
-            break;
-        }
-        arr.push(a);
-      });
-    }
-    this.result = arr;
-  },
-  watch: {
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        const bizId = {
-          bizId: this.bizId
-        };
-        this.params = Object.assign({}, this.params, bizId);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
       }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
     }
   },
+  watch: {},
   methods: {
     payIntention(index) {
       return `payIntention1${index}`;
@@ -235,10 +221,14 @@ export default {
       this.$refs[`picker${checkStage}`][0].open();
     },
     // 选定时间确定
-    handleConfirm(checkStage) {
+    handleConfirm(checkStage, i) {
       this.params.stageData.forEach(item => {
         if (item.checkStage === checkStage) {
-          item.expectRepayDate = formatDate2(item.expectRepayDate, 1);
+          if (!this.timePicker[i].timeP) {
+            item.expectRepayDate = formatDate(this.startDate);
+          } else {
+            item.expectRepayDate = formatDate(this.timePicker[i].timeP);
+          }
         }
       });
       this.$refs[`picker${checkStage}`][0].close();

@@ -11,7 +11,7 @@
 			.title {{title}} 
 			.operate
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
-				span(v-else-if="operateTag === 2") 保存
+				span(v-else-if="operateTag === 2" @click="saveInfo") 保存
 				span(v-else-if="operateTag === 3") 下一步
 				span(v-else-if="operateTag === 4") 
 		scroll(:top="scrollTop" ref="scrollWrapper" )
@@ -114,6 +114,12 @@ export default {
     back() {
       this.$router.go(-1);
       this.$refs.scrollWrapper.scrollTo(0, 0);
+    },
+    saveInfo() {
+      //随机数
+      const val = Date.now();
+      //向vuex添加nextFooter的值，以方便所有组件判断是否点击了“下一步”,这边用了这个值判断有没有保存
+      this.setNextFooter({ nextFooter: val, tag: "save" });
     }
   }
 };

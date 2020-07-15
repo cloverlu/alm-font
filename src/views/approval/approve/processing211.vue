@@ -65,7 +65,7 @@ export default {
       params: {
         agreeResult: 1, // 二级分行/一级分行抽查意见
         msg: "", // 二级分行/一级分行抽查意见说明
-        suggest: "xxx" // 措施建议
+        suggest: "" // 措施建议
       }
     };
   },

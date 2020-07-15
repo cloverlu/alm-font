@@ -32,6 +32,8 @@
             ref="picker"
             type="date"
             v-model="pickerValue"
+            :startDate="startDate"
+            :endDate="endDate"
             @confirm="handleConfirm()"
           ></mt-datetime-picker>
           <mt-cell
@@ -174,19 +176,22 @@
 <script>
 import { yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 import { DatetimePicker } from "mint-ui";
-import { formatDate2 } from "@/utils/utils";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
 export default {
   components: {
     almSelect,
     "mt-datetime-picker": DatetimePicker
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       yesNo: yesNo,
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       pickerValue: "",
       addedOverdues: "addedOverdues",
       addedLoans: "addedLoans",
@@ -219,10 +224,19 @@ export default {
     };
   },
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
   watch: {
     nextFooter(val, oldval) {
@@ -254,7 +268,10 @@ export default {
       this.$refs.picker.open();
     },
     handleConfirm() {
-      this.params.queryDate = formatDate2(this.pickerValue, 1);
+      if (!this.pickerValue) {
+        this.pickerValue = this.startDate;
+      }
+      this.params.queryDate = formatDate(this.pickerValue);
       this.$refs.picker.close();
     }
   }

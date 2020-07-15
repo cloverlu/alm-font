@@ -63,6 +63,8 @@
         ref="picker"
         type="date"
         v-model="pickerValue"
+        :startDate="startDate"
+        :endDate="endDate"
         @confirm="handleConfirm()"
       ></mt-datetime-picker>
 
@@ -169,7 +171,7 @@
 
 <script>
 import { DatetimePicker } from "mint-ui";
-import { formatDate2 } from "@/utils/utils";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
 import { normalMixin } from "../../../utils/mixin";
 import {
   DetailsOfIOU,
@@ -191,6 +193,8 @@ export default {
       coordinate: coordinate,
       yesNo: yesNo,
       popupVisible: false,
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       payType: 1,
       selectTitle1: "贷款支付方式",
       selectTitle2: "是否按合同约定的用途使用信贷资金",
@@ -300,7 +304,10 @@ export default {
       this.$refs.picker.open();
     },
     handleConfirm() {
-      this.params.loanDate = formatDate2(this.pickerValue, 1);
+      if (!this.pickerValue) {
+        this.pickerValue = this.startDate;
+      }
+      this.params.loanDate = formatDate(this.pickerValue);
       this.$refs.picker.close();
     }
   }

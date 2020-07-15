@@ -10,7 +10,7 @@
 		.definite-field
 			.item
 				span(class="tag") 放款日期
-				span(class="info") {{detail.definite1.billBeginDate}}
+				span(class="info") {{detail.definite1.loanDate}}
 			.item
 				span(class="tag") 贷款金额
 				span(class="info") {{detail.definite1.billAmout}}

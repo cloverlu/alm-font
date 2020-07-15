@@ -27,7 +27,7 @@
 import definite8 from "../creditOverall/credit8";
 import definite9 from "../creditOverall/credit9";
 import { DropdownMenu, DropdownItem } from "vant";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: {
     "van-dropdown-menu": DropdownMenu,
@@ -35,10 +35,11 @@ export default {
     definite8,
     definite9
   },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       dropVisibale: false,
       value: "1",
       option: [
@@ -52,16 +53,18 @@ export default {
   },
   mounted() {
     // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
-    this.value = this.params.financeClassification;
-    if (this.params.financeClassification === "1") {
-      this.params8 = this.params;
-      this.params9 = {};
-    } else if (this.params.financeClassification === "2") {
-      this.params9 = this.params;
-      this.params8 = {};
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
     }
   },
   methods: {
@@ -70,15 +73,12 @@ export default {
     },
     childParams(val) {
       this.params = {
-        financeInfo: val,
-        bizId: this.$route.params.bizId
+        financeInfo: val
       };
     },
     childParams2(val) {
-      console.log(val);
       this.params = {
-        financeInfo: val,
-        bizId: this.$route.params.bizId
+        financeInfo: val
       };
     }
   }

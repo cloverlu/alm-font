@@ -61,6 +61,7 @@ export default {
         name: "userIndex",
         params: {
           queryType: "2",
+          moduleName: "custmer",
           custName: custName,
           emplName: this.userInfo.emplName
         }

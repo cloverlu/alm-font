@@ -10,7 +10,7 @@
 			span(class="colum-blue")
 			span(class="title") {{$route.params.custName}}
 		.receipt-content
-			.receipt-content-item(v-for="item in info" :key="item.id" @click="handleClick(item.billNo)")
+			.receipt-content-item(v-for="item in info" :key="item.id" @click="handleClick(item.billNo,item.orgName)")
 				.item-one
 					span(class="tag") 借据编号
 					span(class="info") {{item.billNo}}
@@ -34,7 +34,9 @@
 <script>
 import { receipt1 } from "../../utils/dataMock";
 import { loanReceiptParams } from "../../api/users";
+import { userMixin } from "../../utils/mixin";
 export default {
+  mixins: [userMixin],
   data() {
     return {
       info: []
@@ -44,11 +46,16 @@ export default {
     this.getList();
   },
   methods: {
-    handleClick(id) {
+    handleClick(id, orgName) {
+      this.userBizId.splice(0, this.userBizId.length);
+      for (var key in this.userBizType) {
+        delete this.userBizType[key];
+      }
       this.$router.push({
         name: "definiteUserAll",
         params: {
-          billNo: id
+          billNo: id,
+          orgName: orgName
         }
       });
     },

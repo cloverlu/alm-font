@@ -7,43 +7,57 @@
   <div class="checkDetail">
     <!--填写信息  -->
     <div class="definite14">
-      <mt-cell
-        class="textFiled"
-        title="客户名称"
-        :value="params.custName"
-      ></mt-cell>
+      <div class="formTitle">
+        <span class="lightBlue"></span>
+        <span class="coNameBlack">存货</span>
+      </div>
       <mt-cell
         class="textFiled"
         title="合同编号"
-        :value="params.contractNo"
+        :value="detail.contractNo"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="授信业务小类"
-        :value="params.bizSubKind"
+        :value="detail.bizSubKind"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款金额"
-        :value="params.loanAmout"
+        :value="detail.loanAmout"
       ></mt-cell>
       <mt-cell
         class="textFiled"
         title="贷款期限"
-        :value="params.loanLength"
+        :value="detail.loanLength"
       ></mt-cell>
-      <mt-field
+      <!-- <mt-cell
         class="textFiled"
-        label="还款方式"
-        placeholder="请输入"
-        v-model="params.repayKind"
-      ></mt-field>
-      <mt-field
-        class="textFiled"
-        label="还款日期"
-        placeholder="请输入"
-        v-model="params.repayDate"
-      ></mt-field>
+        title="还款方式"
+        :value="detail.repayKind"
+      ></mt-cell> -->
+      <div class="definite-field">
+        <div class="item">
+          <span class="tag big">放款日期</span>
+          <span class="info" @click="a">
+            <input
+              v-model="params.loanDate"
+              type="input"
+              class="field-input"
+              placeholder="请输入"
+            />
+          </span>
+        </div>
+      </div>
+      <mt-datetime-picker
+        ref="picker"
+        type="date"
+        v-model="pickerValue"
+        :startDate="startDate"
+        :endDate="endDate"
+        @confirm="handleConfirm()"
+      ></mt-datetime-picker>
+
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
         type="textarea"
@@ -67,7 +81,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <div class="formTitle">
+      <div class="formTitle1">
         <span class="lightBlue"></span>
         <span class="coName">检查内容</span>
       </div>
@@ -135,7 +149,7 @@
       <mt-field
         type="textarea"
         rows="3"
-        v-model="params.otherSitu"
+        v-model="params.cooperateMsg"
         class="text"
         style="overflow:hidden"
         placeholder="请输入"
@@ -145,22 +159,24 @@
 </template>
 
 <script>
+import { DatetimePicker } from "mint-ui";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 import {
   DetailsOfIOU,
   payKindsArr,
   yesNo,
   coordinate
 } from "../../../utils/dataMock";
-import { Field, Cell } from "mint-ui";
 import almSelect from "../../loanInspection/components/select";
 export default {
-  components: {
-    "mt-cell": Cell,
-    "mt-field": Field,
-    almSelect
-  },
+  components: { "mt-datetime-picker": DatetimePicker, almSelect },
+  mixins: [normalMixin, userMixin],
+  props: ["detail", "uBizId"],
   data() {
     return {
+      bizId: this.uBizId,
+      pickerValue: "",
       DetailsOfIOU: DetailsOfIOU,
       payKindsArr: payKindsArr,
       coordinate: coordinate,
@@ -176,45 +192,60 @@ export default {
       useAmoutByContract: "useAmoutByContract",
       executeCon: "executeCon",
       cooperate: "cooperate",
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       params: {
-        bizType: "小企业授信业务还款资金落实情况检查", // 检查类型
-        custName: "王健林", // 客户名称
-        contractNo: "440000002200111", //  合同编号
-        bizSubKind: "xx", //  授信业务小类
-        loanAmout: "1000000000", // 贷款金额
-        loanLength: "2040-08-25", // 贷款期限
-        payKind: 1, // 贷款支付方式
-        repayKind: "", // 还款方式
-        repayDate: "", // 还款日期
+        payKind: "1",
+        // repayKind: "", // 还款方式
+        loanDate: "", // 还款日期
         loanPurpose: "", // 约定用途
         detailMsg4useAmout: "", // 资金使用情况详细说明
         useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
         executeCon: 1, //是否履行合同约定
         cooperate: "1", //对我行检查的态度
-        otherSitu: "" // 其他
+        cooperateMsg: "", // 其他
+        msg: ""
       }
     };
   },
+  async mounted() {
+    const type = this.userBizType.bizType;
+    const name = this.$route.name;
+
+    if (this.bizId) {
+      await this.setUserforDizDetail(this);
+      this.params = this.userForBizDetail(name, type);
+    }
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
+  watch: {},
   methods: {
     getSelect1: function(data) {
-      this.params.payKind = data.key;
+      this.params.payKind = data[0].key;
     },
     getSelect2: function(data) {
-      this.params.useAmoutByContract = data.key;
+      this.params.useAmoutByContract = data[0].key;
     },
     getSelect3: function(data) {
-      this.params.executeCon = data.key;
+      this.params.executeCon = data[0].key;
     },
     getSelect4: function(data) {
-      this.params.cooperate = data.key;
-    }
-  },
-  watch: {
-    // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
-      if (val !== oldval) {
-        // 将数据存入vuex里的setDefinite5里
+      this.params.cooperate = data[0].key;
+    },
+    a() {
+      this.$refs.picker.open();
+    },
+    handleConfirm() {
+      if (!this.pickerValue) {
+        this.pickerValue = this.startDate;
       }
+      this.params.loanDate = formatDate(this.pickerValue);
+      this.$refs.picker.close();
     }
   }
 };
@@ -237,7 +268,7 @@ export default {
       width: px2rem(3);
       height: px2rem(14);
       top: 50%;
-      left: px2rem(18);
+      left: px2rem(10);
       transform: translate(-50%, -50%);
       background: rgba(78, 120, 222, 1);
       opacity: 1;
@@ -251,7 +282,7 @@ export default {
       line-height: px2rem(15);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(16), -50%);
       font-size: px2rem(14);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
@@ -266,14 +297,49 @@ export default {
       line-height: px2rem(20);
       top: 50%;
       // left: 21%;
-      transform: translate(px2rem(26), -50%);
+      transform: translate(px2rem(16), -50%);
       font-size: px2rem(15);
       // font-family: Source Han Sans CN;
       // font-weight: bold;
-      color: rgba(113, 113, 113, 1);
+      color: rgba(9, 9, 9, 1);
       opacity: 1;
     }
   }
+
+  .formTitle1 {
+    width: 100%;
+    height: px2rem(44);
+    position: relative;
+    background-color: #f7f7f7;
+    .lightBlue {
+      position: absolute;
+      display: inline-block;
+      width: px2rem(3);
+      height: px2rem(14);
+      top: 50%;
+      left: px2rem(16);
+      transform: translate(-50%, -50%);
+      background: rgba(78, 120, 222, 1);
+      opacity: 1;
+      border-radius: px2rem(2);
+    }
+    .coName {
+      position: absolute;
+      display: inline-block;
+      height: px2rem(14);
+      width: 100%;
+      line-height: px2rem(15);
+      top: 50%;
+      // left: 21%;
+      transform: translate(px2rem(24), -50%);
+      font-size: px2rem(14);
+      // font-family: Source Han Sans CN;
+      // font-weight: bold;
+      color: rgba(78, 120, 222, 1);
+      opacity: 1;
+    }
+  }
+
   .mint-cell {
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-of-type {
@@ -285,7 +351,7 @@ export default {
     width: 100%;
     height: px2rem(44);
     line-height: px2rem(44);
-    padding: 0 px2rem(10);
+    padding: 0 px2rem(16);
     display: flex;
     font-size: px2rem(14);
     box-sizing: border-box;
@@ -311,6 +377,7 @@ export default {
       flex: 1;
       text-align: right;
       color: #9f9f9f;
+      width: px2rem(140);
       .pay-type {
         width: 100%;
         height: px2rem(145);
@@ -344,7 +411,13 @@ textarea {
 .definite14 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(224) !important;
       font-size: px2rem(14);

@@ -6,11 +6,12 @@
 
 <template lang="pug">
 	.credit-overall
-		.newly-18
-			.definite-field(:class="params.securityKind === 4 ? 'add-item' : ''")
+		.newly-18()
+			.definite-field
 				.item
 					span(class="tag") 授信金额
-					span(class="info") {{detail.lineAmout}}
+					span(class="info") 
+						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
 					span(class="tag") 授信余额
 					span(class="info") {{detail.lineBalance}}
@@ -18,7 +19,7 @@
 					span(class="tag") 担保方式
 					almSelect(:selectData="info"  :defaultValue="params.securityKind" :triggerId="securityKindId" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
 					span(class="iconfont iconxiala arrow") 
-				.item(class="input-item" v-if="params.securityKind === 4")
+				.item(class="input-item" v-if="params.securityKind ==='5' ")
 					mt-field(v-model="params.otherSecurityKindMsg" class="textArea other-textArea" type="input"  placeholder="其他担保方式")
 				.item
 					span(class="tag") 还款方式
@@ -30,73 +31,111 @@
 				span(class="colum-blue")
 				span  审批意见中贷后日常检查要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldOne" )
+				fieldOne(:definite="definite1Field" :info="params" :read="false" ref="fieldOne" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  产品贷后日常检查特殊要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldTwo" )
+				fieldOne(:definite="definite1FieldSpecial" :info="params" :read="false" ref="fieldTwo" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  利率及综合金融服务的要求及落实情况
 			.newly-18-field
-				fieldOne(:definite="definite1Field" ref="fieldThree" )
+				fieldOne(:definite="definite1FieldRate" :info="params" :read="false" ref="fieldThree" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  实际控制人或法定代表人风险点
 			.newly-18-field(class="small-one")
-				fieldOne(:definite="newly18One" ref="fieldThree" )
+				fieldOne(:definite="newly18One" :info="params" :read="false" ref="fieldFour" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  管理层风险点
 			.newly-18-field(class="small-two")
-				fieldOne(:definite="newly18Two" ref="fieldThree" )
+				fieldOne(:definite="newly18Two" :info="params" :read="false" ref="fieldFive" )
 			.definite-smalltitle(class="blue-titile-two")
 				span(class="colum-blue")
 				span  近期检查发现的其他风险点
 			.newly-18-field(class="small-three")
 				mt-field(v-model="params.otherRisk" class="textArea" type="textarea" rows="3" placeholder="请输入")
+	
 </template>
 
 <script>
 import {
   newly18,
-  securityKinds,
+  securityKindsArr,
   definite1Field,
   newly18One,
-  newly18Two
+  newly18Two,
+  definite1FieldSpecial,
+  definite1FieldRate
 } from "../../../utils/dataMock.js";
 import almSelect from "../../loanInspection/components/select";
 import fieldOne from "../../loanInspection/components/fieldOne";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
+  mixins: [normalMixin, userMixin],
+  props: ["detail", "uBizId"],
   data() {
     return {
-      detail: newly18,
-      info: securityKinds(),
+      bizId: this.uBizId,
+      info: securityKindsArr,
       definite1Field: definite1Field,
+      definite1FieldSpecial: definite1FieldSpecial,
+      definite1FieldRate: definite1FieldRate,
       newly18One: newly18One,
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
       securityKindId: "securityKind",
       params: {
-        securityKind: 1,
+        lineAmout: "",
+        securityKind: "1",
         otherSecurityKindMsg: "",
         repayKind: "",
-        requireCheck: "", //审批意见中贷后日常检查要求及落实情况
-        checked: "", //审批意见中贷后日常检查要求及落实情况
-        specialRequireCheck: "", //产品贷后日常检查特殊要求及落实情况
-        specialChecked: "", //产品贷后日常检查特殊要求及落实情况
-        rateAndIntfinSerCheck: "", // 利率及综合金融服务的要求及落实情况
-        rateAndIntfinSerChecked: "", // 利率及综合金融服务的要求及落实情况
-        HoldPensonRisk: "", //实际控制人或法定代表人风险点
-        managerRisk: "", //管理层风险点
+        // requireCheck: "", //审批意见中贷后日常检查要求及落实情况
+        // checked: "", //审批意见中贷后日常检查要求及落实情况
+        // specialRequireCheck: "", //产品贷后日常检查特殊要求及落实情况
+        // specialChecked: "", //产品贷后日常检查特殊要求及落实情况
+        // rateAndIntfinSerCheck: "", // 利率及综合金融服务的要求及落实情况
+        // rateAndIntfinSerChecked: "", // 利率及综合金融服务的要求及落实情况
+        // HoldPensonRisk: "", //实际控制人或法定代表人风险点
+        // managerRisk: "", //管理层风险点
         otherRisk: "" //近期检查发现的其他风险点
       }
     };
   },
-  mounted() {},
+
+  async mounted() {
+    const type = this.userBizType.bizType;
+    const name = this.$route.name;
+
+    if (this.bizId) {
+      await this.setUserforDizDetail(this);
+      this.params = this.userForBizDetail(name, type);
+    }
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
+  watch: {
+    nextFooter(val, oldval) {
+      var loanBusiness = Object.assign(
+        {},
+        this.params,
+        this.$refs.fieldOne.params,
+        this.$refs.fieldTwo.params,
+        this.$refs.fieldThree.params,
+        this.$refs.fieldFour.params,
+        this.$refs.fieldFive.params
+      );
+      this.params = loanBusiness;
+    }
+  },
   methods: {
     getSelect(val) {
       this.params.securityKind = val[0].key;
@@ -113,10 +152,6 @@ export default {
     width: 100%;
     height: 100%;
     .definite-field {
-      height: px2rem(220);
-      &.add-item {
-        height: px2rem(264);
-      }
       .input-item {
         padding: inherit;
         .other-textArea {
@@ -134,17 +169,7 @@ export default {
     }
     .newly-18-field {
       width: 100%;
-      height: px2rem(236);
       background-color: #fff;
-      &.small-one {
-        height: px2rem(118);
-      }
-      &.small-two {
-        height: px2rem(132);
-      }
-      &.small-three {
-        height: px2rem(74);
-      }
     }
   }
 }

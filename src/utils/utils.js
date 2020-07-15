@@ -60,7 +60,8 @@ export function os() {
 export const formatDate = (date, format) => {
   if (!date) return "";
 
-  format = format || "yyyy-MM-dd hh:mm:ss";
+  // format = format || "yyyy-MM-dd hh:mm:ss";
+  format = format || "yyyy-MM-dd";
   date = new Date(date);
   var map = {
     M: date.getMonth() + 1, // 月份
@@ -144,4 +145,19 @@ export function unique(arr, key) {
       ? false
       : (obj[typeof item[key] + item[key]] = true);
   });
+}
+
+// 获取当前日期的去年的前一天
+export function getLastYearYestdy(date) {
+  var strYear = date.getFullYear() - 1;
+  var strDay = date.getDate();
+  var strMonth = date.getMonth() + 1;
+  if (strMonth < 10) {
+    strMonth = "0" + strMonth;
+  }
+  if (strDay < 10) {
+    strDay = "0" + strDay;
+  }
+  const datastr = strYear + "-" + strMonth + "-" + strDay;
+  return datastr;
 }

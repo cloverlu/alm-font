@@ -13,16 +13,19 @@
             <mt-field
               class="textFiled"
               label="贷后检查模式"
+              placeholder="请输入"
               v-model="params.checkModel"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="授信金额"
+              placeholder="请输入"
               v-model="params.lineAmout"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="授信余额"
+              placeholder="请输入"
               v-model="params.lineBalance"
             ></mt-field>
             <div class="item">
@@ -36,18 +39,30 @@
                 @getSelectValue="getSelect1"
                 class="info"
               ></almSelect>
+
               <span class="iconfont iconxiala arrow"></span>
             </div>
-            <mt-field class="textFiled" label="其他xxxx"></mt-field>
+            <mt-field
+              v-if="params.securityKind === '5'"
+              type="textarea"
+              rows="1"
+              v-model="params.otherSecurityKindMsg"
+              class="text"
+              style="overflow:hidden"
+              placeholder="其他"
+            ></mt-field>
+            <!-- <mt-field class="textFiled" label="其他xxxx"></mt-field> -->
             <mt-field
               class="textFiled"
               label="还款方式"
+              placeholder="请输入"
               v-model="params.repayKind"
             ></mt-field>
             <mt-field
               class="textFiled"
               label="检查地点"
-              v-model="params.practicableCheckAddr"
+              placeholder="请输入"
+              v-model="params.checkAddr"
             ></mt-field>
             <div class="item">
               <span class="tag">检查配合程度</span>
@@ -96,19 +111,16 @@
 </template>
 
 <script>
-import {
-  DetailsOfIOU,
-  coordinate,
-  securityKindsArr,
-  yesNo
-} from "../../../utils/dataMock";
+import { coordinate, securityKindsArr, yesNo } from "../../../utils/dataMock";
 import almSelect from "../../loanInspection/components/select";
-import { Field } from "mint-ui";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
-  components: { "mt-field": Field, almSelect },
+  components: { almSelect },
+  mixins: [normalMixin, userMixin],
+  props: ["detail", "uBizId"],
   data() {
     return {
-      DetailsOfIOU: DetailsOfIOU,
+      bizId: this.uBizId,
       coordinate: coordinate,
       securityKindsArr: securityKindsArr,
       yesNo: yesNo,
@@ -124,32 +136,49 @@ export default {
       yearlyInspection: "yearlyInspection",
       fontColor: "blue",
       params: {
-        checkType: "", // 检查类型
+        otherSecurityKindMsg: "",
+        repayKind: "",
+        checkAddr: "",
         checkModel: "", // 检查模式
         lineAmout: "", // 授信金额
         lineBalance: "", // 授信余额
-        securityKind: 1, // 担保方式
+        securityKind: "1", // 担保方式
         cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
       }
     };
   },
+  async mounted() {
+    const type = this.userBizType.bizType;
+    const name = this.$route.name;
+
+    if (this.bizId) {
+      await this.setUserforDizDetail(this);
+      this.params = this.userForBizDetail(name, type);
+    }
+    this.setScrollToPo({
+      x: 0,
+      y: 0,
+      ratenum: Date.now(),
+      tag: "nextFooter"
+    });
+  },
+  watch: {},
   methods: {
     getSelect1(data) {
-      this.params.securityKind = data.key;
+      this.params.securityKind = data[0].key;
     },
     getSelect2(data) {
-      this.params.cooperate = data.key;
+      this.params.cooperate = data[0].key;
     },
     getSelect3(data) {
-      this.params.yearlyInspection = data.key;
+      this.params.yearlyInspection = data[0].key;
     },
     getSelect4(data) {
-      this.params.revalOfColl = data.key;
+      this.params.revalOfColl = data[0].key;
     }
-  },
-  watch: {}
+  }
 };
 </script>
 
@@ -187,7 +216,7 @@ export default {
         width: px2rem(120);
         line-height: px2rem(15);
         top: 50%;
-        left: 21%;
+        left: 20%;
         transform: translate(-50%, -50%);
         font-size: px2rem(14);
         // font-family: Source Han Sans CN;
@@ -203,7 +232,7 @@ export default {
         width: 100%;
         height: px2rem(44);
         line-height: px2rem(44);
-        padding: 0 px2rem(10);
+        padding: 0 px2rem(16);
         display: flex;
         font-size: px2rem(14);
         box-sizing: border-box;
@@ -268,7 +297,13 @@ export default {
 .newly1 {
   width: 100%;
   height: 100%;
+  .mint-cell {
+    min-height: px2rem(44);
+  }
   .textFiled {
+    .mint-cell-wrapper {
+      padding: 0 px2rem(16);
+    }
     .mint-cell-title {
       width: px2rem(150) !important;
       font-size: px2rem(14);

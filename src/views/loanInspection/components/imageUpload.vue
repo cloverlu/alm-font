@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     const arr = this.itemVmodel[this.item.vModel];
-    if (arr && arr[0]) {
+    if (arr && arr[0] && arr[0].url !== "") {
       if (arr.length > 0) {
         this.imageHas = true;
       } else {
@@ -85,7 +85,7 @@ export default {
   watch: {
     itemVmodel(val, oldval) {
       const arr = val[this.item.vModel];
-      if (arr && arr[0]) {
+      if (arr && arr[0] && arr[0].url !== "") {
         if (arr.length > 0) {
           this.imageHas = true;
         } else {
@@ -159,8 +159,8 @@ export default {
       var vModel = document.getElementById(this.item.vId);
       var img1 = vModel.getElementsByClassName("van-image__img")[index];
       // var img1 = document.getElementById("img1");
-      console.log(img1);
-      console.log(EXIF.getData(img1));
+      // console.log(img1);
+      // console.log(EXIF.getData(img1));
       var coordinate = {};
       if (!EXIF.getData(img1)) {
         coordinate = {
@@ -191,7 +191,7 @@ export default {
     },
     // 上传之前
     async beforeRead(file) {
-      console.log(file, "beforeRead");
+      // console.log(file, "beforeRead");
       return new Promise((resolve, reject) => {
         // let ishas = this.fileList[this.item.vModel].some(function(cur, i, arr) {
         //   return cur.file.name === file.name;
@@ -217,9 +217,9 @@ export default {
     },
     async afterRead(file) {
       //上传完成
-      console.log(this.item.vModel, "id");
-      console.log(file, "afterRead");
-      console.log(this.fileList[this.item.vModel]);
+      // console.log(this.item.vModel, "id");
+      // console.log(file, "afterRead");
+      // console.log(this.fileList[this.item.vModel]);
       file.status = "uploading";
       file.message = "上传中...";
 
@@ -249,7 +249,7 @@ export default {
         return this.fileList[this.item.vModel];
       });
 
-      console.log(imageUploadRes);
+      // console.log(imageUploadRes);
       if (imageUploadRes) {
         var index = "";
         if (imageUploadRes.length > 0) {
@@ -283,7 +283,7 @@ export default {
           img.onload = function() {
             let data = self.compress(img);
             file.cusContent = data;
-            console.log(file.size);
+            // console.log(file.size);
             self.isloadImg = false;
           };
         }

@@ -54,8 +54,11 @@ const actions = {
   setm1Definite3: ({ commit }, m1Definite3) => {
     return commit("SET_M1DEFINITE1", m1Definite3);
   },
-  setBizType: ({ commit }, bizType) => {
-    return commit("SET_BIZTYPE", bizType);
+  setBizType: ({ commit }, userBizType) => {
+    return commit("SET_USERBIZTYPE", userBizType);
+  },
+  setUserBizId: ({ commit }, userBizId) => {
+    return commit("SET_USERBIZID", userBizId);
   },
   // approval加载m3时，蓝色横条的初始位置
   setAddmore: ({ commit }, addmore) => {
@@ -71,6 +74,17 @@ const actions = {
       }
     });
     return commit("SET_FORBIZDETAIL", params);
+  },
+  // 用户模块上一步下一步需要走的详情接口
+  async setUserforDizDetail({ commit }, data) {
+    const params = await api.infoDetail(data).then(res => {
+      if (res.status === 200 && res.data.returnCode === "200000") {
+        if (res.data.data) {
+          return res.data.data;
+        }
+      }
+    });
+    return commit("SET_USERFORBIZDETAIL", params);
   },
   // 基本信息
   async setqueryDetail({ commit }, data) {

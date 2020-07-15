@@ -14,7 +14,7 @@ module.exports = {
     proxy: {
       "/alm": {
         // alm开发环境API地址
-        target: "http://20.147.168.80:9001",
+        target: "http://20.147.168.86:9001",
         // 如果要代理 websockets
         ws: true,
         // 将主机标头的原点更改为目标URL

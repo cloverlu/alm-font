@@ -74,6 +74,8 @@
           ref="picker"
           type="date"
           v-model="pickerValue"
+          :startDate="startDate"
+          :endDate="endDate"
           @confirm="handleConfirm()"
         ></mt-datetime-picker>
       </div>
@@ -84,7 +86,7 @@
 
 <script>
 import { DatetimePicker } from "mint-ui";
-import { formatDate2 } from "@/utils/utils";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
 import { bizTypes } from "../../../utils/dataMock";
 import { normalMixin } from "../../../utils/mixin";
 export default {
@@ -95,6 +97,8 @@ export default {
       bizId: this.$route.params.bizId,
       hasRouterChild4: this.$route.params.hasRouterChild4,
       bizTypes: bizTypes,
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       popupVisible: false,
       payType: 1,
       selectTitle: "检查类型",
@@ -169,8 +173,9 @@ export default {
               this.$refs.m4rview.params2,
               bizId
             );
+            const moduleName = this.$route.params.moduleName;
             // 两个接口并发，都成功后才走操作
-            this.bindSave(loanBusiness, loanBusiness2);
+            this.bindSave(loanBusiness, loanBusiness2, moduleName);
           });
         } else {
           this.$nextTick(() => {
@@ -186,7 +191,10 @@ export default {
       this.$refs.picker.open();
     },
     handleConfirm() {
-      this.params.repayDate = formatDate2(this.pickerValue, 1);
+      if (!this.pickerValue) {
+        this.pickerValue = this.startDate;
+      }
+      this.params.repayDate = formatDate(this.pickerValue);
       this.$refs.picker.close();
     }
   }

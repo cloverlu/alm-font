@@ -57,6 +57,11 @@
 					span(class="tag big") 抵质押率
 					span(class="info") 
 						input(v-model="item.thisMortAndpleRate" type="input" class="field-input" placeholder="请输入")
+			
+				.item2(class="one-line")
+					.tag 押品价值及变现能力变动情况
+					span(class="item-textarea")
+						mt-field(v-model="item.assitChangeSuit"  class="textArea" type="textarea" rows="3" placeholder="请输入" )
 		.add
 			mt-button(class="add-primary" type="primary" @click="addInfo") + 增加
 		.newly-4-norepeat
@@ -132,6 +137,7 @@ export default {
         thisEstimateValue: "", //我行认定价值
         thisMortAndpleRate: "" //抵质押率
       };
+      console.log(this.info.assitInfoForPledge);
       this.info.assitInfoForPledge.push(item);
     },
     operateDelete(index, id) {
@@ -157,6 +163,17 @@ export default {
     }
     .field-top {
       margin-top: px2rem(10);
+      .one-line {
+        width: 100%;
+        font-size: px2rem(14);
+        .tag {
+          padding: px2rem(15);
+          box-sizing: border-box;
+          color: #090909;
+          width: 100%;
+          border-bottom: px2rem(1) solid rgba(229, 229, 229, 1);
+        }
+      }
     }
     .repeat-operation {
       width: 100%;

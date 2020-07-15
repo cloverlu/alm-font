@@ -17,33 +17,48 @@
 <script>
 import imageUpload from "../components/imageUpload";
 import { definte18 } from "../../../utils/dataMock";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: { imageUpload },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       params: {},
-      definte18: [],
-      type: {}
+      definte18: []
     };
   },
+  computed: {
+    type() {
+      if (this.$route.params.type) {
+        return { bizType: this.$route.params.type };
+      } else {
+        return { bizType: this.userBizType.bizType };
+      }
+    }
+  },
   mounted() {
-    const type = this.$route.params.type;
+    const type = this.type.bizType;
     switch (type) {
       case "m2":
-        this.type = {
-          bizType: "m2"
-        };
         this.definte18 = definte18();
         this.params = this.mVmodel(11);
-        console.log(this.params);
     }
     // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
+
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
   watch: {
     nextFooter(val, oldval) {

@@ -51,10 +51,11 @@ import {
 } from "../../../utils/dataMock.js";
 import fieldOne from "../components/fieldOne";
 import almSelect from "../components/select";
-import { normalMixin } from "../../../utils/mixin";
+import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: { almSelect, fieldOne },
-  mixins: [normalMixin],
+  mixins: [normalMixin, userMixin],
+  props: ["uBizId"],
   // props: {
   //   infoDetail: {
   //     type: Object,
@@ -64,7 +65,7 @@ export default {
   // inject: ["reload"],
   data() {
     return {
-      bizId: this.$route.params.bizId,
+      bizId: this.$route.params.bizId || this.uBizId,
       definite2Field: definite2Field,
       definite2Field2: definite2Field2,
       coordinate: coordinate,
@@ -84,14 +85,24 @@ export default {
       }
     };
   },
+  computed: {},
 
   mounted() {
-    // 上一步下一步需要走的详情接口
-    const flag = this.$route.params.saveFlag;
+    console.log(this.bizId);
+    const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
-    this.mountedTag(flag, name);
+    const type = this.userBizType.bizType;
+    // 上一步下一步需要走的详情接口
+    if (moduleName === "custmer") {
+      const billNo = this.$route.params.billNo;
+      if (this.bizId) {
+        this.userMountedTag(type, billNo, name);
+      }
+    } else {
+      const flag = this.$route.params.saveFlag;
+      this.mountedTag(flag, name);
+    }
   },
-  computed: {},
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
@@ -101,9 +112,6 @@ export default {
           this.$refs.fieldOne.params,
           this.$refs.fieldTwo.params
         );
-        // this.setm1Definite2({ params: this.params });
-        // this.footerRoute("loanCreditFirst", "firstDefinite2");
-        // this.$router.push({ name: "firstDefinite16" });
       }
     }
   },

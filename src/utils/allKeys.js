@@ -449,7 +449,7 @@ const loanlnspection = {
     },
     newly45: {
       bizId: "",
-      assitChangeSuit: "", //押品价值及变现能力变动情况
+      // assitChangeSuit: "", //押品价值及变现能力变动情况
       assitOtherSuit: "", //押品其他情况
       summaryForAssit: "", //押品检查小结
       assitInfoForPledge: [],
