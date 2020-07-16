@@ -24,6 +24,7 @@
                   type="input"
                   class="field-input"
                   placeholder="请输入"
+                  :disabled="true"
                 />
               </span>
             </div>
@@ -192,7 +193,7 @@ export default {
       yesNo: yesNo,
       startDate: new Date(getLastYearYestdy(new Date())),
       endDate: new Date(),
-      pickerValue: "",
+      pickerValue: new Date(),
       addedOverdues: "addedOverdues",
       addedLoans: "addedLoans",
       shrinkLoanScale: "shrinkLoanScale",
@@ -209,18 +210,19 @@ export default {
       params: {
         queryDate: "",
         fiveClass: "", // 当前企业及实际控制人征信情况（注明征信查询分类结果)
-        addedOverdues: 0, // 企业或企业主征信是否有新增逾期记录  客户资信检查
+        addedOverdues: 1, // 企业或企业主征信是否有新增逾期记录  客户资信检查
         addedOverduesMsg: "", // 当前企业及实际控制人征信情况 说明
-        addedLoans: 0, // 企业或企业主是否有他行新增贷款  客户资信检查
+        addedLoans: 1, // 企业或企业主是否有他行新增贷款  客户资信检查
         addedLoansMsg: "", // 企业或企业主是否有他行新增贷款情况 说明
-        shrinkLoanScale: 0, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
+        shrinkLoanScale: 1, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
         shrinkLoanScaleMsg: "", // 企业或企业主是否有他行收缩贷款规模 说明
-        addedGuarantees: 0, // 企业或企业主是否有新增对外担保记录  客户资信检查
+        addedGuarantees: 1, // 企业或企业主是否有新增对外担保记录  客户资信检查
         addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
-        otherSitu: 0, // 企业或企业主是否有其他异常变化  客户资信检查
+        otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: "", // 企业或企业主是否有其他异常变化 说明
         summaryForCheck: ""
-      }
+      },
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -241,7 +243,7 @@ export default {
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = {
+        this.loanBusiness = {
           assetCreditInfo: this.params,
           summaryForCheck: this.params.summaryForCheck
         };
@@ -269,7 +271,7 @@ export default {
     },
     handleConfirm() {
       if (!this.pickerValue) {
-        this.pickerValue = this.startDate;
+        this.pickerValue = this.endDate;
       }
       this.params.queryDate = formatDate(this.pickerValue);
       this.$refs.picker.close();

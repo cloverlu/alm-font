@@ -107,6 +107,7 @@ export default {
     nextFooter(val, oldval) {
       const name = this.$route.name;
       const type = this.userBizType.bizType;
+      const operate = val.tag;
       var params = {};
       var tag = {};
       console.log(name);
@@ -124,7 +125,7 @@ export default {
               bizType: type
             };
           }
-          params = Object.assign({}, this.$refs.mView.params, tag);
+          params = Object.assign({}, this.$refs.mView.loanBusiness, tag);
         } else if (
           name === "userFirstDefinite3" ||
           name === "userRoutineDefinite3" ||
@@ -135,7 +136,7 @@ export default {
           const bizId = {
             bizId: this.bizId
           };
-          params = Object.assign({}, this.$refs.userview.params, bizId);
+          params = Object.assign({}, this.$refs.userview.loanBusiness, bizId);
           // 审批页面的保存走审批接口，只是传的对象不同
           this.userSubmit(params);
           return false;
@@ -143,7 +144,7 @@ export default {
           const bizId = {
             bizId: this.bizId
           };
-          params = Object.assign({}, this.$refs.userview.params, bizId);
+          params = Object.assign({}, this.$refs.userview.loanBusiness, bizId);
           delete params.imageList;
           const loanBusiness2 = Object.assign(
             {},
@@ -157,10 +158,10 @@ export default {
           const pa = {
             bizId: this.bizId
           };
-          params = Object.assign({}, this.$refs.userview.params, pa);
+          params = Object.assign({}, this.$refs.userview.loanBusiness, pa);
           // console.log(params);
         }
-        this.userInfoSave(params, name, type, "nextFooter");
+        this.userInfoSave(params, name, type, operate);
       });
     }
   },

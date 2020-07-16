@@ -149,7 +149,11 @@ export default {
           this.infoSave(loanBusiness, currentName, type, val.tag);
         } else if (currentName === "firstDefinite3") {
           this.$nextTick(() => {
-            loanBusiness = Object.assign({}, this.$refs.rview.params, bizId);
+            loanBusiness = Object.assign(
+              {},
+              this.$refs.rview.loanBusiness,
+              bizId
+            );
             // 审批页面的保存走审批接口，只是传的对象不同
             this.submit(loanBusiness);
           });

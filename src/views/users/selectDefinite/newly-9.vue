@@ -43,6 +43,7 @@
                 type="input"
                 class="field-input"
                 placeholder="请输入"
+                :disabled="true"
               />
             </span>
           </div>
@@ -64,8 +65,6 @@
           ref="picker"
           type="date"
           v-model="pickerValue"
-          :startDate="startDate"
-          :endDate="endDate"
           @confirm="handleConfirm()"
         ></mt-datetime-picker>
       </div>
@@ -91,13 +90,14 @@ export default {
       selectTitle: "检查类型",
       fontColor: "blue",
       repayKind: "repayKind",
-      pickerValue: "",
+      pickerValue: new Date(),
       startDate: new Date(getLastYearYestdy(new Date())),
       endDate: new Date(),
       params: {
         repayDate: "", // 还款日期
         repayAmout: "" // 还款金额
-      }
+      },
+      loanBusiness: {}
     };
   },
 
@@ -116,14 +116,19 @@ export default {
       tag: "nextFooter"
     });
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      this.loanBusiness = this.params;
+    }
+  },
   methods: {
     a() {
       this.$refs.picker.open();
     },
     handleConfirm() {
       if (!this.pickerValue) {
-        this.pickerValue = this.startDate;
+        this.pickerValue = this.endDate;
       }
       this.params.repayDate = formatDate(this.pickerValue);
       this.$refs.picker.close();

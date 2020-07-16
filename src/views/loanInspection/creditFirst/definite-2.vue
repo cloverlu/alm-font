@@ -88,7 +88,6 @@ export default {
   computed: {},
 
   mounted() {
-    console.log(this.bizId);
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
     const type = this.userBizType.bizType;
@@ -117,7 +116,6 @@ export default {
   },
   methods: {
     getSelect(data) {
-      console.log(data);
       this.params.cooperate = data[0].key;
     },
     getSelect2(data) {

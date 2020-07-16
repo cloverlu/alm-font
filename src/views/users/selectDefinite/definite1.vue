@@ -102,7 +102,7 @@ export default {
     nextFooter(val, oldval) {
       const fieldOne = this.$refs.fieldOne.params;
       const fieldTwo = this.$refs.fieldTwo.params;
-      this.params = Object.assign({}, this.params, fieldOne, fieldTwo);
+      this.loanBusiness = Object.assign({}, this.params, fieldOne, fieldTwo);
     }
   },
   methods: {

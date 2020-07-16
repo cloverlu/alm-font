@@ -20,7 +20,7 @@
           <mt-cell
             class="textFiled"
             title="征信报告查询日期"
-            :value="detail.queryDateForPer"
+            :value="detail.queryDateForCom"
           ></mt-cell>
         </div>
       </div>

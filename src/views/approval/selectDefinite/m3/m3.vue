@@ -12,16 +12,13 @@
 					span(class="tag") 授信金额
 					span(class="info") {{detail.newly18.lineAmout}}
 				.item
-					span(class="tag") 授信余额
-					span(class="info") {{detail.newly18.lineBalance}}
+					span(class="tag") 贷款余额
+					span(class="info") {{detail.newly18.loanBalance}}
 				.item
 					span(class="tag") 担保方式
-					span(class="info" v-if="detail.newly18.securityKind === '1'") 信用
-					span(class="info" v-else-if="detail.newly18.securityKind === '2'") 抵押
-					span(class="info" v-else-if="detail.newly18.securityKind === '3'") 质押
-					span(class="info" v-else-if="detail.newly18.securityKind === '4'") 保证
-					span(class="info" v-else-if="detail.newly18.securityKind === '5'") 其它
-				.item(class="input-item" v-if="detail.newly18.securityKind === '5'")
+					span(class="info" ) {{securityKind}}
+				
+				.item(class="input-item" v-if="securityKindTag")
 					mt-field(v-model="detail.newly18.otherSecurityKindMsg" class="textArea other-textArea" type="input"  :disabled="true")
 				.item
 					span(class="tag") 还款方式
@@ -69,7 +66,7 @@
 <script>
 import {
   newly18,
-  securityKinds,
+  securityKindsArr,
   definite1Field,
   definite1FieldSpecial,
   definite1FieldRate,
@@ -119,6 +116,8 @@ export default {
       definite1FieldRate: definite1FieldRate,
       newly18One: newly18One,
       newly18Two: newly18Two,
+      securityKind: "",
+      securityKindsArr: securityKindsArr,
       detail: {
         newly18: {},
         definite13: {},
@@ -130,13 +129,47 @@ export default {
       }
     };
   },
-  computed: {},
+  computed: {
+    securityKindTag() {
+      if (
+        this.params.securityKind &&
+        typeof this.detail.securityKind === "object"
+      ) {
+        const flag = this.detail.securityKind.some(item => item === "5");
+        if (flag) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  },
 
   async mounted() {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
+    this.securityKindsF();
   },
-  methods: {}
+  methods: {
+    securityKindsF() {
+      if (
+        this.params.securityKind &&
+        typeof this.detail.securityKind === "object"
+      ) {
+        var arr = [];
+        this.securityKindsArr.map(item => {
+          this.detail.securityKind.map(item2 => {
+            if (item2 === item.value) {
+              arr.push(item.label);
+            }
+          });
+        });
+        this.securityKind = arr.join(",");
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

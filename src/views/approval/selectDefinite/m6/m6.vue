@@ -27,24 +27,10 @@
             ></mt-cell>
             <div class="item m6-item">
               <span class="tag">担保方式</span>
-              <span class="info" v-if="detail.newly1.securityKind === '1'"
-                >信用</span
-              >
-              <span class="info" v-else-if="detail.newly1.securityKind === '2'"
-                >抵押</span
-              >
-              <span class="info" v-else-if="detail.newly1.securityKind === '3'"
-                >质押</span
-              >
-              <span class="info" v-else-if="detail.newly1.securityKind === '4'"
-                >保证</span
-              >
-              <span class="info" v-else-if="detail.newly1.securityKind === '5'"
-                >其它</span
-              >
+              <span class="info">{{ securityKind }}</span>
             </div>
             <mt-field
-              v-if="detail.newly1.securityKind === '5'"
+              v-if="securityKindTag"
               type="textarea"
               rows="1"
               v-model="detail.newly1.otherSecurityKindMsg"
@@ -110,6 +96,7 @@ import newly3 from "../m6/newly-3";
 import newly45 from "../m6/newly-45";
 import definite16 from "../m6/definite-16";
 import { normalMixin, approvalMixin } from "../../../../utils/mixin";
+import { securityKindsArr } from "../../../../utils/dataMock";
 
 export default {
   components: {
@@ -136,6 +123,8 @@ export default {
     };
     return {
       bizId: this.$route.params.bizId,
+      securityKindsArr: securityKindsArr,
+      securityKind: "",
       detail: {
         newly1: {},
         newly2: {},
@@ -145,12 +134,46 @@ export default {
       }
     };
   },
-  computed: {},
+  computed: {
+    securityKindTag() {
+      if (
+        this.params.securityKind &&
+        typeof this.detail.securityKind === "object"
+      ) {
+        const flag = this.detail.securityKind.some(item => item === "5");
+        if (flag) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  },
   async mounted() {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
+    this.securityKindsF();
   },
-  methods: {},
+  methods: {
+    securityKindsF() {
+      if (
+        this.params.securityKind &&
+        typeof this.detail.securityKind === "object"
+      ) {
+        var arr = [];
+        this.securityKindsArr.map(item => {
+          this.detail.securityKind.map(item2 => {
+            if (item2 === item.value) {
+              arr.push(item.label);
+            }
+          });
+        });
+        this.securityKind = arr.join(",");
+      }
+    }
+  },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     // nextFooter(val, oldval) {

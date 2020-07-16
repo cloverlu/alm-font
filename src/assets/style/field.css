@@ -126,7 +126,7 @@ input:disabled {
   border-top: 0.02667rem solid #e5e5e5;
 }
 
-.definite-field .item {
+.definite-field .item, .definite-field .definite-item {
   width: 100%;
   padding: 0.4rem;
   display: flex;
@@ -137,44 +137,48 @@ input:disabled {
   border-bottom: 0.02667rem solid #e5e5e5;
 }
 
-.definite-field .item.item-textarea {
+.definite-field .item.item-textarea, .definite-field .definite-item.item-textarea {
   border: none;
   padding: 0;
 }
 
-.definite-field .item .tag {
+.definite-field .item .tag, .definite-field .definite-item .tag {
   flex: 0 0 3.73333rem;
   text-align: left;
   color: #090909;
 }
 
-.definite-field .item .tag.big {
+.definite-field .item .tag.big, .definite-field .definite-item .tag.big {
   flex: 0 0 5.06667rem;
 }
 
-.definite-field .item .tag.big-max {
+.definite-field .item .tag.big-max, .definite-field .definite-item .tag.big-max {
   flex: 0 0 7.46667rem;
 }
 
-.definite-field .item .arrow {
+.definite-field .item .arrow, .definite-field .definite-item .arrow {
   font-size: 0.37333rem;
   color: #848484;
   margin-left: 0.08rem;
 }
 
-.definite-field .item .info {
+.definite-field .item .info, .definite-field .definite-item .info {
   flex: 1;
   text-align: right;
   color: #9f9f9f;
 }
 
-.definite-field .item .info .pay-type {
+.definite-field .item .info.sec, .definite-field .definite-item .info.sec {
+  color: #4e78de;
+}
+
+.definite-field .item .info .pay-type, .definite-field .definite-item .info .pay-type {
   width: 100%;
   height: 3.86667rem;
   background-color: #fff;
 }
 
-.definite-field .item .info .pay-type .item {
+.definite-field .item .info .pay-type .item, .definite-field .definite-item .info .pay-type .item {
   width: 100%;
   height: 1.17333rem;
   border-bottom: 0.02667rem solid #e5e5e5;
@@ -184,7 +188,7 @@ input:disabled {
   align-items: center;
 }
 
-.definite-field .item .info .pay-type .item:last-child {
+.definite-field .item .info .pay-type .item:last-child, .definite-field .definite-item .info .pay-type .item:last-child {
   border-bottom: none;
 }
 

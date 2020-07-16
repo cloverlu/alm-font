@@ -45,7 +45,7 @@ input:disabled {
 	width: 100%;
 	background-color: #fff;
 	border-top: px2rem(1) solid rgba(229, 229, 229, 1);
-	.item {
+	.item,.definite-item {
 		width: 100%;
 		// height: px2rem(44);
 		// line-height: px2rem(44);
@@ -80,6 +80,9 @@ input:disabled {
 			flex: 1;
 			text-align: right;
 			color: #9f9f9f;
+			&.sec{
+				color:#4e78de ;
+			}
 			.pay-type {
 				width: 100%;
 				height: px2rem(145);
@@ -235,3 +238,5 @@ input:disabled {
 		}
 	}
 }
+
+

@@ -48,7 +48,8 @@ export default {
       ],
       params: {},
       params8: {},
-      params9: {}
+      params9: {},
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -72,12 +73,12 @@ export default {
       this.dropVisibale = !this.dropVisibale;
     },
     childParams(val) {
-      this.params = {
+      this.loanBusiness = {
         financeInfo: val
       };
     },
     childParams2(val) {
-      this.params = {
+      this.loanBusiness = {
         financeInfo: val
       };
     }

@@ -107,7 +107,8 @@ export default {
         dailyExpenLastBalance: "", // 上次全面检查或调查时余额  水煤气
         dailyExpenChangSitu: "", // 本次检查存货变动情况  水煤气
         proAndOpeAbnormalSuitMsg: "" //
-      }
+      },
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -130,7 +131,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = {
+        this.loanBusiness = {
           financeInfo: this.params
         };
       }

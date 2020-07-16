@@ -19,7 +19,7 @@
           <mt-cell
             class="textFiled"
             title="贷款余额"
-            :value="detail.lineBalance"
+            :value="detail.loanBalance"
           ></mt-cell>
         </div>
       </div>
@@ -160,7 +160,8 @@ export default {
         managerRisk: "", // 管理层风险点
         otherRisk: "", // 其他风险点
         lineAmout: ""
-      }
+      },
+      loanBusiness: {}
     };
   },
   async mounted() {
@@ -178,7 +179,12 @@ export default {
       tag: "nextFooter"
     });
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      this.loanBusiness = this.params;
+    }
+  },
   methods: {}
 };
 </script>

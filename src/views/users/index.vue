@@ -47,6 +47,20 @@ export default {
     next();
   },
   beforeRouteUpdate(to, from, next) {
+    // 当是审批页面跳转到列表后再点击返回再退回到审批页面的Bug
+    if (
+      to.name === "userFirstDefinite3" ||
+      to.name === "userRoutineDefinite3" ||
+      to.name === "userNewlyDefinite3" ||
+      to.name === "userOveralltDefinite3" ||
+      to.name === "userReInsProcessing4" ||
+      to.name === "userFastCreDefinite3"
+    ) {
+      if (from.name === "userIndex") {
+        this.$router.push({ name: "Home" });
+      }
+    }
+
     const meta = to.meta;
     this.title = meta.title;
     this.footerShow = meta.footer;

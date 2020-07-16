@@ -46,7 +46,12 @@
         title="还款方式"
         :value="detail.repayKind"
       ></mt-cell> -->
-      <div class="definite-field">
+      <mt-cell
+        class="textFiled"
+        title="放款日期"
+        :value="detail.loanDate"
+      ></mt-cell>
+      <!-- <div class="definite-field">
         <div class="item">
           <span class="tag big">放款日期</span>
           <span class="info" @click="a">
@@ -66,7 +71,7 @@
         :startDate="startDate"
         :endDate="endDate"
         @confirm="handleConfirm()"
-      ></mt-datetime-picker>
+      ></mt-datetime-picker> -->
 
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
@@ -170,7 +175,7 @@
 </template>
 
 <script>
-import { DatetimePicker } from "mint-ui";
+// import { DatetimePicker } from "mint-ui";
 import { formatDate, getLastYearYestdy } from "@/utils/utils";
 import { normalMixin } from "../../../utils/mixin";
 import {
@@ -181,7 +186,7 @@ import {
 } from "../../../utils/dataMock";
 import almSelect from "../components/select";
 export default {
-  components: { "mt-datetime-picker": DatetimePicker, almSelect },
+  components: { almSelect },
   mixins: [normalMixin],
   data() {
     return {
@@ -274,13 +279,21 @@ export default {
           this.infoSave(loanBusiness, currentName, type, val.tag);
         } else if (currentName === "fastCreditFirstDefinite3") {
           this.$nextTick(() => {
-            loanBusiness = Object.assign({}, this.$refs.m5rview.params, bizId);
+            loanBusiness = Object.assign(
+              {},
+              this.$refs.m5rview.loanBusiness,
+              bizId
+            );
             // 审批页面的保存走审批接口，只是传的对象不同
             this.submit(loanBusiness);
           });
         } else {
           this.$nextTick(() => {
-            loanBusiness = Object.assign({}, this.$refs.m5rview.params, bizId);
+            loanBusiness = Object.assign(
+              {},
+              this.$refs.m5rview.loanBusiness,
+              bizId
+            );
             this.infoSave(loanBusiness, currentName, type, val.tag);
           });
         }

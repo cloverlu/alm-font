@@ -13,13 +13,13 @@
 					span(class="info") 
 						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
-					span(class="tag") 授信余额
-					span(class="info") {{detail.lineBalance}}
-				.item
+					span(class="tag") 贷款余额
+					span(class="info") {{detail.loanBalance}}
+				.item(@click="popupVisible = !popupVisible")
 					span(class="tag") 担保方式
-					almSelect(:selectData="info"  :defaultValue="params.securityKind" :triggerId="securityKindId" :title="selectTitle" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
-					span(class="iconfont iconxiala arrow") 
-				.item(class="input-item" v-if="params.securityKind ==='5' ")
+					span(class="info sec") {{ securityKind }}
+					span(class="iconfont iconxiala arrow")
+				.item(class="input-item" v-if="securityKindTag")
 					mt-field(v-model="params.otherSecurityKindMsg" class="textArea other-textArea" type="input"  placeholder="其他担保方式")
 				.item
 					span(class="tag") 还款方式
@@ -57,6 +57,7 @@
 				span  近期检查发现的其他风险点
 			.newly-18-field(class="small-three")
 				mt-field(v-model="params.otherRisk" class="textArea" type="textarea" rows="3" placeholder="请输入")
+			definiteProp(:popupVisible="popupVisible" @change="changeProp" @checkData="checkData" :info="securityKindsArr" :defaultValue="params.securityKind")
 	
 </template>
 
@@ -73,14 +74,18 @@ import {
 import almSelect from "../../loanInspection/components/select";
 import fieldOne from "../../loanInspection/components/fieldOne";
 import { normalMixin, userMixin } from "../../../utils/mixin";
+import definiteProp from "../../loanInspection/components/prop";
 export default {
-  components: { almSelect, fieldOne },
+  components: { almSelect, fieldOne, definiteProp },
   mixins: [normalMixin, userMixin],
   props: ["detail", "uBizId"],
   data() {
     return {
       bizId: this.uBizId,
       info: securityKindsArr,
+      securityKindsArr: securityKindsArr,
+      securityKind: "",
+      popupVisible: false,
       definite1Field: definite1Field,
       definite1FieldSpecial: definite1FieldSpecial,
       definite1FieldRate: definite1FieldRate,
@@ -91,7 +96,8 @@ export default {
       securityKindId: "securityKind",
       params: {
         lineAmout: "",
-        securityKind: "1",
+        loanBalance: "",
+        securityKind: ["1"],
         otherSecurityKindMsg: "",
         repayKind: "",
         // requireCheck: "", //审批意见中贷后日常检查要求及落实情况
@@ -103,11 +109,30 @@ export default {
         // HoldPensonRisk: "", //实际控制人或法定代表人风险点
         // managerRisk: "", //管理层风险点
         otherRisk: "" //近期检查发现的其他风险点
-      }
+      },
+      loanBusiness: {}
     };
+  },
+  computed: {
+    securityKindTag() {
+      if (
+        this.params.securityKind &&
+        typeof this.params.securityKind === "object"
+      ) {
+        const flag = this.params.securityKind.some(item => item === "5");
+        if (flag) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
   },
 
   async mounted() {
+    this.securityKindsF();
     const type = this.userBizType.bizType;
     const name = this.$route.name;
 
@@ -133,12 +158,35 @@ export default {
         this.$refs.fieldFour.params,
         this.$refs.fieldFive.params
       );
-      this.params = loanBusiness;
+      this.loanBusiness = loanBusiness;
     }
   },
   methods: {
     getSelect(val) {
       this.params.securityKind = val[0].key;
+    },
+    changeProp(val) {
+      this.popupVisible = val;
+    },
+    checkData(val) {
+      this.params.securityKind = val;
+      this.securityKindsF();
+    },
+    securityKindsF() {
+      if (
+        this.params.securityKind &&
+        typeof this.params.securityKind === "object"
+      ) {
+        var arr = [];
+        this.securityKindsArr.map(item => {
+          this.params.securityKind.map(item2 => {
+            if (item2 === item.value) {
+              arr.push(item.label);
+            }
+          });
+        });
+        this.securityKind = arr.join(",");
+      }
     }
   }
 };

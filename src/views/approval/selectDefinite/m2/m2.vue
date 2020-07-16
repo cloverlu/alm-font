@@ -22,7 +22,7 @@
           <mt-cell
             class="textFiled"
             title="贷款余额"
-            :value="detail.definite12.lineBalance"
+            :value="detail.definite12.loanBalance"
           ></mt-cell>
         </div>
       </div>

@@ -17,12 +17,34 @@
               客户每季度查询一次个人征信即可)
             </span>
           </div>
-          <mt-field
+          <div class="definite-field">
+            <div class="item">
+              <span class="tag big">征信报告查询日期</span>
+              <span class="info" @click="a">
+                <input
+                  v-model="params.queryDateForCom"
+                  type="input"
+                  class="field-input"
+                  placeholder="请输入"
+                  :disabled="true"
+                />
+              </span>
+            </div>
+          </div>
+          <mt-datetime-picker
+            ref="picker"
+            type="date"
+            v-model="pickerValue"
+            :startDate="startDate"
+            :endDate="endDate"
+            @confirm="handleConfirm()"
+          ></mt-datetime-picker>
+          <!-- <mt-field
             class="textFiled"
             label="征信报告查询日期"
             placeholder="请输入"
             v-model="params.queryDateForPer"
-          ></mt-field>
+          ></mt-field> -->
         </div>
       </div>
 
@@ -284,7 +306,7 @@
         <div class="coNo3">3.法人保证人征信：</div>
         <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
         <div class="item1">
-          <span class="tag">征信记录是否有异常变化</span>
+          <span class="tag">征信记录是否有异常变化 </span>
           <almSelect
             :selectData="yesNo"
             :defaultValue="params.existCreditChage3"
@@ -325,17 +347,22 @@
 import { yesNo } from "../../../utils/dataMock";
 import almSelect from "../components/select";
 import { normalMixin, userMixin } from "../../../utils/mixin";
+import { DatetimePicker } from "mint-ui";
+import { formatDate, getLastYearYestdy } from "@/utils/utils";
 export default {
   components: {
-    almSelect
+    almSelect,
+    "mt-datetime-picker": DatetimePicker
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
   data() {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
-      queryDate: "2020-06-03",
+      pickerValue: new Date(),
       yesNo: yesNo,
+      startDate: new Date(getLastYearYestdy(new Date())),
+      endDate: new Date(),
       popupVisible: false,
       payType: 1,
       selectTitle: "检查配合程度",
@@ -346,7 +373,7 @@ export default {
       existCreditChage5: "existCreditChage5",
       existCreditChage3: "existCreditChage3",
       params: {
-        queryDateForPer: "",
+        queryDateForCom: "",
         creditClassification: "", // 征信分类
         creditClassificationJur: "",
         // 企业实际控制人部分
@@ -390,7 +417,8 @@ export default {
         addedOverdues: false,
         pickerVisible: false
       },
-      freezeParams: {}
+      freezeParams: {},
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -412,7 +440,7 @@ export default {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = {
+        this.loanBusiness = {
           creditInfo: this.params,
           msg: this.params.msg
         };
@@ -423,10 +451,10 @@ export default {
     getSelect1(data) {
       this.params.existBadRecordCon = data[0].key;
     },
-    getSelect2(data) {
+    getSelect3(data) {
       this.params.existBadRecordJur = data[0].key;
     },
-    getSelect3(data) {
+    getSelect2(data) {
       this.params.existCreditChage4 = data[0].key;
     },
     getSelect4(data) {
@@ -434,6 +462,16 @@ export default {
     },
     getSelect5(data) {
       this.params.existCreditChage3 = data[0].key;
+    },
+    a() {
+      this.$refs.picker.open();
+    },
+    handleConfirm() {
+      if (!this.pickerValue) {
+        this.pickerValue = this.endDate;
+      }
+      this.params.queryDateForCom = formatDate(this.pickerValue);
+      this.$refs.picker.close();
     }
   }
 };

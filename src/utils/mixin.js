@@ -254,20 +254,10 @@ export const normalMixin = {
           }
         } else if (name === "repaymentInspectionDefinite7") {
           if (this.params.stageData) {
-            var arr = [];
             var a = "";
-            this.params.stageData.forEach(item => {
-              //时间转换格式
-              var expectRepayDate = new Date(item.expectRepayDate);
-              item.expectRepayDate =
-                expectRepayDate.getFullYear() +
-                "-" +
-                (expectRepayDate.getMonth() + 1) +
-                "-" +
-                expectRepayDate.getDate();
-
-              // checkbox显示
-              switch (item.checkStage) {
+            if (this.params.stageData && this.params.stageData[0]) {
+              const type = this.params.stageData[0].checkStage;
+              switch (type) {
                 case "1":
                   a = "一";
                   break;
@@ -278,9 +268,8 @@ export const normalMixin = {
                   a = "三";
                   break;
               }
-              arr.push(a);
-              this.result = arr;
-            });
+              this.result = a;
+            }
           }
         }
         console.log(this.forBizDetail(name));
@@ -659,11 +648,10 @@ export const userMixin = {
             }
           } else if (name === "userReInsDefinite7") {
             if (params.stageData) {
-              var arr = [];
               var a = "";
-              params.stageData.forEach(item => {
-                // checkbox显示
-                switch (item.checkStage) {
+              if (params.stageData && params.stageData[0]) {
+                const type = params.stageData[0].checkStage;
+                switch (type) {
                   case "1":
                     a = "一";
                     break;
@@ -674,9 +662,8 @@ export const userMixin = {
                     a = "三";
                     break;
                 }
-                arr.push(a);
-                this.result = arr;
-              });
+                this.result = a;
+              }
             }
           }
           this.params = params;

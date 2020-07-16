@@ -26,8 +26,9 @@ export default {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       definte16: [],
-      params: {}
-      // type: ""
+      params: {},
+      loanBusiness: {}
+      // type: "",
     };
   },
   computed: {
@@ -75,7 +76,7 @@ export default {
           const a = `pic_${i + 1}s`;
           arrs[a] = this.$refs[`definte16${i}`][0].fileList[a];
         }
-        this.params = Object.assign({}, this.type, arrs);
+        this.loanBusiness = Object.assign({}, this.type, arrs);
       }
     }
   },

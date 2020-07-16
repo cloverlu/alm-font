@@ -44,7 +44,8 @@ export default {
       params: {
         assitInfoForPledge: [],
         assitInfoForGuarantee: []
-      }
+      },
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -65,10 +66,10 @@ export default {
 
   methods: {
     upperParams4(val) {
-      this.params = Object.assign({}, this.params, val);
+      this.loanBusiness = Object.assign({}, this.params, val);
     },
     upperParams5(val) {
-      this.params = Object.assign({}, this.params, val);
+      this.loanBusiness = Object.assign({}, this.params, val);
     }
   }
 };
