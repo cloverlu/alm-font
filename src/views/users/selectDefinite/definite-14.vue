@@ -36,7 +36,12 @@
         title="还款方式"
         :value="detail.repayKind"
       ></mt-cell> -->
-      <div class="definite-field">
+      <mt-cell
+        class="textFiled"
+        title="放款日期"
+        :value="detail.loanDate"
+      ></mt-cell>
+      <!-- <div class="definite-field">
         <div class="item">
           <span class="tag big">放款日期</span>
           <span class="info" @click="a">
@@ -56,7 +61,7 @@
         :startDate="startDate"
         :endDate="endDate"
         @confirm="handleConfirm()"
-      ></mt-datetime-picker>
+      ></mt-datetime-picker> -->
 
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
@@ -159,7 +164,7 @@
 </template>
 
 <script>
-import { DatetimePicker } from "mint-ui";
+// import { DatetimePicker } from "mint-ui";
 import { formatDate, getLastYearYestdy } from "@/utils/utils";
 import { normalMixin, userMixin } from "../../../utils/mixin";
 import {
@@ -170,7 +175,7 @@ import {
 } from "../../../utils/dataMock";
 import almSelect from "../../loanInspection/components/select";
 export default {
-  components: { "mt-datetime-picker": DatetimePicker, almSelect },
+  components: { almSelect },
   mixins: [normalMixin, userMixin],
   props: ["detail", "uBizId"],
   data() {
@@ -205,7 +210,8 @@ export default {
         cooperate: "1", //对我行检查的态度
         cooperateMsg: "", // 其他
         msg: ""
-      }
+      },
+      loanBusiness: {}
     };
   },
   async mounted() {
@@ -223,7 +229,12 @@ export default {
       tag: "nextFooter"
     });
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      this.loanBusiness = this.params;
+    }
+  },
   methods: {
     getSelect1: function(data) {
       this.params.payKind = data[0].key;

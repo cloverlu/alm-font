@@ -44,7 +44,10 @@ export default {
         });
       } else if (id === 1) {
         this.$router.push({
-          name: "approvalIndex"
+          name: "approvalIndex",
+          params: {
+            moduleName: "approve"
+          }
         });
       }
     },

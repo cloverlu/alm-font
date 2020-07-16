@@ -28,22 +28,13 @@
               placeholder="请输入"
               v-model="params.lineBalance"
             ></mt-field>
-            <div class="item">
+            <div class="item" @click="popupVisible = !popupVisible">
               <span class="tag">担保方式</span>
-              <almSelect
-                :selectData="securityKindsArr"
-                :defaultValue="params.securityKind"
-                :triggerId="securityKind"
-                :title="selectTitle"
-                :fontColor="fontColor"
-                @getSelectValue="getSelect1"
-                class="info"
-              ></almSelect>
-
+              <span class="info sec">{{ securityKind }}</span>
               <span class="iconfont iconxiala arrow"></span>
             </div>
             <mt-field
-              v-if="params.securityKind === '5'"
+              v-if="securityKindTag"
               type="textarea"
               rows="1"
               v-model="params.otherSecurityKindMsg"
@@ -107,6 +98,13 @@
         </div>
       </div>
     </div>
+    <definiteProp
+      :popupVisible="popupVisible"
+      @change="changeProp"
+      @checkData="checkData"
+      :info="securityKindsArr"
+      :defaultValue="params.securityKind"
+    ></definiteProp>
   </div>
 </template>
 
@@ -114,8 +112,9 @@
 import { coordinate, securityKindsArr, yesNo } from "../../../utils/dataMock";
 import almSelect from "../../loanInspection/components/select";
 import { normalMixin, userMixin } from "../../../utils/mixin";
+import definiteProp from "../../loanInspection/components/prop";
 export default {
-  components: { almSelect },
+  components: { almSelect, definiteProp },
   mixins: [normalMixin, userMixin],
   props: ["detail", "uBizId"],
   data() {
@@ -123,14 +122,14 @@ export default {
       bizId: this.uBizId,
       coordinate: coordinate,
       securityKindsArr: securityKindsArr,
-      yesNo: yesNo,
       popupVisible: false,
+      securityKind: "",
+      yesNo: yesNo,
       payType: 1,
       selectTitle: "担保方式",
       selectTitle1: "检查配合程度",
       selectTitle2: "额度年检",
       selectTitle3: "押品重估",
-      securityKind: "securityKind",
       revalOfColl: "revalOfColl",
       cooperate: "cooperate",
       yearlyInspection: "yearlyInspection",
@@ -146,10 +145,29 @@ export default {
         cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
-      }
+      },
+      loanBusiness: {}
     };
   },
+  computed: {
+    securityKindTag() {
+      if (
+        this.params.securityKind &&
+        typeof this.params.securityKind === "object"
+      ) {
+        const flag = this.params.securityKind.some(item => item === "5");
+        if (flag) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  },
   async mounted() {
+    this.securityKindsF();
     const type = this.userBizType.bizType;
     const name = this.$route.name;
 
@@ -164,7 +182,12 @@ export default {
       tag: "nextFooter"
     });
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      this.loanBusiness = this.params;
+    }
+  },
   methods: {
     getSelect1(data) {
       this.params.securityKind = data[0].key;
@@ -177,6 +200,29 @@ export default {
     },
     getSelect4(data) {
       this.params.revalOfColl = data[0].key;
+    },
+    changeProp(val) {
+      this.popupVisible = val;
+    },
+    checkData(val) {
+      this.params.securityKind = val;
+      this.securityKindsF();
+    },
+    securityKindsF() {
+      if (
+        this.params.securityKind &&
+        typeof this.params.securityKind === "object"
+      ) {
+        var arr = [];
+        this.securityKindsArr.map(item => {
+          this.params.securityKind.map(item2 => {
+            if (item2 === item.value) {
+              arr.push(item.label);
+            }
+          });
+        });
+        this.securityKind = arr.join(",");
+      }
     }
   }
 };
@@ -256,6 +302,9 @@ export default {
           flex: 1;
           text-align: right;
           color: #9f9f9f;
+          &.sec {
+            color: #4e78de;
+          }
           .pay-type {
             width: 100%;
             height: px2rem(145);

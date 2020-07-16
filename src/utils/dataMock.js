@@ -360,24 +360,24 @@ const payKindsArr = [
 // 担保方式
 const securityKindsArr = [
   {
-    key: "1",
-    value: "信用"
+    value: "1",
+    label: "信用"
   },
   {
-    key: "2",
-    value: "抵押"
+    value: "2",
+    label: "抵押"
   },
   {
-    key: "3",
-    value: "质押"
+    value: "3",
+    label: "质押"
   },
   {
-    key: "4",
-    value: "保证"
+    value: "4",
+    label: "保证"
   },
   {
-    key: "5",
-    value: "其他"
+    value: "5",
+    label: "其他"
   }
 ];
 

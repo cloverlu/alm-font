@@ -41,7 +41,7 @@
 			.item
 				span(class="tag big") 上次抵质押物评估或重估日期
 				span(class="info" @click="a") 
-					input(v-model="params.collEstimateDate" type="input" class="field-input" placeholder="请输入")
+					input(v-model="params.collEstimateDate" :disabled="true" type="input" class="field-input" placeholder="请输入")
 				
 			.item
 				span(class="tag big") 上次抵质押物评估或重估金额
@@ -51,8 +51,6 @@
 			ref="picker"
 			type="date"
 			v-model="pickerValue" 
-			:startDate="startDate" 
-			:endDate="endDate"
 			@confirm="handleConfirm()")
 		.war-tag
 			span 根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。
@@ -73,9 +71,9 @@ export default {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       params: {
-        industrycChangSiut: 0,
-        planExpandSitu: 0,
-        hiddenTroubleSitu: 0,
+        industrycChangSiut: 1,
+        planExpandSitu: 1,
+        hiddenTroubleSitu: 1,
         industrycChangSiutMsg: "",
         planExpandSituMsg: "",
         hiddenTroubleSituMsg: "",
@@ -88,12 +86,13 @@ export default {
       triggerId1: "IndustrycChangSiut",
       triggerId2: "planExpandSitu",
       triggerId3: "hiddenTroubleSitu",
-      pickerValue: "",
+      pickerValue: new Date(),
       selectTitle1: "企业所在行业是否发生重大不利变化",
       selectTitle2: "企业是否有与主业无关的扩张计划",
       selectTitle3: "生产经营是否存在安全隐患",
       fontColor: "blue",
-      yesNo: yesNo
+      yesNo: yesNo,
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -111,7 +110,14 @@ export default {
       this.mountedTag(flag, name);
     }
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.loanBusiness = this.params;
+      }
+    }
+  },
   methods: {
     a() {
       this.$refs.picker.open();

@@ -114,6 +114,11 @@ const getters = {
     Object.keys(obj2).forEach(key => {
       if (forBizDetail) {
         obj2[key] = forBizDetail[key];
+        if (key === "cooperate") {
+          if (!forBizDetail[key]) {
+            obj2[key] = "1";
+          }
+        }
       }
     });
     if (name === "definite10" || name === "overalltDefinite10") {
@@ -234,6 +239,11 @@ const getters = {
         Object.keys(obj[key]).forEach(k => {
           if (approveData) {
             obj[key][k] = approveData[k];
+            if (k === "cooperate") {
+              if (!approveData[k]) {
+                obj[key][k] = "1";
+              }
+            }
           }
         });
         if (key === "definite10" || key === "definite11") {
@@ -363,6 +373,11 @@ const getters = {
     Object.keys(obj2).forEach(key => {
       if (forBizDetail) {
         obj2[key] = forBizDetail[key];
+        if (key === "cooperate") {
+          if (!forBizDetail[key]) {
+            obj2[key] = "1";
+          }
+        }
       }
     });
     if (name === "userRoutineDefinite10" || name === "userOveralltDefinite10") {

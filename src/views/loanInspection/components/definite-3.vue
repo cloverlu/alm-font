@@ -132,7 +132,8 @@ export default {
         riskMsg: "", // 预警信号说明
         suggest: "", // 建议
         empSign: "" // 签名
-      }
+      },
+      loanBusiness: {}
     };
   },
   computed: {
@@ -180,7 +181,7 @@ export default {
           };
         }
 
-        this.params = Object.assign({}, this.params, pa);
+        this.loanBusiness = Object.assign({}, this.params, pa);
       }
     }
   },

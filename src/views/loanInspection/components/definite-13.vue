@@ -72,7 +72,8 @@ export default {
         cooperate: "1",
         addrChangedMsg: "",
         staff: ""
-      }
+      },
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -90,7 +91,14 @@ export default {
       this.mountedTag(flag, name);
     }
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.loanBusiness = this.params;
+      }
+    }
+  },
   methods: {
     getSelect(data) {
       this.params.cooperate = data[0].key;

@@ -13,7 +13,7 @@
       </div>
       <van-collapse v-model="activeNames">
         <van-collapse-item title="检查阶段选择" name="1">
-          <van-checkbox-group v-model="result">
+          <van-radio-group v-model="result">
             <van-cell-group>
               <van-cell
                 v-for="(item, index) in list"
@@ -23,11 +23,11 @@
                 @click="toggle(index)"
               >
                 <template #right-icon>
-                  <van-checkbox :name="item" ref="checkboxes" />
+                  <van-radio :name="item" ref="checkboxes" />
                 </template>
               </van-cell>
             </van-cell-group>
-          </van-checkbox-group>
+          </van-radio-group>
         </van-collapse-item>
       </van-collapse>
       <div class="definite7-wrapper">
@@ -83,6 +83,7 @@
                   type="input"
                   class="field-input"
                   placeholder="请输入"
+                  :disabled="true"
                 />
               </span>
             </div>
@@ -90,8 +91,6 @@
           <mt-datetime-picker
             :ref="'picker' + item.checkStage"
             type="date"
-            :startDate="startDate"
-            :endDate="endDate"
             v-model="timePicker[i].timeP"
             @confirm="handleConfirm(item.checkStage, i)"
           ></mt-datetime-picker>
@@ -122,8 +121,8 @@ import { normalMixin, userMixin } from "../../../utils/mixin";
 import {
   Collapse,
   CollapseItem,
-  Checkbox,
-  CheckboxGroup,
+  Radio,
+  RadioGroup,
   Cell,
   CellGroup
 } from "vant";
@@ -132,8 +131,8 @@ export default {
   components: {
     "van-cell": Cell,
     "van-cell-group": CellGroup,
-    "van-checkbox": Checkbox,
-    "van-checkbox-group": CheckboxGroup,
+    "van-radio": Radio,
+    "van-radio-group": RadioGroup,
     "mt-field": Field,
     "van-collapse": Collapse,
     "van-collapse-item": CollapseItem,
@@ -157,19 +156,19 @@ export default {
       activeNames: ["1"],
       timePicker: [
         {
-          timeP: ""
+          timeP: new Date()
         },
         {
-          timeP: ""
+          timeP: new Date()
         },
         {
-          timeP: ""
+          timeP: new Date()
         }
       ],
       startDate: new Date(getLastYearYestdy(new Date())),
       endDate: new Date(),
       list: ["一", "二", "三"],
-      result: [],
+      result: "",
       first: true,
       second: false,
       three: false,
@@ -186,7 +185,8 @@ export default {
           //   practicableMsg: "" // 还款资金落实情况说明
           // }
         ]
-      }
+      },
+      loanBusiness: {}
     };
   },
   mounted() {
@@ -204,7 +204,14 @@ export default {
       this.mountedTag(flag, name);
     }
   },
-  watch: {},
+  watch: {
+    // 监听是否点击了下一步，用vuex里的nextFooter属性
+    nextFooter(val, oldval) {
+      if (val !== oldval) {
+        this.loanBusiness = this.params;
+      }
+    }
+  },
   methods: {
     payIntention(index) {
       return `payIntention1${index}`;
@@ -222,10 +229,11 @@ export default {
     },
     // 选定时间确定
     handleConfirm(checkStage, i) {
+      console.log(this.timePicker[i].timeP);
       this.params.stageData.forEach(item => {
         if (item.checkStage === checkStage) {
           if (!this.timePicker[i].timeP) {
-            item.expectRepayDate = formatDate(this.startDate);
+            item.expectRepayDate = formatDate(this.endDate);
           } else {
             item.expectRepayDate = formatDate(this.timePicker[i].timeP);
           }
@@ -235,42 +243,55 @@ export default {
     },
 
     toggle(index) {
-      console.log(this.result);
       var checkStage = "";
-      const checked = this.$refs.checkboxes[index].checked;
       if (index == 0) {
         checkStage = "1";
+        this.result = "一";
       } else if (index == 1) {
         checkStage = "2";
+        this.result = "二";
       } else if (index == 2) {
         checkStage = "3";
+        this.result = "三";
       }
-      if (checked === false) {
-        const item = {
-          checkStage: checkStage, // 检查阶段
-          payIntention: "1", // 还款意愿
-          practicableCheckAddr: "", // 检查地点
-          practicableStaff: "", // 接待人员
-          amoutSource: "", // 还款资金来源
-          expectRepayDate: "", // 预计还款/付息时间
-          practicableMsg: "" // 还款资金落实情况说明
-        };
-        // this.params.stageData.forEach((item, index) => {
-        //   if (item.checkStage === checkStage) {
-        //     this.params.stageData[index] =
-        //   }
-        // });
-        this.params.stageData.push(item);
-        // 无论用户怎么选择阶段的顺序，都是按一二三阶段的顺序来添加
-        this.params.stageData.sort(this.sortId);
-      } else {
-        this.params.stageData.forEach((item, index) => {
-          if (item.checkStage === checkStage) {
-            this.params.stageData.splice(index, 1);
-            return false;
-          }
-        });
-      }
+      const item = {
+        checkStage: checkStage, // 检查阶段
+        payIntention: "1", // 还款意愿
+        practicableCheckAddr: "", // 检查地点
+        practicableStaff: "", // 接待人员
+        amoutSource: "", // 还款资金来源
+        expectRepayDate: "", // 预计还款/付息时间
+        practicableMsg: "" // 还款资金落实情况说明
+      };
+      this.params.stageData = [];
+      this.params.stageData.push(item);
+
+      // if (checked === false) {
+      //   const item = {
+      //     checkStage: checkStage, // 检查阶段
+      //     payIntention: "1", // 还款意愿
+      //     practicableCheckAddr: "", // 检查地点
+      //     practicableStaff: "", // 接待人员
+      //     amoutSource: "", // 还款资金来源
+      //     expectRepayDate: "", // 预计还款/付息时间
+      //     practicableMsg: "" // 还款资金落实情况说明
+      //   };
+      //   // this.params.stageData.forEach((item, index) => {
+      //   //   if (item.checkStage === checkStage) {
+      //   //     this.params.stageData[index] =
+      //   //   }
+      //   // });
+      //   this.params.stageData.push(item);
+      //   // 无论用户怎么选择阶段的顺序，都是按一二三阶段的顺序来添加
+      //   this.params.stageData.sort(this.sortId);
+      // } else {
+      //   this.params.stageData.forEach((item, index) => {
+      //     if (item.checkStage === checkStage) {
+      //       this.params.stageData.splice(index, 1);
+      //       return false;
+      //     }
+      //   });
+      // }
     },
     change() {
       this.$refs.checkboxes[0].checked = true;
@@ -486,7 +507,7 @@ textarea {
         color: #969799;
         font-size: px2rem(14);
         background-color: #fff;
-        .van-checkbox-group {
+        .van-radio-group {
           // width: px2rem(342);
           .van-cell--clickable {
             // width: px2rem(342);

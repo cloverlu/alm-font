@@ -49,6 +49,26 @@ export default {
     next();
   },
   beforeRouteUpdate(to, from, next) {
+    // 当是审批页面跳转到列表后再点击返回再退回到审批页面的Bug
+    if (to.params.moduleName === "loanInspection") {
+      if (
+        to.name === "firstDefinite3" ||
+        to.name === "routineDefinite3" ||
+        to.name === "overalltDefinite3" ||
+        to.name === "processing4" ||
+        to.name === "fastCreditFirstDefinite3" ||
+        to.name === "newlyDefinite3"
+      ) {
+        if (from.name === "loanInspectionIndex") {
+          this.$router.push({ name: "Home" });
+        }
+      }
+    } else if (to.params.moduleName === "approve") {
+      if (to.name === "approve" && from.name === "approvalIndex") {
+        this.$router.push({ name: "Home" });
+      }
+    }
+
     const meta = to.meta;
     const status = to.params.status;
 

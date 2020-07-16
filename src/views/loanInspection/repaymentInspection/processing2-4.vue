@@ -156,10 +156,11 @@ export default {
         riskStage: "",
         riskMsg: "",
         suggest: "",
-        existRisk: 0,
+        existRisk: 1,
         empSign: "" // 签名
       },
-      params2: {}
+      params2: {},
+      loanBusiness: {}
     };
   },
   computed: {
@@ -199,7 +200,7 @@ export default {
           orgName: this.$route.params.orgName,
           opType: "0"
         };
-        this.params = Object.assign({}, this.params, pa);
+        this.loanBusiness = Object.assign({}, this.params, pa);
 
         //保存照片
         var arrs = {};
@@ -208,9 +209,6 @@ export default {
           arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
         }
         this.params2 = Object.assign({}, this.type, arrs);
-
-        console.log(this.params);
-        console.log(this.params2);
       }
     }
   },

@@ -23,12 +23,17 @@
             title="客户名称"
             :value="detail.custName"
           ></mt-cell>
-          <mt-field
+          <mt-cell
+            class="textFiled"
+            title="贷款余额"
+            :value="detail.loanBalance"
+          ></mt-cell>
+          <!-- <mt-field
             class="textFiled"
             label="授信金额"
             placeholder="请输入"
             v-model="params.lineAmout"
-          ></mt-field>
+          ></mt-field> -->
 
           <mt-cell
             class="textFiled"
@@ -239,7 +244,7 @@ export default {
             this.$nextTick(() => {
               loanBusiness = Object.assign(
                 {},
-                this.$refs.m2rview.params,
+                this.$refs.m2rview.loanBusiness,
                 bizId
               );
               // 审批页面的保存走审批接口，只是传的对象不同
@@ -249,7 +254,7 @@ export default {
             this.$nextTick(() => {
               loanBusiness = Object.assign(
                 {},
-                this.$refs.m2rview.params,
+                this.$refs.m2rview.loanBusiness,
                 bizId
               );
               // console.log(loanBusiness);
@@ -318,20 +323,18 @@ export default {
 .fillInInformation {
   .title {
     width: px2rem(60);
-    height: px2rem(23);
     font-size: px2rem(14);
-    // font-family: Source Han Sans CN;
-    // font-weight: bold;
-    line-height: px2rem(20);
     color: rgba(9, 9, 9, 1);
     opacity: 1;
-    margin: px2rem(8) px2rem(17) px2rem(-8);
+    padding: px2rem(5) px2rem(15);
+    box-sizing: border-box;
+    width: 100%;
   }
 
   .formTitle {
     background-color: #f7f7f7;
     width: 100%;
-    height: px2rem(44);
+    height: px2rem(30);
     position: relative;
     .lightBlue {
       position: absolute;
@@ -391,7 +394,7 @@ export default {
   }
   .textFiled {
     .mint-cell-wrapper {
-      padding: 0 px2rem(16);
+      padding: 0 px2rem(16) !important;
     }
     .mint-cell-title {
       width: px2rem(252) !important;

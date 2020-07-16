@@ -163,6 +163,7 @@ const loanlnspection = {
   m3: {
     newly18: {
       lineAmout: "",
+      loanBalance: "",
       securityKind: "1",
       otherSecurityKindMsg: "",
       repayKind: "",
@@ -215,7 +216,7 @@ const loanlnspection = {
     },
     definite10: {
       creditInfo: {
-        queryDateForPer: "",
+        queryDateForCom: "",
         creditClassification: "",
         creditClassificationJur: "",
         // 企业实际控制人部分
