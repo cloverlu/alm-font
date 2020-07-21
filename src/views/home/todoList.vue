@@ -30,6 +30,16 @@ export default {
       list: []
     };
   },
+  created() {
+    console.log();
+    var queryVal = this.GetQueryValue("app");
+    if (queryVal == "youjie") {
+      console.log("成功");
+      this.getUserInfo();
+    } else {
+      console.log("失败");
+    }
+  },
   mounted() {
     this.getList();
   },
@@ -65,6 +75,23 @@ export default {
           });
         }
       });
+    },
+    getUserInfo() {
+      let xui = requireModuleJs("xui");
+      let obj = xui.getUserInfo();
+      let token = xui.getDeviceTokens();
+      alert(obj);
+      alert(token);
+    },
+    GetQueryValue(queryName) {
+      var query = decodeURI(window.location.search.substring(1));
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == queryName) {
+          return pair[1];
+        }
+      }
     }
   }
 };
