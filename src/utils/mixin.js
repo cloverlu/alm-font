@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { SaveEditModelBusiness, submitApprove } from "../api/loanlnspection";
-import { unique, formatDate } from "../utils/utils";
+import { unique } from "../utils/utils";
 
 //普遍用到的状态
 export const normalMixin = {
@@ -11,7 +11,8 @@ export const normalMixin = {
       "scrollToPo",
       "forBizDetail",
       "saveFlag",
-      "queryDetail"
+      "queryDetail",
+      "tranSactName1"
     ])
   },
   methods: {
@@ -21,7 +22,8 @@ export const normalMixin = {
       "setScrollToPo",
       "setforDizDetail",
       "setSaveFlag",
-      "setqueryDetail"
+      "setqueryDetail",
+      "setTranSactName1"
     ]),
     // 判断下一步路由该去的页面
     footerRoute(currentType, currentName, params) {
@@ -162,21 +164,22 @@ export const normalMixin = {
           iconClass: "iconfont icongou-01",
           duration: 1000
         });
-
         // 保存saveFlag
         const pa = {
           bizId: this.$route.params.bizId,
           currentName: currentName,
-          flag: true
+          flag: true,
+          uniqueTag: this.$route.params.bizId + currentName
         };
         const saveFlags = this.saveFlag;
         saveFlags.push(pa);
-        this.setSaveFlag(unique(saveFlags, "currentName"));
+        this.setSaveFlag(unique(saveFlags, "uniqueTag"));
 
         if (tag === "nextFooter") {
+          // this.footerRoute(type, currentName, loanBusiness);
           setTimeout(() => {
             this.footerRoute(type, currentName, loanBusiness);
-          }, 1200);
+          }, 1100);
         }
       } else {
         this.$Toast({
@@ -187,7 +190,7 @@ export const normalMixin = {
       }
     },
     // 提交审批页面的保存（opType: "0"）和提交（opType: "1"）
-    async submit(params) {
+    async submit(params, currentName) {
       var message = "";
       if (params.opType === "0") {
         message = "保存";
@@ -198,6 +201,25 @@ export const normalMixin = {
       await submitApprove(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
+          if (params.opType === "0") {
+            const pa = {
+              bizId: this.$route.params.bizId,
+              currentName: currentName,
+              flag: true,
+              uniqueTag: this.$route.params.bizId + currentName
+            };
+            const saveFlags = this.saveFlag;
+            saveFlags.push(pa);
+            this.setSaveFlag(unique(saveFlags, "uniqueTag"));
+          } else if (params.opType === "1") {
+            this.saveFlag.map((item, index) => {
+              if (item.bizId === params.bizId) {
+                this.saveFlag.splice(index, 1);
+              }
+            });
+          }
+          // 保存saveFlag
+
           this.$Toast({
             message: message + "成功！",
             iconClass: "iconfont icongou-01",
@@ -235,9 +257,9 @@ export const normalMixin = {
       });
     },
     // mounted中需要判断是否走详情接口的内容
-    mountedTag(flag, name) {
-      if (flag === 1 || flag === "1") {
-        this.setforDizDetail(this);
+    async mountedTag(flag, name, bizId) {
+      if (this.tranSactName1.tranSactName1 === true) {
+        await this.setforDizDetail(this);
         this.params = this.forBizDetail(name);
         if (name === "processing4") {
           this.params2 = {
@@ -273,34 +295,60 @@ export const normalMixin = {
           }
         }
         console.log(this.forBizDetail(name));
-        //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-        this.setScrollToPo({
-          x: 0,
-          y: 0,
-          ratenum: Date.now(),
-          tag: "nextFooter"
-        });
-        return false;
       } else {
-        this.saveFlag.forEach(item => {
-          if (item.currentName === name && item.flag === true) {
-            this.setforDizDetail(this);
+        this.saveFlag.forEach(async item => {
+          if (
+            item.currentName === name &&
+            item.bizId === bizId &&
+            item.flag === true
+          ) {
+            await this.setforDizDetail(this);
             this.params = this.forBizDetail(name);
             if (name === "processing4") {
-              this.params2 = this.forBizDetail(name);
+              this.params2 = {
+                pic_1s: this.forBizDetail(name).imageList
+              };
+            } else if (name === "overalltDefinite89") {
+              this.value = this.params.financeClassification;
+              if (this.params.financeClassification === "1") {
+                this.params8 = this.params;
+                this.params9 = {};
+              } else if (this.params.financeClassification === "2") {
+                this.params9 = this.params;
+                this.params8 = {};
+              }
+            } else if (name === "repaymentInspectionDefinite7") {
+              if (this.params.stageData) {
+                var a = "";
+                if (this.params.stageData && this.params.stageData[0]) {
+                  const type = this.params.stageData[0].checkStage;
+                  switch (type) {
+                    case "1":
+                      a = "一";
+                      break;
+                    case "2":
+                      a = "二";
+                      break;
+                    case "3":
+                      a = "三";
+                      break;
+                  }
+                  this.result = a;
+                }
+              }
             }
             console.log(this.forBizDetail(name));
-            //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-            this.setScrollToPo({
-              x: 0,
-              y: 0,
-              ratenum: Date.now(),
-              tag: "nextFooter"
-            });
-            return false;
           }
         });
       }
+
+      //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+      this.setScrollToPo({
+        x: 0,
+        y: 0,
+        ratenum: Date.now(),
+        tag: "nextFooter"
+      });
     },
     // 图像模块匹配
     mVmodel(num) {
@@ -392,65 +440,6 @@ export const normalMixin = {
           });
         });
     }
-  }
-};
-
-// 贷后检查
-//m1 loanInsM1
-export const loanInsM1 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
-  }
-};
-//m2 loanInsM2
-export const loanInsM2 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
-  }
-};
-
-//m3 loanInsM3
-export const loanInsM3 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
-  }
-};
-
-//m4 loanInsM4
-export const loanInsM4 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
-  }
-};
-
-//m5 loanInsM5
-export const loanInsM5 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
-  }
-};
-//m6 loanInsM6
-export const loanInsM6 = {
-  computed: {
-    ...mapGetters([])
-  },
-  methods: {
-    ...mapActions([])
   }
 };
 
@@ -598,6 +587,7 @@ export const userMixin = {
           duration: 1000
         });
 
+        //setUserBizId
         const pa = {
           bizId: res.data.bizId,
           billNo: this.$route.params.billNo,
@@ -668,20 +658,18 @@ export const userMixin = {
           }
           this.params = params;
           console.log(this.params);
-
-          //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-          this.setScrollToPo({
-            x: 0,
-            y: 0,
-            ratenum: Date.now(),
-            tag: "nextFooter"
-          });
-          return false;
         }
+      });
+      //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+      this.setScrollToPo({
+        x: 0,
+        y: 0,
+        ratenum: Date.now(),
+        tag: "nextFooter"
       });
     },
     // 提交审批页面的保存（opType: "0"）和提交（opType: "1"）
-    async userSubmit(params) {
+    async userSubmit(params, type, currentName) {
       var message = "";
       if (params.opType === "0") {
         message = "保存";
@@ -692,6 +680,21 @@ export const userMixin = {
       await submitApprove(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
+
+          //setUserBizId
+          const pa = {
+            bizId: res.data.bizId,
+            billNo: this.$route.params.billNo,
+            bizType: type,
+            currentName: currentName,
+            allTag: type + this.$route.params.billNo,
+            uniqueTag: type + this.$route.params.billNo + currentName
+          };
+
+          const userBizId = this.userBizId;
+          userBizId.push(pa);
+          this.setUserBizId(unique(userBizId, "uniqueTag"));
+
           this.$Toast({
             message: message + "成功！",
             iconClass: "iconfont icongou-01",

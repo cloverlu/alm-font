@@ -30,7 +30,7 @@
         <mt-cell
           class="textFiled"
           title="贷款期限"
-          :value="detail.newly9.loanLength"
+          :value="`${detail.newly9.loanLength}月`"
         ></mt-cell>
         <mt-field
           class="textFiled"
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .coInformation {
   width: 100%;
   height: 100%;
@@ -229,7 +229,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 textarea {
   resize: none;
 }

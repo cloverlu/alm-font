@@ -1,9 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 const Home = () => import("@/views/home/index.vue");
-// import Home from "@/views/home/index.vue";
 const loanInspectionIndex = () => import("@/views/loanInspection/index");
-// import loanInspectionIndex from "@/views/loanInspection/index";
 const definite16 = () =>
   import("@/views/loanInspection/components/definite-16");
 const definite18 = () =>
@@ -14,11 +12,6 @@ const definite13 = () =>
   import("@/views/loanInspection/components/definite-13");
 const definite11 = () =>
   import("@/views/loanInspection/components/definite-11");
-// import definite16 from "@/views/loanInspection/components/definite-16";
-// import definite18 from "@/views/loanInspection/components/definite-18";
-// import creditRoutineIndex from "@/views/loanInspection/creditRoutine/definite-12";
-// import definite13 from "@/views/loanInspection/components/definite-13";
-// import definite11 from "@/views/loanInspection/components/definite-11";
 const definite10 = () =>
   import("@/views/loanInspection/components/definite-10");
 const definite5 = () =>
@@ -26,21 +19,11 @@ const definite5 = () =>
 const definite7 = () => import("@/views/loanInspection/components/definite-7");
 const definite3 = () => import("@/views/loanInspection/components/definite-3");
 const definite4 = () => import("@/views/loanInspection/components/definite-4");
-// import definite10 from "@/views/loanInspection/components/definite-10";
-// import definite5 from "@/views/loanInspection/creditRoutine/definite-5";
-// import definite7 from "@/views/loanInspection/components/definite-7";
-// import definite3 from "@/views/loanInspection/components/definite-3";
-// import definite4 from "@/views/loanInspection/components/definite-4";
 const definite1 = () => import("@/views/loanInspection/creditFirst/definite-1");
 const definite2 = () => import("@/views/loanInspection/creditFirst/definite-2");
 const newly1 = () => import("@/views/loanInspection/dailyInspection/newly-1");
 const newly2 = () => import("@/views/loanInspection/dailyInspection/newly-2");
 const newly3 = () => import("@/views/loanInspection/dailyInspection/newly-3");
-// import definite1 from "@/views/loanInspection/creditFirst/definite-1";
-// import definite2 from "@/views/loanInspection/creditFirst/definite-2";
-// import newly1 from "@/views/loanInspection/dailyInspection/newly-1";
-// import newly2 from "@/views/loanInspection/dailyInspection/newly-2";
-// import newly3 from "@/views/loanInspection/dailyInspection/newly-3";
 const newly45 = () => import("@/views/loanInspection/dailyInspection/newly-45");
 const creditOverallIndex = () =>
   import("@/views/loanInspection/creditOverall/newly18");
@@ -50,11 +33,6 @@ const definite6 = () =>
   import("@/views/loanInspection/creditOverall/definite6");
 const definite17 = () =>
   import("@/views/loanInspection/creditOverall/definite-17");
-// import newly45 from "@/views/loanInspection/dailyInspection/newly-45";
-// import creditOverallIndex from "@/views/loanInspection/creditOverall/newly18";
-// import definite89 from "@/views/loanInspection/creditOverall/credit89";
-// import definite6 from "@/views/loanInspection/creditOverall/definite6";
-// import definite17 from "@/views/loanInspection/creditOverall/definite-17";
 const repaymentInspectionIndex = () =>
   import("@/views/loanInspection/repaymentInspection/newly-9");
 const processing4 = () =>
@@ -63,17 +41,12 @@ const definite14 = () =>
   import("@/views/loanInspection/fastCreditFirst/definite-14");
 const userIndex = () => import("@/views/users/index.vue");
 const definiteUserAll = () => import("@/views/users/definiteUserall.vue");
-// import repaymentInspectionIndex from "@/views/loanInspection/repaymentInspection/newly-9";
-// import processing4 from "@/views/loanInspection/repaymentInspection/processing2-4";
-// import definite14 from "@/views/loanInspection/fastCreditFirst/definite-14";
-// import userIndex from "@/views/users/index.vue";
-// import definiteUserAll from "@/views/users/definiteUserall.vue";
 const checklist1 = () => import("@/views/approval/checklist1.vue");
 const approve = () => import("@/views/approval/approve.vue");
-// import checklist1 from "@/views/approval/checklist1.vue";
-// import approve from "@/views/approval/approve.vue";
 
-Vue.use(VueRouter);
+if (!window.VueRouter) {
+  Vue.use(VueRouter);
+}
 
 const routes = [
   {

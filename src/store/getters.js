@@ -389,7 +389,8 @@ const getters = {
     }
 
     return obj2;
-  }
+  },
+  tranSactName1: state => state.footerNext.tranSactName1
 };
 
 export default getters;

@@ -14,7 +14,9 @@
 					v-for="(item,index) in info" :key="item.id" 
 					@click="toggle(item.id,index)"
 					:ref="'item'+index"
-				) {{item.title}}
+				)
+					span {{item.title}}
+					span(class="xuant" v-if="item.tag") ({{item.tag}})
 			.caiwu-tabs-content(v-for="(item2,index2) in info" :key="item2.id" v-if="toggleNum === item2.id")
 				.content-type1(v-if="type === 1")
 					.definite-field
@@ -179,9 +181,10 @@ export default {
       // const index = 0;
       const item = "item" + index;
       if (this.$refs[item][0]) {
-        const marginLeft = realPx(this.$refs[item][0].offsetLeft);
-        const width = realPx(this.$refs[item][0].offsetWidth);
-        const tx = px2rem(marginLeft - 10 + (width - 20) / 2) + "rem";
+        const defaultLeft = this.$refs.item0[0].offsetLeft;
+        const marginLeft = this.$refs[item][0].offsetLeft;
+        const width = this.$refs[item][0].offsetWidth;
+        const tx = marginLeft - defaultLeft + (width - 20) / 2 + "px";
         this.itemClass = `translateX(${tx})`;
       }
     },
@@ -193,7 +196,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .caiwu {
   width: 100%;
   margin-bottom: px2rem(8);
@@ -218,6 +221,9 @@ export default {
       display: flex;
       padding: 0 px2rem(10);
       box-sizing: border-box;
+      .xuant {
+        color: #4e78de;
+      }
       .caiwu-tabs-bar {
         position: absolute;
         bottom: px2rem(5);
@@ -234,6 +240,7 @@ export default {
       }
       .tabs-title-item {
         padding: 0 px2rem(5);
+        display: block;
         // width: px2rem(70);
         // text-align: center;
         box-sizing: border-box;

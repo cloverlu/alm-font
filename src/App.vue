@@ -11,6 +11,17 @@
 
 <script>
 export default {
+  computed: {
+    judgeDeviceType() {
+      var ua = window.navigator.userAgent.toLocaleLowerCase();
+      var isIOS = /iphone|ipad|ipod/.test(ua);
+      var isAndroid = /android/.test(ua);
+      return {
+        isIOS: isIOS,
+        isAndroid: isAndroid
+      };
+    }
+  },
   created() {
     // 字体根据屏幕大小变化
     var documentElement = document.documentElement;
@@ -48,6 +59,93 @@ export default {
     window.addEventListener("load", () => {
       sessionStorage.clear();
     });
+
+    // 兼容Android，ios 键盘弹起时，把搜索的数据顶上去影响布局和搜索功能
+    var h = document.body.scrollHeight; // 用onresize事件监控窗口或框架被调整大小，先把一开始的高度记录下来
+    window.onresize = function() {
+      // 如果当前窗口小于一开始记录的窗口高度，那就让当前窗口等于一开始窗口的高度
+      if (document.body.scrollHeight < h) {
+        document.body.style.height = h;
+      }
+    };
+  },
+  mounted() {
+    // console.log("app");
+    // console.log(document.documentElement.scrollTop);
+    // console.log(this.judgeDeviceType.isIOS);
+    // this.judgeDeviceType.isIOS &&
+    //   document.addEventListener(
+    //     "focus",
+    //     event => {
+    //       if (["input", "textarea"].includes(event.target.localName)) {
+    //         const a = document.documentElement.scrollTop;
+    //         if (a > 0) {
+    //           setTimeout(() => {
+    //             const h = document.getElementsByClassName(
+    //               "loanIns-index-header"
+    //             )[0];
+    //             h.style.top = a + "px";
+    //             console.log(a);
+    //             console.log(h);
+    //             console.log("33");
+    //           }, 1000);
+    //         }
+    //       }
+    //     },
+    //     true
+    //   );
+  },
+  methods: {
+    listenKeybord($input) {
+      // var $input = document.getElementsByTagName("input");
+      if (this.judgeDeviceType.isIOS) {
+        // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
+        console.log("sss");
+
+        $input.addEventListener(
+          "focus",
+          function() {
+            console.log("IOS 键盘弹起啦！");
+
+            // IOS 键盘弹起后操作
+          },
+          false
+        );
+
+        // IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
+
+        $input.addEventListener("blur", () => {
+          console.log("IOS 键盘收起啦！");
+
+          // IOS 键盘收起后操作
+        });
+      } else if (this.judgeDeviceType.isAndroid) {
+        var originHeight =
+          document.documentElement.clientHeight || document.body.clientHeight;
+
+        window.addEventListener(
+          "resize",
+          function() {
+            var resizeHeight =
+              document.documentElement.clientHeight ||
+              document.body.clientHeight;
+
+            if (originHeight < resizeHeight) {
+              console.log("Android 键盘收起啦！");
+
+              // Android 键盘收起后操作
+            } else {
+              console.log("Android 键盘弹起啦！");
+
+              // Android 键盘弹起后操作
+            }
+
+            originHeight = resizeHeight;
+          },
+          false
+        );
+      }
+    }
   }
 };
 // document.addEventListener("DOMContentLoaded", () => {

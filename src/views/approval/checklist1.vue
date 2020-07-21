@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
+// @import "../../assets/style/global.scss";
 .checklist-1-wrapper {
   width: 100%;
   height: 100%;

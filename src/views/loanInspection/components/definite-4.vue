@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .definite4 {
   position: relative;
   width: 100%;

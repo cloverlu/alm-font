@@ -30,7 +30,7 @@
       <mt-cell
         class="textFiled"
         title="贷款期限"
-        :value="detail.definite14.loanLength"
+        :value="`${detail.definite14.loanLength}月`"
       ></mt-cell>
       <mt-cell
         class="textFiled"
@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .definite14 {
   width: 100%;
   height: 100%;
@@ -274,7 +274,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 textarea {
   resize: none;
 }

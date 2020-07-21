@@ -212,7 +212,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .companyInformation {
   width: 100%;
   box-sizing: border-box;
@@ -330,7 +330,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .definte12-wrapper {
   width: 100%;
   height: 100%;

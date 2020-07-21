@@ -253,6 +253,7 @@ input:disabled {
   text-align: right;
   color: #9F9F9F;
   font-size: 0.37333rem;
+  cursor: pointer;
 }
 
 .field-input:focus {

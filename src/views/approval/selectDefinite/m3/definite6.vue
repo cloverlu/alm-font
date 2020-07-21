@@ -14,20 +14,20 @@
 		.definite-field
 			.item
 				span(class="tag big-max") 企业所在行业是否发生重大不利变化
-				span(class="info" v-if="detail.industrycChangSiut === 0") 否
-				span(class="info" v-else-if="detail.industrycChangSiut === 1") 是
+				//- span(class="info" v-if="detail.industrycChangSiut === 0") 否
+				//- span(class="info" v-else-if="detail.industrycChangSiut === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.industrycChangSiutMsg" :disabled="true" class="textArea" type="textarea" rows="3" )
 			.item
 				span(class="tag big-max") 企业是否有与主业无关的扩张计划
-				span(class="info" v-if="detail.planExpandSitu === 0") 否
-				span(class="info" v-else-if="detail.planExpandSitu === 1") 是
+				//- span(class="info" v-if="detail.planExpandSitu === 0") 否
+				//- span(class="info" v-else-if="detail.planExpandSitu === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.planExpandSituMsg" :disabled="true" class="textArea" type="textarea" rows="3" )
 			.item
 				span(class="tag big-max") 生产经营是否存在安全隐患
-				span(class="info" v-if="detail.hiddenTroubleSitu === 0") 否
-				span(class="info" v-else-if="detail.hiddenTroubleSitu === 1") 是
+				//- span(class="info" v-if="detail.hiddenTroubleSitu === 0") 否
+				//- span(class="info" v-else-if="detail.hiddenTroubleSitu === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.hiddenTroubleSituMsg" :disabled="true"  class="textArea" type="textarea" rows="3")
 			.item
@@ -45,7 +45,7 @@
 				span(class="tag big") 上次抵质押物评估或重估金额
 				span(class="info") {{detail.collEstimateValue}}
 		.war-tag
-			span 根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。
+			span {{detail.collEstimateMsg}}
 
 </template>
 
@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .definite-6-wrapper {
   width: 100%;
   height: 100%;

@@ -123,7 +123,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   methods: {},
@@ -141,7 +141,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .coInformation {
   .title {
     // width: px2rem(60);
@@ -260,7 +260,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 textarea {
   resize: none;
 }

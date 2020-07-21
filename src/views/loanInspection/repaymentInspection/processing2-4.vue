@@ -24,12 +24,25 @@
         ></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <mt-field
+      <div class="item1">
+        <span class="tag1">发生阶段</span>
+        <almSelect
+          :selectData="happenPats"
+          :defaultValue="params.riskStage"
+          :triggerId="riskStage"
+          :title="riskStageTitle"
+          :fontColor="fontColor"
+          @getSelectValue="getSelect2"
+          class="info"
+        ></almSelect>
+        <span class="iconfont iconxiala arrow"></span>
+      </div>
+      <!-- <mt-field
         class="textFiled"
         label="发生阶段"
         placeholder="请输入"
         v-model="params.riskStage"
-      ></mt-field>
+      ></mt-field> -->
       <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
       <mt-field
         type="textarea"
@@ -126,7 +139,12 @@
 </template>
 
 <script>
-import { DetailsOfIOU, yesNo, processing4 } from "../../../utils/dataMock";
+import {
+  DetailsOfIOU,
+  yesNo,
+  processing4,
+  happenPats
+} from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field, Cell, Button, Popup } from "mint-ui";
 import almSelect from "../components/select";
@@ -149,11 +167,14 @@ export default {
       popupVisible: false,
       payType: 1,
       selectTitle: "是否存在风险预警信号",
+      riskStageTitle: "发生阶段",
       fontColor: "blue",
+      riskStage: "riskStage",
       yesNo: yesNo,
+      happenPats: happenPats,
       existSignal: "existSignal",
       params: {
-        riskStage: "",
+        riskStage: "1",
         riskMsg: "",
         suggest: "",
         existRisk: 1,
@@ -186,7 +207,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   watch: {
@@ -216,6 +237,9 @@ export default {
   methods: {
     getSelect: function(data) {
       this.params.existRisk = data[0].key;
+    },
+    getSelect2(data) {
+      this.params.riskStage = data[0].key;
     },
     goSign: function() {
       this.params.empSign = "";
@@ -327,6 +351,8 @@ export default {
     // 提交审批
     async submitApprove() {
       const moduleName = this.$route.params.moduleName;
+      const currentName = this.$route.name;
+      const type = this.type.bizType;
       this.$Indicator.open();
       var pa;
       if (moduleName === "custmer") {
@@ -336,7 +362,7 @@ export default {
           opType: "1"
         };
         const params = Object.assign({}, pa, this.params);
-        await this.userSubmit(params);
+        await this.userSubmit(params, type, currentName);
       } else {
         pa = {
           bizId: this.bizId,
@@ -345,7 +371,7 @@ export default {
           opType: "1"
         };
         const params = Object.assign({}, pa, this.params);
-        await this.submit(params);
+        await this.submit(params, currentName);
       }
     }
   }
@@ -353,7 +379,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .processing4 {
   width: 100%;
   height: 100%;
@@ -588,7 +614,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 textarea {
   resize: none;
 }
