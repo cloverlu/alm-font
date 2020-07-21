@@ -26,7 +26,7 @@
       </div>
 
       <div class="enterpriseCredit">
-        <div class="title">1.企业实际控制人及其配偶（若有）征信：</div>
+        <div class="title">1.企业实际控制人及其配偶（若有）wwww征信：</div>
         <mt-cell
           class="textFiled"
           title="征信分类"
@@ -45,22 +45,22 @@
         </div>
         <mt-cell
           class="textFiled"
-          title="未结清贷款笔数"
+          title="未结清贷款笔数（笔）"
           :value="detail.unPayOffLoanNumCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未结清贷款金额"
+          title="未结清贷款金额（万元）"
           :value="detail.unPayOffAmoutCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="涉及金融机构"
+          title="涉及金融机构（家）"
           :value="detail.finInstitutionNumCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未结清贷款结余"
+          title="未结清贷款结余（万元）"
           :value="detail.sumBalanceCon"
         ></mt-cell>
         <!--  -->
@@ -68,12 +68,12 @@
         <!--  -->
         <mt-cell
           class="textFiled"
-          title="未销户贷记卡账户"
+          title="未销户贷记卡账户（个）"
           :value="detail.debitCardNumCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未销户贷记卡担保金额"
+          title="授信总金额（万元）"
           :value="detail.debitCardLineAmoutCon"
         ></mt-cell>
 
@@ -81,17 +81,17 @@
         <!--  -->
         <mt-cell
           class="textFiled"
-          title="对外担保笔数"
+          title="对外担保笔数（笔）"
           :value="detail.guaranteeNumCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="对外担保金额"
+          title="对外担保金额（万元）"
           :value="detail.guaranteeAmoutCon"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="对外担保结余"
+          title="对外担保结余（万元）"
           :value="detail.guaranteeBalanceCon"
         ></mt-cell>
 
@@ -151,22 +151,22 @@
         </div>
         <mt-cell
           class="textFiled"
-          title="未结清贷款笔数"
+          title="未结清贷款笔数（笔）"
           :value="detail.unPayOffLoanNumJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未结清贷款金额"
+          title="未结清贷款金额（万元）"
           :value="detail.unPayOffAmoutJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="涉及金融机构"
+          title="涉及金融机构（家）"
           :value="detail.finInstitutionNumJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未结清贷款结余"
+          title="未结清贷款结余（万元）"
           :value="detail.sumBalanceJur"
         ></mt-cell>
 
@@ -174,30 +174,30 @@
         <!--  -->
         <mt-cell
           class="textFiled"
-          title="未销户贷记卡账户"
+          title="未销户贷记卡账户（个）"
           :value="detail.debitCardNumJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="未销户贷记卡担保金额"
-          :value="detail.debitCardLineAmoutJur"
+          title="授信总金额（万元）"
+          :value="detail.debitCardLineAmout"
         ></mt-cell>
 
         <div class="nothing"></div>
         <!--  -->
         <mt-cell
           class="textFiled"
-          title="对外担保笔数"
+          title="对外担保笔数（笔）"
           :value="detail.guaranteeNumJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="对外担保金额"
+          title="对外担保金额（万元）"
           :value="detail.guaranteeAmoutJur"
         ></mt-cell>
         <mt-cell
           class="textFiled"
-          title="对外担保结余"
+          title="对外担保结余（万元）"
           :value="detail.guaranteeBalanceJur"
         ></mt-cell>
 
@@ -236,14 +236,12 @@
           :disabled="true"
         ></mt-field>
         <!-- 3.法人保证人征信： -->
-        <div class="coNo3">3.法人保证人征信：</div>
+        <div class="coNo3">3.企业其他保证人征信：</div>
         <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
-          <span class="info" v-if="detail.existCreditChage3 === 1">是</span>
-          <span class="info" v-else-if="detail.existCreditChage3 === 0"
-            >否</span
-          >
+          <span class="info" v-if="detail.existCreditChager6 === 1">是</span>
+          <span class="info" v-else-if="detail.creditChageMsg6 === 0">否</span>
         </div>
         <mt-field
           type="textarea"
@@ -296,7 +294,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 // .coInformation {
 .title {
   // width: px2rem(60);
@@ -610,7 +608,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 textarea {
   resize: none;
 }
@@ -625,7 +623,7 @@ textarea {
       padding: 0 px2rem(16);
     }
     .mint-cell-title {
-      width: px2rem(150) !important;
+      width: px2rem(180) !important;
       font-size: px2rem(14);
     }
     .mint-cell-value {

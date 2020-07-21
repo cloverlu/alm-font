@@ -7,7 +7,7 @@ import apiIntercept from "@/utils/apiIntercept";
 import { Field, Cell, Indicator, Toast, MessageBox } from "mint-ui";
 
 import "@/assets/font/font.scss";
-import "@/assets/style/global.scss";
+// import "@/assets/style/global.scss";
 
 import "./assets/iconfont/iconfont.css";
 

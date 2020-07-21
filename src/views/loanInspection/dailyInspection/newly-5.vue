@@ -8,7 +8,7 @@
 		.wrapper
 			.newly-5-repeat(v-for="(item,index) in info.assitInfoForGuarantee" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
 				.repeat-operation(v-if="index !== 0")
-					.repeat-operation-title 新增 {{item.id}}
+					.repeat-operation-title 新增 
 					.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
 				.definite-field
 					.item
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .newly5-wrapper {
   width: 100%;
   height: 100%;
@@ -134,8 +134,4 @@ export default {
     margin-top: px2rem(20);
   }
 }
-</style>
-
-<style lang="scss">
-@import "../../../assets/style/global.scss";
 </style>

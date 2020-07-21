@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .processing25 {
   width: 100%;
   height: 100%;
@@ -318,7 +318,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 
 .processing25 {
   width: 100%;

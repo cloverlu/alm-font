@@ -191,7 +191,13 @@ export default {
     },
     // 上传之前
     async beforeRead(file) {
-      // console.log(file, "beforeRead");
+      // this.$Indicator.open();
+      // console.log(this.fileList[this.item.vModel]);
+      // const a = this.fileList[this.item.vModel].length;
+      this.fileList[this.item.vModel].push({
+        status: "uploading",
+        message: "上传中"
+      });
       return new Promise((resolve, reject) => {
         // let ishas = this.fileList[this.item.vModel].some(function(cur, i, arr) {
         //   return cur.file.name === file.name;
@@ -205,6 +211,9 @@ export default {
         //   this.imgPreview(file);
         //   resolve();
         // }
+
+        console.log(file, "beforeRead");
+        console.log(this.fileList, "fileList");
         this.imgPreview(file);
         resolve();
       });
@@ -217,34 +226,34 @@ export default {
     },
     async afterRead(file) {
       //上传完成
-      // console.log(this.item.vModel, "id");
-      // console.log(file, "afterRead");
-      // console.log(this.fileList[this.item.vModel]);
-      file.status = "uploading";
-      file.message = "上传中...";
+      // console.log(file, "afterRead-file");
+      // console.log(this.fileList, "afterRead-this.fileList");
 
       //上传图片
       let params = new FormData();
       params.append("file", file.file);
       params.append("bizId", this.$route.params.bizId);
 
+      var newFileList;
+
       const imageUploadRes = await imageUpload(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           file.status = "done";
           file.message = "上传成功";
+          this.$Indicator.close();
 
-          const newFileList = this.fileList[this.item.vModel];
+          newFileList = this.fileList[this.item.vModel];
 
           if (newFileList.length > 0) {
             const index = newFileList.length;
             newFileList.splice(index, 1);
           }
-          newFileList.push({
-            url: res.data.picUrl
-          });
+
+          newFileList[newFileList.length - 1].url = res.data.picUrl;
+          newFileList[newFileList.length - 1].status = "done";
         } else {
-          file.status = "failed";
-          file.message = "上传失败";
+          newFileList[newFileList.length - 1].message = "上传失败";
+          newFileList[newFileList.length - 1].status = "failed";
         }
         return this.fileList[this.item.vModel];
       });
@@ -352,7 +361,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .image-upload-wrapper {
   width: 100%;
   padding: 0 px2rem(16);
@@ -378,7 +387,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .image-upload-wrapper {
   &.upload-none {
     .van-uploader__upload {

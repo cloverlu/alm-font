@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .newly4 {
   width: 100%;
   height: 100%;

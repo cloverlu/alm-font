@@ -13,7 +13,7 @@
 				span(class="iconfont iconshaixuan" v-if="operateTag === 1")
 				span(v-else-if="operateTag === 2" @click="saveInfo") 保存
 				span(@click="topFooterNext" v-else-if="(operateTag === 3) && nextVisible") 下一步
-		scroll(:top="scrollTop" ref="scrollWrapper" )
+		scroll(:top="scrollTop" ref="scrollWrapper" class="scrollWrapper")
 			.loanIns-index-content
 				.content(:class="footerShow ? 'footershow' : ''")
 					loadInsList(v-if="hasChildRouter") 
@@ -145,13 +145,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
+// @import "../../assets/style/global.scss";
 .loanIns-index {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #f7f7f7;
+  position: relative;
   .loanIns-index-header {
     width: 100%;
     height: px2rem(44);
@@ -162,6 +163,8 @@ export default {
     box-sizing: border-box;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.16);
     background-color: #fff;
+    position: absolute;
+    z-index: 1000;
     .arrow-back {
       color: #000000;
       font-size: px2rem(17);
@@ -180,26 +183,30 @@ export default {
       text-align: right;
     }
   }
-  .loanIns-index-content {
-    flex: 1;
-    background-color: #f7f7f7;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .content {
-      width: 100%;
-      // min-height: 100%;
+  .scrollWrapper {
+    position: absolute;
+    top: px2rem(44);
+    .loanIns-index-content {
       flex: 1;
-      box-sizing: border-box;
-      // &.footershow {
-      //   // padding-bottom: px2rem(38);
-      // }
-    }
-    .footer {
-      width: 100%;
-      height: px2rem(38);
-      z-index: 100;
-      // margin-top: px2rem(-38);
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      .content {
+        width: 100%;
+        // min-height: 100%;
+        flex: 1;
+        box-sizing: border-box;
+        // &.footershow {
+        //   // padding-bottom: px2rem(38);
+        // }
+      }
+      .footer {
+        width: 100%;
+        height: px2rem(38);
+        z-index: 100;
+        // margin-top: px2rem(-38);
+      }
     }
   }
 }

@@ -600,6 +600,7 @@ const caiwuOne = [
   {
     id: 1,
     title: "应收票据",
+    tag: "",
     currentBalance: "colDebtBalance", //当前余额
     lastBalance: "colDebtLastBalance", //应收票据上期检查（或调查）时点余额
     Chang30Msg: "colDebtChang30Msg" // 应收票据变动超过30%，原因
@@ -607,6 +608,7 @@ const caiwuOne = [
   {
     id: 2,
     title: "存货",
+    tag: "",
     currentBalance: "stockChangSitu", //存货上次全面检查或调查时余额
     lastBalance: "stockLastBalance", //存货本次检查存货变动情况
     Chang30Msg: "stockChang30Msg" // 存货变动超过30%，原因
@@ -614,6 +616,7 @@ const caiwuOne = [
   {
     id: 3,
     title: "私人借款",
+    tag: "选填",
     currentBalance: "loanForPsonBalance", //私人借款当前余额
     lastBalance: "loanForPsonLastBalance", //私人借款上期检查（或调查）时点余额
     Chang30Msg: "loanForPsonChang30Msg" // 私人借款变动超过30%，原因
@@ -621,6 +624,7 @@ const caiwuOne = [
   {
     id: 4,
     title: "应付票据",
+    tag: "",
     currentBalance: "payDebtBalance", //应付票据当前余额
     lastBalance: "payDebtLastBalance", //应付票据上期检查（或调查）时点余额
     Chang30Msg: "payDebtChang30Msg" // 应付票据变动超过30%，原因
@@ -631,20 +635,23 @@ const caiwuTwo = [
   {
     id: 1,
     title: "应收账款",
+    tag: "",
     currentBalance: "colCapitalBalance", //应收账款当前余额
     lastBalance: "colCapitalLastBalance", //应收账款上期检查（或调查）时点余额
     Chang30Msg: "colCapitalChang30Msg" // 应收账款变动超过30%，原因
   },
-  {
-    id: 2,
-    title: "银行借款",
-    currentBalance: "loanForBankBalance", //银行借款当前余额
-    lastBalance: "loanForBankLastBalance", //银行借款上期检查（或调查）时点余额
-    Chang30Msg: "loanForBankChang30Msg" // 银行借款变动超过30%，原因
-  },
+  // {
+  //   id: 2,
+  //   title: "银行借款",
+  //   tag: "",
+  //   currentBalance: "loanForBankBalance", //银行借款当前余额
+  //   lastBalance: "loanForBankLastBalance", //银行借款上期检查（或调查）时点余额
+  //   Chang30Msg: "loanForBankChang30Msg" // 银行借款变动超过30%，原因
+  // },
   {
     id: 3,
     title: "应付账款",
+    tag: "",
     currentBalance: "payCapitalBalance", //应收账款当前余额
     lastBalance: "payCapitalLastBalance", //应收账款上期检查（或调查）时点余额
     Chang30Msg: "payCapitalChang30Msg" // 应收账款变动超过30%，原因}
@@ -655,24 +662,28 @@ const caiwuThree = [
   {
     id: 1,
     title: "营业收入",
+    tag: "",
     Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
     Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "日常消耗",
+    tag: "",
     Inc3MSitu: "dailyExpen3MSitu", //近三个月的情况
     Chang30Msg: "dailyExpenChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "人工成本",
+    tag: "选填",
     Inc3MSitu: "emplCost3M", //近三个月的情况
     Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "现金流",
+    tag: "",
     Inc3MSitu: "cash3M", //近三个月的情况
     Chang30Msg: "cashChang30Msg" // 应收账款变动超过30%，原因
   }
@@ -682,24 +693,28 @@ const caiwuFour = [
   {
     id: 1,
     title: "原材料成本",
+    tag: "选填",
     Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
     Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "财务费用",
+    tag: "选填",
     Inc3MSitu: "financeCost3M", //近三个月的情况
     Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "纳税数额",
+    tag: "",
     Inc3MSitu: "payTaxAmout3M", //近三个月的情况
     Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "利润",
+    tag: "",
     Inc3MSitu: "profit3M", //近三个月的情况
     Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
   }
@@ -709,24 +724,28 @@ const caiwuSeven = [
   {
     id: 1,
     title: "营业收入",
+    tag: "",
     Inc3MSitu: "busInc3MSitu", //营业收入近三个月的情况
     Chang30Msg: "busIncChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "员工成本",
+    tag: "选填",
     Inc3MSitu: "emplCost3M", //近三个月的情况
     Chang30Msg: "emplCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "现金流",
+    tag: "",
     Inc3MSitu: "cash3M", //近三个月的情况
     Chang30Msg: "cashChang30Msg" // 变动超过30%，原因
   },
   {
     id: 4,
     title: "利润",
+    tag: "",
     Inc3MSitu: "profit3M", //近三个月的情况
     Chang30Msg: "profitChang30Msg" // 应收账款变动超过30%，原因
   }
@@ -736,18 +755,21 @@ const caiwuEight = [
   {
     id: 1,
     title: "营业成本",
+    tag: "选填",
     Inc3MSitu: "materialCost3M", //营业收入近三个月的情况
     Chang30Msg: "materialCostChang30Msg" // 营业收入剔除季节性因素后变动超30%，原因
   },
   {
     id: 2,
     title: "财务费用",
+    tag: "选填",
     Inc3MSitu: "financeCost3M", //近三个月的情况
     Chang30Msg: "financeCostChang30Msg" // 变动超过30%，原因
   },
   {
     id: 3,
     title: "纳税数额",
+    tag: "",
     Inc3MSitu: "payTaxAmout3M", //近三个月的情况
     Chang30Msg: "payTaxAmoutChang30Msg" // 变动超过30%，原因
   }
@@ -840,6 +862,25 @@ const definite16Normal = {
 const userInfo = {
   emplName: "金林"
 };
+const userInfo2 = {
+  emplName: "金林"
+};
+
+// 发生阶段
+const happenPats = [
+  {
+    key: "1",
+    value: "第一阶段"
+  },
+  {
+    key: "2",
+    value: "第二阶段"
+  },
+  {
+    key: "3",
+    value: "第三阶段"
+  }
+];
 
 export {
   todoListTitle,
@@ -883,5 +924,7 @@ export {
   definite16Normal,
   agreeOrNot,
   nextPositionHandlersArr,
-  userInfo
+  userInfo,
+  userInfo2,
+  happenPats
 };

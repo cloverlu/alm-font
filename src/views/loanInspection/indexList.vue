@@ -81,7 +81,19 @@ export default {
       const currPost = item.currPost;
       const orgName = item.orgName;
       var name = "";
+      var tranSactName1 = "";
+      if (item.tranSactName1) {
+        tranSactName1 = true;
+      } else {
+        tranSactName1 = false;
+      }
       if (moduleName === "loanInspectionIndex") {
+        // 判断当前列表是否是被回退的流程单子，如果是则下面的每一页都要走详情接口
+        this.setTranSactName1({
+          tranSactName1: tranSactName1,
+          tag: Date.now()
+        });
+
         if (status === "inReview") {
           this.$router.push({
             name: "checklist2",
@@ -139,7 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
+// @import "../../assets/style/global.scss";
 .loanIns-list {
   width: 100%;
   height: 100%;

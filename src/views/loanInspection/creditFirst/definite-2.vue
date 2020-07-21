@@ -22,7 +22,7 @@
 			.item
 				span(class="tag") 接待人员
 				span(class="info")
-					input(v-model="params.staff" type="input" class="field-input" placeholder="请输入接待人员")
+					input(v-model="params.staff" type="input" class="field-input" placeholder="请输入接待人员" )
 		.definite-smalltitle
 			span(class="colum-blue")
 			span  检查内容
@@ -99,7 +99,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   watch: {
@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .definite-2 {
   width: 100%;
   height: 100%;

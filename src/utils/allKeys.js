@@ -24,7 +24,8 @@ const loanlnspection = {
       checked: "",
       requireCheck: "",
       specialChecked: "",
-      specialRequireCheck: ""
+      specialRequireCheck: "",
+      loanDate: ""
     },
     definite2: {
       addrChangedMsg: "",
@@ -56,7 +57,8 @@ const loanlnspection = {
       specialChecked: "", // 产品贷后落实情况
       holdPensonRisk: "", // 实际控制人或法定代表人风险点
       managerRisk: "", // 管理层风险点
-      otherRisk: "" // 其他风险点,
+      otherRisk: "", // 其他风险点,
+      lineAmout: ""
     },
     definite13: {
       bizId: "",
@@ -120,7 +122,7 @@ const loanlnspection = {
         sumBalanceJur: "", // 未结清贷款结余
         debitCardNumJur: "", //未销户贷记卡账户
 
-        debitCardLineAmoutJur: "", //授信总金额
+        debitCardLineAmout: "", //授信总金额
         guaranteeNumJur: "", //对外担保笔数
         guaranteeAmoutJur: "", //对外担保金额
         guaranteeBalanceJur: "", //对外担保结余
@@ -133,6 +135,7 @@ const loanlnspection = {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
         existCreditChage6: "", // 企业其他保证人 征信变化是否变化
+        existCreditChager6: "",
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
         addedOverdues: false,
@@ -240,7 +243,7 @@ const loanlnspection = {
         sumBalanceJur: "", // 未结清贷款结余
         debitCardNumJur: "", //未销户贷记卡账户
 
-        debitCardLineAmoutJur: "", //授信总金额
+        debitCardLineAmout: "", //授信总金额
         guaranteeNumJur: "", //对外担保笔数
         guaranteeAmoutJur: "", //对外担保金额
         guaranteeBalanceJur: "", //对外担保结余
@@ -253,6 +256,7 @@ const loanlnspection = {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
         existCreditChage6: "", // 企业其他保证人 征信变化是否变化
+        existCreditChager6: "",
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
@@ -300,7 +304,8 @@ const loanlnspection = {
         payTaxAmout3M: "", //近三个月的情况
         payTaxAmoutChang30Msg: "", // 变动超过30%，原因
         profit3M: "", //近三个月的情况
-        profitChang30Msg: "" // 应收账款变动超过30%，原因
+        profitChang30Msg: "", // 应收账款变动超过30%，原因
+        financeMsg: ""
         // busInc3MSitu: "", //营业收入近三个月的情况
         // busIncChang30Msg: "", // 营业收入剔除季节性因素后变动超30%，原因
         // emplCost3M: "", //近三个月的情况
@@ -327,7 +332,8 @@ const loanlnspection = {
       hiddenTroubleSituMsg: "", //生产经营是否存在安全隐患具体情况
       collEstimateDate: "", //上次抵质押物评估或重估日期
       collEstimateValue: "", //上次抵质押物评估或重估金额
-      otherSitu: "" //其他情况
+      otherSitu: "", //其他情况
+      collEstimateMsg: ""
     },
     definite17: Object.assign({}, mVmodel(12), bizId),
     definite3: {

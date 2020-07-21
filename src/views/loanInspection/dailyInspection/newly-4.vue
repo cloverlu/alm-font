@@ -7,7 +7,7 @@
 	.newly4
 		.newly-4-repeat(v-for="(item,index) in info.assitInfoForPledge" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''" )
 			.repeat-operation(v-if="index !== 0")
-				.repeat-operation-title 新增 {{item.id}}
+				.repeat-operation-title 新增 
 				.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
 			.definite-field
 				.item 
@@ -151,7 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .newly4 {
   width: 100%;
   height: 100%;

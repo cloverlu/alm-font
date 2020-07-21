@@ -13,7 +13,9 @@ const footerNext = {
         //基本信息详情
         queryDetail: {},
         // 前端判断有没有有保存操作
-        saveFlag: []
+        saveFlag: [],
+        // 判断是不是回退的单子
+        tranSactName1: {}
       },
   mutations: {
     SET_NEXTFOOTER: (state, nextFooter) => {
@@ -33,6 +35,9 @@ const footerNext = {
     },
     SET_SAVEFLAG: (state, saveFlag) => {
       state.saveFlag = saveFlag;
+    },
+    SET_TRANSACTNAME1: (state, tranSactName1) => {
+      state.tranSactName1 = tranSactName1;
     }
   }
 };
