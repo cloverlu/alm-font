@@ -71,10 +71,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
+// @import "../../assets/style/global.scss";
 .todo-list {
   width: 100%;
   height: 100%;
+  border-top: px2rem(1) solid #d6d6db;
   @include scroll;
   .list-item {
     width: 100%;

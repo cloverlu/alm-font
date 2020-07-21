@@ -160,13 +160,13 @@ export default {
     //判断是否是已经填了部分
     if (
       this.$route.params.saveFlag === 1 ||
-      this.$route.params.saveFlag === "1"
+      this.$route.params.saveFlag === "1" ||
+      this.tranSactName1.tranSactName1 === true
     ) {
       await this.setforDizDetail(this);
       this.params = this.forBizDetail(this.$route.name);
       this.securityKindsF();
     } else {
-      this.setSaveFlag([]);
       this.securityKindsF();
     }
     //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
@@ -207,7 +207,7 @@ export default {
               bizId
             );
             // 审批页面的保存走审批接口，只是传的对象不同
-            this.submit(loanBusiness);
+            this.submit(loanBusiness, currentName);
           });
         } else {
           this.$nextTick(() => {
@@ -253,7 +253,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .credit-overall {
   width: 100%;
   height: 100%;

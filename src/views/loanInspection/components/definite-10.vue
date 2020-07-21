@@ -69,25 +69,25 @@
         </div>
         <mt-field
           class="textFiled"
-          label="未结清贷款笔数"
+          label="未结清贷款笔数（笔）"
           placeholder="请输入"
           v-model="params.unPayOffLoanNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未结清贷款金额"
+          label="未结清贷款金额（万元）"
           placeholder="请输入"
           v-model="params.unPayOffAmoutCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="涉及金融机构"
+          label="涉及金融机构（家）"
           placeholder="请输入"
           v-model="params.finInstitutionNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未结清贷款结余"
+          label="未结清贷款结余（万元）"
           placeholder="请输入"
           v-model="params.sumBalanceCon"
         ></mt-field>
@@ -96,13 +96,13 @@
         <!--  -->
         <mt-field
           class="textFiled"
-          label="未销户贷记卡账户"
+          label="未销户贷记卡账户（个）"
           placeholder="请输入"
           v-model="params.debitCardNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未销户贷记卡担保金额"
+          label="授信总金额（万元）"
           placeholder="请输入"
           v-model="params.debitCardLineAmoutCon"
         ></mt-field>
@@ -111,19 +111,19 @@
         <!--  -->
         <mt-field
           class="textFiled"
-          label="对外担保笔数"
+          label="对外担保笔数（笔）"
           placeholder="请输入"
           v-model="params.guaranteeNumCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="对外担保金额"
+          label="对外担保笔数（笔）"
           placeholder="请输入"
           v-model="params.guaranteeAmoutCon"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="对外担保结余"
+          label="对外担保结余（万元）"
           placeholder="请输入"
           v-model="params.guaranteeBalanceCon"
         ></mt-field>
@@ -197,25 +197,25 @@
         </div>
         <mt-field
           class="textFiled"
-          label="未结清贷款笔数"
+          label="未结清贷款笔数（笔）"
           placeholder="请输入"
           v-model="params.unPayOffLoanNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未结清贷款金额"
+          label="未结清贷款金额（万元）"
           placeholder="请输入"
           v-model="params.unPayOffAmoutJur"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="涉及金融机构"
+          label="涉及金融机构（家）"
           placeholder="请输入"
           v-model="params.finInstitutionNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未结清贷款结余"
+          label="未结清贷款结余（万元）"
           placeholder="请输入"
           v-model="params.sumBalanceJur"
         ></mt-field>
@@ -224,34 +224,34 @@
         <!--  -->
         <mt-field
           class="textFiled"
-          label="未销户贷记卡账户"
+          label="未销户贷记卡账户（个）"
           placeholder="请输入"
           v-model="params.debitCardNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="未销户贷记卡担保金额"
+          label="授信总金额（万元）"
           placeholder="请输入"
-          v-model="params.debitCardLineAmoutJur"
+          v-model="params.debitCardLineAmout"
         ></mt-field>
 
         <div class="nothing"></div>
         <!--  -->
         <mt-field
           class="textFiled"
-          label="对外担保笔数"
+          label="授信总金额（万元）"
           placeholder="请输入"
-          v-model="params.guaranteeNumJur"
+          v-model="params.lineAmout"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="对外担保金额"
+          label="对外担保金额（万元）"
           placeholder="请输入"
           v-model="params.guaranteeAmoutJur"
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="对外担保结余"
+          label="对外担保结余（万元）"
           placeholder="请输入"
           v-model="params.guaranteeBalanceJur"
         ></mt-field>
@@ -303,13 +303,13 @@
           placeholder="请输入征信记录异常变化说明"
         ></mt-field>
         <!-- 3.法人保证人征信： -->
-        <div class="coNo3">3.法人保证人征信：</div>
+        <div class="coNo3">3.企业其他保证人征信：</div>
         <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
         <div class="item1">
           <span class="tag">征信记录是否有异常变化 </span>
           <almSelect
             :selectData="yesNo"
-            :defaultValue="params.existCreditChage3"
+            :defaultValue="params.existCreditChager6"
             :triggerId="existCreditChage3"
             :title="selectTitle"
             :fontColor="fontColor"
@@ -321,7 +321,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="params.creditChageMsg3"
+          v-model="params.creditChageMsg6"
           class="text"
           style="overflow:hidden"
           placeholder="请输入征信记录异常变化说明"
@@ -397,7 +397,7 @@ export default {
         sumBalanceJur: "", // 未结清贷款结余
         debitCardNumJur: "", //未销户贷记卡账户
 
-        debitCardLineAmoutJur: "", //授信总金额
+        // debitCardLineAmoutJur: "", //授信总金额
         guaranteeNumJur: "", //对外担保笔数
         guaranteeAmoutJur: "", //对外担保金额
         guaranteeBalanceJur: "", //对外担保结余
@@ -410,12 +410,14 @@ export default {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
         existCreditChage6: "", // 企业其他保证人 征信变化是否变化
+        existCreditChager6: "",
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
         msg: "",
         addedOverdues: false,
-        pickerVisible: false
+        pickerVisible: false,
+        debitCardLineAmout: ""
       },
       freezeParams: {},
       loanBusiness: {}
@@ -433,7 +435,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   watch: {
@@ -478,7 +480,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 // .coInformation {
 .title {
   // width: px2rem(60);
@@ -792,7 +794,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 textarea {
   resize: none;
 }
@@ -807,7 +809,7 @@ textarea {
       padding: 0 px2rem(16);
     }
     .mint-cell-title {
-      width: px2rem(150) !important;
+      width: px2rem(180) !important;
       font-size: px2rem(14);
     }
     .mint-cell-value {

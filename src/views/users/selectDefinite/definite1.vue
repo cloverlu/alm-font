@@ -15,7 +15,7 @@
 				span(class="info") {{detail.billAmout}}
 			.item
 				span(class="tag") 贷款期限
-				span(class="info") {{detail.billLength}}
+				span(class="info") {{detail.billLength}}月
 			.item
 				span(class="tag") 贷款支付方式
 				almSelect(:selectData="payTypes"  :defaultValue="params.payKind" :title="selectTitle" :triggerId="payKind" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .credit-wrapper {
   width: 100%;
   height: 100%;

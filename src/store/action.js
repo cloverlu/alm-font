@@ -121,6 +121,9 @@ const actions = {
       }
     });
     return commit("SET_HANDLEPARAMS", params);
+  },
+  setTranSactName1: ({ commit }, tranSactName1) => {
+    return commit("SET_TRANSACTNAME1", tranSactName1);
   }
 };
 

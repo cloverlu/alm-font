@@ -15,9 +15,6 @@ export default new Vuex.Store({
   getters,
   actions,
   modules: {
-    creditFirst,
-    creditRoutine,
-    dailyInspection,
     footerNext,
     userStore,
     approvalStore

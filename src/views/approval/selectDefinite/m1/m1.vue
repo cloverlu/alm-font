@@ -16,7 +16,7 @@
 				span(class="info") {{detail.definite1.billAmout}}
 			.item
 				span(class="tag") 贷款期限
-				span(class="info") {{detail.definite1.billLength}}
+				span(class="info") {{detail.definite1.billLength}}月
 			.item
 				span(class="tag") 贷款支付方式
 				span(class="info" v-if="detail.definite1.payKind === '1'") 贷款人受托支付
@@ -87,13 +87,14 @@ export default {
   async mounted() {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
+    console.log(this.detail);
   },
   methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .credit-wrapper {
   width: 100%;
   height: 100%;

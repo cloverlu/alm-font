@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 
 .companyInformation {
   width: 100%;
@@ -178,7 +178,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .definte13 {
   width: 100%;
   height: 100%;

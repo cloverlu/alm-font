@@ -158,7 +158,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   watch: {
@@ -193,6 +193,8 @@ export default {
     async submitApprove() {
       console.log(this.params);
       const moduleName = this.$route.params.moduleName;
+      const currentName = this.$route.name;
+      const type = this.type;
       this.$Indicator.open();
       var pa;
       if (moduleName === "custmer") {
@@ -202,7 +204,7 @@ export default {
           opType: "1"
         };
         const params = Object.assign({}, pa, this.params);
-        await this.userSubmit(params);
+        await this.userSubmit(params, type, currentName);
       } else {
         pa = {
           bizId: this.bizId,
@@ -211,7 +213,7 @@ export default {
           opType: "1"
         };
         const params = Object.assign({}, pa, this.params);
-        await this.submit(params);
+        await this.submit(params, currentName);
       }
     },
     goback: function() {
@@ -326,7 +328,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 
 .definte3 {
   width: 100%;
@@ -562,7 +564,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 textarea {
   resize: none;
 }

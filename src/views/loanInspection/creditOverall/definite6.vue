@@ -14,20 +14,20 @@
 		.definite-field
 			.item
 				span(class="tag big-max") 企业所在行业是否发生重大不利变化
-				almSelect(:selectData="yesNo"  :defaultValue="params.industrycChangSiut" :triggerId="triggerId1" :title="selectTitle1" :fontColor="fontColor" @getSelectValue="IndustrycChangSiut" class="info" ) 
-				span(class="iconfont iconxiala arrow") 
+				//- almSelect(:selectData="yesNo"  :defaultValue="params.industrycChangSiut" :triggerId="triggerId1" :title="selectTitle1" :fontColor="fontColor" @getSelectValue="IndustrycChangSiut" class="info" ) 
+				//- span(class="iconfont iconxiala arrow") 
 			.item(class="item-textarea")
 				mt-field(v-model="params.industrycChangSiutMsg" class="textArea" type="textarea" rows="3" placeholder="请输入")
 			.item
 				span(class="tag big-max") 企业是否有与主业无关的扩张计划
-				almSelect(:selectData="yesNo"  :defaultValue="params.planExpandSitu" :triggerId="triggerId2" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="planExpandSitu" class="info" ) 
-				span(class="iconfont iconxiala arrow") 
+				//- almSelect(:selectData="yesNo"  :defaultValue="params.planExpandSitu" :triggerId="triggerId2" :title="selectTitle2" :fontColor="fontColor" @getSelectValue="planExpandSitu" class="info" ) 
+				//- span(class="iconfont iconxiala arrow") 
 			.item(class="item-textarea")
 				mt-field(v-model="params.planExpandSituMsg" class="textArea" type="textarea" rows="3" placeholder="请输入")
 			.item
 				span(class="tag big-max") 生产经营是否存在安全隐患
-				almSelect(:selectData="yesNo"  :defaultValue="params.hiddenTroubleSitu" :triggerId="triggerId3" :title="selectTitle3" :fontColor="fontColor" @getSelectValue="hiddenTroubleSitu" class="info" ) 
-				span(class="iconfont iconxiala arrow") 
+				//- almSelect(:selectData="yesNo"  :defaultValue="params.hiddenTroubleSitu" :triggerId="triggerId3" :title="selectTitle3" :fontColor="fontColor" @getSelectValue="hiddenTroubleSitu" class="info" ) 
+				//- span(class="iconfont iconxiala arrow") 
 			.item(class="item-textarea")
 				mt-field(v-model="params.hiddenTroubleSituMsg" class="textArea" type="textarea" rows="3" placeholder="请输入")
 			.item
@@ -53,7 +53,7 @@
 			v-model="pickerValue" 
 			@confirm="handleConfirm()")
 		.war-tag
-			span 根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。
+			mt-field(class="war-tag" v-model="params.collEstimateMsg"  type="textarea" rows="3" placeholder="请输入")
 	  
 </template>
 
@@ -79,7 +79,9 @@ export default {
         hiddenTroubleSituMsg: "",
         collEstimateDate: "",
         collEstimateValue: "",
-        otherSitu: ""
+        otherSitu: "",
+        collEstimateMsg:
+          "根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。"
       },
       startDate: new Date(getLastYearYestdy(new Date())),
       endDate: new Date(),
@@ -107,7 +109,7 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
     }
   },
   watch: {
@@ -143,7 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .definite-6-wrapper {
   width: 100%;
   height: 100%;
@@ -159,11 +161,25 @@ export default {
     height: px2rem(74);
   }
   .war-tag {
-    padding: px2rem(15);
+    padding: px2rem(7);
     font-size: px2rem(14);
     color: #9f9f9f;
     background-color: #fff;
     line-height: 1.2;
+  }
+}
+</style>
+<style lang="scss">
+// @import "../../../assets/style/global.scss";
+.definite-6-wrapper {
+  .war-tag {
+    .mint-cell-wrapper {
+      padding: 0 !important;
+      font-size: px2rem(14);
+      textarea {
+        resize: none;
+      }
+    }
   }
 }
 </style>

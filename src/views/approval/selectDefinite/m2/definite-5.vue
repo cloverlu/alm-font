@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .coInformation {
   .title {
     // width: px2rem(60);
@@ -244,7 +244,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 
 textarea {
   resize: none;

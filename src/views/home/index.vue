@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/global.scss";
+// @import "../../assets/style/global.scss";
 .wrapper {
   width: 100%;
   height: 100%;
@@ -54,9 +54,10 @@ export default {
       width: 100%;
       height: px2rem(44);
       // flex: 0 0 px2rem(44);
-      border-bottom: px2rem(1) solid #d6d6db;
+      // border-bottom: px2rem(1) solid #d6d6db;
       display: flex;
       position: relative;
+      z-index: 888;
       .card {
         flex: 1;
         line-height: px2rem(44);

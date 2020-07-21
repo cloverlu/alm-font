@@ -20,14 +20,14 @@
 			fieldTwo(:info="caiwuThree" :type="typeTwo" :detail="detail" :read="true" ref="caiwuthree")
 			fieldTwo(:info="caiwuFour" :type="typeTwo" :detail="detail" :read="true" ref="caiwufour")
 			.war-tag
-				span 根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。
+				span {{detail.financeMsg}}
 		.definite-89-content(v-if="detail.financeClassification === '2'")
 			fieldTwo(:info="caiwuOne" :type="typeOne"  :detail="detail" :read="true" ref="caiwufive")
 			fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail" :read="true" ref="caiwuseven")
 			fieldTwo(:info="caiwuSeven" :type="typeTwo" :detail="detail" :read="true" ref="caiwuseven")
 			fieldTwo(:info="caiwuEight" :type="typeTwo" :detail="detail" :read="true" ref="caiwueight")
 			.war-tag
-				span 根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。
+				span {{detail.financeMsg}}
 			
 
 
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../assets/style/global.scss";
+// @import "../../../../assets/style/global.scss";
 .definite-89-wrapper {
   width: 100%;
   height: 100%;

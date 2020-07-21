@@ -65,7 +65,8 @@ export default {
       }
     } else {
       const flag = this.$route.params.saveFlag;
-      this.mountedTag(flag, name);
+      this.mountedTag(flag, name, this.$route.params.bizId);
+      console.log(this.params);
     }
   },
   watch: {
@@ -76,6 +77,7 @@ export default {
           const a = `pic_${i + 1}s`;
           arrs[a] = this.$refs[`definte16${i}`][0].fileList[a];
         }
+        this.params = Object.assign({}, this.type, arrs);
         this.loanBusiness = Object.assign({}, this.type, arrs);
       }
     }
@@ -85,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/style/global.scss";
+// @import "../../../assets/style/global.scss";
 .definite-13-wrapper {
   width: 100%;
   height: 100%;
