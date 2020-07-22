@@ -33,11 +33,13 @@ export default {
   },
   created() {
     console.log();
-    var queryVal = this.GetQueryValue("app");
-    if (queryVal == "youjie") {
+		var queryVal = this.GetQueryValue("app");
+		alert(window.location.search.substring(1))
+    if (queryVal === "youjie") {
+      alert("成功");
       this.getUserInfo();
     } else {
-      Toast("失败");
+      alert("失败");
     }
   },
   mounted() {

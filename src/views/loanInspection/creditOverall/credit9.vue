@@ -87,6 +87,7 @@ export default {
 // @import "../../../assets/style/global.scss";
 .definite-9-wrapper {
   .war-tag {
+		border-top: px2rem(1) solid #dbdbdb;
     .mint-cell-wrapper {
       padding: 0 !important;
       font-size: px2rem(14);

@@ -516,7 +516,7 @@ const routes = [
   // 用户
   //据列表信息-1
   {
-    path: "/3/:moduleName/:queryType/:custName/:emplName",
+    path: "/3/:moduleName/:queryType/:custName/:emplName/:custCode",
     name: "userIndex",
     component: userIndex,
     meta: {

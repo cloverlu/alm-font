@@ -76,7 +76,8 @@ export default {
           queryType: "2",
           moduleName: "custmer",
           custName: custName,
-          emplName: this.userInfo2.emplName
+					emplName: this.userInfo2.emplName,
+					custCode:item.custCode
         }
       });
     },
