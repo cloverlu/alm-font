@@ -34,6 +34,7 @@ export default {
   created() {
     console.log();
     var queryVal = this.GetQueryValue("app");
+    alert(window.location.search.substring(1));
     if (queryVal == "youjie") {
       this.getUserInfo();
     } else {
