@@ -23,7 +23,7 @@
 			.tanchaung
 				.definite4
 					.coInformation
-						.enterpriseCredit
+						.enterpriseCredit(ref="scroll")
 							.signBox
 								span(class="left") {{signName}}人员（签字）：
 								span(class="iconfont iconqianzi")
@@ -38,6 +38,7 @@
 <script>
 // processing26:审核;processing28:审核;processing213:审核；processing23:审核;processing210:审核;processing211:抽查;processing213:抽查复核
 import { Button, Popup } from "mint-ui";
+import BScroll from "@better-scroll/core";
 import processing2 from "../approval/approve/processing2";
 import processing21 from "../approval/approve/processing21";
 import processing23 from "../approval/approve/processing23";
@@ -92,6 +93,7 @@ export default {
     };
   },
   async mounted() {
+    this.init();
     this.routerMatch();
     //2，27，25，29 下一级处理人
     await this.setHandleParams(this);
@@ -119,7 +121,25 @@ export default {
       }
     }
   },
+  beforeDestroy() {
+    this.bs.destroy();
+  },
   methods: {
+    init() {
+      this.bs = new BScroll(this.$refs.scroll, {
+        scrollY: true,
+        click: true,
+        probeType: 3 // listening scroll hook
+      });
+      this._registerHooks(["scroll", "scrollEnd"], pos => {
+        console.log("done");
+      });
+    },
+    _registerHooks(hookNames, handler) {
+      hookNames.forEach(name => {
+        this.bs.on(name, handler);
+      });
+    },
     async submitApprove() {
       this.params2.opType = "1";
       const params = Object.assign(
@@ -348,7 +368,7 @@ export default {
             e.changedTouches[0].pageY - 40
           );
         }.bind(this),
-        false
+        true
       );
       //绘制中
       this.canvas.addEventListener(
@@ -360,7 +380,7 @@ export default {
           );
           this.cxt.stroke();
         }.bind(this),
-        false
+        true
       );
       //结束绘制
       this.canvas.addEventListener(
@@ -371,7 +391,7 @@ export default {
           //console.log(imgBase64);
           this.params.empSign = imgBase64;
         }.bind(this),
-        false
+        true
       );
       //清除画布
       this.clearEl.addEventListener(
@@ -379,7 +399,7 @@ export default {
         function() {
           this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }.bind(this),
-        false
+        true
       );
       //保存图片，直接转base64
       this.saveEl.addEventListener(
@@ -393,7 +413,7 @@ export default {
             this.popupVisible = false;
           }, 200);
         }.bind(this),
-        false
+        true
       );
     }
   }

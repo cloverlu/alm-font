@@ -20,6 +20,7 @@
 <script>
 import { todoListTitle, userInfo } from "../../utils/dataMock.js";
 import { getToDoList } from "../../api/home";
+import { Toast } from "mint-ui";
 import Scroll from "../../components/Scroll";
 export default {
   components: { Scroll },
@@ -34,10 +35,9 @@ export default {
     console.log();
     var queryVal = this.GetQueryValue("app");
     if (queryVal == "youjie") {
-      console.log("成功");
       this.getUserInfo();
     } else {
-      console.log("失败");
+      Toast("失败");
     }
   },
   mounted() {
@@ -80,8 +80,10 @@ export default {
       let xui = requireModuleJs("xui");
       let obj = xui.getUserInfo();
       let token = xui.getDeviceTokens();
+      Toast("成功获取用户信息");
       alert(obj);
       alert(token);
+      // await this.getList();
     },
     GetQueryValue(queryName) {
       var query = decodeURI(window.location.search.substring(1));

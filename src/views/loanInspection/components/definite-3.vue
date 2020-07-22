@@ -57,9 +57,7 @@
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submitApprove()"
-            >提交审批</mt-button
-          >
+          <mt-button type="primary" size="large" @click="submitApprove()">提交审批</mt-button>
           <mt-button size="large" @click="goback()">上一步</mt-button>
         </div>
       </div>
@@ -69,7 +67,7 @@
         <div class="definite4">
           <!--填写信息  -->
           <div class="coInformation">
-            <div class="enterpriseCredit">
+            <div class="enterpriseCredit" ref="scroll">
               <div class="signBox">
                 <span class="left">
                   检查人员（签字）：
@@ -82,21 +80,8 @@
             </div>
           </div>
           <div class="submit">
-            <button
-              id="clearCanvas"
-              ref="clearCanvas"
-              class="mint-button mint-button--default"
-            >
-              重置
-            </button>
-            <button
-              type="primary"
-              id="saveCanvas"
-              ref="saveCanvas"
-              class="mint-button"
-            >
-              保存
-            </button>
+            <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
+            <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
           </div>
         </div>
       </div>
@@ -107,6 +92,7 @@
 <script>
 import { yesNo } from "../../../utils/dataMock";
 import { Button, Popup } from "mint-ui";
+import BScroll from "@better-scroll/core";
 import almSelect from "../components/select";
 import { normalMixin, userMixin } from "../../../utils/mixin";
 import { submitApprove } from "../../../api/loanlnspection";
@@ -145,7 +131,11 @@ export default {
       }
     }
   },
+  beforeDestroy() {
+    this.bs.destroy();
+  },
   mounted() {
+    this.init();
     // 上一步下一步需要走的详情接口
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
@@ -186,6 +176,21 @@ export default {
     }
   },
   methods: {
+    init() {
+      this.bs = new BScroll(this.$refs.scroll, {
+        scrollY: true,
+        click: true,
+        probeType: 3 // listening scroll hook
+      });
+      this._registerHooks(["scroll", "scrollEnd"], pos => {
+        console.log("done");
+      });
+    },
+    _registerHooks(hookNames, handler) {
+      hookNames.forEach(name => {
+        this.bs.on(name, handler);
+      });
+    },
     getSelect: function(data) {
       this.params.existRisk = data[0].key;
     },
@@ -263,7 +268,7 @@ export default {
               document.documentElement.scrollTop
           );
         }.bind(this),
-        false
+        true
       );
       //绘制中
       this.canvas.addEventListener(
@@ -287,7 +292,7 @@ export default {
           );
           this.cxt.stroke();
         }.bind(this),
-        false
+        true
       );
       //结束绘制
       this.canvas.addEventListener(
@@ -298,7 +303,7 @@ export default {
           //console.log(imgBase64);
           this.params.empSign = imgBase64;
         }.bind(this),
-        false
+        true
       );
       //清除画布
       this.clearEl.addEventListener(
@@ -306,7 +311,7 @@ export default {
         function() {
           this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }.bind(this),
-        false
+        true
       );
       //保存图片，直接转base64
       this.saveEl.addEventListener(
@@ -320,7 +325,7 @@ export default {
             this.popupVisible = false;
           }, 200);
         }.bind(this),
-        false
+        true
       );
     }
   }

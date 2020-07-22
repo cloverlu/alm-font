@@ -8,32 +8,20 @@
     <div class="definite4">
       <!--填写信息  -->
       <div class="coInformation">
-        <div class="enterpriseCredit">
+        <div class="enterpriseCredit" ref="scroll">
           <div class="signBox">
-            <span class="left"
-              >检查人员（签字）：<span class="iconfont iconqianzi"></span
-            ></span>
+            <span class="left">
+              检查人员（签字）：
+              <span class="iconfont iconqianzi"></span>
+            </span>
             <span class="right">2020-06-01</span>
           </div>
           <div id="canvas" ref="canvas"></div>
         </div>
       </div>
       <div class="submit">
-        <button
-          id="clearCanvas"
-          ref="clearCanvas"
-          class="mint-button mint-button--default"
-        >
-          重置
-        </button>
-        <button
-          type="primary"
-          id="saveCanvas"
-          ref="saveCanvas"
-          class="mint-button"
-        >
-          保存
-        </button>
+        <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
+        <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
       </div>
     </div>
   </div>
@@ -42,6 +30,7 @@
 <script>
 import { DetailsOfIOU, yesNo } from "../../../utils/dataMock";
 import { Button } from "mint-ui";
+import BScroll from "@better-scroll/core";
 export default {
   components: {
     // "mt-button": Button
@@ -54,7 +43,11 @@ export default {
       }
     };
   },
+  beforeDestroy() {
+    this.bs.destroy();
+  },
   mounted() {
+    this.init();
     this.lineCanvas({
       el: this.$refs.canvas, //绘制canvas的父级div
       clearEl: this.$refs.clearCanvas, //清除按钮
@@ -62,6 +55,21 @@ export default {
     });
   },
   methods: {
+    init() {
+      this.bs = new BScroll(this.$refs.scroll, {
+        scrollY: true,
+        click: true,
+        probeType: 3 // listening scroll hook
+      });
+      this._registerHooks(["scroll", "scrollEnd"], pos => {
+        console.log("done");
+      });
+    },
+    _registerHooks(hookNames, handler) {
+      hookNames.forEach(name => {
+        this.bs.on(name, handler);
+      });
+    },
     lineCanvas(obj) {
       this.linewidth = 2;
       this.color = "#000000";
@@ -86,7 +94,7 @@ export default {
           this.cxt.beginPath();
           this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
         }.bind(this),
-        false
+        true
       );
       //绘制中
       this.canvas.addEventListener(
@@ -95,7 +103,7 @@ export default {
           this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
           this.cxt.stroke();
         }.bind(this),
-        false
+        true
       );
       //结束绘制
       this.canvas.addEventListener(
@@ -106,7 +114,7 @@ export default {
           //console.log(imgBase64);
           this.params.signSrc = imgBase64;
         }.bind(this),
-        false
+        true
       );
       //清除画布
       this.clearEl.addEventListener(
@@ -114,7 +122,7 @@ export default {
         function() {
           this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }.bind(this),
-        false
+        true
       );
       //保存图片，直接转base64
       this.saveEl.addEventListener(
@@ -127,7 +135,7 @@ export default {
             this.$router.push("definite3");
           }, 200);
         }.bind(this),
-        false
+        true
       );
     }
   },
