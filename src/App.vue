@@ -60,14 +60,31 @@ export default {
       sessionStorage.clear();
     });
 
-    // 兼容Android，ios 键盘弹起时，把搜索的数据顶上去影响布局和搜索功能
-    var h = document.body.scrollHeight; // 用onresize事件监控窗口或框架被调整大小，先把一开始的高度记录下来
-    window.onresize = function() {
-      // 如果当前窗口小于一开始记录的窗口高度，那就让当前窗口等于一开始窗口的高度
-      if (document.body.scrollHeight < h) {
-        document.body.style.height = h;
-      }
-    };
+    // // 兼容Android，ios 键盘弹起时，把搜索的数据顶上去影响布局和搜索功能
+    // var h = document.body.scrollHeight; // 用onresize事件监控窗口或框架被调整大小，先把一开始的高度记录下来
+    // window.onresize = function() {
+    //   // 如果当前窗口小于一开始记录的窗口高度，那就让当前窗口等于一开始窗口的高度
+    //   if (document.body.scrollHeight < h) {
+    //     document.body.style.height = h;
+    //   }
+		// };
+		let startX,startY;
+
+		document.addEventListener("touchstart",function(e){
+		    startX = e.touches[0].pageX;
+		    startY = e.touches[0].pageY;
+		});
+
+		document.addEventListener("touchmove",function(e){
+		    var moveX = e.touches[0].pageX;
+		    var moveY = e.touches[0].pageY;
+		    //因为上下滑动的时候多少左右会带一点横移呀
+		    //比较横移距离与垂直移动距离的大小，哪个大就是往哪个方向移动啊
+		    if(Math.abs(moveX-startX)>Math.abs(moveY-startY)){
+		        e.preventDefault();
+		    }
+
+		}, {passive: false});
   },
   mounted() {
     // console.log("app");

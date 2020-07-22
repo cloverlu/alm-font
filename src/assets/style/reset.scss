@@ -68,3 +68,7 @@ body {
 // 	// font-family: 'PingFangSC-Light', 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', 'Arial', 'sans-serif';
 // 	font-family: 'SourceHanSansCN-Medium';
 // }
+html{
+	touch-action:none;
+  touch-action:pan-y;
+}

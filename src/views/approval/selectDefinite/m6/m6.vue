@@ -137,7 +137,7 @@ export default {
   computed: {
     securityKindTag() {
       if (
-        this.params.securityKind &&
+        this.detail.securityKind &&
         typeof this.detail.securityKind === "object"
       ) {
         const flag = this.detail.securityKind.some(item => item === "5");
@@ -159,7 +159,7 @@ export default {
   methods: {
     securityKindsF() {
       if (
-        this.params.securityKind &&
+        this.detail.securityKind &&
         typeof this.detail.securityKind === "object"
       ) {
         var arr = [];
