@@ -132,10 +132,10 @@ export default {
   computed: {
     securityKindTag() {
       if (
-        this.detail.securityKind &&
-        typeof this.detail.securityKind === "object"
+        this.detail.newly18.securityKind &&
+        typeof this.detail.newly18.securityKind === "object"
       ) {
-        const flag = this.detail.securityKind.some(item => item === "5");
+        const flag = this.detail.newly18.securityKind.some(item => item === "5");
         if (flag) {
           return true;
         } else {
@@ -155,12 +155,12 @@ export default {
   methods: {
     securityKindsF() {
       if (
-        this.detail.securityKind &&
-        typeof this.detail.securityKind === "object"
+        this.detail.newly18.securityKind &&
+        typeof this.detail.newly18.securityKind === "object"
       ) {
         var arr = [];
         this.securityKindsArr.map(item => {
-          this.detail.securityKind.map(item2 => {
+          this.detail.newly18.securityKind.map(item2 => {
             if (item2 === item.value) {
               arr.push(item.label);
             }

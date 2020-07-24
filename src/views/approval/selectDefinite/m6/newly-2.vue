@@ -107,7 +107,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="detail.summaryForCheck"
+          v-model="detail.summarySituMsg"
           class="textArea"
           style="overflow:hidden"
           :disabled="true"

@@ -167,7 +167,7 @@ const loanlnspection = {
     newly18: {
       lineAmout: "",
       loanBalance: "",
-      securityKind: "1",
+      securityKind: ["1"],
       otherSecurityKindMsg: "",
       repayKind: "",
       bizId: "",
@@ -379,7 +379,8 @@ const loanlnspection = {
       executeCon: 1, //是否履行合同约定
       cooperate: 1, //对我行检查的态度
       cooperateMsg: "", // 其他
-      msg: ""
+			msg: "",
+			
     },
     definite16: Object.assign({}, mVmodel(11), bizId),
     definite3: {
@@ -400,7 +401,7 @@ const loanlnspection = {
       checkModel: "", // 检查模式
       lineAmout: "", // 授信金额
       lineBalance: "", // 授信余额
-      securityKind: "1", // 担保方式
+      securityKind: ["1"], // 担保方式
       cooperate: 1, // 检查配合程度
       yearlyInspection: 1 // 额度年检
     },
@@ -419,7 +420,7 @@ const loanlnspection = {
         otherSitu: 0, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: "" // 企业或企业主是否有其他异常变化 说明
       },
-      summaryForCheck: ""
+      summarySituMsg: ""
     },
     newly3: {
       bizId: "",
@@ -461,7 +462,12 @@ const loanlnspection = {
       summaryForAssit: "", //押品检查小结
       assitInfoForPledge: [],
       assitInfoForGuarantee: []
-    },
+		},
+		newly6:{
+			inspConAndSug:'',
+			isAdjustLine:1,
+			adjustLine:''
+		},
     definite16: Object.assign({}, mVmodel(10), bizId),
     definite3: {
       existRisk: 1, // 是否存在风险预警信号

@@ -445,7 +445,8 @@ export default {
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.loanBusiness = this.params;
+				this.loanBusiness = this.params;
+				console.log('newly3',this.loanBusiness)
       }
     }
   },
@@ -454,7 +455,7 @@ export default {
       this.params.ownerStruSame = data[0].key;
     },
     getSelectIndustrycChangSiut(data) {
-      this.params.IndustrycChangSiut = data[0].key;
+      this.params.industrycChangSiut = data[0].key;
     },
     getSelectMainBusIsChanged(data) {
       this.params.mainBusIsChanged = data[0].key;
@@ -472,7 +473,7 @@ export default {
       this.params.purchaseCost = data[0].key;
     },
     getSelectProAndOpeAbnormalSuit(data) {
-      this.params.proAndOpeAbnormalSuit = data[0].key;
+			this.params.proAndOpeAbnormalSuit = data[0].key;
     },
     getSelectSaleAbnormalSuit(data) {
       this.params.saleAbnormalSuit = data[0].key;

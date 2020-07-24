@@ -8,10 +8,7 @@
     <!--填写信息  -->
     <div class="newly9">
       <div class="coInformation">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">存货</span>
-        </div>
+       
         <mt-cell
           class="textFiled"
           title="客户名称"

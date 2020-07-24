@@ -164,7 +164,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="params.summaryForCheck"
+          v-model="params.summarySituMsg"
           class="textArea"
           style="overflow:hidden"
           placeholder="请输入"
@@ -220,7 +220,7 @@ export default {
         addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
         otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: "", // 企业或企业主是否有其他异常变化 说明
-        summaryForCheck: ""
+        summarySituMsg: ""
       },
       loanBusiness: {}
     };

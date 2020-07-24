@@ -8,7 +8,7 @@
 		.wrapper
 			.newly-5-repeat(v-for="(item,index) in detail.assitInfoForGuarantee" :key="index" )
 				.repeat-operation
-					.repeat-operation-title 新增 {{item.id}}
+					.repeat-operation-title 新增 
 				.definite-field
 					.item
 						span(class="tag") 担保公司名称

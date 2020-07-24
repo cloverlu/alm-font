@@ -1,7 +1,7 @@
 Object.defineProperty(window, "config", {
   value: {
     host: {
-      authorization: "http://20.147.168.80:9001/"
+			authorization: "http://192.168.43.76:9001",
     }
   }
 });

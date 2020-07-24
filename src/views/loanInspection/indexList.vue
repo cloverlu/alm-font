@@ -24,7 +24,7 @@
 					span(class="item-info") {{item.noticeDate}}
 				.item-info-time 
 					span(class="item-tag") 截止时间
-					span(class="item-info") {{item.billEndDate}}
+					span(class="item-info") {{item.bizEndDate}}
 </template>
 
 <script>

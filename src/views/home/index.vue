@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     handclick() {
-      console.log(event);
       this.tabsVisible = !this.tabsVisible;
     }
   }

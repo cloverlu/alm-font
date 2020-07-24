@@ -82,7 +82,8 @@ export default {
         checkAddr: "",
         addrChangedMsg: "",
         staff: ""
-      }
+			},
+			loanBusiness:{}
     };
   },
   computed: {},
@@ -105,7 +106,7 @@ export default {
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = Object.assign(
+        this.loanBusiness = Object.assign(
           {},
           this.params,
           this.$refs.fieldOne.params,

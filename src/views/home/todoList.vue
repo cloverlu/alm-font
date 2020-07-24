@@ -32,18 +32,30 @@ export default {
     };
   },
   created() {
-    console.log();
-		var queryVal = this.GetQueryValue("app");
-		alert(window.location.search.substring(1))
-    if (queryVal === "youjie") {
-      alert("成功");
-      this.getUserInfo();
-    } else {
-      alert("失败");
-    }
+		
+	
   },
   mounted() {
-    this.getList();
+		var params = {}
+		if(JSON.parse(sessionStorage.getItem("userInfo"))){
+			const userInfo = JSON.parse(sessionStorage.getItem("userInfo"))
+			params={
+				emplName:userInfo.userName,
+				orgCode:userInfo.instld,
+				orgName:userInfo.instName
+			}
+		}else{
+			params = this.userInfo
+		}
+		this.getList(params);
+		// alert('todolistuserInfo');
+		// alert(JSON.parse(sessionStorage.getItem("userInfo")));
+		// alert('todolistx-token');
+		// alert(JSON.parse(sessionStorage.getItem("x-token")));
+		// alert('todolistConfigwindow.config');
+		// alert(window.config.host.userInfo.emplName);
+	
+	
   },
   methods: {
     handleClick(id) {
@@ -63,9 +75,8 @@ export default {
         });
       }
     },
-    getList() {
+    getList(params) {
       this.$Indicator.open();
-      const params = this.userInfo;
       getToDoList(this, { params }).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
@@ -78,25 +89,26 @@ export default {
         }
       });
     },
-    getUserInfo() {
-      let xui = requireModuleJs("xui");
-      let obj = xui.getUserInfo();
-      let token = xui.getDeviceTokens();
-      Toast("成功获取用户信息");
-      alert(obj);
-      alert(token);
-      // await this.getList();
-    },
-    GetQueryValue(queryName) {
-      var query = decodeURI(window.location.search.substring(1));
-      var vars = query.split("&");
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == queryName) {
-          return pair[1];
-        }
-      }
-    }
+    // getUserInfo() {
+		// 	alert("成功获取用户信息");
+		// 	let xui = requireModuleJs("xui");
+    //   let obj = xui.getUserInfo();
+		// 	let token = xui.getDeviceTokens();
+		// 	alert(requireModuleJs("xui"));
+    //   alert(obj);
+    //   alert(token);
+    //   // await this.getList();
+    // },
+    // GetQueryValue(queryName) {
+    //   var query = decodeURI(window.location.search.substring(1));
+    //   var vars = query.split("&");
+    //   for (var i = 0; i < vars.length; i++) {
+    //     var pair = vars[i].split("=");
+    //     if (pair[0] == queryName) {
+    //       return pair[1];
+    //     }
+    //   }
+    // }
   }
 };
 </script>

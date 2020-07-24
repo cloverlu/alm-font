@@ -63,7 +63,7 @@ export default {
       yesNo: yesNo,
       agreeResult: "agreeResult",
       params: {
-        agreeResult: 0, // 一级支行/二级分行复核意见
+        agreeResult: 1, // 一级支行/二级分行复核意见
         msg: "", // 一级支行/二级分行复核意见说明
         suggest: "" // 措施建议
       }

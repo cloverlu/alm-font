@@ -42,18 +42,6 @@ const actions = {
   setScrollToPo: ({ commit }, scrollToPo) => {
     return commit("SET_SCROLLTOPO", scrollToPo);
   },
-  setm1Definite1: ({ commit }, m1Definite1) => {
-    return commit("SET_M1DEFINITE1", m1Definite1);
-  },
-  setm1Definite2: ({ commit }, m1Definite2) => {
-    return commit("SET_M1DEFINITE2", m1Definite2);
-  },
-  setm1Definite16: ({ commit }, m1Definite16) => {
-    return commit("SET_M1DEFINITE16", m1Definite16);
-  },
-  setm1Definite3: ({ commit }, m1Definite3) => {
-    return commit("SET_M1DEFINITE1", m1Definite3);
-  },
   setBizType: ({ commit }, userBizType) => {
     return commit("SET_USERBIZTYPE", userBizType);
   },

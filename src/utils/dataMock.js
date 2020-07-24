@@ -860,8 +860,17 @@ const definite16Normal = {
 
 //api公用用户（当前没有用户接口接入）
 const userInfo = {
-  emplName: "金林"
+	emplName: "王萌",
+	orgCode : "32000018",
+	orgName:"I苏省分行"
+
 };
+// const userInfo = {
+// 	emplName: "金林",
+// 	orgCode : "",
+// 	orgName:""
+
+// };
 const userInfo2 = {
   emplName: "金林"
 };
@@ -881,6 +890,14 @@ const happenPats = [
     value: "第三阶段"
   }
 ];
+
+const newly6 = [
+	{
+    name: "检查结论及建议",
+    id: 1,
+    modelName: "inspConAndSug"
+  }
+]
 
 export {
   todoListTitle,
@@ -926,5 +943,6 @@ export {
   nextPositionHandlersArr,
   userInfo,
   userInfo2,
-  happenPats
+	happenPats,
+	newly6
 };

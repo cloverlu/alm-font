@@ -25,6 +25,7 @@ const newly1 = () => import("@/views/loanInspection/dailyInspection/newly-1");
 const newly2 = () => import("@/views/loanInspection/dailyInspection/newly-2");
 const newly3 = () => import("@/views/loanInspection/dailyInspection/newly-3");
 const newly45 = () => import("@/views/loanInspection/dailyInspection/newly-45");
+const newly6 = () => import("@/views/loanInspection/dailyInspection/newly-6")
 const creditOverallIndex = () =>
   import("@/views/loanInspection/creditOverall/newly18");
 const definite89 = () =>
@@ -484,6 +485,17 @@ const routes = [
               tag: "resave",
               footer: true
             }
+					},
+					// 新增1-6
+          {
+            path: "newly6",
+            name: "newly6",
+            component: newly6,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
           },
 
           //检查申请明细 16
@@ -799,6 +811,17 @@ const routes = [
             path: "m6newly45",
             name: "userNewly45",
             component: newly45,
+            meta: {
+              title: "检查申请明细",
+              tag: "resave",
+              footer: true
+            }
+					},
+					 // 新增1-4
+					 {
+            path: "m6newly6",
+            name: "userNewly6",
+            component: newly6,
             meta: {
               title: "检查申请明细",
               tag: "resave",
