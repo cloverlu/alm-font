@@ -12,10 +12,10 @@
 				span(class="info") {{detail.loanDate}}
 			.item
 				span(class="tag") 贷款金额
-				span(class="info") {{detail.billAmout}}
+				span(class="info") {{detail.loanAmout}}
 			.item
 				span(class="tag") 贷款期限
-				span(class="info") {{detail.billLength}}月
+				span(class="info") {{detail.loanLength}}月
 			.item
 				span(class="tag") 贷款支付方式
 				almSelect(:selectData="payTypes"  :defaultValue="params.payKind" :title="selectTitle" :triggerId="payKind" :fontColor="fontColor" @getSelectValue="getSelect" class="info" ) 
@@ -102,7 +102,7 @@ export default {
     nextFooter(val, oldval) {
       const fieldOne = this.$refs.fieldOne.params;
       const fieldTwo = this.$refs.fieldTwo.params;
-      this.loanBusiness = Object.assign({}, this.params, fieldOne, fieldTwo);
+      this.loanBusiness = Object.assign({}, this.params, fieldOne, fieldTwo,this.detail);
     }
   },
   methods: {

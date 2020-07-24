@@ -102,7 +102,7 @@ export default {
       agreeResult: "agreeResult",
       nextEmplCode: "nextEmplCode",
       params: {
-        agreeResult: 0, // 一级支行/二级分行复核意见
+        agreeResult: 1, // 一级支行/二级分行复核意见
         existRisk: 1,
         msg: "", // 一级支行/二级分行复核意见说明
         riskMsg: "", //风险说明

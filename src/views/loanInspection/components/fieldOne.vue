@@ -54,6 +54,7 @@ export default {
     }
   },
   mounted() {
+		
     this.$nextTick(() => {
       var a = {};
       this.disabeld = this.read ? true : false;

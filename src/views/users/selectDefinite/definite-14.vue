@@ -19,7 +19,7 @@
       <mt-cell
         class="textFiled"
         title="授信业务小类"
-        :value="detail.bizSubKind"
+        :value="detail.creditSubLoanKind"
       ></mt-cell>
       <mt-cell
         class="textFiled"
@@ -63,7 +63,7 @@
         @confirm="handleConfirm()"
       ></mt-datetime-picker> -->
 
-      <mt-field class="textFiled" label="约定用途"></mt-field>
+      <mt-field class="textFiled" label="约定用途" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -91,7 +91,7 @@
         <span class="coName">检查内容</span>
       </div>
 
-      <mt-field class="textFiled" label="资金使用情况说明"></mt-field>
+      <mt-field class="textFiled" label="资金使用情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -101,7 +101,7 @@
         placeholder="包括支付对象名称、金额等，必要时可收集汇款凭证、商务合同、账户流水等证明材料进行佐证。"
       ></mt-field>
       <div class="item1">
-        <span class="tag">是否按合同约定的用途使用信贷资金</span>
+        <span class="tag bigTag">是否按合同约定的用途使用信贷资金</span>
         <almSelect
           :selectData="yesNo"
           :defaultValue="params.useAmoutByContract"
@@ -127,7 +127,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field class="textFiled" label="情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -150,7 +150,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field class="textFiled" label="情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -232,7 +232,7 @@ export default {
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
-      this.loanBusiness = this.params;
+			this.loanBusiness = Object.assign({},this.params,this.detail);
     }
   },
   methods: {
@@ -360,10 +360,10 @@ export default {
   .item1 {
     background-color: #fff;
     width: 100%;
-    height: px2rem(44);
-    line-height: px2rem(44);
-    padding: 0 px2rem(16);
-    display: flex;
+   	padding: px2rem(15) ;
+		display: flex;
+		justify-content: flex-start;
+  	align-items: center;
     font-size: px2rem(14);
     box-sizing: border-box;
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
@@ -372,12 +372,12 @@ export default {
       padding: 0 px2rem(10);
     }
     .tag {
-      width: px2rem(224);
-      text-align: left;
-      color: #090909;
-      height: px2rem(44);
-      font-size: px2rem(14);
-      line-height: px2rem(44);
+      flex: 0 0 px2rem(140);
+			text-align: left;
+			color: #090909;
+			&.bigTag{
+				flex: 0 0 px2rem(240);
+			}
     }
     .arrow {
       font-size: px2rem(14);

@@ -180,31 +180,33 @@ export default {
   async mounted() {
     // 基本详情与流程详情的接口写在了vuex里
     //保存接口写在了Mixin里
-    // 获取基本详情
-    await this.setqueryDetail(this);
-    this.bizType(this.queryDetail, this.queryDetail.checkType);
-    this.detail = this.queryDetail;
+		// 获取基本详情
+		const currentName = this.$route.name;
+		if (currentName === "dailyInspectionIndex") {
+			 await this.setqueryDetail(this);
+			this.bizType(this.queryDetail, this.queryDetail.checkType);
+			this.detail = this.queryDetail;
 
-    //判断是否是已经填了部分
-    if (
-      this.$route.params.saveFlag === 1 ||
-      this.$route.params.saveFlag === "1" ||
-      this.tranSactName1.tranSactName1 === true
-    ) {
-      await this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-      this.securityKindsF();
-    } else {
-      this.securityKindsF();
-    }
-    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-    this.setScrollToPo({
-      x: 0,
-      y: 0,
-      ratenum: Date.now(),
-      tag: "nextFooter"
-    });
-    console.log(this.params);
+			//判断是否是已经填了部分
+			if (
+				this.$route.params.saveFlag === 1 ||
+				this.$route.params.saveFlag === "1" ||
+				this.tranSactName1.tranSactName1 === true
+			) {
+				await this.setforDizDetail(this);
+				this.params = this.forBizDetail(this.$route.name);
+				this.securityKindsF();
+			} else {
+				this.securityKindsF();
+			}
+			//刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+			this.setScrollToPo({
+				x: 0,
+				y: 0,
+				ratenum: Date.now(),
+				tag: "nextFooter"
+			});
+		}
   },
 
   beforeRouteEnter(to, from, next) {
@@ -249,7 +251,8 @@ export default {
               {},
               this.$refs.m6rview.loanBusiness,
               bizId
-            );
+						);
+						console.log(loanBusiness)
             this.infoSave(loanBusiness, currentName, type, val.tag);
           });
         }

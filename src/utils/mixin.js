@@ -78,8 +78,11 @@ export const normalMixin = {
               break;
             case "newly3":
               this.$router.push({ name: "newly45" });
-              break;
-            case "newly45":
+							break;
+						case "newly45":
+							this.$router.push({ name: "newly6" });
+							break;
+            case "newly6":
               this.$router.push({ name: "newlyDefinite16" });
               break;
             case "newlyDefinite16":
@@ -182,8 +185,9 @@ export const normalMixin = {
           }, 1100);
         }
       } else {
+				this.$Indicator.close();
         this.$Toast({
-          message: "保存失败！",
+          message: res.data.returnMsg,
           iconClass: "iconfont iconcha-01",
           duration: 5000
         });
@@ -258,7 +262,7 @@ export const normalMixin = {
     },
     // mounted中需要判断是否走详情接口的内容
     async mountedTag(flag, name, bizId) {
-      if (this.tranSactName1.tranSactName1 === true) {
+      if (flag === 1 || flag === '1' || this.tranSactName1.tranSactName1 === true) {
         await this.setforDizDetail(this);
         this.params = this.forBizDetail(name);
         if (name === "processing4") {
@@ -296,6 +300,7 @@ export const normalMixin = {
         }
         console.log(this.forBizDetail(name));
       } else {
+				
         this.saveFlag.forEach(async item => {
           if (
             item.currentName === name &&
@@ -340,7 +345,9 @@ export const normalMixin = {
             console.log(this.forBizDetail(name));
           }
         });
-      }
+			}
+			
+		
 
       //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
       this.setScrollToPo({
@@ -525,8 +532,11 @@ export const userMixin = {
               break;
             case "userNewly45":
               this.$router.push({ name: "userNewlyDefinite16" });
-              break;
-            case "userNewlyDefinite16":
+							break;
+						case "userNewlyDefinite16":
+							this.$router.push({ name: "userNewly6" });
+							break;
+            case "userNewly6":
               this.$router.push({ name: "userNewlyDefinite3" });
           }
           break;
@@ -607,8 +617,9 @@ export const userMixin = {
           }, 1200);
         }
       } else {
+        this.$Indicator.close();
         this.$Toast({
-          message: "保存失败！",
+          message: res.data.returnMsg,
           iconClass: "iconfont iconcha-01",
           duration: 5000
         });

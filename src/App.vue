@@ -57,7 +57,7 @@ export default {
     });
 
     window.addEventListener("load", () => {
-      sessionStorage.clear();
+      sessionStorage.removeItem('store') 
     });
 
     // // 兼容Android，ios 键盘弹起时，把搜索的数据顶上去影响布局和搜索功能
@@ -87,30 +87,11 @@ export default {
 		}, {passive: false});
   },
   mounted() {
-    // console.log("app");
-    // console.log(document.documentElement.scrollTop);
-    // console.log(this.judgeDeviceType.isIOS);
-    // this.judgeDeviceType.isIOS &&
-    //   document.addEventListener(
-    //     "focus",
-    //     event => {
-    //       if (["input", "textarea"].includes(event.target.localName)) {
-    //         const a = document.documentElement.scrollTop;
-    //         if (a > 0) {
-    //           setTimeout(() => {
-    //             const h = document.getElementsByClassName(
-    //               "loanIns-index-header"
-    //             )[0];
-    //             h.style.top = a + "px";
-    //             console.log(a);
-    //             console.log(h);
-    //             console.log("33");
-    //           }, 1000);
-    //         }
-    //       }
-    //     },
-    //     true
-    //   );
+		var queryVal = this.GetQueryValue("app");
+    if (queryVal === "youjie") {
+			 this.getUserInfo();
+    }
+   
   },
   methods: {
     listenKeybord($input) {
@@ -161,6 +142,28 @@ export default {
           },
           false
         );
+      }
+		},
+		getUserInfo() {
+			let xui = requireModuleJs("xui");
+      let obj = xui.getUserInfo();
+			let token = xui.getDeviceTokens();
+			sessionStorage.setItem("userInfo", JSON.stringify(obj));
+			sessionStorage.setItem("x-token", JSON.stringify(token));
+			// alert('APPuserInfo');
+			// alert(JSON.parse(sessionStorage.getItem("userInfo")));
+			// alert('APPx-token');
+			// alert(JSON.parse(sessionStorage.getItem("x-token")));
+      // await this.getList();
+    },
+		GetQueryValue(queryName) {
+      var query = decodeURI(window.location.search.substring(1));
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == queryName) {
+          return pair[1];
+        }
       }
     }
   }

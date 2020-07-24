@@ -103,7 +103,10 @@ const getters = {
         break;
       case "newly45":
         obj2 = loanlnspection.m6.newly45;
-        break;
+				break;
+			case "newly6":
+				obj2 = loanlnspection.m6.newly6;
+				break;
       case "newlyDefinite16":
         obj2 = loanlnspection.m6.definite16;
         break;
@@ -118,7 +121,12 @@ const getters = {
           if (!forBizDetail[key]) {
             obj2[key] = "1";
           }
-        }
+        }else if(key === "securityKind"){
+					if (!forBizDetail[key]) {
+            obj2[key] =["1"];
+          }
+
+				}
       }
     });
     if (name === "definite10" || name === "overalltDefinite10") {
@@ -126,17 +134,13 @@ const getters = {
     } else if (name === "processing4") {
       obj2.imageList = state.footerNext.forBizDetail.pic_1s;
     } else if (name === "newly2") {
-      obj2.summaryForCheck = state.footerNext.forBizDetail.summaryForCheck;
+      obj2.summarySituMsg = state.footerNext.forBizDetail.summarySituMsg;
     }
 
     return obj2;
   },
   saveFlag: state => state.footerNext.saveFlag,
   queryDetail: state => state.footerNext.queryDetail,
-  m1Definite1: state => state.creditFirst.m1Definite1,
-  m1Definite2: state => state.creditFirst.m1Definite2,
-  m1Definite16: state => state.creditFirst.m1Definite16,
-  m1Definite3: state => state.creditFirst.m1Definite3,
   userBizType: state => state.userStore.userBizType,
   addmore: state => state.approvalStore.addmore,
   approveDetail: state => type => {
@@ -220,7 +224,8 @@ const getters = {
         obj.newly1 = Object.assign({}, loanlnspection.m6.newly1, params1);
         obj.newly2 = loanlnspection.m6.newly2.assetCreditInfo;
         obj.newly3 = loanlnspection.m6.newly3;
-        obj.newly45 = loanlnspection.m6.newly45;
+				obj.newly45 = loanlnspection.m6.newly45;
+				obj.newly6 = loanlnspection.m6.newly6;
         obj.definite16 = loanlnspection.m6.definite16;
         break;
     }
@@ -243,14 +248,19 @@ const getters = {
               if (!approveData[k]) {
                 obj[key][k] = "1";
               }
-            }
+            }else if(key === "securityKind"){
+							if (!forBizDetail[key]) {
+								obj2[key] =["1"];
+							}
+		
+						}
           }
         });
         if (key === "definite10" || key === "definite11") {
           obj[key].msg = state.approvalStore.approveDetail.msg;
         } else if (key === "newly2") {
-          obj[key].summaryForCheck =
-            state.approvalStore.approveDetail.summaryForCheck;
+          obj[key].summarySituMsg =
+            state.approvalStore.approveDetail.summarySituMsg;
         }
       }
     });
@@ -362,7 +372,10 @@ const getters = {
         break;
       case "userNewly45":
         obj2 = loanlnspection.m6.newly45;
-        break;
+				break;
+			case "userNewly6":
+				obj2 = loanlnspection.m6.newly6;
+				break;
       case "userNewlyDefinite16":
         obj2 = loanlnspection.m6.definite16;
         break;
@@ -377,7 +390,13 @@ const getters = {
           if (!forBizDetail[key]) {
             obj2[key] = "1";
           }
-        }
+        }else if(key === "securityKind"){
+					console.log(forBizDetail[key])
+					if (!forBizDetail[key]) {
+            obj2[key] =["1"];
+          }
+
+				}
       }
     });
     if (name === "userRoutineDefinite10" || name === "userOveralltDefinite10") {
@@ -385,8 +404,9 @@ const getters = {
     } else if (name === "userReInsProcessing4") {
       obj2.imageList = state.userStore.userForBizDetail.pic_1s;
     } else if (name === "userNewly2") {
-      obj2.summaryForCheck = state.userStore.userForBizDetail.summaryForCheck;
-    }
+      obj2.summarySituMsg = state.userStore.userForBizDetail.summarySituMsg;
+		}
+	
 
     return obj2;
   },

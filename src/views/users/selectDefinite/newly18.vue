@@ -156,7 +156,8 @@ export default {
         this.$refs.fieldTwo.params,
         this.$refs.fieldThree.params,
         this.$refs.fieldFour.params,
-        this.$refs.fieldFive.params
+				this.$refs.fieldFive.params,
+				this.detail
       );
       this.loanBusiness = loanBusiness;
     }

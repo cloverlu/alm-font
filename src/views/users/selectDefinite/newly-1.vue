@@ -141,7 +141,7 @@ export default {
         checkModel: "", // 检查模式
         lineAmout: "", // 授信金额
         lineBalance: "", // 授信余额
-        securityKind: "1", // 担保方式
+        securityKind: ["1"], // 担保方式
         cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
@@ -185,7 +185,7 @@ export default {
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
-      this.loanBusiness = this.params;
+			this.loanBusiness = Object.assign({},this.detail,this.params);
     }
   },
   methods: {
