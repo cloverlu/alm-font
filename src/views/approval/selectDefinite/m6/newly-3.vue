@@ -153,6 +153,21 @@
           style="overflow:hidden"
           :disabled="true"
         ></mt-field>
+       <div class="item">
+          <span class="tag1"
+            >企业订单是否出现大幅下降（降幅达30%）
+          </span>
+          <span class="info" v-if="detail.orderDecline === 1">是</span>
+          <span class="info" v-if="detail.orderDecline === 0">否</span>
+        </div>
+        <mt-field
+          type="textarea"
+          rows="3"
+          v-model="detail.orderDeclinemsg"
+          class="textArea"
+          style="overflow:hidden"
+          :disabled="true"
+        ></mt-field>
         <div class="item">
           <span class="tag">企业生产经营是否有安全隐患</span>
           <span class="info" v-if="detail.hiddenTroubleSitu === 1">是</span>

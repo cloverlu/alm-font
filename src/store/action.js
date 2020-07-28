@@ -112,6 +112,9 @@ const actions = {
   },
   setTranSactName1: ({ commit }, tranSactName1) => {
     return commit("SET_TRANSACTNAME1", tranSactName1);
+	},
+	setSaveFlag45: ({ commit }, flagSava45) => {
+    return commit("SET_FLAGSAVE45", flagSava45);
   }
 };
 

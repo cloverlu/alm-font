@@ -235,6 +235,29 @@
           style="overflow:hidden"
           placeholder="请输入"
         ></mt-field>
+       <div class="item">
+          <span class="tag1"
+            >企业订单是否出现大幅下降（降幅达30%）
+          </span>
+          <almSelect
+            :selectData="yesNo"
+            :defaultValue="params.orderDecline"
+            :triggerId="orderDecline"
+            :title="selectTitle14"
+            :fontColor="fontColor"
+            @getSelectValue="getSelectorderDecline"
+            class="info"
+          ></almSelect>
+          <span class="iconfont iconxiala arrow"></span>
+        </div>
+        <mt-field
+          type="textarea"
+          rows="3"
+          v-model="params.orderDeclinemsg"
+          class="textArea"
+          style="overflow:hidden"
+          placeholder="请输入"
+        ></mt-field>
         <div class="item">
           <span class="tag">企业生产经营是否有安全隐患</span>
           <almSelect
@@ -373,7 +396,8 @@ export default {
       cashMatchesAndProAndOpe: "cashMatchesAndProAndOpe",
       addedLoans: "addedLoans",
       shrinkLoanScale: "shrinkLoanScale",
-      addedGuarantees: "addedGuarantees",
+			addedGuarantees: "addedGuarantees",
+      orderDecline:'orderDecline',
       popupVisible: false,
       payType: 1,
       fontColor: "blue",
@@ -390,7 +414,8 @@ export default {
         "制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降(降幅达30%)",
       selectTitle11: "企业生产经营是否有安全隐患",
       selectTitle12: "剔除季节性因素后的现金流是否有大幅下降(降幅超30%)",
-      selectTitle13: "现金流与营业收入是否基本匹配",
+			selectTitle13: "现金流与营业收入是否基本匹配",
+			selectTitle14:"企业订单是否出现大幅下降（降幅达30%）",
       params: {
         ownerStruSame: 1, // 企业实际股权结构是否与上述工商信息网查询一致
         ownerStruSameMsg: "", // 实际股权结构与工商信息网查询说明
@@ -421,7 +446,9 @@ export default {
         cashMatchesAndProAndOpe: 1, // 现金流与营业收入是否基本匹配
         cashOtherMsg: "", // 现金流其他说明
         summaryForCheck: "", // 检查要点小结
-        otherSitu: "" // 其他情况
+				otherSitu: "", // 其他情况
+				orderDecline:1,
+				orderDeclinemsg:''
       },
       loanBusiness: {}
     };
@@ -492,7 +519,10 @@ export default {
     },
     getSelectCashMatchesAndProAndOpe(data) {
       this.params.cashMatchesAndProAndOpe = data[0].key;
-    }
+		},
+		getSelectorderDecline(data){
+			this.params.orderDecline = data[0].key;
+		}
   }
 };
 </script>

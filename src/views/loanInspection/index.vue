@@ -27,7 +27,7 @@
 import loadInsList from "../loanInspection/indexList";
 import footerNext from "../loanInspection/components/footerNext";
 import Scroll from "../../components/Scroll";
-import { getToDoList, getNoticeCheckList } from "../../api/loanlnspection";
+import { getToDoList} from "../../api/loanlnspection";
 import { normalMixin } from "../../utils/mixin";
 export default {
   components: { loadInsList, Scroll, footerNext },

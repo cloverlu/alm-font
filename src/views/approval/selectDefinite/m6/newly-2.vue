@@ -18,7 +18,7 @@
           <mt-cell
             class="textFiled"
             title="征信报告查询日期"
-            value="2020-06-02"
+            :value="detail.queryDate"
           ></mt-cell>
           <mt-cell
             class="textFiled"

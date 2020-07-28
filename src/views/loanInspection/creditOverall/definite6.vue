@@ -129,7 +129,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.startDate;
       }
-      this.params.collEstimateDate = formatDate(this.pickerValue);
+			// this.params.collEstimateDate = formatDate(this.pickerValue);
+			this.$set(this.params,'collEstimateDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     },
     IndustrycChangSiut(val) {

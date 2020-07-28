@@ -229,13 +229,15 @@ export default {
     },
     // 选定时间确定
     handleConfirm(checkStage, i) {
-      console.log(this.timePicker[i].timeP);
+      // console.log(this.timePicker[i].timeP);
       this.params.stageData.forEach(item => {
         if (item.checkStage === checkStage) {
           if (!this.timePicker[i].timeP) {
-            item.expectRepayDate = formatDate(this.endDate);
+						// item.expectRepayDate = formatDate(this.endDate);
+						this.$set(item,'expectRepayDate',formatDate(this.endDate))
           } else {
-            item.expectRepayDate = formatDate(this.timePicker[i].timeP);
+						// item.expectRepayDate = formatDate(this.timePicker[i].timeP);
+						this.$set(item,'expectRepayDate',formatDate(this.timePicker[i].timeP))
           }
         }
       });

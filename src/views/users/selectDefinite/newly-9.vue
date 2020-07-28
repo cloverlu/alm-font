@@ -130,7 +130,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.repayDate = formatDate(this.pickerValue);
+			// this.params.repayDate = formatDate(this.pickerValue);
+			this.$set(this.params,'repayDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

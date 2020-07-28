@@ -410,7 +410,8 @@ const getters = {
 
     return obj2;
   },
-  tranSactName1: state => state.footerNext.tranSactName1
+	tranSactName1: state => state.footerNext.tranSactName1,
+	flagSava45: state => state.footerNext.flagSava45
 };
 
 export default getters;

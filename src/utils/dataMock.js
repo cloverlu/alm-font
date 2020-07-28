@@ -114,7 +114,7 @@ const DetailsOfIOU = {
   dailyExpenChangSitu: "xxx", //水煤电气变动情况
   proAndOpeAbnormalSuitMsg:
     "根据财务信息及现场检查情况，判断企业是否生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，并详细阐述异常情况对企业偿债能力的影响。", //企业生产经营是否出现异常情况说明
-  existRisk: true, //是否存在风险预警信号
+  existRisk: 1, //是否存在风险预警信号
   riskMsg: "有危险", //预警信号说明
   suggest: "建议你重置", //检查结论及措施建议
   emplSign: "admin" //检查人员签字
@@ -791,7 +791,7 @@ const payIntentionsArr = [
   }
 ];
 //新增1-4
-const newly4 = [
+const newly44 = [
   // {
   //   id: 1,
   //   name: "押品价值及变现能力变动情况",
@@ -858,19 +858,19 @@ const definite16Normal = {
   lineBalance: "" //贷款余额
 };
 
-//api公用用户（当前没有用户接口接入）
-const userInfo = {
-	emplName: "王萌",
-	orgCode : "32000018",
-	orgName:"I苏省分行"
-
-};
+// //api公用用户（当前没有用户接口接入）
 // const userInfo = {
-// 	emplName: "金林",
-// 	orgCode : "",
-// 	orgName:""
+// 	emplName: "王萌",
+// 	orgCode : "32000018",
+// 	orgName:"I苏省分行"
 
 // };
+const userInfo = {
+	emplName: "金林",
+	orgCode : "",
+	orgName:""
+
+};
 const userInfo2 = {
   emplName: "金林"
 };
@@ -934,7 +934,7 @@ export {
   caiwuSeven,
   caiwuEight,
   bizTypes,
-  newly4,
+  newly44,
   receipt1,
   payIntentionsArr,
   checklist1,

@@ -453,7 +453,9 @@ const loanlnspection = {
       cashMatchesAndProAndOpe: 0, // 现金流与营业收入是否基本匹配
       cashOtherMsg: "", // 现金流其他说明
       summaryForCheck: "", // 检查要点小结
-      otherSitu: "" // 其他情况
+			otherSitu: "" ,// 其他情况
+			orderDecline:1,
+			orderDeclinemsg:''
     },
     newly45: {
       bizId: "",
