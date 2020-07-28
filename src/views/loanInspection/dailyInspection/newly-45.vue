@@ -13,29 +13,35 @@
 				.definite-89-title1 
 					.titil-89 {{option[0].text}}
 				.definite-89-content
-					newly4(:detail="params" @upperParams4="upperParams4")
+					newly4(:detail="params" @upperParams4="upperParams4" ref="upperParams4")
+					.newly-4-norepeat
+						fieldOne(:definite="newly44" :info="params" :read="false" ref="fieldOne")
 			.wrapper-89
 				.definite-89-title1
 					.titil-89 {{option[1].text}}
 				.definite-89-content
-					newly5(:detail="params" @upperParams5="upperParams5")
+					newly5(:detail="params" @upperParams5="upperParams5" ref="upperParams5")
 </template>
 
 <script>
 import newly4 from "../dailyInspection/newly-4";
 import newly5 from "../dailyInspection/newly-5";
+import fieldOne from '../components/fieldOne'
+import {newly44} from '../../../utils/dataMock'
 import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   components: {
     newly4,
-    newly5
+		newly5,
+		fieldOne
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
   data() {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
-      dropVisibale: false,
+			dropVisibale: false,
+			newly44:newly44,
       value: 0,
       option: [
         { text: "房地产抵押担保适用", value: 0 },
@@ -43,8 +49,10 @@ export default {
       ],
       params: {
         assitInfoForPledge: [],
-        assitInfoForGuarantee: []
-      },
+				assitInfoForGuarantee: [],
+				assitOtherSuit:'',
+				summaryForAssit:''
+			},
       loanBusiness: {}
     };
   },
@@ -62,14 +70,37 @@ export default {
       const flag = this.$route.params.saveFlag;
       this.mountedTag(flag, name, this.$route.params.bizId);
     }
-  },
+	},
+	watch:{
+		// async flagSava45(val,oldval){
+		// 	if(val !== oldval){
+		// 		const name = this.$route.name;
+		// 		await this.setforDizDetail(this);
+		// 		this.params = this.forBizDetail(name);
+		// 		console.log(this.params)
+		// 		// this.info.filter(item => {
+		// 		// 	info.filter(item2 => {
+		// 		// 			this.$set(item,'id',item2.id)
+
+		// 		// 	})
+				
+		// 		// })
+		// 	}
+		// }
+		
+	},
 
   methods: {
     upperParams4(val) {
-      this.loanBusiness = Object.assign({}, this.params, val);
+			this.loanBusiness.assitInfoForPledge = val
+			this.loanBusiness.assitOtherSuit= this.$refs.fieldOne.params.assitOtherSuit
+			this.loanBusiness.summaryForAssit= this.$refs.fieldOne.params.summaryForAssit
+			
     },
     upperParams5(val) {
-      this.loanBusiness = Object.assign({}, this.params, val);
+			this.loanBusiness.assitInfoForGuarantee =val
+				this.loanBusiness.assitOtherSuit= this.$refs.fieldOne.params.assitOtherSuit
+			this.loanBusiness.summaryForAssit= this.$refs.fieldOne.params.summaryForAssit
     }
   }
 };

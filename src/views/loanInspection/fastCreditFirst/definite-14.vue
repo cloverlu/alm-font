@@ -323,7 +323,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.startDate;
       }
-      this.params.loanDate = formatDate(this.pickerValue);
+			// this.params.loanDate = formatDate(this.pickerValue);
+			this.$set(this.params,'loanDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

@@ -15,7 +15,10 @@ const footerNext = {
         // 前端判断有没有有保存操作
         saveFlag: [],
         // 判断是不是回退的单子
-        tranSactName1: {}
+				tranSactName1: {},
+				// 判断newly45页面多次保存多次向数据库加同样数据的问题
+				flagSava45:{}
+
       },
   mutations: {
     SET_NEXTFOOTER: (state, nextFooter) => {
@@ -38,6 +41,9 @@ const footerNext = {
     },
     SET_TRANSACTNAME1: (state, tranSactName1) => {
       state.tranSactName1 = tranSactName1;
+		},
+		SET_FLAGSAVE45: (state, flagSava45) => {
+      state.flagSava45 = flagSava45;
     }
   }
 };

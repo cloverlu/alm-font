@@ -273,7 +273,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.queryDate = formatDate(this.pickerValue);
+			// this.params.queryDate = formatDate(this.pickerValue);
+			this.$set(this.params, 'queryDate', formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

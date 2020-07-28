@@ -117,7 +117,7 @@
         ></mt-field>
         <mt-field
           class="textFiled"
-          label="对外担保笔数（笔）"
+          label="对外担保金额（万元）"
           placeholder="请输入"
           v-model="params.guaranteeAmoutCon"
         ></mt-field>
@@ -185,7 +185,8 @@
             placeholder="请输入"
             v-model="params.creditClassificationJur"
           ></mt-field>
-          <div class="formTitle1">
+        </div>
+				 <div class="formTitle1">
             <!-- <span class="lightBlue"></span>
             <span class="coNameBlack">征信分类</span>-->
             <span class="lightBlue1"></span>
@@ -194,7 +195,6 @@
           <div class="coNo1">
             （1）未结清贷款、未销户贷记卡（含准贷记）及对外担保情况
           </div>
-        </div>
         <mt-field
           class="textFiled"
           label="未结清贷款笔数（笔）"
@@ -239,9 +239,9 @@
         <!--  -->
         <mt-field
           class="textFiled"
-          label="授信总金额（万元）"
+          label="对外担保笔数（笔）"
           placeholder="请输入"
-          v-model="params.lineAmout"
+          v-model="params.guaranteeNumJur"
         ></mt-field>
         <mt-field
           class="textFiled"
@@ -310,7 +310,7 @@
           <almSelect
             :selectData="yesNo"
             :defaultValue="params.existCreditChager6"
-            :triggerId="existCreditChage3"
+            :triggerId="existCreditChager6"
             :title="selectTitle"
             :fontColor="fontColor"
             @getSelectValue="getSelect5"
@@ -371,7 +371,8 @@ export default {
       existBadRecordJur: "existBadRecordJur",
       existCreditChage4: "existCreditChage4",
       existCreditChage5: "existCreditChage5",
-      existCreditChage3: "existCreditChage3",
+			existCreditChage3: "existCreditChage3",
+			existCreditChager6:'existCreditChager6',
       params: {
         queryDateForCom: "",
         creditClassification: "", // 征信分类
@@ -410,7 +411,7 @@ export default {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
         existCreditChage6: "", // 企业其他保证人 征信变化是否变化
-        existCreditChager6: "",
+        existCreditChager6: 1,
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
@@ -463,7 +464,7 @@ export default {
       this.params.existCreditChage5 = data[0].key;
     },
     getSelect5(data) {
-      this.params.existCreditChage3 = data[0].key;
+      this.params.existCreditChager6 = data[0].key;
     },
     a() {
       this.$refs.picker.open();
@@ -472,7 +473,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.queryDateForCom = formatDate(this.pickerValue);
+			// this.params.queryDateForCom = formatDate(this.pickerValue);
+			this.$set(this.params, 'queryDateForCom', formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }
@@ -614,8 +616,8 @@ export default {
 }
 
 .titleBox {
-  height: px2rem(135);
-  padding-top: px2rem(5);
+  // height: px2rem(135);
+  padding: px2rem(5);
   background-color: #f7f7f7;
   .formTitle1 {
     width: 100%;

@@ -5,13 +5,13 @@
 -->
 <template lang="pug">
 	.newly4
-		.newly-4-repeat(v-for="(item,index) in info.assitInfoForPledge" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''" )
+		.newly-4-repeat(v-for="(item,index) in info" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''" )
 			.repeat-operation(v-if="index !== 0")
 				.repeat-operation-title 新增 
 				.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
 			.definite-field
 				.item 
-					span(class="tag big") 押品名称
+					span(class="tag big") 押品名称 
 					span(class="info") 
 						input(v-model="item.assitName" type="input" class="field-input" placeholder="请输入")
 				.item
@@ -59,29 +59,29 @@
 						input(v-model="item.thisMortAndpleRate" type="input" class="field-input" placeholder="请输入")
 			
 				.item2(class="one-line")
-					.tag 押品价值及变现能力变动情况
+					.tag 押品价值及变现能力变动情况 
 					span(class="item-textarea")
 						mt-field(v-model="item.assitChangeSuit"  class="textArea" type="textarea" rows="3" placeholder="请输入" )
 		.add
 			mt-button(class="add-primary" type="primary" @click="addInfo") + 增加
-		.newly-4-norepeat
-			fieldOne(:definite="newly4" :info="info" ref="fieldOne")
+		//- .newly-4-norepeat
+		//- 	fieldOne(:definite="newly4" :info="info" :read="false" ref="fieldOne")
 
 		
 
 </template>
 
 <script>
-import { newly4 } from "../../../utils/dataMock.js";
+// import { newly44 } from "../../../utils/dataMock.js";
 import { Button } from "mint-ui";
-import fieldOne from "../components/fieldOne";
 import { normalMixin } from "../../../utils/mixin";
 export default {
-  components: { "mt-button": Button, fieldOne },
-  props: ["detail"],
+  components: { "mt-button": Button },
+  props: ["detail","uBizId"],
   mixins: [normalMixin],
   data() {
     return {
+			bizId: this.$route.params.bizId || this.uBizId,
       params: {},
       trasIndex: "",
       info: {
@@ -100,25 +100,39 @@ export default {
             thisEstimateValue: "", //我行认定价值
             thisMortAndpleRate: "" //抵质押率
           }
-        ]
+				],
+				// assitOtherSuit:'',
+				// summaryForAssit:''
+			
       },
-      newly4: newly4
+      // newly4: newly44
     };
   },
   mounted() {
-    this.info = this.detail;
+	
+		this.info = this.detail.assitInfoForPledge
   },
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = Object.assign({}, this.info, this.$refs.fieldOne.params);
-        this.$emit("upperParams4", this.params);
+				this.params = this.info
+				console.log(this.params)
+				this.$emit("upperParams4", this.params);
       }
     },
     detail(val, oldval) {
-      this.info = val;
-      console.log(this.info);
-    }
+			this.info = val.assitInfoForPledge
+		
+		},
+		async flagSava45(val,oldval){
+			if(val !== oldval){
+				const name = this.$route.name;
+				await this.setforDizDetail(this);
+				this.info = this.forBizDetail(name).assitInfoForPledge;
+				// console.log(this.info)
+			
+			}
+		}
   },
   methods: {
     addInfo() {
@@ -137,14 +151,14 @@ export default {
         thisEstimateValue: "", //我行认定价值
         thisMortAndpleRate: "" //抵质押率
       };
-      console.log(this.info.assitInfoForPledge);
-      this.info.assitInfoForPledge.push(item);
+      this.info.push(item);
     },
     operateDelete(index, id) {
       this.trasIndex = id;
       setTimeout(() => {
-        this.info.assitInfoForPledge.splice(index, 1);
-      }, 300);
+        this.info.splice(index, 1);
+			}, 300);
+			console.log(this.info)
     }
   }
 };

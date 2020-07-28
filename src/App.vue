@@ -88,10 +88,21 @@ export default {
   },
   mounted() {
 		var queryVal = this.GetQueryValue("app");
-    if (queryVal === "youjie") {
-			 this.getUserInfo();
-    }
-   
+		alert(queryVal)
+		if (queryVal === "youjie") {
+			alert('进来了')
+			this.getUserInfo();
+		}else{
+			alert('没有进来')
+			const userInfo = {
+				userName: "金林",
+				instId : "12222",
+				instName:"南京"
+			};
+		
+			sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+		}
+
   },
   methods: {
     listenKeybord($input) {
@@ -144,17 +155,24 @@ export default {
         );
       }
 		},
-		getUserInfo() {
-			let xui = requireModuleJs("xui");
-      let obj = xui.getUserInfo();
+		async getUserInfo() {
+			let xui = await requireModuleJs("xui");
+			let obj = xui.getUserInfo();
+			alert('app-obj')
+			alert(obj)
 			let token = xui.getDeviceTokens();
-			sessionStorage.setItem("userInfo", JSON.stringify(obj));
-			sessionStorage.setItem("x-token", JSON.stringify(token));
-			// alert('APPuserInfo');
-			// alert(JSON.parse(sessionStorage.getItem("userInfo")));
-			// alert('APPx-token');
-			// alert(JSON.parse(sessionStorage.getItem("x-token")));
-      // await this.getList();
+			if(typeof obj ==='object'){
+				sessionStorage.setItem('userInfo', JSON.stringify(obj))
+			}else if(typeof obj === 'string'){
+				sessionStorage.setItem('userInfo', obj)
+			}
+
+			if(typeof token ==='object'){
+				sessionStorage.setItem('x-token', JSON.stringify(token))
+			}else if(typeof token === 'string'){
+				sessionStorage.setItem('x-token', token)
+			}
+		
     },
 		GetQueryValue(queryName) {
       var query = decodeURI(window.location.search.substring(1));

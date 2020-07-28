@@ -6,7 +6,7 @@
 <template lang="pug">
 	.newly5-wrapper
 		.wrapper
-			.newly-5-repeat(v-for="(item,index) in info.assitInfoForGuarantee" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
+			.newly-5-repeat(v-for="(item,index) in info" :key="item.id" :class="trasIndex === item.id ? 'transa' : ''")
 				.repeat-operation(v-if="index !== 0")
 					.repeat-operation-title 新增 
 					.repeat-operation-delete(@click="operateDelete(index,item.id)")  删除
@@ -32,10 +32,11 @@ import { Button } from "mint-ui";
 import { normalMixin } from "../../../utils/mixin";
 export default {
   components: { "mt-button": Button },
-  props: ["detail"],
+  props: ["detail","uBizId"],
   mixins: [normalMixin],
   data() {
     return {
+			bizId: this.$route.params.bizId || this.uBizId,
       info: {
         assitInfoForGuarantee: [
           {
@@ -51,25 +52,34 @@ export default {
     };
   },
   mounted() {
-    this.info = this.detail;
+    this.info = this.detail.assitInfoForGuarantee;
   },
   watch: {
     nextFooter(val, oldval) {
       if (val !== oldval) {
-        this.params = this.info;
+				this.params = this.info;
+				console.log(this.params)
         this.$emit("upperParams5", this.params);
-        console.log(this.params);
       }
     },
     detail(val, oldval) {
-      this.info = val;
-    }
+      this.info = val.assitInfoForGuarantee;
+		},
+		async flagSava45(val,oldval){
+			if(val !== oldval){
+				const name = this.$route.name;
+				await this.setforDizDetail(this);
+				this.info = this.forBizDetail(name).assitInfoForGuarantee;
+				// console.log(this.info)
+			
+			}
+		}
   },
   methods: {
     operateDelete(index, id) {
       this.trasIndex = id;
       setTimeout(() => {
-        this.info.assitInfoForGuarantee.splice(index, 1);
+        this.info.splice(index, 1);
       }, 100);
     },
     addInfo() {
@@ -80,7 +90,7 @@ export default {
         cooperatStatus: "", //我行合作状态
         assitFiveClass: "" //风险分类
       };
-      this.info.assitInfoForGuarantee.push(item);
+      this.info.push(item);
     }
   }
 };

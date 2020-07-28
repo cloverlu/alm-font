@@ -12,7 +12,8 @@ export const normalMixin = {
       "forBizDetail",
       "saveFlag",
       "queryDetail",
-      "tranSactName1"
+			"tranSactName1",
+			"flagSava45"
     ])
   },
   methods: {
@@ -23,7 +24,8 @@ export const normalMixin = {
       "setforDizDetail",
       "setSaveFlag",
       "setqueryDetail",
-      "setTranSactName1"
+			"setTranSactName1",
+			"setSaveFlag45"
     ]),
     // 判断下一步路由该去的页面
     footerRoute(currentType, currentName, params) {
@@ -166,7 +168,10 @@ export const normalMixin = {
           message: "保存成功！",
           iconClass: "iconfont icongou-01",
           duration: 1000
-        });
+				});
+				if(currentName === 'newly45'){
+					this.setSaveFlag45({saveFlag : true,bizId : this.$route.params.bizId,tag: Date.now()})
+				}
         // 保存saveFlag
         const pa = {
           bizId: this.$route.params.bizId,

@@ -22,13 +22,15 @@ import { todoListTitle, userInfo } from "../../utils/dataMock.js";
 import { getToDoList } from "../../api/home";
 import { Toast } from "mint-ui";
 import Scroll from "../../components/Scroll";
+// import global_ from  '../../utils/global'
 export default {
   components: { Scroll },
   data() {
     return {
       todoListTitle: todoListTitle,
       userInfo: userInfo,
-      list: []
+			list: [],
+			// userParams : global_.params
     };
   },
   created() {
@@ -36,26 +38,35 @@ export default {
 	
   },
   mounted() {
-		var params = {}
-		if(JSON.parse(sessionStorage.getItem("userInfo"))){
-			const userInfo = JSON.parse(sessionStorage.getItem("userInfo"))
-			params={
-				emplName:userInfo.userName,
-				orgCode:userInfo.instld,
-				orgName:userInfo.instName
+		alert('todolist')
+		// const userInfo = {
+		// 	emplName: "金林",
+		// 	orgCode : "12222",
+		// 	orgName:"南京"
+		// };
+		// this.getList(userInfo);
+		const param = sessionStorage.getItem("userInfo")
+		if(param){
+			let JsonParamP = {}
+			try{
+					JsonParamP = JSON.parse(param)
+					const params={
+						emplName:JsonParamP.userName,
+						orgCode:JsonParamP.instId,
+						orgName:JsonParamP.instName
+					}
+					alert(params.emplName)
+					this.getList(params);
+				
+			}catch(e){
+					// debugger 看看报的什么错误, 正式环境注释掉alert
+					// 不出意外的话，可能跟之前存储的脏数据有关系。
+					alert(e.toString())
+					JsonParamP = {};
 			}
-		}else{
-			params = this.userInfo
 		}
-		this.getList(params);
-		// alert('todolistuserInfo');
-		// alert(JSON.parse(sessionStorage.getItem("userInfo")));
-		// alert('todolistx-token');
-		// alert(JSON.parse(sessionStorage.getItem("x-token")));
-		// alert('todolistConfigwindow.config');
-		// alert(window.config.host.userInfo.emplName);
-	
-	
+		
+		
   },
   methods: {
     handleClick(id) {

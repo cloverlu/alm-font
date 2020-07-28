@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { loanInsList, loanInsList2, userInfo } from "../../utils/dataMock.js";
+import { loanInsList, loanInsList2} from "../../utils/dataMock.js";
 import { getNoticeCheckList } from "../../api/loanlnspection";
 import { normalMixin } from "../../utils/mixin";
 
@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       list: [],
-      userInfo: userInfo,
       itemType: ""
     };
   },
@@ -55,19 +54,29 @@ export default {
     // 获取列表数据
     getList() {
       this.$Indicator.open();
-      const itemType = { itemType: this.itemType };
-      const params = Object.assign({}, this.userInfo, itemType);
-      getNoticeCheckList(this, { params }).then(res => {
-        if (res.status === 200 && res.data.returnCode === "200000") {
-          this.$Indicator.close();
-          if (res.data.data) {
-            res.data.data.filter(item => {
-              this.bizType(item, item.bizType);
-            });
-          }
-          this.list = res.data.data;
-        }
-      });
+			const param = sessionStorage.getItem("userInfo");
+			if(param){
+					const p = JSON.parse(param)
+					const params={
+						emplName:p.userName,
+						orgCode:p.instId,
+						orgName:p.instName,
+						itemType: this.itemType 
+					}
+					getNoticeCheckList(this, { params }).then(res => {
+					if (res.status === 200 && res.data.returnCode === "200000") {
+						this.$Indicator.close();
+						if (res.data.data) {
+							res.data.data.filter(item => {
+								this.bizType(item, item.bizType);
+							});
+						}
+						this.list = res.data.data;
+					}
+				});
+
+			}
+      
     },
     handleClick(item) {
       //item.bizStatus,item.bizType,item.bizId,item.saveFlag,item.biggerThan500,item.belongBranch,item.currPost
