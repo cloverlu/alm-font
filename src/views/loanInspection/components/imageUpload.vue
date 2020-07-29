@@ -16,6 +16,7 @@
 				:after-read="afterRead" 
 				@delete="deleteImage"
 				v-if="imageHas"
+				:deletable="!imageHas"
 			)
 			span(v-else-if="!imageHas") 无照片 
 		//- img(id="img1" src="../../../assets/666.png")
@@ -33,7 +34,7 @@ export default {
     Toast
   },
 
-  data() {
+  data () {
     return {
       fileList: [],
       images: [],
@@ -46,10 +47,10 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     // console.log(this.fileList);
   },
-  mounted() {
+  mounted () {
     const arr = this.itemVmodel[this.item.vModel];
     if (arr && arr[0] && arr[0].url !== "") {
       if (arr.length > 0) {
@@ -83,7 +84,7 @@ export default {
     }
   },
   watch: {
-    itemVmodel(val, oldval) {
+    itemVmodel (val, oldval) {
       const arr = val[this.item.vModel];
       if (arr && arr[0] && arr[0].url !== "") {
         if (arr.length > 0) {
@@ -115,17 +116,17 @@ export default {
   },
   methods: {
     //删除文件
-    deleteImage(file, event) {
+    deleteImage (file, event) {
       const newFileList = this.fileList[this.item.vModel];
       newFileList.splice(event.index, 1);
     },
     // 获取图片坐标(文件法)
-    getLo(file, index) {
+    getLo (file, index) {
       const newFileList = this.fileList[this.item.vModel];
       let Longitude;
       let Latitude;
-      var getdate = function(e) {
-        EXIF.getData(e, function() {
+      var getdate = function (e) {
+        EXIF.getData(e, function () {
           let SubjectLocation = EXIF.getAllTags(e);
           // console.log("imgdata", SubjectLocation);
 
@@ -154,7 +155,7 @@ export default {
       getdate(file);
     },
     // 获取图片坐标（获取dom法）
-    getOrientation(index) {
+    getOrientation (index) {
       const newFileList = this.fileList[this.item.vModel];
       var vModel = document.getElementById(this.item.vId);
       var img1 = vModel.getElementsByClassName("van-image__img")[index];
@@ -171,7 +172,7 @@ export default {
         newFileList[index].longitude = coordinate.longitude;
         return false;
       }
-      EXIF.getData(img1, function() {
+      EXIF.getData(img1, function () {
         const _GPSLongitude = JSON.stringify(EXIF.getTag(this, "GPSLongitude"));
         const _GPSLatitude = JSON.stringify(EXIF.getTag(this, "GPSLatitude"));
         if (_GPSLongitude) {
@@ -190,10 +191,11 @@ export default {
       newFileList[index].longitude = coordinate.longitude;
     },
     // 上传之前
-    async beforeRead(file) {
+    async beforeRead (file) {
       // this.$Indicator.open();
       // console.log(this.fileList[this.item.vModel]);
       // const a = this.fileList[this.item.vModel].length;
+      alert('上传之前')
       this.fileList[this.item.vModel].push({
         status: "uploading",
         message: "上传中"
@@ -219,15 +221,16 @@ export default {
       });
     },
     //删除之前的回调
-    async afterDelete(file, event) {
+    async afterDelete (file, event) {
       return new Promise((resolve, reject) => {
         resolve();
       });
     },
-    async afterRead(file) {
+    async afterRead (file) {
       //上传完成
       // console.log(file, "afterRead-file");
       // console.log(this.fileList, "afterRead-this.fileList");
+      alert('上传中，还未走接口')
 
       //上传图片
       let params = new FormData();
@@ -237,7 +240,9 @@ export default {
       var newFileList;
 
       const imageUploadRes = await imageUpload(this, params).then(res => {
+        alert('进入接口')
         if (res.status === 200 && res.data.returnCode === "200000") {
+          alert('接口返回成功')
           file.status = "done";
           file.message = "上传成功";
           this.$Indicator.close();
@@ -252,6 +257,7 @@ export default {
           newFileList[newFileList.length - 1].url = res.data.picUrl;
           newFileList[newFileList.length - 1].status = "done";
         } else {
+          alert('接口返回失败')
           newFileList[newFileList.length - 1].message = "上传失败";
           newFileList[newFileList.length - 1].status = "failed";
         }
@@ -270,7 +276,7 @@ export default {
         this.getLo(file.file, index);
       }
     },
-    imgPreview(file) {
+    imgPreview (file) {
       let self = this;
       // 看支持不支持FileReader
       if (!file || !window.FileReader) return;
@@ -278,7 +284,7 @@ export default {
       // 将图片2将转成 base64 格式
       reader.readAsDataURL(file);
       // 读取成功后的回调
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         //此处的this是reader
         let result = this.result;
         let img = new Image();
@@ -289,7 +295,7 @@ export default {
           file.cusContent = result;
           self.isloadImg = false;
         } else {
-          img.onload = function() {
+          img.onload = function () {
             let data = self.compress(img);
             file.cusContent = data;
             // console.log(file.size);
@@ -299,7 +305,7 @@ export default {
       };
     },
     // 压缩图片
-    compress(img) {
+    compress (img) {
       let canvas = document.createElement("canvas");
       let ctx = canvas.getContext("2d");
       //瓦片canvas

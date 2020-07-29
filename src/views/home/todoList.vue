@@ -22,54 +22,79 @@ import { todoListTitle, userInfo } from "../../utils/dataMock.js";
 import { getToDoList } from "../../api/home";
 import { Toast } from "mint-ui";
 import Scroll from "../../components/Scroll";
-// import global_ from  '../../utils/global'
+// import global_ from '../../utils/global'
+import { GetQueryValue } from '../../utils/utils'
 export default {
   components: { Scroll },
-  data() {
+  data () {
     return {
       todoListTitle: todoListTitle,
       userInfo: userInfo,
-			list: [],
-			// userParams : global_.params
+      list: [],
+      // userParams: global_.param
     };
   },
-  created() {
-		
-	
+  created () {
+
+
   },
-  mounted() {
-		alert('todolist')
-		// const userInfo = {
-		// 	emplName: "金林",
-		// 	orgCode : "12222",
-		// 	orgName:"南京"
-		// };
-		// this.getList(userInfo);
-		const param = sessionStorage.getItem("userInfo")
-		if(param){
-			let JsonParamP = {}
-			try{
-					JsonParamP = JSON.parse(param)
-					const params={
-						emplName:JsonParamP.userName,
-						orgCode:JsonParamP.instId,
-						orgName:JsonParamP.instName
-					}
-					alert(params.emplName)
-					this.getList(params);
-				
-			}catch(e){
-					// debugger 看看报的什么错误, 正式环境注释掉alert
-					// 不出意外的话，可能跟之前存储的脏数据有关系。
-					alert(e.toString())
-					JsonParamP = {};
-			}
-		}
-		
-		
+  mounted () {
+    var params = {}
+    alert('todolist')
+    if (GetQueryValue("app") === 'youjie') {
+      alert(GetQueryValue("app"))
+      params = {
+        emplName: GetQueryValue("userName"),
+        orgCode: GetQueryValue("instId"),
+        orgName: GetQueryValue("instName"),
+      };
+
+    } else {
+      params = {
+        emplName: "金林",
+        orgCode: "12222",
+        orgName: "南京"
+      };
+    }
+    alert(params.emplName)
+    this.getList(params)
+    // const userInfo = {
+    // 	emplName: "金林",
+    // 	orgCode : "12222",
+    // 	orgName:"南京"
+    // };
+    // this.getList(userInfo);
+    // const param = sessionStorage.getItem("userInfo")
+    // if(param){
+    // 	let JsonParamP = {}
+    // 	try{
+    // 			JsonParamP = JSON.parse(param)
+    // 			const params={
+    // 				emplName:JsonParamP.userName,
+    // 				orgCode:JsonParamP.instId,
+    // 				orgName:JsonParamP.instName
+    // 			}
+    // 			alert(params.emplName)
+    // 			this.getList(params);
+
+    // 	}catch(e){
+    // 			// debugger 看看报的什么错误, 正式环境注释掉alert
+    // 			// 不出意外的话，可能跟之前存储的脏数据有关系。
+    // 			alert(e.toString())
+    // 			JsonParamP = {};
+    // 	}
+    // }
+    // window.addEventListener('getUserInfo',function(res){
+    // 	alert('wqefregergkt')
+    // 	  alert(typeof res.detail.userInfo)
+    //     alert(JSON.stringify(res.detail.userInfo))
+    // });
+
+
+
   },
   methods: {
-    handleClick(id) {
+    handleClick (id) {
       if (id === 2) {
         this.$router.push({
           name: "loanInspectionIndex",
@@ -86,7 +111,7 @@ export default {
         });
       }
     },
-    getList(params) {
+    getList (params) {
       this.$Indicator.open();
       getToDoList(this, { params }).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
@@ -101,11 +126,11 @@ export default {
       });
     },
     // getUserInfo() {
-		// 	alert("成功获取用户信息");
-		// 	let xui = requireModuleJs("xui");
+    // 	alert("成功获取用户信息");
+    // 	let xui = requireModuleJs("xui");
     //   let obj = xui.getUserInfo();
-		// 	let token = xui.getDeviceTokens();
-		// 	alert(requireModuleJs("xui"));
+    // 	let token = xui.getDeviceTokens();
+    // 	alert(requireModuleJs("xui"));
     //   alert(obj);
     //   alert(token);
     //   // await this.getList();

@@ -28,57 +28,70 @@
 </template>
 
 <script>
-import { loanInsList, loanInsList2} from "../../utils/dataMock.js";
+import { loanInsList, loanInsList2 } from "../../utils/dataMock.js";
 import { getNoticeCheckList } from "../../api/loanlnspection";
 import { normalMixin } from "../../utils/mixin";
-
+// import global_ from  '../../utils/global'
+import { GetQueryValue } from '../../utils/utils'
 export default {
   mixins: [normalMixin],
-  data() {
+  data () {
     return {
       list: [],
-      itemType: ""
+      itemType: "",
+      // userParams: global_.param
     };
   },
   watch: {},
-  mounted() {
+  mounted () {
     if (this.$route.name === "loanInspectionIndex") {
       // this.list = loanInsList();
       this.itemType = "2";
     } else if (this.$route.name === "approvalIndex") {
       this.itemType = "1";
     }
-    this.getList();
+
+    var params = {}
+    if (GetQueryValue("app") === 'youjie') {
+      params = {
+        emplName: GetQueryValue("userName"),
+        orgCode: GetQueryValue("instId"),
+        orgName: GetQueryValue("instName"),
+      };
+
+    } else {
+      params = {
+        emplName: "金林",
+        orgCode: "12222",
+        orgName: "南京"
+      };
+    }
+    this.getList(params);
   },
   methods: {
     // 获取列表数据
-    getList() {
+    getList (userParams) {
       this.$Indicator.open();
-			const param = sessionStorage.getItem("userInfo");
-			if(param){
-					const p = JSON.parse(param)
-					const params={
-						emplName:p.userName,
-						orgCode:p.instId,
-						orgName:p.instName,
-						itemType: this.itemType 
-					}
-					getNoticeCheckList(this, { params }).then(res => {
-					if (res.status === 200 && res.data.returnCode === "200000") {
-						this.$Indicator.close();
-						if (res.data.data) {
-							res.data.data.filter(item => {
-								this.bizType(item, item.bizType);
-							});
-						}
-						this.list = res.data.data;
-					}
-				});
+      const item = {
+        itemType: this.itemType
+      }
+      const params = Object.assign({}, item, userParams)
+      getNoticeCheckList(this, { params }).then(res => {
+        if (res.status === 200 && res.data.returnCode === "200000") {
+          this.$Indicator.close();
+          if (res.data.data) {
+            res.data.data.filter(item => {
+              this.bizType(item, item.bizType);
+            });
+          }
+          this.list = res.data.data;
+        }
+      });
 
-			}
-      
+
+
     },
-    handleClick(item) {
+    handleClick (item) {
       //item.bizStatus,item.bizType,item.bizId,item.saveFlag,item.biggerThan500,item.belongBranch,item.currPost
       const status = item.bizStatus;
       const moduleName = this.$route.name;

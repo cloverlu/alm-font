@@ -14,24 +14,17 @@
             <span class="lightBlue"></span>
             <span class="coName">存货</span>
           </div>
-          <mt-cell
-            class="textFiled"
-            title="上次全面检查或调查时余额"
-            :value="detail.stockLastBalance"
-          ></mt-cell>
-          <mt-cell
-            class="textFiled"
-            title="本次检查存货变动情况"
-            :value="detail.stockChangSitu"
-          ></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="detail.stockChangSitu"
-            class="text"
-            style="overflow:hidden"
-            :disabled="true"
-          ></mt-field>
+          <mt-cell class="textFiled"
+                   title="上次全面检查或调查时余额"
+                   :value="detail.stockLastBalance"></mt-cell>
+          <mt-cell class="textFiled"
+                   title="本次检查存货变动情况"></mt-cell>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="detail.stockChangSitu"
+                    class="text"
+                    style="overflow:hidden"
+                    :disabled="true"></mt-field>
         </div>
 
         <div class="enterpriseCredit">
@@ -41,42 +34,29 @@
             <span class="coName">营业收入</span>
           </div>
 
-          <mt-cell
-            class="textFiled"
-            title="上次全面检查或调查时余额"
-            :value="detail.busIncLastBalance"
-          ></mt-cell>
-          <mt-cell
-            class="textFiled"
-            title="本次检查营业收入变动情况"
-            :value="detail.busIncChangSitu"
-          ></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="detail.busIncChangSitu"
-            class="text"
-            style="overflow:hidden"
-            :disabled="true"
-          ></mt-field>
+          <mt-cell class="textFiled"
+                   title="上次全面检查或调查时余额"
+                   :value="detail.busIncLastBalance"></mt-cell>
+          <mt-cell class="textFiled"
+                   title="本次检查营业收入变动情况"></mt-cell>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="detail.busIncChangSitu"
+                    class="text"
+                    style="overflow:hidden"
+                    :disabled="true"></mt-field>
 
           <!-- 加工制造类 -->
           <div class="formTitle">
             <span class="lightBlue"></span>
-            <span class="coName"
-              >水、电、煤、气费其中一项或多项(加工制造类企业必填)</span
-            >
+            <span class="coName">水、电、煤、气费其中一项或多项(加工制造类企业必填)</span>
           </div>
-          <mt-cell
-            class="textFiled"
-            title="上次全面检查或调查时余额"
-            :value="detail.dailyExpenLastBalance"
-          ></mt-cell>
-          <mt-cell
-            class="textFiled"
-            title="本次检查变动情况"
-            :value="detail.dailyExpenChangSitu"
-          ></mt-cell>
+          <mt-cell class="textFiled"
+                   title="上次全面检查或调查时余额"
+                   :value="detail.dailyExpenLastBalance"></mt-cell>
+          <mt-cell class="textFiled"
+                   title="本次检查变动情况"
+                   :value="detail.dailyExpenChangSitu"></mt-cell>
           <!-- <mt-field
             type="textarea"
             rows="3"
@@ -86,14 +66,12 @@
             :disabled="true"
           ></mt-field> -->
 
-          <mt-field
-            type="textarea"
-            rows="4"
-            class="text"
-            v-model="detail.proAndOpeAbnormalSuitMsg"
-            style="overflow:hidden"
-            :disabled="true"
-          ></mt-field>
+          <mt-field type="textarea"
+                    rows="4"
+                    class="text"
+                    v-model="detail.proAndOpeAbnormalSuitMsg"
+                    style="overflow:hidden"
+                    :disabled="true"></mt-field>
         </div>
       </div>
     </div>
@@ -108,13 +86,13 @@ export default {
     "mt-field": Field
   },
   props: ["detail"],
-  data() {
+  data () {
     return {};
   },
   methods: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite5里
         this.setDefinite5({ params: this.params });

@@ -18,6 +18,9 @@
 		.definite-89-content
 			definite8(@childParams="childParams" :detail="params8" v-if="value==='1'")
 			definite9(@childParams2="childParams2" :detail="params9" v-if="value==='2'")
+		.war-tag
+			mt-field(:placeholder="financeMsg" class="war-tag" v-model="params8.financeMsg"  type="textarea" rows="5" v-if="value==='1'")
+			mt-field(:placeholder="financeMsg" class="war-tag" v-model="params9.financeMsg"  type="textarea" rows="5" v-if="value==='2'")
 			
 
 
@@ -37,7 +40,7 @@ export default {
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       dropVisibale: false,
@@ -49,10 +52,12 @@ export default {
       params: {},
       params8: {},
       params9: {},
-      loanBusiness: {}
+      loanBusiness: {},
+      financeMsg:
+        "根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。"
     };
   },
-  mounted() {
+  mounted () {
     // 上一步下一步需要走的详情接口
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
@@ -69,17 +74,26 @@ export default {
     }
   },
   methods: {
-    dropShow() {
+    dropShow () {
       this.dropVisibale = !this.dropVisibale;
     },
-    childParams(val) {
+    childParams (val) {
+      const financeMsg = {
+        financeMsg: this.params8.financeMsg
+      }
+      const finance = Object.assign({}, val, financeMsg)
       this.loanBusiness = {
-        financeInfo: val
+        financeInfo: finance
       };
+      console.log(this.loanBusiness)
     },
-    childParams2(val) {
+    childParams2 (val) {
+      const financeMsg = {
+        financeMsg: this.params9.financeMsg
+      }
+      const finance = Object.assign({}, val, financeMsg)
       this.loanBusiness = {
-        financeInfo: val
+        financeInfo: finance
       };
     }
   }

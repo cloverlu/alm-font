@@ -12,18 +12,18 @@
         <span class="coName">检查阶段</span>
       </div>
       <van-collapse v-model="activeNames">
-        <van-collapse-item title="检查阶段选择" name="1">
+        <van-collapse-item title="检查阶段选择"
+                           name="1">
           <van-radio-group v-model="result">
             <van-cell-group>
-              <van-cell
-                v-for="(item, index) in list"
-                clickable
-                :key="item"
-                :title="`第${item}阶段`"
-                @click="toggle(index)"
-              >
+              <van-cell v-for="(item, index) in list"
+                        clickable
+                        :key="item"
+                        :title="`第${item}阶段`"
+                        @click="toggle(index)">
                 <template #right-icon>
-                  <van-radio :name="item" ref="checkboxes" />
+                  <van-radio :name="item"
+                             ref="checkboxes" />
                 </template>
               </van-cell>
             </van-cell-group>
@@ -31,80 +31,68 @@
         </van-collapse-item>
       </van-collapse>
       <div class="definite7-wrapper">
-        <div
-          class="type1"
-          v-for="(item, i) in params.stageData"
-          :key="item.checkStage"
-        >
+        <div class="type1"
+             v-for="(item, i) in params.stageData"
+             :key="item.checkStage">
           <div class="formTitle1">
-            <span class="coName" v-if="item.checkStage === '1'">第一阶段</span>
-            <span class="coName" v-if="item.checkStage === '2'">第二阶段</span>
-            <span class="coName" v-if="item.checkStage === '3'">第三阶段</span>
+            <span class="coName"
+                  v-if="item.checkStage === '1'">第一阶段</span>
+            <span class="coName"
+                  v-if="item.checkStage === '2'">第二阶段</span>
+            <span class="coName"
+                  v-if="item.checkStage === '3'">第三阶段</span>
           </div>
           <div class="item1">
             <span class="tag1">还款意愿</span>
-            <almSelect
-              :selectData="payIntentionsArr"
-              :defaultValue="item.payIntention"
-              :triggerId="payIntention(item.checkStage)"
-              :title="selectTitle"
-              :fontColor="fontColor"
-              @getSelectValue="getSelect(arguments, item.checkStage)"
-              class="info"
-            ></almSelect>
+            <almSelect :selectData="payIntentionsArr"
+                       :defaultValue="item.payIntention"
+                       :triggerId="payIntention(item.checkStage)"
+                       :title="selectTitle"
+                       :fontColor="fontColor"
+                       @getSelectValue="getSelect(arguments, item.checkStage)"
+                       class="info"></almSelect>
             <span class="iconfont iconxiala arrow"></span>
           </div>
-          <mt-field
-            class="textFiled"
-            label="检查地点"
-            placeholder="请输入"
-            v-model="item.practicableCheckAddr"
-          ></mt-field>
-          <mt-field
-            class="textFiled"
-            label="接待人员"
-            placeholder="请输入"
-            v-model="item.practicableStaff"
-          ></mt-field>
-          <mt-field
-            class="textFiled"
-            label="还款资金来源"
-            placeholder="请输入"
-            v-model="item.amoutSource"
-          ></mt-field>
+          <mt-field class="textFiled"
+                    label="检查地点"
+                    placeholder="请输入"
+                    v-model="item.practicableCheckAddr"></mt-field>
+          <mt-field class="textFiled"
+                    label="接待人员"
+                    placeholder="请输入"
+                    v-model="item.practicableStaff"></mt-field>
+          <mt-field class="textFiled"
+                    label="还款资金来源"
+                    placeholder="请输入"
+                    v-model="item.amoutSource"></mt-field>
           <div class="definite-field">
             <div class="item">
               <span class="tag big">
                 预计还款/付息时间
               </span>
-              <span class="info" @click="timepickerVisible(item.checkStage)">
-                <input
-                  v-model="item.expectRepayDate"
-                  type="input"
-                  class="field-input"
-                  placeholder="请输入"
-                  :disabled="true"
-                />
+              <span class="info"
+                    @click="timepickerVisible(item.checkStage)">
+                <input v-model="item.expectRepayDate"
+                       type="input"
+                       class="field-input"
+                       placeholder="请输入"
+                       :disabled="true" />
               </span>
             </div>
           </div>
-          <mt-datetime-picker
-            :ref="'picker' + item.checkStage"
-            type="date"
-            v-model="timePicker[i].timeP"
-            @confirm="handleConfirm(item.checkStage, i)"
-          ></mt-datetime-picker>
+          <mt-datetime-picker :ref="'picker' + item.checkStage"
+                              type="date"
+                              v-model="timePicker[i].timeP"
+                              @confirm="handleConfirm(item.checkStage, i)"></mt-datetime-picker>
 
           <!-- <van-cell title="还款资金落实情况说明" class="cellTitle" /> -->
           <div class="msg">还款资金落实情况说明</div>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="item.practicableMsg"
-            class="text"
-            style="overflow:hidden"
-            placeholder="请输入"
-          ></mt-field>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="item.practicableMsg"
+                    class="text"
+                    style="overflow:hidden"
+                    placeholder="请输入"></mt-field>
         </div>
       </div>
     </div>
@@ -141,7 +129,7 @@ export default {
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       popupVisible: false,
@@ -186,10 +174,11 @@ export default {
           // }
         ]
       },
-      loanBusiness: {}
+      loanBusiness: {},
+      stageData: []
     };
   },
-  mounted() {
+  mounted () {
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
     const type = this.userBizType.bizType;
@@ -198,6 +187,7 @@ export default {
       const billNo = this.$route.params.billNo;
       if (this.bizId) {
         this.userMountedTag(type, billNo, name);
+
       }
     } else {
       const flag = this.$route.params.saveFlag;
@@ -206,17 +196,17 @@ export default {
   },
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         this.loanBusiness = this.params;
       }
     }
   },
   methods: {
-    payIntention(index) {
+    payIntention (index) {
       return `payIntention1${index}`;
     },
-    getSelect(data, checkStage) {
+    getSelect (data, checkStage) {
       this.params.stageData.forEach(item => {
         if (item.checkStage === checkStage) {
           item.payIntention = data[0][0].key;
@@ -224,27 +214,27 @@ export default {
       });
     },
     //时间界面调出
-    timepickerVisible(checkStage) {
+    timepickerVisible (checkStage) {
       this.$refs[`picker${checkStage}`][0].open();
     },
     // 选定时间确定
-    handleConfirm(checkStage, i) {
+    handleConfirm (checkStage, i) {
       // console.log(this.timePicker[i].timeP);
       this.params.stageData.forEach(item => {
         if (item.checkStage === checkStage) {
           if (!this.timePicker[i].timeP) {
-						// item.expectRepayDate = formatDate(this.endDate);
-						this.$set(item,'expectRepayDate',formatDate(this.endDate))
+            // item.expectRepayDate = formatDate(this.endDate);
+            this.$set(item, 'expectRepayDate', formatDate(this.endDate))
           } else {
-						// item.expectRepayDate = formatDate(this.timePicker[i].timeP);
-						this.$set(item,'expectRepayDate',formatDate(this.timePicker[i].timeP))
+            // item.expectRepayDate = formatDate(this.timePicker[i].timeP);
+            this.$set(item, 'expectRepayDate', formatDate(this.timePicker[i].timeP))
           }
         }
       });
       this.$refs[`picker${checkStage}`][0].close();
     },
 
-    toggle(index) {
+    toggle (index) {
       var checkStage = "";
       if (index == 0) {
         checkStage = "1";
@@ -256,50 +246,31 @@ export default {
         checkStage = "3";
         this.result = "三";
       }
-      const item = {
-        checkStage: checkStage, // 检查阶段
-        payIntention: "1", // 还款意愿
-        practicableCheckAddr: "", // 检查地点
-        practicableStaff: "", // 接待人员
-        amoutSource: "", // 还款资金来源
-        expectRepayDate: "", // 预计还款/付息时间
-        practicableMsg: "" // 还款资金落实情况说明
-      };
+
+      var item = {}
+      if (this.stageData[0].checkStage !== checkStage) {
+        item = {
+          checkStage: checkStage, // 检查阶段
+          payIntention: "1", // 还款意愿
+          practicableCheckAddr: "", // 检查地点
+          practicableStaff: "", // 接待人员
+          amoutSource: "", // 还款资金来源
+          expectRepayDate: "", // 预计还款/付息时间
+          practicableMsg: "" // 还款资金落实情况说明
+        };
+      } else {
+        item = this.stageData[0]
+      }
       this.params.stageData = [];
       this.params.stageData.push(item);
 
-      // if (checked === false) {
-      //   const item = {
-      //     checkStage: checkStage, // 检查阶段
-      //     payIntention: "1", // 还款意愿
-      //     practicableCheckAddr: "", // 检查地点
-      //     practicableStaff: "", // 接待人员
-      //     amoutSource: "", // 还款资金来源
-      //     expectRepayDate: "", // 预计还款/付息时间
-      //     practicableMsg: "" // 还款资金落实情况说明
-      //   };
-      //   // this.params.stageData.forEach((item, index) => {
-      //   //   if (item.checkStage === checkStage) {
-      //   //     this.params.stageData[index] =
-      //   //   }
-      //   // });
-      //   this.params.stageData.push(item);
-      //   // 无论用户怎么选择阶段的顺序，都是按一二三阶段的顺序来添加
-      //   this.params.stageData.sort(this.sortId);
-      // } else {
-      //   this.params.stageData.forEach((item, index) => {
-      //     if (item.checkStage === checkStage) {
-      //       this.params.stageData.splice(index, 1);
-      //       return false;
-      //     }
-      //   });
-      // }
+
     },
-    change() {
+    change () {
       this.$refs.checkboxes[0].checked = true;
     },
     //数组排序
-    sortId(a, b) {
+    sortId (a, b) {
       return parseInt(a.checkStage) - parseInt(b.checkStage);
     }
   }

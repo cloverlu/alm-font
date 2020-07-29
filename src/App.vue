@@ -12,7 +12,7 @@
 <script>
 export default {
   computed: {
-    judgeDeviceType() {
+    judgeDeviceType () {
       var ua = window.navigator.userAgent.toLocaleLowerCase();
       var isIOS = /iphone|ipad|ipod/.test(ua);
       var isAndroid = /android/.test(ua);
@@ -22,11 +22,11 @@ export default {
       };
     }
   },
-  created() {
+  created () {
     // 字体根据屏幕大小变化
     var documentElement = document.documentElement;
 
-    function callback() {
+    function callback () {
       var clientWidth = documentElement.clientWidth;
       // 屏幕宽度大于780，不在放大
       clientWidth = clientWidth < 1200 ? clientWidth : 1200;
@@ -57,7 +57,7 @@ export default {
     });
 
     window.addEventListener("load", () => {
-      sessionStorage.removeItem('store') 
+      sessionStorage.removeItem('store')
     });
 
     // // 兼容Android，ios 键盘弹起时，把搜索的数据顶上去影响布局和搜索功能
@@ -67,45 +67,80 @@ export default {
     //   if (document.body.scrollHeight < h) {
     //     document.body.style.height = h;
     //   }
-		// };
-		let startX,startY;
+    // };
+    let startX, startY;
 
-		document.addEventListener("touchstart",function(e){
-		    startX = e.touches[0].pageX;
-		    startY = e.touches[0].pageY;
-		});
+    document.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+    });
 
-		document.addEventListener("touchmove",function(e){
-		    var moveX = e.touches[0].pageX;
-		    var moveY = e.touches[0].pageY;
-		    //因为上下滑动的时候多少左右会带一点横移呀
-		    //比较横移距离与垂直移动距离的大小，哪个大就是往哪个方向移动啊
-		    if(Math.abs(moveX-startX)>Math.abs(moveY-startY)){
-		        e.preventDefault();
-		    }
+    document.addEventListener("touchmove", function (e) {
+      var moveX = e.touches[0].pageX;
+      var moveY = e.touches[0].pageY;
+      //因为上下滑动的时候多少左右会带一点横移呀
+      //比较横移距离与垂直移动距离的大小，哪个大就是往哪个方向移动啊
+      if (Math.abs(moveX - startX) > Math.abs(moveY - startY)) {
+        e.preventDefault();
+      }
 
-		}, {passive: false});
+    }, { passive: false });
   },
-  mounted() {
-		var queryVal = this.GetQueryValue("app");
-		alert(queryVal)
-		if (queryVal === "youjie") {
-			alert('进来了')
-			this.getUserInfo();
-		}else{
-			alert('没有进来')
-			const userInfo = {
-				userName: "金林",
-				instId : "12222",
-				instName:"南京"
-			};
-		
-			sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-		}
+  mounted () {
+    // alert('app')
+    // var params = {}
+    // var userParams = {}
+    // if (this.GetQueryValue("app") === 'youjie') {
+    //   params = {
+    //     emplName: this.GetQueryValue("userName"),
+    //     orgCode: this.GetQueryValue("instId"),
+    //     orgName: this.GetQueryValue("instName"),
+    //   };
+    //   userParams = {
+    //     emplName: this.GetQueryValue("userName"),
+    //     orgName: this.GetQueryValue("instName")
+    //   }
+    //   alert('appparam')
+    //   alert(params.emplName)
+    //   const token = this.GetQueryValue("token")
+    //   sessionStorage.setItem('x-token', token)
+
+    // } else {
+    //   params = {
+    //     emplName: "金林",
+    //     orgCode: "12222",
+    //     orgName: "南京"
+    //   };
+    //   userParams = {
+    //     emplName: "金林",
+    //     orgName: "南京"
+    //   }
+    // }
+    // sessionStorage.setItem('userInfo', JSON.stringify(params))
+    // sessionStorage.setItem('userUserInfo', JSON.stringify(userParams))
+    // alert(sessionStorage.getItem("userInfo").emplName)
+    // alert(sessionStorage.getItem("userInfo"))
+    // alert(JSON.parse(sessionStorage.getItem("userInfo")))
+    // alert(JSON.parse(sessionStorage.getItem("userInfo")).emplName)
+    // var queryVal = this.GetQueryValue("app");
+    // alert(queryVal)
+    // if (queryVal === "youjie") {
+    // 	alert('进来了')
+    // 	this.getUserInfo();
+    // }else{
+    // 	alert('没有进来')
+    // 	const userInfo = {
+    // 		userName: "金林",
+    // 		instId : "12222",
+    // 		instName:"南京"
+    // 	};
+
+    // 	sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+    // }
 
   },
   methods: {
-    listenKeybord($input) {
+    listenKeybord ($input) {
       // var $input = document.getElementsByTagName("input");
       if (this.judgeDeviceType.isIOS) {
         // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
@@ -113,7 +148,7 @@ export default {
 
         $input.addEventListener(
           "focus",
-          function() {
+          function () {
             console.log("IOS 键盘弹起啦！");
 
             // IOS 键盘弹起后操作
@@ -134,7 +169,7 @@ export default {
 
         window.addEventListener(
           "resize",
-          function() {
+          function () {
             var resizeHeight =
               document.documentElement.clientHeight ||
               document.body.clientHeight;
@@ -154,36 +189,30 @@ export default {
           false
         );
       }
-		},
-		async getUserInfo() {
-			let xui = await requireModuleJs("xui");
-			let obj = xui.getUserInfo();
-			alert('app-obj')
-			alert(obj)
-			let token = xui.getDeviceTokens();
-			if(typeof obj ==='object'){
-				sessionStorage.setItem('userInfo', JSON.stringify(obj))
-			}else if(typeof obj === 'string'){
-				sessionStorage.setItem('userInfo', obj)
-			}
-
-			if(typeof token ==='object'){
-				sessionStorage.setItem('x-token', JSON.stringify(token))
-			}else if(typeof token === 'string'){
-				sessionStorage.setItem('x-token', token)
-			}
-		
     },
-		GetQueryValue(queryName) {
-      var query = decodeURI(window.location.search.substring(1));
-      var vars = query.split("&");
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == queryName) {
-          return pair[1];
-        }
+    getUserInfo () {
+      let xui = requireModuleJs("xui");
+      let obj = xui.getUserInfo();
+      alert('app-obj')
+      alert(obj)
+      let token = xui.getDeviceTokens();
+      alert(token)
+      if (typeof obj === 'object') {
+        sessionStorage.setItem('userInfo', JSON.stringify(obj))
+        alert(sessionStorage.getItem("userInfo"))
+      } else if (typeof obj === 'string') {
+        sessionStorage.setItem('userInfo', obj)
+        alert(sessionStorage.getItem("userInfo"))
       }
+
+      if (typeof token === 'object') {
+        sessionStorage.setItem('x-token', JSON.stringify(token))
+      } else if (typeof token === 'string') {
+        sessionStorage.setItem('x-token', token)
+      }
+
     }
+
   }
 };
 // document.addEventListener("DOMContentLoaded", () => {

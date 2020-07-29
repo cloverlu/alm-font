@@ -9,21 +9,15 @@
       <!-- 公司信息 -->
       <div class="companyInformation">
         <div class="formBody">
-          <mt-cell
-            class="textFiled"
-            title="客户名称"
-            :value="detail.definite12.custName"
-          ></mt-cell>
-          <mt-cell
-            class="textFiled"
-            title="授信金额"
-            :value="detail.definite12.lineAmout"
-          ></mt-cell>
-          <mt-cell
-            class="textFiled"
-            title="贷款余额"
-            :value="detail.definite12.loanBalance"
-          ></mt-cell>
+          <mt-cell class="textFiled"
+                   title="客户名称"
+                   :value="detail.definite12.custName"></mt-cell>
+          <mt-cell class="textFiled"
+                   title="授信金额"
+                   :value="detail.definite12.lineAmout"></mt-cell>
+          <mt-cell class="textFiled"
+                   title="贷款余额"
+                   :value="detail.definite12.loanBalance"></mt-cell>
         </div>
       </div>
       <!--填写信息  -->
@@ -35,24 +29,22 @@
             <span class="coName">审批意见中贷后日常检查要求及落实情况</span>
           </div>
           <div class="textarea">
-            <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.requireCheck"
-              class="text is-nolabel textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
-            <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.checked"
-              class="text textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
+            <mt-cell title="要求"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.requireCheck"
+                      class="text is-nolabel textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
+            <mt-cell title="落实情况"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.checked"
+                      class="text textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
           </div>
         </div>
 
@@ -62,24 +54,22 @@
             <span class="coName">产品贷后日常检查特殊要求及落实情况</span>
           </div>
           <div class="textarea">
-            <mt-cell title="要求" class="textFiled textUpTitle"></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.specialRequireCheck"
-              class="text"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
-            <mt-cell title="落实情况" class="textFiled textUpTitle"></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.specialChecked"
-              class="text textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
+            <mt-cell title="要求"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.specialRequireCheck"
+                      class="text"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
+            <mt-cell title="落实情况"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.specialChecked"
+                      class="text textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
           </div>
         </div>
 
@@ -89,18 +79,14 @@
             <span class="coName">实际控制人或法定代表人风险点</span>
           </div>
           <div class="textarea">
-            <mt-cell
-              title="健康、 嗜好、家庭关系等方面"
-              class="textFiled textUpTitle"
-            ></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.holdPensonRisk"
-              class="text textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
+            <mt-cell title="健康、 嗜好、家庭关系等方面"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.holdPensonRisk"
+                      class="text textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
           </div>
         </div>
 
@@ -110,18 +96,14 @@
             <span class="coName">管理层风险点</span>
           </div>
           <div class="textarea">
-            <mt-cell
-              title="股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题"
-              class="textFiled textUpTitle"
-            ></mt-cell>
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.managerRisk"
-              class="text textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
+            <mt-cell title="股权变化、关键管理人员变动、关联企业变动等，是否存在偏离主业、盲目扩张等问题"
+                     class="textFiled textUpTitle"></mt-cell>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.managerRisk"
+                      class="text textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
           </div>
         </div>
 
@@ -131,14 +113,12 @@
             <span class="coName">近期检查发现的其他风险点</span>
           </div>
           <div class="textarea">
-            <mt-field
-              type="textarea"
-              rows="3"
-              v-model="detail.definite12.otherRisk"
-              class="text textArea"
-              style="overflow:hidden"
-              :disabled="true"
-            ></mt-field>
+            <mt-field type="textarea"
+                      rows="3"
+                      v-model="detail.definite12.otherRisk"
+                      class="text textArea"
+                      style="overflow:hidden"
+                      :disabled="true"></mt-field>
           </div>
         </div>
       </div>
@@ -167,7 +147,7 @@ export default {
     definite5,
     definite18
   },
-  data() {
+  data () {
     const definite18 = _ => {
       const definite18 = {};
       for (let i = 0; i < 11; i++) {
@@ -197,14 +177,14 @@ export default {
   computed: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         // 将数据存入vuex里的setDefinite12里
         // this.setDefinite12({ params: this.params });
       }
     }
   },
-  async mounted() {
+  async mounted () {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
   }
