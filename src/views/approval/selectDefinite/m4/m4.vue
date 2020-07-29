@@ -8,42 +8,28 @@
     <!--填写信息  -->
     <div class="newly9">
       <div class="coInformation">
-       
-        <mt-cell
-          class="textFiled"
-          title="客户名称"
-          :value="detail.newly9.custName"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="贷款金额"
-          :value="detail.newly9.loanAmout"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="贷款余额"
-          :value="detail.newly9.loanBalance"
-        ></mt-cell>
-        <mt-cell
-          class="textFiled"
-          title="贷款期限"
-          :value="`${detail.newly9.loanLength}月`"
-        ></mt-cell>
-        <mt-field
-          class="textFiled"
-          label="还款方式"
-          v-model="detail.newly9.repayKind"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款日期"
-          v-model="detail.newly9.repayDate"
-        ></mt-field>
-        <mt-field
-          class="textFiled"
-          label="还款金额"
-          v-model="detail.newly9.repayAmout"
-        ></mt-field>
+
+        <mt-cell class="textFiled"
+                 title="客户名称"
+                 :value="detail.newly9.custName"></mt-cell>
+        <mt-cell class="textFiled"
+                 title="贷款金额"
+                 :value="detail.newly9.loanAmout"></mt-cell>
+        <mt-cell class="textFiled"
+                 title="贷款余额"
+                 :value="detail.newly9.loanBalance"></mt-cell>
+        <mt-cell class="textFiled"
+                 title="贷款期限"
+                 :value="`${detail.newly9.loanLength}月`"></mt-cell>
+        <mt-field class="textFiled"
+                  label="还款方式"
+                  v-model="detail.newly9.repayKind"></mt-field>
+        <mt-field class="textFiled"
+                  label="还款日期"
+                  v-model="detail.newly9.repayDate"></mt-field>
+        <mt-field class="textFiled"
+                  label="还款金额"
+                  v-model="detail.newly9.repayAmout"></mt-field>
       </div>
       <definite7 :detail="detail.definite7"></definite7>
       <div class="definite-smalltitle">
@@ -51,13 +37,11 @@
         <span>影像维护</span>
       </div>
       <div class="definite-13-content">
-        <imageUpload
-          v-for="item in imageList"
-          :key="item.id"
-          :item="item"
-          :itemVmodel="detail.imageList"
-          :read="true"
-        ></imageUpload>
+        <imageUpload v-for="item in imageList"
+                     :key="item.id"
+                     :item="item"
+                     :itemVmodel="detail.imageList"
+                     :read="true"></imageUpload>
       </div>
     </div>
   </div>
@@ -73,7 +57,7 @@ export default {
     imageUpload
   },
   mixins: [normalMixin, approvalMixin],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId,
       imageList: [
@@ -92,7 +76,7 @@ export default {
     };
   },
   computed: {},
-  async mounted() {
+  async mounted () {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
   },

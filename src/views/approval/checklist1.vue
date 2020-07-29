@@ -56,7 +56,8 @@
 					span(class="info") {{item.processTime}}
 				.item
 					span(class="tag") 意见
-					span(class="info") {{item.agreeResult}}
+					span(class="info" v-if="item.agreeResult === 0") 不同意
+					span(class="info" v-if="item.agreeResult === 1") 同意
 				.item1(@click="linkMore" v-show="showLink") 查看更多 »
 		router-view(v-else)
 					
@@ -75,7 +76,7 @@ export default {
   components: { m1, m2, m3, m4, m5, m6 },
   mixins: [approvalMixin, normalMixin],
 
-  data() {
+  data () {
     return {
       approveHasChildRouter: this.$route.params.approveHasChildRouter,
       showVisible: false,
@@ -85,22 +86,22 @@ export default {
       params: {}
     };
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     to.params.approveHasChildRouter =
       to.name === "checklist1" || to.name === "checklist2";
     next();
   },
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     this.approveHasChildRouter =
       to.name === "checklist1" || to.name === "checklist2";
     next();
   },
-  mounted() {
+  mounted () {
     this.getBaseDetail();
   },
   methods: {
     // 基本详情
-    getBaseDetail() {
+    getBaseDetail () {
       let params = {
         bizId: this.$route.params.bizId
       };
@@ -116,13 +117,13 @@ export default {
         }
       });
     },
-    infoMore() {
+    infoMore () {
       this.showVisible = !this.showVisible;
       // 点击更多的时候，为按钮添加一个随机数，用于监听是否点击了按钮
       const val = Date.now();
       this.setAddmore({ addmore: val });
     },
-    linkMore() {
+    linkMore () {
       this.max = this.info.aproveInfo.length;
       this.showLink = false;
     }
