@@ -40,9 +40,7 @@ export default {
   },
   mounted () {
     var params = {}
-    alert('todolist')
     if (GetQueryValue("app") === 'youjie') {
-      alert(GetQueryValue("app"))
       params = {
         emplName: GetQueryValue("userName"),
         orgCode: GetQueryValue("instId"),
@@ -50,13 +48,13 @@ export default {
       };
 
     } else {
+			alert('没有获取到用户信息')
       params = {
         emplName: "金林",
         orgCode: "12222",
         orgName: "南京"
       };
     }
-    alert(params.emplName)
     this.getList(params)
     // const userInfo = {
     // 	emplName: "金林",

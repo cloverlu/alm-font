@@ -141,6 +141,15 @@ export default {
       });
     },
     async submitApprove() {
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       this.params2.opType = "1";
       const params = Object.assign(
         {},
@@ -153,6 +162,15 @@ export default {
       await this.submit2(params);
     },
     async goback() {
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       this.params2.opType = "2";
       const params = Object.assign(
         {},
@@ -164,6 +182,15 @@ export default {
       await this.submit2(params);
     },
     async gobackLast() {
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       this.params2.opType = "3";
       const params = Object.assign(
         {},
@@ -303,23 +330,7 @@ export default {
             setTimeout(() => {
               this.$router.push({ name: "approvalIndex" });
             }, 1200);
-          } else if (params.opType === "0") {
-            setTimeout(() => {
-              this.$MessageBox
-                .confirm("回到列表页吗？")
-                .then(action => {
-                  if (action === "confirm") {
-                    this.$router.push({ name: "approvalIndex" });
-                  }
-                  if (action === "cancel") {
-                    return false;
-                  }
-                })
-                .catch(err => {
-                  console.log(err);
-                });
-            }, 1200);
-          }
+          } 
         } else {
           this.$Indicator.close();
           this.$Toast({

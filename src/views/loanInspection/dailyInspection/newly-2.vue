@@ -223,19 +223,19 @@ export default {
   },
   methods: {
     getSelect1 (data) {
-      this.params.addedOverdues = data.key;
+      this.params.addedOverdues = data[0].key;
     },
     getSelect2 (data) {
-      this.params.addedLoans = data.key;
+      this.params.addedLoans = data[0].key;
     },
     getSelect3 (data) {
-      this.params.shrinkLoanScale = data.key;
+      this.params.shrinkLoanScale = data[0].key;
     },
     getSelect4 (data) {
-      this.params.addedGuarantees = data.key;
+      this.params.addedGuarantees = data[0].key;
     },
     getSelect5 (data) {
-      this.params.otherSitu = data.key;
+      this.params.otherSitu = data[0].key;
     },
     a () {
       this.$refs.picker.open();

@@ -242,23 +242,7 @@ export const normalMixin = {
             setTimeout(() => {
               this.$router.push({ name: 'loanInspectionIndex' })
             }, 1200)
-          } else {
-            setTimeout(() => {
-              this.$MessageBox
-                .confirm('回到列表页吗？')
-                .then((action) => {
-                  if (action === 'confirm') {
-                    this.$router.push({ name: 'loanInspectionIndex' })
-                  }
-                  if (action === 'cancel') {
-                    return false
-                  }
-                })
-                .catch((err) => {
-                  console.log(err)
-                })
-            }, 1200)
-          }
+          } 
         } else {
           this.$Indicator.close()
           this.$Toast({
@@ -281,7 +265,13 @@ export const normalMixin = {
         if (name === 'processing4') {
           this.params2 = {
             pic_1s: this.forBizDetail(name).imageList,
-          }
+					}
+					if(this.params.existRisk === 1){
+						this.existRiskYN = true
+					}else if(this.params.existRisk === 0){
+						this.existRiskYN = false
+
+					}
         } else if (name === 'overalltDefinite89') {
           this.value = this.params.financeClassification
           if (this.params.financeClassification === '1') {
@@ -353,7 +343,8 @@ export const normalMixin = {
                   }
                   this.result = a
                 }
-              }
+							}
+							this.stageData = this.params.stageData
             }
             console.log(this.forBizDetail(name))
           }
@@ -427,27 +418,7 @@ export const normalMixin = {
                 this.$router.push({ name: 'loanInspectionIndex' })
               }
             }, 1200)
-          } else {
-            setTimeout(() => {
-              this.$MessageBox
-                .confirm('回到列表页吗？')
-                .then((action) => {
-                  if (action === 'confirm') {
-                    if (moduleName === 'custmer') {
-                      this.$router.push({ name: 'userIndex' })
-                    } else {
-                      this.$router.push({ name: 'loanInspectionIndex' })
-                    }
-                  }
-                  if (action === 'cancel') {
-                    return false
-                  }
-                })
-                .catch((err) => {
-                  console.log(err)
-                })
-            }, 1200)
-          }
+          } 
         })
         .catch((err) => {
           this.$Indicator.close()
@@ -648,7 +619,13 @@ export const userMixin = {
           if (name === 'userReInsProcessing4') {
             this.params2 = {
               pic_1s: params.imageList,
-            }
+						}
+						if(params.existRisk === 1){
+							this.existRiskYN = true
+						}else if(params.existRisk === 0){
+							this.existRiskYN = false
+	
+						}
           } else if (name === 'userOveralltDefinite89') {
             this.value = params.financeClassification
             if (params.financeClassification === '1') {
@@ -676,7 +653,8 @@ export const userMixin = {
                 }
                 this.result = a
               }
-            }
+						}
+						this.stageData = params.stageData
           }
           this.params = params
 
@@ -727,23 +705,7 @@ export const userMixin = {
             setTimeout(() => {
               this.$router.push({ name: 'userIndex' })
             }, 1200)
-          } else {
-            setTimeout(() => {
-              this.$MessageBox
-                .confirm('回到列表页吗？')
-                .then((action) => {
-                  if (action === 'confirm') {
-                    this.$router.push({ name: 'userIndex' })
-                  }
-                  if (action === 'cancel') {
-                    return false
-                  }
-                })
-                .catch((err) => {
-                  console.log(err)
-                })
-            }, 1200)
-          }
+          } 
         } else {
           this.$Indicator.close()
           this.$Toast({

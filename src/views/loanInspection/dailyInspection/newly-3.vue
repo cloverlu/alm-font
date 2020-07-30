@@ -454,7 +454,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.bizId);
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
     const type = this.userBizType.bizType;
