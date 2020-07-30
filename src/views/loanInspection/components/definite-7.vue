@@ -247,22 +247,37 @@ export default {
         this.result = "三";
       }
 
-      var item = {}
-      if (this.stageData[0].checkStage !== checkStage) {
-        item = {
-          checkStage: checkStage, // 检查阶段
-          payIntention: "1", // 还款意愿
-          practicableCheckAddr: "", // 检查地点
-          practicableStaff: "", // 接待人员
-          amoutSource: "", // 还款资金来源
-          expectRepayDate: "", // 预计还款/付息时间
-          practicableMsg: "" // 还款资金落实情况说明
-        };
-      } else {
-        item = this.stageData[0]
-      }
-      this.params.stageData = [];
-      this.params.stageData.push(item);
+			var item = {}
+      if (this.stageData && this.stageData.length > 0 ) {
+				if(this.stageData[0].checkStage !== checkStage){
+					item = {
+						checkStage: checkStage, // 检查阶段
+						payIntention: "1", // 还款意愿
+						practicableCheckAddr: "", // 检查地点
+						practicableStaff: "", // 接待人员
+						amoutSource: "", // 还款资金来源
+						expectRepayDate: "", // 预计还款/付息时间
+						practicableMsg: "" // 还款资金落实情况说明
+					};
+				} else {
+					item = this.stageData[0]
+				}
+				
+			}else{
+				item = {
+					checkStage: checkStage, // 检查阶段
+					payIntention: "1", // 还款意愿
+					practicableCheckAddr: "", // 检查地点
+					practicableStaff: "", // 接待人员
+					amoutSource: "", // 还款资金来源
+					expectRepayDate: "", // 预计还款/付息时间
+					practicableMsg: "" // 还款资金落实情况说明
+				};
+
+			}
+			this.params.stageData = [];
+			this.params.stageData.push(item);
+        
 
 
     },

@@ -19,7 +19,7 @@ const loanlnspection = {
   m1: {
     definite1: {
       loanPurpose: '',
-      payKind: '',
+      payKind: "1",
       bizId: '',
       checked: '',
       requireCheck: '',
@@ -64,7 +64,7 @@ const loanlnspection = {
     definite13: {
       bizId: '',
       checkAddr: '',
-      cooperate: 1,
+      cooperate: "1",
       addrChangedMsg: '',
       staff: '',
     },
@@ -90,11 +90,11 @@ const loanlnspection = {
         administRecordNum: '', // 行政处罚记录
 
         creditChageMsg1: '', // 	借款企业 征信变化情况说明
-        existCreditChage1: 0, // 借款企业 征信变化是否变化
+        existCreditChage1: 1, // 借款企业 征信变化是否变化
         creditChageMsg2: '', // 	关联企业 征信变化情况说明
-        existCreditChage2: 0, // 关联企业 征信变化是否变化
+        existCreditChage2: 1, // 关联企业 征信变化是否变化
         creditChageMsg3: '', // 	法人保证人 征信变化情况说明
-        existCreditChage3: 0, // 法人保证人 征信变化是否变化
+        existCreditChage3: 1, // 法人保证人 征信变化是否变化
       },
     },
     definite10: {
@@ -136,10 +136,10 @@ const loanlnspection = {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: '', // 企业其他保证人 征信变化情况说明
         existCreditChage6: '', // 企业其他保证人 征信变化是否变化
-        existCreditChager6: '',
+        existCreditChager6: 1,
         creditChageMsg3: '', // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
-        addedOverdues: false,
+        addedOverdues: 1,
         pickerVisible: false,
       },
       msg: '',
@@ -185,7 +185,7 @@ const loanlnspection = {
     definite13: {
       bizId: '',
       checkAddr: '',
-      cooperate: 1,
+      cooperate: "1",
       addrChangedMsg: '',
       staff: '',
     },
@@ -211,11 +211,11 @@ const loanlnspection = {
         administRecordNum: '', // 行政处罚记录
 
         creditChageMsg1: '', // 	借款企业 征信变化情况说明
-        existCreditChage1: 0, // 借款企业 征信变化是否变化
+        existCreditChage1: 1, // 借款企业 征信变化是否变化
         creditChageMsg2: '', // 	关联企业 征信变化情况说明
-        existCreditChage2: 0, // 关联企业 征信变化是否变化
+        existCreditChage2: 1, // 关联企业 征信变化是否变化
         creditChageMsg3: '', // 	法人保证人 征信变化情况说明
-        existCreditChage3: 0, // 法人保证人 征信变化是否变化
+        existCreditChage3: 1, // 法人保证人 征信变化是否变化
       },
     },
     definite10: {
@@ -257,12 +257,12 @@ const loanlnspection = {
         existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: '', // 企业其他保证人 征信变化情况说明
         existCreditChage6: '', // 企业其他保证人 征信变化是否变化
-        existCreditChager6: '',
+        existCreditChager6: 1,
         creditChageMsg3: '', // 法人保证人 征信变化情况说明
         existCreditChage3: 1, // 法人保证人 征信变化是否变化
 
         RecentNegativeInformation: '',
-        addedOverdues: false,
+        addedOverdues: 1,
         pickerVisible: false,
       },
     },
@@ -325,15 +325,15 @@ const loanlnspection = {
     },
     definite6: {
       bizId: '',
-      industrycChangSiut: 0, //企业所在行业是否发生重大不利变化
-      planExpandSitu: 0, //企业是否有与主业无关的扩张计划
-      hiddenTroubleSitu: 0, //生产经营是否存在安全隐患
+      industrycChangSiut: 1, //企业所在行业是否发生重大不利变化
+      planExpandSitu: 1, //企业是否有与主业无关的扩张计划
+      hiddenTroubleSitu: 1, //生产经营是否存在安全隐患
       industrycChangSiutMsg: '', //企业所在行业是否发生重大不利变化具体情况
       planExpandSituMsg: '', //企业是否有与主业无关的扩张计划具体情况
       hiddenTroubleSituMsg: '', //生产经营是否存在安全隐患具体情况
       collEstimateDate: '', //上次抵质押物评估或重估日期
       collEstimateValue: '', //上次抵质押物评估或重估金额
-      otherSitu: '', //其他情况
+      otherSitu: 1, //其他情况
       collEstimateMsg: '',
     },
     definite17: Object.assign({}, mVmodel(12), bizId),
@@ -364,7 +364,7 @@ const loanlnspection = {
       riskStage: '',
       riskMsg: '',
       suggest: '',
-      existRisk: 0,
+      existRisk: 1,
       empSign: '', // 签名
       imageList: [],
     },
@@ -372,14 +372,14 @@ const loanlnspection = {
   m5: {
     definite14: {
       bizId: '',
-      payKind: '', // 贷款支付方式
+      payKind: "1", // 贷款支付方式
       // repayKind: "", // 还款方式
       loanDate: '', // 还款日期
       loanPurpose: '', // 约定用途
       detailMsg4useAmout: '', // 资金使用情况详细说明
       useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
       executeCon: 1, //是否履行合同约定
-      cooperate: 1, //对我行检查的态度
+      cooperate: "1", //对我行检查的态度
       cooperateMsg: '', // 其他
       msg: '',
     },
@@ -394,7 +394,7 @@ const loanlnspection = {
   },
   m6: {
     newly1: {
-      revalOfColl: '',
+      revalOfColl: 1,
       bizId: '',
       otherSecurityKindMsg: '',
       repayKind: '',
@@ -403,22 +403,22 @@ const loanlnspection = {
       lineAmout: '', // 授信金额
       lineBalance: '', // 授信余额
       securityKind: ['1'], // 担保方式
-      cooperate: 1, // 检查配合程度
+      cooperate: "1", // 检查配合程度
       yearlyInspection: 1, // 额度年检
     },
     newly2: {
       assetCreditInfo: {
         queryDate: '',
         fiveClass: '', // 当前企业及实际控制人征信情况（注明征信查询分类结果)
-        addedOverdues: 0, // 企业或企业主征信是否有新增逾期记录  客户资信检查
+        addedOverdues: 1, // 企业或企业主征信是否有新增逾期记录  客户资信检查
         addedOverduesMsg: '', // 当前企业及实际控制人征信情况 说明
-        addedLoans: 0, // 企业或企业主是否有他行新增贷款  客户资信检查
+        addedLoans: 1, // 企业或企业主是否有他行新增贷款  客户资信检查
         addedLoansMsg: '', // 企业或企业主是否有他行新增贷款情况 说明
-        shrinkLoanScale: 0, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
+        shrinkLoanScale: 1, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
         shrinkLoanScaleMsg: '', // 企业或企业主是否有他行收缩贷款规模 说明
-        addedGuarantees: 0, // 企业或企业主是否有新增对外担保记录  客户资信检查
+        addedGuarantees: 1, // 企业或企业主是否有新增对外担保记录  客户资信检查
         addedGuaranteesMsg: '', // 企业或企业主是否有新增对外担保记录 说明
-        otherSitu: 0, // 企业或企业主是否有其他异常变化  客户资信检查
+        otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: '', // 企业或企业主是否有其他异常变化 说明
         summarySituMsg: '',
       },
@@ -426,36 +426,36 @@ const loanlnspection = {
     },
     newly3: {
       bizId: '',
-      ownerStruSame: 0, // 企业实际股权结构是否与上述工商信息网查询一致
+      ownerStruSame: 1, // 企业实际股权结构是否与上述工商信息网查询一致
       ownerStruSameMsg: '', // 实际股权结构与工商信息网查询说明
-      industrycChangSiut: 0, // 企业所在行业是否发生重大不利变化
+      industrycChangSiut: 1, // 企业所在行业是否发生重大不利变化
       industrycChangSiutMsg: '', // 企业所在行业是否发生重大不利变化具体情况
-      mainBusIsChanged: 0, // 企业主营业务情况是否发生变更
+      mainBusIsChanged: 1, // 企业主营业务情况是否发生变更
       mainBusIsChangedMsg: '', // 企业主营业务情况是否发生变更情况
-      planExpandSitu: 0, // 企业是否有与主业无关的扩张计划
+      planExpandSitu: 1, // 企业是否有与主业无关的扩张计划
       planExpandSituMsg: '', // 企业是否有与主业无关的扩张计划具体情况
-      addrIsChanged: 0, // 生产经营场所是否发生变化
+      addrIsChanged: 1, // 生产经营场所是否发生变化
       addrChangedMsg: '', // 生产经营场所变动情况
-      hiddenTroubleSitu: 0, // 生产经营是否存在安全隐患
+      hiddenTroubleSitu: 1, // 生产经营是否存在安全隐患
       hiddenTroubleSituMsg: '', // 生产经营是否存在安全隐患具体情况
-      purchaseCost: 0, // 企业主要原材料或货物的采购成本是否明显上升
+      purchaseCost: 1, // 企业主要原材料或货物的采购成本是否明显上升
       purchaseCostMsg: '', // 企业主要原材料或货物的采购成本是否明显上升情况
-      proAndOpeAbnormalSuit: 0, // 企业生产经营是否出现异常情况
+      proAndOpeAbnormalSuit: 1, // 企业生产经营是否出现异常情况
       proAndOpeAbnormalSuitMsg: '', // 企业生产经营是否出现异常情况说明
-      saleAbnormalSuit: 0, // 企业销售是否出现异常情况
+      saleAbnormalSuit: 1, // 企业销售是否出现异常情况
       saleAbnormalSuitMsg: '', // 企业销售是否出现异常情况说明
-      chainChange: 0, // 企业上下游核心客户是否发生重大变更
+      chainChange: 1, // 企业上下游核心客户是否发生重大变更
       chainChangeMsg: '', // 企业上下游核心客户发生重大变更说明
-      dailyCostDecline: 0, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
+      dailyCostDecline: 1, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
       dailyCostDeclineMsg: '', // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）shuoming
       // orderDecline: 0, // 企业订单是否出现大幅下降（降幅达30%）
       // orderDeclinemsg: "", // 企业订单出现大幅下降（降幅达30%）说明
       cashLastToNow: '', // 上次检查（或调查）至本次检查期间的现金
-      cashDecline: 0, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
-      cashMatchesAndProAndOpe: 0, // 现金流与营业收入是否基本匹配
+      cashDecline: 1, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
+      cashMatchesAndProAndOpe: 1, // 现金流与营业收入是否基本匹配
       cashOtherMsg: '', // 现金流其他说明
       summaryForCheck: '', // 检查要点小结
-      otherSitu: '', // 其他情况
+      otherSitu: 1, // 其他情况
       orderDecline: 1,
       orderDeclinemsg: '',
     },
@@ -483,4 +483,42 @@ const loanlnspection = {
   },
 }
 
-export { loanlnspection }
+const initArray = [
+	'existRisk',
+	'existBadRecord',
+	'existCreditChage1',
+	'existCreditChage2',
+	'existCreditChage3',
+	'existBadRecordCon',
+	'existBadRecordJur',
+	'existCreditChage4',
+	'existCreditChage5',
+	'existCreditChager6',
+	'existCreditChage3',
+	'addedOverdues',
+	'existBadRecord',
+	'industrycChangSiut',
+	'planExpandSitu',
+	'hiddenTroubleSitu',
+	'otherSitu',
+	'useAmoutByContract',
+	'executeCon',
+	'revalOfColl',
+	'yearlyInspection',
+	'addedLoans',
+	'shrinkLoanScale',
+	'addedGuarantees',
+	'ownerStruSame',
+	'mainBusIsChanged',
+	'addrIsChanged',
+	'proAndOpeAbnormalSuit',
+	'saleAbnormalSuit',
+	'chainChange',
+	'dailyCostDecline',
+	'cashDecline',
+	'cashMatchesAndProAndOpe',
+	'orderDecline',
+	'isAdjustLine',
+]
+
+export { loanlnspection,initArray }

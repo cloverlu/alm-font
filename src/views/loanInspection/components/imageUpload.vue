@@ -195,7 +195,6 @@ export default {
       // this.$Indicator.open();
       // console.log(this.fileList[this.item.vModel]);
       // const a = this.fileList[this.item.vModel].length;
-      alert('上传之前')
       this.fileList[this.item.vModel].push({
         status: "uploading",
         message: "上传中"
@@ -230,7 +229,6 @@ export default {
       //上传完成
       // console.log(file, "afterRead-file");
       // console.log(this.fileList, "afterRead-this.fileList");
-      alert('上传中，还未走接口')
 
       //上传图片
       let params = new FormData();
@@ -240,9 +238,7 @@ export default {
       var newFileList;
 
       const imageUploadRes = await imageUpload(this, params).then(res => {
-        alert('进入接口')
         if (res.status === 200 && res.data.returnCode === "200000") {
-          alert('接口返回成功')
           file.status = "done";
           file.message = "上传成功";
           this.$Indicator.close();
@@ -257,7 +253,6 @@ export default {
           newFileList[newFileList.length - 1].url = res.data.picUrl;
           newFileList[newFileList.length - 1].status = "done";
         } else {
-          alert('接口返回失败')
           newFileList[newFileList.length - 1].message = "上传失败";
           newFileList[newFileList.length - 1].status = "failed";
         }

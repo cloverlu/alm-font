@@ -51,7 +51,8 @@ export default {
         queryType: "3",
         pageNo: 1,
         pageSize: 1000
-      }
+			},
+			userParams:{}
     };
   },
   created () { },
@@ -68,7 +69,8 @@ export default {
         emplName: "金林",
         orgName: "南京"
       }
-    }
+		}
+		this.userParams = userParams
     this.getList(userParams);
 
 
@@ -92,7 +94,7 @@ export default {
           queryType: "2",
           moduleName: "custmer",
           custName: custName,
-          emplName: GetQueryValue("userName"),
+          emplName: this.userParams.emplName,
           custCode: item.custCode
         }
       });
@@ -123,8 +125,18 @@ export default {
       });
     },
     userChange () {
-      this.params.custName = this.userSearch;
-      this.getList();
+			var params;
+			if(this.userSearch){
+				const custName = {
+					custName:this.userSearch
+				}
+				params = Object.assign({},this.params,custName)
+
+			}else{
+				params = Object.assign({},this.params,this.userParams)
+			}
+      
+      this.getList(params);
     },
     autofocus () {
       console.log("...");

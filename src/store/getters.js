@@ -1,4 +1,4 @@
-import { loanlnspection } from '../utils/allKeys'
+import { loanlnspection ,initArray} from '../utils/allKeys'
 
 const getters = {
   nextFooter: (state) => state.footerNext.nextFooter,
@@ -116,16 +116,28 @@ const getters = {
     }
     Object.keys(obj2).forEach((key) => {
       if (forBizDetail) {
-        obj2[key] = forBizDetail[key]
-        if (key === 'cooperate') {
-          if (!forBizDetail[key]) {
+				obj2[key] = forBizDetail[key]
+				if(initArray.indexOf(key) !== -1){
+					if (forBizDetail[key] === null) {
+            obj2[key] = 1
+          }
+				}
+        else if (key === 'cooperate' || key === 'payKind') {
+          if (forBizDetail[key] === null) {
             obj2[key] = '1'
           }
         } else if (key === 'securityKind') {
-          if (!forBizDetail[key]) {
+          if (forBizDetail[key]  === null) {
             obj2[key] = ['1']
           }
-        }
+        }else if(key === 'riskStage'){
+					const key2 = 'existRisk'
+					if(forBizDetail[key2] === 1 || forBizDetail[key2] === null){
+						if(forBizDetail[key] === null){
+							obj2[key] = '一'
+						}
+					}
+				}
       }
     })
     if (name === 'definite10' || name === 'overalltDefinite10') {
@@ -137,6 +149,7 @@ const getters = {
     //   obj2.summarySituMsg = state.footerNext.forBizDetail.summarySituMsg;
     // }
 
+		console.log(obj2)
     return obj2
   },
   saveFlag: (state) => state.footerNext.saveFlag,
@@ -243,16 +256,28 @@ const getters = {
 
         Object.keys(obj[key]).forEach((k) => {
           if (approveData) {
-            obj[key][k] = approveData[k]
-            if (k === 'cooperate') {
-              if (!approveData[k]) {
+						obj[key][k] = approveData[k]
+						if(initArray.indexOf(k) !== -1){
+							if (approveData[k] === null) {
+								obj[key][k] = 1
+							}
+						}
+            else if (k === 'cooperate' || k === 'payKind') {
+              if (approveData[k] === null) {
                 obj[key][k] = '1'
               }
-            } else if (key === 'securityKind') {
-              if (!forBizDetail[key]) {
-                obj2[key] = ['1']
+            } else if (k === 'securityKind') {
+              if (approveData[k] === null) {
+                obj[key][k] = ['1']
               }
-            }
+            }else if(k === 'riskStage'){
+							const key2 = 'existRisk'
+							if(approveData[key2] === 1 || approveData[key2] === null){
+								if(approveData[k] === null){
+									obj[key][k] = '一'
+								}
+							}
+						}
           }
         })
         if (key === 'definite10' || key === 'definite11') {
@@ -263,8 +288,7 @@ const getters = {
         //     state.approvalStore.approveDetail.summarySituMsg
         // }
       }
-    })
-
+		})
     return obj
   },
   handleParams: (state) => state.approvalStore.handleParams,
@@ -385,17 +409,28 @@ const getters = {
     }
     Object.keys(obj2).forEach((key) => {
       if (forBizDetail) {
-        obj2[key] = forBizDetail[key]
-        if (key === 'cooperate') {
-          if (!forBizDetail[key]) {
+				obj2[key] = forBizDetail[key]
+				if(initArray.indexOf(key) !== -1){
+					if (forBizDetail[key] === null) {
+            obj2[key] = 1
+          }
+				}
+        else if (key === 'cooperate' || key === 'payKind') {
+          if (forBizDetail[key] === null) {
             obj2[key] = '1'
           }
         } else if (key === 'securityKind') {
-          console.log(forBizDetail[key])
-          if (!forBizDetail[key]) {
+          if (forBizDetail[key] === null) {
             obj2[key] = ['1']
           }
-        }
+        }else if(key === 'riskStage'){
+					const key2 = 'existRisk'
+					if(forBizDetail[key2] === 1 || forBizDetail[key2] === null){
+						if(forBizDetail[key] === null){
+							obj2[key] = '一'
+						}
+					}
+				}
       }
     })
     if (name === 'userRoutineDefinite10' || name === 'userOveralltDefinite10') {

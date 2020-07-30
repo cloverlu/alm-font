@@ -25,14 +25,19 @@
       </div>
       <div class="item1">
         <span class="tag1">发生阶段</span>
-        <almSelect :selectData="happenPats"
-                   :defaultValue="params.riskStage"
-                   :triggerId="riskStage"
-                   :title="riskStageTitle"
-                   :fontColor="fontColor"
-                   @getSelectValue="getSelect2"
-                   class="info"></almSelect>
-        <span class="iconfont iconxiala arrow"></span>
+        <almSelect 
+					:selectData="happenPats"
+					:defaultValue="params.riskStage"
+					:triggerId="riskStage"
+					:title="riskStageTitle"
+					:fontColor="fontColor"
+					@getSelectValue="getSelect2"
+					v-if="existRiskYN"
+					class="info"
+					
+				>
+				</almSelect>
+        <span class="iconfont iconxiala arrow" 	v-if="existRiskYN"></span>
       </div>
       <!-- <mt-field
         class="textFiled"
@@ -160,7 +165,8 @@ export default {
       riskStage: "riskStage",
       yesNo: yesNo,
       happenPats: happenPats2,
-      existSignal: "existSignal",
+			existSignal: "existSignal",
+			existRiskYN:true,
       params: {
         riskStage: "一",
         riskMsg: "",
@@ -243,7 +249,15 @@ export default {
       });
     },
     getSelect: function (data) {
-      this.params.existRisk = data[0].key;
+			this.params.existRisk = data[0].key;
+			if(this.params.existRisk === 1){
+				this.existRiskYN = true
+				this.params.riskStage = '一'
+			}else if(this.params.existRisk === 0){
+				this.existRiskYN = false
+				this.params.riskStage = ''
+
+			}
     },
     getSelect2 (data) {
       this.params.riskStage = data[0].key
@@ -358,6 +372,15 @@ export default {
     },
     // 提交审批
     async submitApprove () {
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type.bizType;

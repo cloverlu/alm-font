@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import apiIntercept from "@/utils/apiIntercept";
-import { Field, Cell, Indicator, Toast, MessageBox } from "mint-ui";
+import { Field, Cell, Indicator, Toast } from "mint-ui";
 
 import "@/assets/font/font.scss";
 // import "@/assets/style/global.scss";
@@ -21,7 +21,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 Vue.prototype.$Indicator = Indicator;
 Vue.prototype.$Toast = Toast;
-Vue.prototype.$MessageBox = MessageBox;
+
 
 Vue.use(apiIntercept);
 

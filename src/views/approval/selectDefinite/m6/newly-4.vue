@@ -45,6 +45,10 @@
 				.item
 					span(class="tag big") 抵质押率
 					span(class="info") {{item.thisMortAndpleRate}}
+				.item
+					span(class="tag big") 押品价值及变现能力变动情况 
+				.item(class="item-textarea")
+					mt-field(v-model="item.assitChangeSuit" :disabled="true" class="textArea" type="textarea" rows="3")
 		
 		.newly-4-norepeat
 			fieldOne(:definite="newly4" :info="detail" ref="fieldOne")
@@ -54,14 +58,14 @@
 </template>
 
 <script>
-import { newly4 } from "../../../../utils/dataMock.js";
+import { newly44 } from "../../../../utils/dataMock.js";
 import fieldOne from "../../../loanInspection/components/fieldOne";
 export default {
   components: { fieldOne },
   props: ["detail"],
   data() {
     return {
-      newly4: newly4
+      newly4: newly44
     };
   },
   methods: {}
