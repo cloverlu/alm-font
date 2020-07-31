@@ -115,7 +115,7 @@ export default {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
           res.data.dataList.filter((item, index) => {
-            if (index <= 6) {
+            if (index <= 1) {
               this.todoListTitle[index].warningNumber = item.itemRecordNum;
               this.todoListTitle[index].postCode = item.postCode;
             }

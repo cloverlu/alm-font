@@ -11,36 +11,36 @@ const todoListTitle = [
     icon: 'iconfont icondaikuan2',
     warningNumber: '',
   },
-  {
-    id: 3,
-    text: '客户账户余额不足提醒',
-    icon: 'iconfont iconzhanghuyue2',
-    warningNumber: '',
-  },
-  {
-    id: 4,
-    text: '贷款到期提醒',
-    icon: 'iconfont icondaikuanshenqing1',
-    warningNumber: '',
-  },
-  {
-    id: 5,
-    text: '信贷运营监控预警核查提醒',
-    icon: 'iconfont iconguochengjiankong-jianduhecha2',
-    warningNumber: '',
-  },
-  {
-    id: 6,
-    text: '信贷运营监控风险提示',
-    icon: 'iconfont iconfengxiantishi2',
-    warningNumber: '',
-  },
-  {
-    id: 7,
-    text: '行业信用风险提醒',
-    icon: 'iconfont iconxinyongka',
-    warningNumber: '',
-  },
+  // {
+  //   id: 3,
+  //   text: '客户账户余额不足提醒',
+  //   icon: 'iconfont iconzhanghuyue2',
+  //   warningNumber: '',
+  // },
+  // {
+  //   id: 4,
+  //   text: '贷款到期提醒',
+  //   icon: 'iconfont icondaikuanshenqing1',
+  //   warningNumber: '',
+  // },
+  // {
+  //   id: 5,
+  //   text: '信贷运营监控预警核查提醒',
+  //   icon: 'iconfont iconguochengjiankong-jianduhecha2',
+  //   warningNumber: '',
+  // },
+  // {
+  //   id: 6,
+  //   text: '信贷运营监控风险提示',
+  //   icon: 'iconfont iconfengxiantishi2',
+  //   warningNumber: '',
+  // },
+  // {
+  //   id: 7,
+  //   text: '行业信用风险提醒',
+  //   icon: 'iconfont iconxinyongka',
+  //   warningNumber: '',
+  // },
 ]
 
 const bizType = [
