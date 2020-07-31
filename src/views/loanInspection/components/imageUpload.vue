@@ -16,7 +16,7 @@
 				:after-read="afterRead" 
 				@delete="deleteImage"
 				v-if="imageHas"
-				:deletable="!imageHas"
+				:deletable="!read"
 			)
 			span(v-else-if="!imageHas") 无照片 
 		//- img(id="img1" src="../../../assets/666.png")

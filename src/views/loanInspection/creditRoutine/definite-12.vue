@@ -38,7 +38,7 @@
           <mt-cell
             class="textFiled"
             title="贷款余额"
-            :value="detail.lineBalance"
+            :value="detail.loanBalance"
           ></mt-cell>
         </div>
       </div>

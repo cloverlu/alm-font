@@ -197,7 +197,7 @@
         </div>
         <mt-field type="textarea"
                   rows="3"
-                  v-model="detail.creditChageMsg3"
+                  v-model="detail.creditChageMsg6"
                   class="text"
                   style="overflow:hidden"
                   :disabled="true"></mt-field>

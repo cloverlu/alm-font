@@ -128,7 +128,9 @@ export default {
 			var params;
 			if(this.userSearch){
 				const custName = {
-					custName:this.userSearch
+					custName:this.userSearch,
+					emplName:this.userParams.emplName,
+					orgName:this.userParams.orgName
 				}
 				params = Object.assign({},this.params,custName)
 
