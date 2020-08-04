@@ -25,7 +25,7 @@ export default {
     return {
       propV: this.popupVisible,
       clickfalse: false,
-      value: this.defaultValue,
+      value: [],
       options: [
         {
           label: "disabled ",
@@ -46,14 +46,20 @@ export default {
       ]
     };
   },
-  mounted() {},
+  mounted() {
+		this.value = this.defaultValue
+	},
   watch: {
     popupVisible(val, oldval) {
       this.propV = val;
     },
     propV(val, oldval) {
       this.$emit("change", val);
-    }
+		},
+		defaultValue(val,oldval){
+			this.value = val
+
+		}
   },
   computed: {},
   methods: {

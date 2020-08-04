@@ -281,7 +281,8 @@ export const normalMixin = {
             this.params9 = this.params
             this.params8 = {}
           }
-        } else if (name === 'repaymentInspectionDefinite7') {
+				}
+				else if (name === 'repaymentInspectionDefinite7') {
           if (this.params.stageData) {
             var a = ''
             if (this.params.stageData && this.params.stageData[0]) {

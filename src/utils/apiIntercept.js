@@ -45,26 +45,36 @@ let apiIntercept = {};
 apiIntercept.install = vue => {
   vue.prototype.$axios = Axios;
   // 拦截请求请求头加token
-  Axios.interceptors.request.use(
-    config => {
-      // 判断是否存在token，如果存在的话，则每个http header都加上token
-      if (localStorage.token) {
-        config.headers["B-AUTH-TOKEN"] = localStorage.token;
-        config.headers["Authorization"] = localStorage.token;
-      }
-      return config;
-    },
-    err => {
-      return Promise.reject(err);
-    }
-  );
+  // Axios.interceptors.request.use(
+  //   config => {
+  //     // 判断是否存在token，如果存在的话，则每个http header都加上token
+  //     if (localStorage.token) {
+  //       config.headers["B-AUTH-TOKEN"] = localStorage.token;
+  //       config.headers["Authorization"] = localStorage.token;
+  //     }
+  //     return config;
+  //   },
+  //   err => {
+  //     return Promise.reject(err);
+  //   }
+  // );
   // http response 拦截器
 
   Axios.interceptors.response.use(
     response => {
       if (response) {
-        if (response.data.code) {
-          switch (response.data.code) {
+        if (response.data.status) {
+          switch (response.data.status) {
+						case 200:
+							if(response.data.data.returnCode !== "200000"){
+								Indicator.close();
+								Toast({
+									message: response.data.data.returnMsg,
+									iconClass: 'iconfont iconcha-01',
+									duration: 5000,
+								})
+							}
+							break;
             case 401:
               // 返回 401 清除token信息并跳转到登录页面
               localStorage.removeItem("token");
@@ -95,9 +105,12 @@ apiIntercept.install = vue => {
             break;
           case 404:
             Toast({ message: "当前数据不存在", duration: 5000 });
-            break;
+						break;
+					case 400:
+						Toast({ message: err.response.data.message, duration: 5000 });
+						break;
           case 405:
-            Toast({ message: err.response.statusText, duration: 5000 });
+            Toast({ message: err.response.data.message, duration: 5000 });
         }
       }
       return Promise.reject(err);
