@@ -145,7 +145,8 @@ export default {
       cooperate: "cooperate",
       yearlyInspection: "yearlyInspection",
       fontColor: "blue",
-      securityKind: "",
+			securityKind: "",
+			otherSecurityKindMsg:'',
       params: {
         otherSecurityKindMsg: "",
         repayKind: "",
@@ -195,8 +196,15 @@ export default {
 			) {
 				await this.setforDizDetail(this);
 				this.params = this.forBizDetail(this.$route.name);
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag && this.params.otherSecurityKindMsg){
+					this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+				}else{
+					this.otherSecurityKindMsg =''
+				}
 				this.securityKindsF();
 			} else {
+				this.otherSecurityKindMsg =''
 				this.securityKindsF();
 			}
 			//刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
@@ -284,7 +292,13 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-        var arr = [];
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag){
+					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+				}else{
+					this.params.otherSecurityKindMsg = ''
+				}
+				var arr = [];
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {

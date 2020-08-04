@@ -16,6 +16,7 @@
 				:after-read="afterRead" 
 				@delete="deleteImage"
 				v-if="imageHas"
+				multiple
 				:deletable="!read"
 			
 			)
@@ -193,13 +194,6 @@ export default {
     },
     // 上传之前
     async beforeRead (file) {
-      // this.$Indicator.open();
-      // console.log(this.fileList[this.item.vModel]);
-      // const a = this.fileList[this.item.vModel].length;
-      this.fileList[this.item.vModel].push({
-        status: "uploading",
-        message: "上传中"
-      });
       return new Promise((resolve, reject) => {
         // let ishas = this.fileList[this.item.vModel].some(function(cur, i, arr) {
         //   return cur.file.name === file.name;
@@ -214,9 +208,26 @@ export default {
         //   resolve();
         // }
 
-        console.log(file, "beforeRead");
-        console.log(this.fileList, "fileList");
-        this.imgPreview(file);
+        // console.log(file, "beforeRead");
+				// console.log(this.fileList, "fileList");
+			
+				if(file.length > 1){
+					// 多选
+					file.map(item => {
+						this.fileList[this.item.vModel].push({
+							status: "uploading",
+							message: "上传中",
+							name: item.name 
+						});
+					})
+				}else{
+					// 单传
+					this.fileList[this.item.vModel].push({
+					  status: "uploading",
+						message: "上传中",
+						name: file.name 
+					});
+				}
         resolve();
       });
     },
@@ -226,53 +237,56 @@ export default {
         resolve();
       });
     },
-    async afterRead (file) {
+    afterRead (file) {
       //上传完成
       // console.log(file, "afterRead-file");
-      // console.log(this.fileList, "afterRead-this.fileList");
-
-      //上传图片
-      let params = new FormData();
-      params.append("file", file.file);
-      params.append("bizId", this.$route.params.bizId);
-
-      var newFileList;
-
+			// console.log(this.fileList, "afterRead-this.fileList");
+			if(file.length > 1){
+				file.map(item => {
+					this.imgPreview(item,item.file)
+				})
+			}else{
+					this.imgPreview(file,file.file)
+			}
+		},
+		//上传图片
+		async uploadImage(e,base64){
+			//上传图片
+			const file = this.dataURLtoFile(base64,e)
+			let params = new FormData();
+      params.append("file", file);
+			params.append("bizId", this.$route.params.bizId);
+			var newFileList;
       const imageUploadRes = await imageUpload(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
-          file.status = "done";
-          file.message = "上传成功";
-          this.$Indicator.close();
-
-          newFileList = this.fileList[this.item.vModel];
-
-          if (newFileList.length > 0) {
-            const index = newFileList.length;
-            newFileList.splice(index, 1);
-          }
-
-          newFileList[newFileList.length - 1].url = res.data.picUrl;
-          newFileList[newFileList.length - 1].status = "done";
-        } else {
-          newFileList[newFileList.length - 1].message = "上传失败";
-          newFileList[newFileList.length - 1].status = "failed";
+					newFileList = this.fileList[this.item.vModel];
+					
+					newFileList.map((item,index) => {
+						if(item.name === e.file.name){
+							this.getLo(e.file, index);
+							item.status = 'done'
+							item.message = '上传成功'
+							item.url = res.data.picUrl
+							item.name = Date.now()
+						}
+					})
+				} 
+				else {
+					newFileList = this.fileList[this.item.vModel];
+					newFileList.map(item => {
+						if(item.name === e.file.name){
+							item.status = 'failed'
+							item.message = '上传失败'
+							item.url = res.data.picUrl
+							item.name = Date.now()
+						}
+					})
         }
         return this.fileList[this.item.vModel];
       });
 
-      // console.log(imageUploadRes);
-      if (imageUploadRes) {
-        var index = "";
-        if (imageUploadRes.length > 0) {
-          index = imageUploadRes.length - 1;
-        } else {
-          index = 0;
-        }
-        // this.getOrientation(index);
-        this.getLo(file.file, index);
-      }
-    },
-    imgPreview (file) {
+		},
+    imgPreview (item,file) {
       let self = this;
       // 看支持不支持FileReader
       if (!file || !window.FileReader) return;
@@ -288,17 +302,18 @@ export default {
         img.src = result;
         //判断图片是否大于500K,是就直接上传，反之压缩图片
         if (this.result.length <= 500 * 1024) {
-          file.cusContent = result;
-          self.isloadImg = false;
+					file.cusContent = result;
+          self.uploadImage(item,result)
         } else {
           img.onload = function () {
             let data = self.compress(img);
-            file.cusContent = data;
-            // console.log(file.size);
-            self.isloadImg = false;
+						file.cusContent = data;
+						self.uploadImage(item,data)
+           
           };
-        }
-      };
+				}
+			};
+		
     },
     // 压缩图片
     compress (img) {
@@ -355,9 +370,22 @@ export default {
       //进行最小压缩
       let ndata = canvas.toDataURL("image/jpeg", 0.3);
       tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;
-
+    
       return ndata;
-    }
+		},
+		//将base64转换为文件
+    dataURLtoFile(dataurl,item) {
+      var arr = dataurl.split(","),
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], item.file.name, {
+        type: item.file.type
+      });
+    },
   }
 };
 </script>

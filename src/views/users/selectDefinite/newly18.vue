@@ -93,7 +93,8 @@ export default {
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
-      securityKindId: "securityKind",
+			securityKindId: "securityKind",
+			otherSecurityKindMsg:'',
       params: {
         lineAmout: "",
         loanBalance: "",
@@ -138,7 +139,13 @@ export default {
 
     if (this.bizId) {
       await this.setUserforDizDetail(this);
-      this.params = this.userForBizDetail(name, type);
+			this.params = this.userForBizDetail(name, type);
+			const flag = this.params.securityKind.some(item => item === "5");
+			if(flag && this.params.otherSecurityKindMsg){
+				this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+			}else{
+				this.otherSecurityKindMsg =''
+			}
     }
     this.setScrollToPo({
       x: 0,
@@ -178,7 +185,13 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-        var arr = [];
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag){
+					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+				}else{
+					this.params.otherSecurityKindMsg = ''
+				}
+				var arr = [];
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {

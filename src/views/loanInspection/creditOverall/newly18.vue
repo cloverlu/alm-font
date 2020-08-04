@@ -100,7 +100,8 @@ export default {
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
-      securityKindId: "securityKind",
+			securityKindId: "securityKind",
+			otherSecurityKindMsg:'',
       params: {
         loanBalance: "",
         lineAmout: "",
@@ -138,7 +139,7 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-        const flag = this.params.securityKind.some(item => item === "5");
+				const flag = this.params.securityKind.some(item => item === "5");
         if (flag) {
           return true;
         } else {
@@ -166,9 +167,16 @@ export default {
         this.tranSactName1.tranSactName1 === true
       ) {
         await this.setforDizDetail(this);
-        this.params = this.forBizDetail(this.$route.name);
+				this.params = this.forBizDetail(this.$route.name);
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag && this.params.otherSecurityKindMsg){
+					this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+				}else{
+					this.otherSecurityKindMsg =''
+				}
         this.securityKindsF();
       } else {
+				this.otherSecurityKindMsg =''
         this.securityKindsF();
       }
       //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
@@ -244,13 +252,21 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
+				const flag = this.params.securityKind.some(item => item === "5");
+				
+				if(flag){
+					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+				}else{
+					this.params.otherSecurityKindMsg = ''
+				}
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {
               arr.push(item.label);
             }
           });
-        });
+				});
+				
         this.securityKind = arr.join(",");
       }
     }

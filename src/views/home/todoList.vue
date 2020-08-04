@@ -48,7 +48,7 @@ export default {
       };
 
     } else {
-			alert('没有获取到用户信息')
+			// alert('没有获取到用户信息')
       params = {
         emplName: "金林",
         orgCode: "12222",
@@ -115,10 +115,12 @@ export default {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
           res.data.dataList.filter((item, index) => {
-            if (index <= 1) {
-              this.todoListTitle[index].warningNumber = item.itemRecordNum;
-              this.todoListTitle[index].postCode = item.postCode;
-            }
+						this.todoListTitle.filter((item2,index2) => {
+							if(item.itemType === item2.id.toString()){
+								item2.warningNumber = item.itemRecordNum;
+								item2.postCode = item.postCode;
+							}
+						})
           });
         }
       });
