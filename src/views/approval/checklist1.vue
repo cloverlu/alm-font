@@ -56,8 +56,9 @@
 					span(class="info") {{item.processTime}}
 				.item
 					span(class="tag") 意见
-					span(class="info" v-if="item.agreeResult === 0") 不同意
-					span(class="info" v-if="item.agreeResult === 1") 同意
+					span(class="info" v-if="item.agreeResult === '0'") 不同意
+					span(class="info" v-else-if="item.agreeResult === '1'") 同意
+					span(class="info" v-else) 无
 				.item1(@click="linkMore" v-show="showLink") 查看更多 »
 		router-view(v-else)
 					

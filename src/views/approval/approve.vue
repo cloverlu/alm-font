@@ -211,7 +211,7 @@ export default {
       const biggerThan500 = this.$route.params.biggerThan500;
       const belongBranch = this.$route.params.belongBranch;
       const type = this.$route.params.type;
-      if (currPost === "321") {
+      if (currPost === "321" || currPost === "322") {
         if (type === "m1" || type === "m3") {
           this.commpoentName = "processing2";
         } else if (type === "m2" || type === "m5") {
@@ -221,7 +221,8 @@ export default {
         } else if (type === "m6") {
           this.commpoentName = "processing29";
         }
-      } else if (currPost === "320") {
+			}
+			else if (currPost === "320") {
         if (biggerThan500 === 1) {
           if (type === "m1") {
             this.commpoentName = "processing2";

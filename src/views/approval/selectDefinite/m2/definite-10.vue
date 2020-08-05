@@ -110,7 +110,7 @@
           <div class="title">2.企业法定代表人及其配偶（若有）征信：</div>
           <mt-cell class="textFiled"
                    title="征信分类"
-                   :value="detail.creditClassification"></mt-cell>
+                   :value="detail.creditClassificationJur"></mt-cell>
           <div class="formTitle1">
             <!-- <span class="lightBlue"></span>
             <span class="coNameBlack">征信分类</span>-->

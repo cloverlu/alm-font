@@ -161,7 +161,7 @@
         </div>
         <mt-field type="textarea"
                   rows="3"
-                  v-model="detail.orderDeclinemsg"
+                  v-model="detail.orderDeclineMsg"
                   class="textArea"
                   style="overflow:hidden"
                   :disabled="true"></mt-field>

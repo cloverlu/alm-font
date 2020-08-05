@@ -181,7 +181,7 @@ export default {
             );
             const moduleName = this.$route.params.moduleName;
             // 两个接口并发，都成功后才走操作
-            this.bindSave(loanBusiness, loanBusiness2, moduleName);
+            this.bindSave(loanBusiness, loanBusiness2, currentName);
           });
         } else {
           this.$nextTick(() => {

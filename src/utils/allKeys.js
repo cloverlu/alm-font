@@ -457,7 +457,7 @@ const loanlnspection = {
       summaryForCheck: '', // 检查要点小结
       otherSitu: 1, // 其他情况
       orderDecline: 1,
-      orderDeclinemsg: '',
+      orderDeclineMsg: '',
     },
     newly45: {
       bizId: '',
