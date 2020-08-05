@@ -2,6 +2,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { SaveEditModelBusiness, submitApprove } from '../api/loanlnspection'
 import { unique } from '../utils/utils'
 
+
 //普遍用到的状态
 export const normalMixin = {
   computed: {
@@ -14,7 +15,17 @@ export const normalMixin = {
       'queryDetail',
       'tranSactName1',
       'flagSava45',
-    ]),
+		]),
+		// 判断安卓还是ios
+		judgeDeviceType () {
+      var ua = window.navigator.userAgent.toLocaleLowerCase();
+      var isIOS = /iphone|ipad|ipod/.test(ua);
+      var isAndroid = /android/.test(ua);
+      return {
+        isIOS: isIOS,
+        isAndroid: isAndroid
+      };
+    }
   },
   methods: {
     ...mapActions([
@@ -374,32 +385,45 @@ export const normalMixin = {
         ]
       }
       return definite16
-    },
-    // promise
-    promiseFun(url, params) {
-      return new Promise((resolve, reject) => {
-        url(this, params).then(
-          (res) => {
-            if (res.status === 200 && res.data.returnCode === '200000') {
-              console.log(res)
-              resolve(res)
-            }
-          },
-          (err) => {
-            reject(err.json())
-          }
-        )
-      })
-    },
+		},
+		promiseFun(url, params) {
+			return new Promise((resolve, reject) => {
+				url(this, params).then(
+					(res) => {
+						if (res.status === 200 && res.data.returnCode === '200000') {
+							console.log(res)
+							resolve(res)
+						}
+					},
+					(err) => {
+						reject(err.json())
+					}
+				)
+			})
+		},
     // 照片保存与保存审批页面同时存在，用promise all，只要一个失败即失败
-    bindSave(params, params2, moduleName) {
+    bindSave(params, params2, currentName) {
       let appreove = this.promiseFun(submitApprove, params)
       let editSave = this.promiseFun(SaveEditModelBusiness, params2)
       var message = ''
       if (params.opType === '0') {
-        message = '保存'
+				message = '保存'
+				const pa = {
+					bizId: this.$route.params.bizId,
+					currentName: currentName,
+					flag: true,
+					uniqueTag: this.$route.params.bizId + currentName,
+				}
+				const saveFlags = this.saveFlag
+				saveFlags.push(pa)
+				this.setSaveFlag(unique(saveFlags, 'uniqueTag'))
       } else if (params.opType === '1') {
-        message = '提交'
+				message = '提交'
+				this.saveFlag.map((item, index) => {
+					if (item.bizId === params.bizId) {
+						this.saveFlag.splice(index, 1)
+					}
+				})
       }
 
       // 使用 Promise.all()
@@ -413,11 +437,12 @@ export const normalMixin = {
           })
           if (params.opType === '1') {
             setTimeout(() => {
-              if (moduleName === 'custmer') {
-                this.$router.push({ name: 'userIndex' })
-              } else {
-                this.$router.push({ name: 'loanInspectionIndex' })
-              }
+              // if (moduleName === 'custmer') {
+              //   this.$router.push({ name: 'userIndex' })
+              // } else {
+              //   this.$router.push({ name: 'loanInspectionIndex' })
+							// }
+							this.$router.push({ name: 'loanInspectionIndex' })
             }, 1200)
           } 
         })
@@ -703,6 +728,11 @@ export const userMixin = {
             duration: 1000,
           })
           if (params.opType === '1') {
+						this.userBizId.map((item, index) => {
+							if (item.bizId === params.bizId) {
+								this.userBizId.splice(index, 1)
+							}
+						})
             setTimeout(() => {
               this.$router.push({ name: 'userIndex' })
             }, 1200)
@@ -716,6 +746,75 @@ export const userMixin = {
           })
         }
       })
+		},
+		promiseFun(url, params) {
+			return new Promise((resolve, reject) => {
+				url(this, params).then(
+					(res) => {
+						if (res.status === 200 && res.data.returnCode === '200000') {
+							console.log(res)
+							resolve(res)
+						}
+					},
+					(err) => {
+						reject(err.json())
+					}
+				)
+			})
+		},
+		// 照片保存与保存审批页面同时存在，用promise all，只要一个失败即失败
+    userBindSave(params, params2, type,currentName) {
+      let appreove = this.promiseFun(submitApprove, params)
+      let editSave = this.promiseFun(SaveEditModelBusiness, params2)
+      var message = ''
+      if (params.opType === '0') {
+				message = '保存'
+			 //setUserBizId
+			 	const pa = {
+					bizId: params.bizId,
+					billNo: this.$route.params.billNo,
+					bizType: type,
+					currentName: currentName,
+					allTag: type + this.$route.params.billNo,
+					uniqueTag: type + this.$route.params.billNo + currentName,
+				}
+
+				const userBizId = this.userBizId
+				userBizId.push(pa)
+				this.setUserBizId(unique(userBizId, 'uniqueTag'))
+      } else if (params.opType === '1') {
+				message = '提交'
+				this.userBizId.map((item, index) => {
+					if (item.bizId === params.bizId) {
+						this.userBizId.splice(index, 1)
+					}
+				})
+				
+      }
+
+      // 使用 Promise.all()
+      Promise.all([appreove, editSave])
+        .then((res) => {
+          this.$Indicator.close()
+          this.$Toast({
+            message: message + '成功！',
+            iconClass: 'iconfont icongou-01',
+            duration: 1000,
+          })
+          if (params.opType === '1') {
+            setTimeout(() => {
+							this.$router.push({ name: 'userIndex' })
+            }, 1200)
+          } 
+        })
+        .catch((err) => {
+          this.$Indicator.close()
+          this.$Toast({
+            message: message + '失败！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 5000,
+          })
+        })
     },
   },
 }

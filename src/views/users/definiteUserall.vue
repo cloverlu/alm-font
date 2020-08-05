@@ -153,7 +153,7 @@ export default {
           );
           const moduleName = this.$route.params.moduleName;
           // 两个接口并发，都成功后才走操作
-          this.bindSave(params, loanBusiness2, moduleName);
+          this.userBindSave(params, loanBusiness2, type,name);
         } else {
           const pa = {
             bizId: this.bizId

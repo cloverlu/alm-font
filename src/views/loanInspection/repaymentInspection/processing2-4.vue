@@ -391,18 +391,36 @@ export default {
           bizId: this.bizId,
           orgName: this.$route.params.orgName,
           opType: "1"
-        };
+				};
+				var arrs = {};
+        for (let i = 0; i < this.processing4.length; i++) {
+          const a = `pic_${i + 1}s`;
+          arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
+				}
+				const bizId = {
+					 bizId: this.bizId,
+				}
+				const params2 = Object.assign({}, this.type, bizId,arrs);
         const params = Object.assign({}, pa, this.params);
-        await this.userSubmit(params, type, currentName);
+        await this.userBindSave(params,params2, type,currentName);
       } else {
         pa = {
           bizId: this.bizId,
           postCode: this.$route.params.currPost,
           orgName: this.$route.params.orgName,
           opType: "1"
-        };
+				};
+				var arrs = {};
+        for (let i = 0; i < this.processing4.length; i++) {
+          const a = `pic_${i + 1}s`;
+          arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
+				}
+				const bizId = {
+					 bizId: this.bizId,
+				}
+				const params2 = Object.assign({}, this.type, bizId,arrs);
         const params = Object.assign({}, pa, this.params);
-        await this.submit(params, currentName);
+        await this.bindSave(params,params2, currentName);
       }
     }
   }
