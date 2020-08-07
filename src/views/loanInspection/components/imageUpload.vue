@@ -209,25 +209,25 @@ export default {
         // }
 
         // console.log(file, "beforeRead");
-				// console.log(this.fileList, "fileList");
-			
-				if(file.length > 1){
-					// 多选
-					file.map(item => {
-						this.fileList[this.item.vModel].push({
-							status: "uploading",
-							message: "上传中",
-							name: item.name 
-						});
-					})
-				}else{
-					// 单传
-					this.fileList[this.item.vModel].push({
-					  status: "uploading",
-						message: "上传中",
-						name: file.name 
-					});
-				}
+        // console.log(this.fileList, "fileList");
+
+        if (file.length > 1) {
+          // 多选
+          file.map(item => {
+            this.fileList[this.item.vModel].push({
+              status: "uploading",
+              message: "上传中",
+              name: item.name
+            });
+          })
+        } else {
+          // 单传
+          this.fileList[this.item.vModel].push({
+            status: "uploading",
+            message: "上传中",
+            name: file.name
+          });
+        }
         resolve();
       });
     },
@@ -239,54 +239,54 @@ export default {
     },
     afterRead (file) {
       //上传完成
-      // console.log(file, "afterRead-file");
-			// console.log(this.fileList, "afterRead-this.fileList");
-			if(file.length > 1){
-				file.map(item => {
-					this.imgPreview(item,item.file)
-				})
-			}else{
-					this.imgPreview(file,file.file)
-			}
-		},
-		//上传图片
-		async uploadImage(e,base64){
-			//上传图片
-			const file = this.dataURLtoFile(base64,e)
-			let params = new FormData();
+      console.log(file, "afterRead-file");
+      console.log(this.fileList, "afterRead-this.fileList");
+      if (file.length > 1) {
+        file.map(item => {
+          this.imgPreview(item, item.file)
+        })
+      } else {
+        this.imgPreview(file, file.file)
+      }
+    },
+    //上传图片
+    async uploadImage (e, base64) {
+      //上传图片
+      const file = this.dataURLtoFile(base64, e)
+      let params = new FormData();
       params.append("file", file);
-			params.append("bizId", this.$route.params.bizId);
-			var newFileList;
+      params.append("bizId", this.$route.params.bizId);
+      var newFileList;
       const imageUploadRes = await imageUpload(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
-					newFileList = this.fileList[this.item.vModel];
-					
-					newFileList.map((item,index) => {
-						if(item.name === e.file.name){
-							this.getLo(e.file, index);
-							item.status = 'done'
-							item.message = '上传成功'
-							item.url = res.data.picUrl
-							item.name = Date.now()
-						}
-					})
-				} 
-				else {
-					newFileList = this.fileList[this.item.vModel];
-					newFileList.map(item => {
-						if(item.name === e.file.name){
-							item.status = 'failed'
-							item.message = '上传失败'
-							item.url = res.data.picUrl
-							item.name = Date.now()
-						}
-					})
+          newFileList = this.fileList[this.item.vModel];
+
+          newFileList.map((item, index) => {
+            if (item.name === e.file.name) {
+              this.getLo(e.file, index);
+              item.status = 'done'
+              item.message = '上传成功'
+              item.url = res.data.picUrl
+              item.name = Date.now()
+            }
+          })
+
+        }
+        else {
+          newFileList = this.fileList[this.item.vModel];
+          newFileList.map(item => {
+            if (item.name === e.file.name) {
+              item.status = 'failed'
+              item.message = '上传失败'
+              item.name = Date.now()
+            }
+          })
         }
         return this.fileList[this.item.vModel];
       });
 
-		},
-    imgPreview (item,file) {
+    },
+    imgPreview (item, file) {
       let self = this;
       // 看支持不支持FileReader
       if (!file || !window.FileReader) return;
@@ -302,18 +302,18 @@ export default {
         img.src = result;
         //判断图片是否大于500K,是就直接上传，反之压缩图片
         if (this.result.length <= 500 * 1024) {
-					file.cusContent = result;
-          self.uploadImage(item,result)
+          file.cusContent = result;
+          self.uploadImage(item, result)
         } else {
           img.onload = function () {
             let data = self.compress(img);
-						file.cusContent = data;
-						self.uploadImage(item,data)
-           
+            file.cusContent = data;
+            self.uploadImage(item, data)
+
           };
-				}
-			};
-		
+        }
+      };
+
     },
     // 压缩图片
     compress (img) {
@@ -370,11 +370,11 @@ export default {
       //进行最小压缩
       let ndata = canvas.toDataURL("image/jpeg", 0.3);
       tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;
-    
+
       return ndata;
-		},
-		//将base64转换为文件
-    dataURLtoFile(dataurl,item) {
+    },
+    //将base64转换为文件
+    dataURLtoFile (dataurl, item) {
       var arr = dataurl.split(","),
         bstr = atob(arr[1]),
         n = bstr.length,

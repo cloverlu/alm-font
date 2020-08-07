@@ -25,19 +25,17 @@
       </div>
       <div class="item1">
         <span class="tag1">发生阶段</span>
-        <almSelect 
-					:selectData="happenPats"
-					:defaultValue="params.riskStage"
-					:triggerId="riskStage"
-					:title="riskStageTitle"
-					:fontColor="fontColor"
-					@getSelectValue="getSelect2"
-					v-if="existRiskYN"
-					class="info"
-					
-				>
-				</almSelect>
-        <span class="iconfont iconxiala arrow" 	v-if="existRiskYN"></span>
+        <almSelect :selectData="happenPats"
+                   :defaultValue="params.riskStage"
+                   :triggerId="riskStage"
+                   :title="riskStageTitle"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelect2"
+                   v-if="existRiskYN"
+                   class="info">
+        </almSelect>
+        <span class="iconfont iconxiala arrow"
+              v-if="existRiskYN"></span>
       </div>
       <!-- <mt-field
         class="textFiled"
@@ -66,7 +64,18 @@
           <span class="colum-blue"></span>
           <span>影像维护</span>
         </div>
-        <div class="definite-13-content">
+        <div class="definite-13-content"
+             v-if="judgeDeviceType.isAndroid">
+          <imageUploadForAZ v-for="(item, i) in processing4"
+                            :item="item"
+                            :key="i"
+                            :itemVmodel="params2"
+                            :read="false"
+                            :ref="`processing4${i}`" />
+
+        </div>
+        <div class="definite-13-content"
+             v-if="judgeDeviceType.isIOS">
           <imageUpload v-for="(item, i) in processing4"
                        :item="item"
                        :key="i"
@@ -138,6 +147,7 @@ import {
   happenPats2
 } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
+import imageUploadForAZ from '../components/imageUploadForAZ'
 import { Field, Cell, Button, Popup } from "mint-ui";
 import BScroll from "@better-scroll/core";
 import almSelect from "../components/select";
@@ -149,7 +159,8 @@ export default {
     "mt-button": Button,
     "mt-popup": Popup,
     almSelect,
-    imageUpload
+    imageUpload,
+    imageUploadForAZ
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
@@ -165,8 +176,8 @@ export default {
       riskStage: "riskStage",
       yesNo: yesNo,
       happenPats: happenPats2,
-			existSignal: "existSignal",
-			existRiskYN:true,
+      existSignal: "existSignal",
+      existRiskYN: true,
       params: {
         riskStage: "一",
         riskMsg: "",
@@ -249,15 +260,15 @@ export default {
       });
     },
     getSelect: function (data) {
-			this.params.existRisk = data[0].key;
-			if(this.params.existRisk === 1){
-				this.existRiskYN = true
-				this.params.riskStage = '一'
-			}else if(this.params.existRisk === 0){
-				this.existRiskYN = false
-				this.params.riskStage = ''
+      this.params.existRisk = data[0].key;
+      if (this.params.existRisk === 1) {
+        this.existRiskYN = true
+        this.params.riskStage = '一'
+      } else if (this.params.existRisk === 0) {
+        this.existRiskYN = false
+        this.params.riskStage = ''
 
-			}
+      }
     },
     getSelect2 (data) {
       this.params.riskStage = data[0].key
@@ -372,15 +383,15 @@ export default {
     },
     // 提交审批
     async submitApprove () {
-			if(!this.params.empSign){
-				this.$Toast({
-            message: '请签名！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-				return false;
+      if (!this.params.empSign) {
+        this.$Toast({
+          message: '请签名！',
+          iconClass: 'iconfont iconcha-01',
+          duration: 2000,
+        })
+        return false;
 
-			}
+      }
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type.bizType;
@@ -391,36 +402,36 @@ export default {
           bizId: this.bizId,
           orgName: this.$route.params.orgName,
           opType: "1"
-				};
-				var arrs = {};
+        };
+        var arrs = {};
         for (let i = 0; i < this.processing4.length; i++) {
           const a = `pic_${i + 1}s`;
           arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
-				}
-				const bizId = {
-					 bizId: this.bizId,
-				}
-				const params2 = Object.assign({}, this.type, bizId,arrs);
+        }
+        const bizId = {
+          bizId: this.bizId,
+        }
+        const params2 = Object.assign({}, this.type, bizId, arrs);
         const params = Object.assign({}, pa, this.params);
-        await this.userBindSave(params,params2, type,currentName);
+        await this.userBindSave(params, params2, type, currentName);
       } else {
         pa = {
           bizId: this.bizId,
           postCode: this.$route.params.currPost,
           orgName: this.$route.params.orgName,
           opType: "1"
-				};
-				var arrs = {};
+        };
+        var arrs = {};
         for (let i = 0; i < this.processing4.length; i++) {
           const a = `pic_${i + 1}s`;
           arrs[a] = this.$refs[`processing4${i}`][0].fileList[a];
-				}
-				const bizId = {
-					 bizId: this.bizId,
-				}
-				const params2 = Object.assign({}, this.type, bizId,arrs);
+        }
+        const bizId = {
+          bizId: this.bizId,
+        }
+        const params2 = Object.assign({}, this.type, bizId, arrs);
         const params = Object.assign({}, pa, this.params);
-        await this.bindSave(params,params2, currentName);
+        await this.bindSave(params, params2, currentName);
       }
     }
   }

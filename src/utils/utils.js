@@ -173,3 +173,8 @@ export function GetQueryValue(queryName) {
     }
   }
 }
+
+// 判断是否为整数
+export function isInteger(obj) {
+  return typeof obj === 'number' && obj % 1 === 0
+}
