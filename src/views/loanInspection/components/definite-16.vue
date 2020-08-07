@@ -9,20 +9,26 @@
 		.definite-smalltitle
 			span(class="colum-blue")
 			span  影像维护
-		.definite-13-content
-			imageUpload(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params" :read="false" :ref="`definte16${i}`")
+		.definite-13-content(v-if="judgeDeviceType.isAndroid")
+			imageUploadForAZ(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params" :read="false" :ref="`definte16${i}`"  )
+		.definite-13-content(v-if="judgeDeviceType.isIOS")
+			imageUpload(v-for="(item,i) in definte16" :key="i" :item="item" :itemVmodel="params" :read="false" :ref="`definte16${i}`" )
+			
+			
+		
 			
 </template>
 
 <script>
 import imageUpload from "../components/imageUpload";
+import imageUploadForAZ from '../components/imageUploadForAZ'
 import { definte16, definte162, definte172 } from "../../../utils/dataMock";
 import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
-  components: { imageUpload },
+  components: { imageUpload, imageUploadForAZ },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       definte16: [],
@@ -32,7 +38,7 @@ export default {
     };
   },
   computed: {
-    type() {
+    type () {
       if (this.$route.params.type) {
         return { bizType: this.$route.params.type };
       } else {
@@ -40,7 +46,8 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
+    console.log(this.judgeDeviceType)
     const type = this.type.bizType;
     switch (type) {
       case "m1":
@@ -69,7 +76,7 @@ export default {
     }
   },
   watch: {
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         var arrs = {};
         for (let i = 0; i < this.definte16.length; i++) {
