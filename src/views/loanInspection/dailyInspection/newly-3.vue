@@ -253,7 +253,7 @@
         <mt-field
           type="textarea"
           rows="3"
-          v-model="params.orderDeclinemsg"
+          v-model="params.orderDeclineMsg"
           class="textArea"
           style="overflow:hidden"
           placeholder="请输入"
@@ -448,7 +448,7 @@ export default {
         summaryForCheck: "", // 检查要点小结
 				otherSitu: "", // 其他情况
 				orderDecline:1,
-				orderDeclinemsg:''
+				orderDeclineMsg:''
       },
       loanBusiness: {}
     };
