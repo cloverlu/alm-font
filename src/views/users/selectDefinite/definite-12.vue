@@ -182,7 +182,7 @@ export default {
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
-      this.loanBusiness = this.params;
+			this.loanBusiness = Object.assign({},this.detail,this.params);
     }
   },
   methods: {}

@@ -196,7 +196,15 @@ export default {
     },
     // 提交审批
     async submitApprove() {
-      console.log(this.params);
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type;

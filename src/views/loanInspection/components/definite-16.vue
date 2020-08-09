@@ -66,7 +66,6 @@ export default {
     } else {
       const flag = this.$route.params.saveFlag;
       this.mountedTag(flag, name, this.$route.params.bizId);
-      console.log(this.params);
     }
   },
   watch: {

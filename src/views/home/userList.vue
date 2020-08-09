@@ -25,10 +25,11 @@
 import Scroll from "../../components/Scroll";
 import { loanReceiptParams } from "../../api/users";
 import { userInfo2 } from "../../utils/dataMock";
-
+// import global_ from '../../utils/global'
+import { GetQueryValue } from '../../utils/utils'
 export default {
   components: { Scroll },
-  data() {
+  data () {
     const userMock = _ => {
       const userMocks = [];
       for (let i = 1; i <= 10; i++) {
@@ -43,22 +44,39 @@ export default {
     return {
       userSearch: "",
       userInfo2: userInfo2,
+      // userParams: global_.userParam,
       usersMock: userMock(),
       info: [],
       params: {
         queryType: "3",
         pageNo: 1,
         pageSize: 1000
-      }
+			},
+			userParams:{}
     };
   },
-  created() {},
+  created () { },
 
-  mounted() {
-    this.getList();
+  mounted () {
+    var userParams = {}
+    if (GetQueryValue("app") === 'youjie') {
+      userParams = {
+        emplName: GetQueryValue("userName"),
+        orgName: GetQueryValue("instName")
+      }
+    } else {
+      userParams = {
+        emplName: "金林",
+        orgName: "南京"
+      }
+		}
+		this.userParams = userParams
+    this.getList(userParams);
+
+
     //h5 安卓手机键盘调上来挤压input框的问题
     const h = document.getElementsByClassName("user-list")[0].offsetTop;
-    window.onresize = function() {
+    window.onresize = function () {
       // 如果当前窗口小于一开始记录的窗口高度，那就让当前窗口等于一开始窗口的高度
       if (document.getElementsByClassName("user-list")[0].offsetTop < h) {
         document.getElementsByClassName("user-list")[0].style.marginTop =
@@ -67,7 +85,7 @@ export default {
     };
   },
   methods: {
-    handleClick(item) {
+    handleClick (item) {
       const custName = item.custName;
 
       this.$router.push({
@@ -76,28 +94,53 @@ export default {
           queryType: "2",
           moduleName: "custmer",
           custName: custName,
-          emplName: this.userInfo2.emplName
+          emplName: this.userParams.emplName,
+          custCode: item.custCode
         }
       });
     },
     //获取客户列表
-    getList() {
+    getList (userParams) {
       this.$Indicator.open();
-      // this.userInfo.emplCode = "123456";
-      this.userInfo2.orgName = "南京";
-      const params = Object.assign({}, this.params, userInfo2);
+
+      const params = Object.assign({}, this.params, userParams);
       loanReceiptParams(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
-          this.info = res.data.data;
+          if (res.data.data) {
+            this.info = res.data.data;
+          } else {
+            this.info = []
+          }
+
+        } else {
+          this.$Indicator.close();
+          this.info = []
+          this.$Toast({
+            message: res.data.returnMsg,
+            iconClass: "iconfont iconcha-01",
+            duration: 5000
+          });
         }
       });
     },
-    userChange() {
-      this.params.custName = this.userSearch;
-      this.getList();
+    userChange () {
+			var params;
+			if(this.userSearch){
+				const custName = {
+					custName:this.userSearch,
+					emplName:this.userParams.emplName,
+					orgName:this.userParams.orgName
+				}
+				params = Object.assign({},this.params,custName)
+
+			}else{
+				params = Object.assign({},this.params,this.userParams)
+			}
+      
+      this.getList(params);
     },
-    autofocus() {
+    autofocus () {
       console.log("...");
     }
   }

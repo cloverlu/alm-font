@@ -22,6 +22,8 @@ import { todoListTitle, userInfo } from "../../utils/dataMock.js";
 import { getToDoList } from "../../api/home";
 import { Toast } from "mint-ui";
 import Scroll from "../../components/Scroll";
+// import global_ from '../../utils/global'
+import { GetQueryValue } from "../../utils/utils";
 export default {
   components: { Scroll },
   data() {
@@ -29,20 +31,58 @@ export default {
       todoListTitle: todoListTitle,
       userInfo: userInfo,
       list: []
+      // userParams: global_.param
     };
   },
-  created() {
-    console.log();
-    var queryVal = this.GetQueryValue("app");
-    alert(window.location.search.substring(1));
-    if (queryVal == "youjie") {
-      this.getUserInfo();
-    } else {
-      Toast("失败");
-    }
-  },
+  created() {},
   mounted() {
-    this.getList();
+    var params = {};
+    if (GetQueryValue("app") === "youjie") {
+      params = {
+        emplName: GetQueryValue("userName"),
+        orgCode: GetQueryValue("instId"),
+        orgName: GetQueryValue("instName")
+      };
+    } else {
+      // alert('没有获取到用户信息')
+      params = {
+        emplName: "金林",
+        orgCode: "12222",
+        orgName: "南京"
+      };
+    }
+    this.getList(params);
+    // const userInfo = {
+    // 	emplName: "金林",
+    // 	orgCode : "12222",
+    // 	orgName:"南京"
+    // };
+    // this.getList(userInfo);
+    // const param = sessionStorage.getItem("userInfo")
+    // if(param){
+    // 	let JsonParamP = {}
+    // 	try{
+    // 			JsonParamP = JSON.parse(param)
+    // 			const params={
+    // 				emplName:JsonParamP.userName,
+    // 				orgCode:JsonParamP.instId,
+    // 				orgName:JsonParamP.instName
+    // 			}
+    // 			alert(params.emplName)
+    // 			this.getList(params);
+
+    // 	}catch(e){
+    // 			// debugger 看看报的什么错误, 正式环境注释掉alert
+    // 			// 不出意外的话，可能跟之前存储的脏数据有关系。
+    // 			alert(e.toString())
+    // 			JsonParamP = {};
+    // 	}
+    // }
+    // window.addEventListener('getUserInfo',function(res){
+    // 	alert('wqefregergkt')
+    // 	  alert(typeof res.detail.userInfo)
+    //     alert(JSON.stringify(res.detail.userInfo))
+    // });
   },
   methods: {
     handleClick(id) {
@@ -62,40 +102,42 @@ export default {
         });
       }
     },
-    getList() {
+    getList(params) {
       this.$Indicator.open();
-      const params = this.userInfo;
       getToDoList(this, { params }).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
           this.$Indicator.close();
           res.data.dataList.filter((item, index) => {
-            if (index <= 6) {
-              this.todoListTitle[index].warningNumber = item.itemRecordNum;
-              this.todoListTitle[index].postCode = item.postCode;
-            }
+            this.todoListTitle.filter((item2, index2) => {
+              if (item.itemType === item2.id.toString()) {
+                item2.warningNumber = item.itemRecordNum;
+                item2.postCode = item.postCode;
+              }
+            });
           });
         }
       });
-    },
-    getUserInfo() {
-      let xui = requireModuleJs("xui");
-      let obj = xui.getUserInfo();
-      let token = xui.getDeviceTokens();
-      Toast("成功获取用户信息");
-      alert(obj);
-      alert(token);
-      // await this.getList();
-    },
-    GetQueryValue(queryName) {
-      var query = decodeURI(window.location.search.substring(1));
-      var vars = query.split("&");
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == queryName) {
-          return pair[1];
-        }
-      }
     }
+    // getUserInfo() {
+    // 	alert("成功获取用户信息");
+    // 	let xui = requireModuleJs("xui");
+    //   let obj = xui.getUserInfo();
+    // 	let token = xui.getDeviceTokens();
+    // 	alert(requireModuleJs("xui"));
+    //   alert(obj);
+    //   alert(token);
+    //   // await this.getList();
+    // },
+    // GetQueryValue(queryName) {
+    //   var query = decodeURI(window.location.search.substring(1));
+    //   var vars = query.split("&");
+    //   for (var i = 0; i < vars.length; i++) {
+    //     var pair = vars[i].split("=");
+    //     if (pair[0] == queryName) {
+    //       return pair[1];
+    //     }
+    //   }
+    // }
   }
 };
 </script>

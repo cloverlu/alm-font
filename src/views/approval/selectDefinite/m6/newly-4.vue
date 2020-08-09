@@ -7,7 +7,7 @@
 	.newly4
 		.newly-4-repeat(v-for="(item,index) in detail.assitInfoForPledge" :key="index"  )
 			.repeat-operation
-				.repeat-operation-title 新增 {{item.id}}
+				.repeat-operation-title 新增 
 			.definite-field
 				.item
 					span(class="tag big") 押品名称
@@ -28,13 +28,13 @@
 			.definite-field(class="field-top")
 				.item
 					span(class="tag big") 最近一次评估情况
-					span(class="info") {{item.LastEstimateDate}}
+					span(class="info") {{item.lastEstimateDate}}
 				.item
 					span(class="tag big") 我行认定价值
-					span(class="info") {{item.LastEstimateValue}}
+					span(class="info") {{item.lastEstimateValue}}
 				.item
 					span(class="tag big") 抵质押率
-					span(class="info") {{item.LastMortAndpleRate}}
+					span(class="info") {{item.lastMortAndpleRate}}
 			.definite-field(class="field-top")
 				.item
 					span(class="tag big") 本次评估情况
@@ -45,23 +45,27 @@
 				.item
 					span(class="tag big") 抵质押率
 					span(class="info") {{item.thisMortAndpleRate}}
+				.item
+					span(class="tag big") 押品价值及变现能力变动情况 
+				.item(class="item-textarea")
+					mt-field(v-model="item.assitChangeSuit" :disabled="true" class="textArea" type="textarea" rows="3")
 		
 		.newly-4-norepeat
-			fieldOne(:definite="newly4" :info="detail.fieldOne" ref="fieldOne")
+			fieldOne(:definite="newly4" :info="detail" ref="fieldOne")
 
 		
 
 </template>
 
 <script>
-import { newly4 } from "../../../../utils/dataMock.js";
+import { newly44 } from "../../../../utils/dataMock.js";
 import fieldOne from "../../../loanInspection/components/fieldOne";
 export default {
   components: { fieldOne },
   props: ["detail"],
   data() {
     return {
-      newly4: newly4
+      newly4: newly44
     };
   },
   methods: {}

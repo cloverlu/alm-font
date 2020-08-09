@@ -18,157 +18,128 @@
           <div class="definite-field">
             <div class="item">
               <span class="tag big">征信报告查询日期</span>
-              <span class="info" @click="a">
-                <input
-                  v-model="params.queryDate"
-                  type="input"
-                  class="field-input"
-                  placeholder="请输入"
-                  :disabled="true"
-                />
+              <span class="info"
+                    @click="a">
+                <input v-model="params.queryDate"
+                       type="input"
+                       class="field-input"
+                       placeholder="请输入"
+                       :disabled="true" />
               </span>
             </div>
           </div>
-          <mt-datetime-picker
-            ref="picker"
-            type="date"
-            v-model="pickerValue"
-            :startDate="startDate"
-            :endDate="endDate"
-            @confirm="handleConfirm()"
-          ></mt-datetime-picker>
-          <mt-cell
-            class="textFiled"
-            title="当前企业及实际控制人征信情况(注明征信查询分类结果)"
-          ></mt-cell>
+          <mt-datetime-picker ref="picker"
+                              type="date"
+                              v-model="pickerValue"
+                              :startDate="startDate"
+                              :endDate="endDate"
+                              @confirm="handleConfirm()"></mt-datetime-picker>
+          <mt-cell class="textFiled"
+                   title="当前企业及实际控制人征信情况(注明征信查询分类结果)"></mt-cell>
         </div>
 
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.fiveClass"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入征信情况"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.fiveClass"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入征信情况"></mt-field>
         <div class="item">
           <span class="tag">企业或企业主征信是否有新增逾期记录</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.addedOverdues"
-            :triggerId="addedOverdues"
-            :title="selectTitle1"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect1"
-            class="info"
-          ></almSelect>
+          <almSelect :selectData="yesNo"
+                     :defaultValue="params.addedOverdues"
+                     :triggerId="addedOverdues"
+                     :title="selectTitle1"
+                     :fontColor="fontColor"
+                     @getSelectValue="getSelect1"
+                     class="info"></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.addedOverduesMsg"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.addedOverduesMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行新增贷款</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.addedLoans"
-            :triggerId="addedLoans"
-            :title="selectTitle2"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect2"
-            class="info"
-          ></almSelect>
+          <almSelect :selectData="yesNo"
+                     :defaultValue="params.addedLoans"
+                     :triggerId="addedLoans"
+                     :title="selectTitle2"
+                     :fontColor="fontColor"
+                     @getSelectValue="getSelect2"
+                     class="info"></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.addedLoansMsg"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.addedLoansMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行收缩贷款规模</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.shrinkLoanScale"
-            :triggerId="shrinkLoanScale"
-            :title="selectTitle3"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect3"
-            class="info"
-          ></almSelect>
+          <almSelect :selectData="yesNo"
+                     :defaultValue="params.shrinkLoanScale"
+                     :triggerId="shrinkLoanScale"
+                     :title="selectTitle3"
+                     :fontColor="fontColor"
+                     @getSelectValue="getSelect3"
+                     class="info"></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.shrinkLoanScaleMsg"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.shrinkLoanScaleMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有新增对外担保记录</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.addedGuarantees"
-            :triggerId="addedGuarantees"
-            :title="selectTitle4"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect4"
-            class="info"
-          ></almSelect>
+          <almSelect :selectData="yesNo"
+                     :defaultValue="params.addedGuarantees"
+                     :triggerId="addedGuarantees"
+                     :title="selectTitle4"
+                     :fontColor="fontColor"
+                     @getSelectValue="getSelect4"
+                     class="info"></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.addedGuaranteesMsg"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.addedGuaranteesMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有其他异常变化</span>
-          <almSelect
-            :selectData="yesNo"
-            :defaultValue="params.otherSitu"
-            :triggerId="otherSitu"
-            :title="selectTitle5"
-            :fontColor="fontColor"
-            @getSelectValue="getSelect5"
-            class="info"
-          ></almSelect>
+          <almSelect :selectData="yesNo"
+                     :defaultValue="params.otherSitu"
+                     :triggerId="otherSitu"
+                     :title="selectTitle5"
+                     :fontColor="fontColor"
+                     @getSelectValue="getSelect5"
+                     class="info"></almSelect>
           <span class="iconfont iconxiala arrow"></span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.otherSituMsg"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.otherSituMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
 
         <div class="formTitle">
           <span class="lightBlue"></span>
           <span class="coName">检查要点小结</span>
         </div>
-        <mt-field
-          type="textarea"
-          rows="3"
-          v-model="params.summaryForCheck"
-          class="textArea"
-          style="overflow:hidden"
-          placeholder="请输入"
-        ></mt-field>
+        <mt-field type="textarea"
+                  rows="3"
+                  v-model="params.summarySituMsg"
+                  class="textArea"
+                  style="overflow:hidden"
+                  placeholder="请输入"></mt-field>
       </div>
     </div>
   </div>
@@ -187,7 +158,7 @@ export default {
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       yesNo: yesNo,
@@ -220,12 +191,12 @@ export default {
         addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
         otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: "", // 企业或企业主是否有其他异常变化 说明
-        summaryForCheck: ""
+        summarySituMsg: ""
       },
       loanBusiness: {}
     };
   },
-  mounted() {
+  mounted () {
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
     const type = this.userBizType.bizType;
@@ -241,39 +212,40 @@ export default {
     }
   },
   watch: {
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         this.loanBusiness = {
-          assetCreditInfo: this.params,
-          summaryForCheck: this.params.summaryForCheck
+          assetCreditInfo: this.params
+          // summaryForCheck: this.params.summaryForCheck
         };
       }
     }
   },
   methods: {
-    getSelect1(data) {
-      this.params.addedOverdues = data.key;
+    getSelect1 (data) {
+      this.params.addedOverdues = data[0].key;
     },
-    getSelect2(data) {
-      this.params.addedLoans = data.key;
+    getSelect2 (data) {
+      this.params.addedLoans = data[0].key;
     },
-    getSelect3(data) {
-      this.params.shrinkLoanScale = data.key;
+    getSelect3 (data) {
+      this.params.shrinkLoanScale = data[0].key;
     },
-    getSelect4(data) {
-      this.params.addedGuarantees = data.key;
+    getSelect4 (data) {
+      this.params.addedGuarantees = data[0].key;
     },
-    getSelect5(data) {
-      this.params.otherSitu = data.key;
+    getSelect5 (data) {
+      this.params.otherSitu = data[0].key;
     },
-    a() {
+    a () {
       this.$refs.picker.open();
     },
-    handleConfirm() {
+    handleConfirm () {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.queryDate = formatDate(this.pickerValue);
+      // this.params.queryDate = formatDate(this.pickerValue);
+      this.$set(this.params, 'queryDate', formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

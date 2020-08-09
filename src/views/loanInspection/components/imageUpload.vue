@@ -16,6 +16,9 @@
 				:after-read="afterRead" 
 				@delete="deleteImage"
 				v-if="imageHas"
+				multiple
+				:deletable="!read"
+			
 			)
 			span(v-else-if="!imageHas") 无照片 
 		//- img(id="img1" src="../../../assets/666.png")
@@ -33,7 +36,7 @@ export default {
     Toast
   },
 
-  data() {
+  data () {
     return {
       fileList: [],
       images: [],
@@ -46,10 +49,10 @@ export default {
       }
     };
   },
-  created() {
+  created () {
     // console.log(this.fileList);
   },
-  mounted() {
+  mounted () {
     const arr = this.itemVmodel[this.item.vModel];
     if (arr && arr[0] && arr[0].url !== "") {
       if (arr.length > 0) {
@@ -83,7 +86,7 @@ export default {
     }
   },
   watch: {
-    itemVmodel(val, oldval) {
+    itemVmodel (val, oldval) {
       const arr = val[this.item.vModel];
       if (arr && arr[0] && arr[0].url !== "") {
         if (arr.length > 0) {
@@ -115,17 +118,17 @@ export default {
   },
   methods: {
     //删除文件
-    deleteImage(file, event) {
+    deleteImage (file, event) {
       const newFileList = this.fileList[this.item.vModel];
       newFileList.splice(event.index, 1);
     },
     // 获取图片坐标(文件法)
-    getLo(file, index) {
+    getLo (file, index) {
       const newFileList = this.fileList[this.item.vModel];
       let Longitude;
       let Latitude;
-      var getdate = function(e) {
-        EXIF.getData(e, function() {
+      var getdate = function (e) {
+        EXIF.getData(e, function () {
           let SubjectLocation = EXIF.getAllTags(e);
           // console.log("imgdata", SubjectLocation);
 
@@ -154,7 +157,7 @@ export default {
       getdate(file);
     },
     // 获取图片坐标（获取dom法）
-    getOrientation(index) {
+    getOrientation (index) {
       const newFileList = this.fileList[this.item.vModel];
       var vModel = document.getElementById(this.item.vId);
       var img1 = vModel.getElementsByClassName("van-image__img")[index];
@@ -171,7 +174,7 @@ export default {
         newFileList[index].longitude = coordinate.longitude;
         return false;
       }
-      EXIF.getData(img1, function() {
+      EXIF.getData(img1, function () {
         const _GPSLongitude = JSON.stringify(EXIF.getTag(this, "GPSLongitude"));
         const _GPSLatitude = JSON.stringify(EXIF.getTag(this, "GPSLatitude"));
         if (_GPSLongitude) {
@@ -190,14 +193,7 @@ export default {
       newFileList[index].longitude = coordinate.longitude;
     },
     // 上传之前
-    async beforeRead(file) {
-      // this.$Indicator.open();
-      // console.log(this.fileList[this.item.vModel]);
-      // const a = this.fileList[this.item.vModel].length;
-      this.fileList[this.item.vModel].push({
-        status: "uploading",
-        message: "上传中"
-      });
+    async beforeRead (file) {
       return new Promise((resolve, reject) => {
         // let ishas = this.fileList[this.item.vModel].some(function(cur, i, arr) {
         //   return cur.file.name === file.name;
@@ -212,65 +208,85 @@ export default {
         //   resolve();
         // }
 
-        console.log(file, "beforeRead");
-        console.log(this.fileList, "fileList");
-        this.imgPreview(file);
+        // console.log(file, "beforeRead");
+				// console.log(this.fileList, "fileList");
+			
+				if(file.length > 1){
+					// 多选
+					file.map(item => {
+						this.fileList[this.item.vModel].push({
+							status: "uploading",
+							message: "上传中",
+							name: item.name 
+						});
+					})
+				}else{
+					// 单传
+					this.fileList[this.item.vModel].push({
+					  status: "uploading",
+						message: "上传中",
+						name: file.name 
+					});
+				}
         resolve();
       });
     },
     //删除之前的回调
-    async afterDelete(file, event) {
+    async afterDelete (file, event) {
       return new Promise((resolve, reject) => {
         resolve();
       });
     },
-    async afterRead(file) {
+    afterRead (file) {
       //上传完成
       // console.log(file, "afterRead-file");
-      // console.log(this.fileList, "afterRead-this.fileList");
-
-      //上传图片
-      let params = new FormData();
-      params.append("file", file.file);
-      params.append("bizId", this.$route.params.bizId);
-
-      var newFileList;
-
+			// console.log(this.fileList, "afterRead-this.fileList");
+			if(file.length > 1){
+				file.map(item => {
+					this.imgPreview(item,item.file)
+				})
+			}else{
+					this.imgPreview(file,file.file)
+			}
+		},
+		//上传图片
+		async uploadImage(e,base64){
+			//上传图片
+			const file = this.dataURLtoFile(base64,e)
+			let params = new FormData();
+      params.append("file", file);
+			params.append("bizId", this.$route.params.bizId);
+			var newFileList;
       const imageUploadRes = await imageUpload(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
-          file.status = "done";
-          file.message = "上传成功";
-          this.$Indicator.close();
-
-          newFileList = this.fileList[this.item.vModel];
-
-          if (newFileList.length > 0) {
-            const index = newFileList.length;
-            newFileList.splice(index, 1);
-          }
-
-          newFileList[newFileList.length - 1].url = res.data.picUrl;
-          newFileList[newFileList.length - 1].status = "done";
-        } else {
-          newFileList[newFileList.length - 1].message = "上传失败";
-          newFileList[newFileList.length - 1].status = "failed";
+					newFileList = this.fileList[this.item.vModel];
+					
+					newFileList.map((item,index) => {
+						if(item.name === e.file.name){
+							this.getLo(e.file, index);
+							item.status = 'done'
+							item.message = '上传成功'
+							item.url = res.data.picUrl
+							item.name = Date.now()
+						}
+					})
+				} 
+				else {
+					newFileList = this.fileList[this.item.vModel];
+					newFileList.map(item => {
+						if(item.name === e.file.name){
+							item.status = 'failed'
+							item.message = '上传失败'
+							item.url = res.data.picUrl
+							item.name = Date.now()
+						}
+					})
         }
         return this.fileList[this.item.vModel];
       });
 
-      // console.log(imageUploadRes);
-      if (imageUploadRes) {
-        var index = "";
-        if (imageUploadRes.length > 0) {
-          index = imageUploadRes.length - 1;
-        } else {
-          index = 0;
-        }
-        // this.getOrientation(index);
-        this.getLo(file.file, index);
-      }
-    },
-    imgPreview(file) {
+		},
+    imgPreview (item,file) {
       let self = this;
       // 看支持不支持FileReader
       if (!file || !window.FileReader) return;
@@ -278,7 +294,7 @@ export default {
       // 将图片2将转成 base64 格式
       reader.readAsDataURL(file);
       // 读取成功后的回调
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         //此处的this是reader
         let result = this.result;
         let img = new Image();
@@ -286,20 +302,21 @@ export default {
         img.src = result;
         //判断图片是否大于500K,是就直接上传，反之压缩图片
         if (this.result.length <= 500 * 1024) {
-          file.cusContent = result;
-          self.isloadImg = false;
+					file.cusContent = result;
+          self.uploadImage(item,result)
         } else {
-          img.onload = function() {
+          img.onload = function () {
             let data = self.compress(img);
-            file.cusContent = data;
-            // console.log(file.size);
-            self.isloadImg = false;
+						file.cusContent = data;
+						self.uploadImage(item,data)
+           
           };
-        }
-      };
+				}
+			};
+		
     },
     // 压缩图片
-    compress(img) {
+    compress (img) {
       let canvas = document.createElement("canvas");
       let ctx = canvas.getContext("2d");
       //瓦片canvas
@@ -353,9 +370,22 @@ export default {
       //进行最小压缩
       let ndata = canvas.toDataURL("image/jpeg", 0.3);
       tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;
-
+    
       return ndata;
-    }
+		},
+		//将base64转换为文件
+    dataURLtoFile(dataurl,item) {
+      var arr = dataurl.split(","),
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], item.file.name, {
+        type: item.file.type
+      });
+    },
   }
 };
 </script>

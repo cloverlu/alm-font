@@ -6,36 +6,38 @@
 <template>
   <div class="checkDetail">
     <!--填写信息  -->
-    <div class="processing4" ref="processing4">
+    <div class="processing4"
+         ref="processing4">
       <div class="formTitle">
         <span class="lightBlue"></span>
         <span class="coNameBlack">一级支行/二级分行检查情况</span>
       </div>
       <div class="item1">
         <span class="tag1">是否存在风险预警信号</span>
-        <almSelect
-          :selectData="yesNo"
-          :defaultValue="params.existRisk"
-          :triggerId="existSignal"
-          :title="selectTitle"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect"
-          class="info"
-        ></almSelect>
+        <almSelect :selectData="yesNo"
+                   :defaultValue="params.existRisk"
+                   :triggerId="existSignal"
+                   :title="selectTitle"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelect"
+                   class="info"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
       <div class="item1">
         <span class="tag1">发生阶段</span>
-        <almSelect
-          :selectData="happenPats"
-          :defaultValue="params.riskStage"
-          :triggerId="riskStage"
-          :title="riskStageTitle"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect2"
-          class="info"
-        ></almSelect>
-        <span class="iconfont iconxiala arrow"></span>
+        <almSelect 
+					:selectData="happenPats"
+					:defaultValue="params.riskStage"
+					:triggerId="riskStage"
+					:title="riskStageTitle"
+					:fontColor="fontColor"
+					@getSelectValue="getSelect2"
+					v-if="existRiskYN"
+					class="info"
+					
+				>
+				</almSelect>
+        <span class="iconfont iconxiala arrow" 	v-if="existRiskYN"></span>
       </div>
       <!-- <mt-field
         class="textFiled"
@@ -43,44 +45,41 @@
         placeholder="请输入"
         v-model="params.riskStage"
       ></mt-field>-->
-      <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
-      <mt-field
-        type="textarea"
-        rows="3"
-        v-model="params.riskMsg"
-        class="text"
-        style="overflow:hidden"
-        placeholder="请输入"
-      ></mt-field>
-      <mt-cell class="textFiled" title="检查结论及措施建议"></mt-cell>
-      <mt-field
-        type="textarea"
-        rows="3"
-        v-model="params.suggest"
-        class="text"
-        style="overflow:hidden"
-        placeholder="请输入"
-      ></mt-field>
+      <mt-cell class="textFiled"
+               title="预警信号说明"></mt-cell>
+      <mt-field type="textarea"
+                rows="3"
+                v-model="params.riskMsg"
+                class="text"
+                style="overflow:hidden"
+                placeholder="请输入"></mt-field>
+      <mt-cell class="textFiled"
+               title="检查结论及措施建议"></mt-cell>
+      <mt-field type="textarea"
+                rows="3"
+                v-model="params.suggest"
+                class="text"
+                style="overflow:hidden"
+                placeholder="请输入"></mt-field>
       <div class="definite-13-wrapper">
         <div class="definite-smalltitle">
           <span class="colum-blue"></span>
           <span>影像维护</span>
         </div>
         <div class="definite-13-content">
-          <imageUpload
-            v-for="(item, i) in processing4"
-            :item="item"
-            :key="i"
-            :itemVmodel="params2"
-            :read="false"
-            :ref="`processing4${i}`"
-          />
+          <imageUpload v-for="(item, i) in processing4"
+                       :item="item"
+                       :key="i"
+                       :itemVmodel="params2"
+                       :read="false"
+                       :ref="`processing4${i}`" />
         </div>
       </div>
       <div class="signBox">
         <span class="left">
           复核人员（签字）：
-          <span class="iconfont iconqianzi" @click="goSign()"></span>
+          <span class="iconfont iconqianzi"
+                @click="goSign()"></span>
         </span>
         <!-- <span class="right">2020-06-01</span> -->
       </div>
@@ -89,17 +88,22 @@
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submitApprove()">提交审批</mt-button>
-          <mt-button size="large" @click="goback()">上一步</mt-button>
+          <mt-button type="primary"
+                     size="large"
+                     @click="submitApprove()">提交审批</mt-button>
+          <mt-button size="large"
+                     @click="goback()">上一步</mt-button>
         </div>
       </div>
     </div>
-    <mt-popup v-model="popupVisible" popup-transition="popup-fade">
+    <mt-popup v-model="popupVisible"
+              popup-transition="popup-fade">
       <div class="tanchaung">
         <div class="definite4">
           <!--填写信息  -->
           <div class="coInformation">
-            <div class="enterpriseCredit" ref="scroll">
+            <div class="enterpriseCredit"
+                 ref="scroll">
               <div class="signBox">
                 <span class="left">
                   检查人员（签字）：
@@ -112,8 +116,13 @@
             </div>
           </div>
           <div class="submit">
-            <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
-            <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
+            <button id="clearCanvas"
+                    ref="clearCanvas"
+                    class="mint-button mint-button--default">重置</button>
+            <button type="primary"
+                    id="saveCanvas"
+                    ref="saveCanvas"
+                    class="mint-button">保存</button>
           </div>
         </div>
       </div>
@@ -126,7 +135,7 @@ import {
   DetailsOfIOU,
   yesNo,
   processing4,
-  happenPats
+  happenPats2
 } from "../../../utils/dataMock";
 import imageUpload from "../components/imageUpload";
 import { Field, Cell, Button, Popup } from "mint-ui";
@@ -144,7 +153,7 @@ export default {
   },
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       processing4: processing4(),
@@ -155,10 +164,11 @@ export default {
       fontColor: "blue",
       riskStage: "riskStage",
       yesNo: yesNo,
-      happenPats: happenPats,
-      existSignal: "existSignal",
+      happenPats: happenPats2,
+			existSignal: "existSignal",
+			existRiskYN:true,
       params: {
-        riskStage: "1",
+        riskStage: "一",
         riskMsg: "",
         suggest: "",
         existRisk: 1,
@@ -169,7 +179,7 @@ export default {
     };
   },
   computed: {
-    type() {
+    type () {
       if (this.$route.params.type) {
         return { bizType: this.$route.params.type };
       } else {
@@ -177,10 +187,10 @@ export default {
       }
     }
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.bs.destroy();
   },
-  mounted() {
+  mounted () {
     this.init();
     const type = this.type.bizType;
     this.params2 = this.mVmodel(1);
@@ -199,7 +209,7 @@ export default {
     }
   },
   watch: {
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         // 保存审批页面
         const pa = {
@@ -223,7 +233,7 @@ export default {
   },
 
   methods: {
-    init() {
+    init () {
       this.bs = new BScroll(this.$refs.scroll, {
         scrollY: true,
         click: true,
@@ -233,18 +243,27 @@ export default {
         console.log("done");
       });
     },
-    _registerHooks(hookNames, handler) {
+    _registerHooks (hookNames, handler) {
       hookNames.forEach(name => {
         this.bs.on(name, handler);
       });
     },
-    getSelect: function(data) {
-      this.params.existRisk = data[0].key;
+    getSelect: function (data) {
+			this.params.existRisk = data[0].key;
+			if(this.params.existRisk === 1){
+				this.existRiskYN = true
+				this.params.riskStage = '一'
+			}else if(this.params.existRisk === 0){
+				this.existRiskYN = false
+				this.params.riskStage = ''
+
+			}
     },
-    getSelect2(data) {
-      this.params.riskStage = data[0].key;
+    getSelect2 (data) {
+      this.params.riskStage = data[0].key
+
     },
-    goSign: function() {
+    goSign: function () {
       this.params.empSign = "";
       this.popupVisible = true;
       this.lineCanvas({
@@ -254,7 +273,7 @@ export default {
         saveEl: this.$refs.saveCanvas //保存按钮
       });
     },
-    lineCanvas(obj) {
+    lineCanvas (obj) {
       this.linewidth = 2;
       this.color = "#000000";
       this.background = "rgba(0, 0, 0, 0)";
@@ -275,17 +294,17 @@ export default {
       //开始绘制
       this.canvas.addEventListener(
         "touchstart",
-        function(e) {
+        function (e) {
           this.cxt.beginPath();
           // this.cxt.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
           this.cxt.moveTo(
             e.changedTouches[0].clientX -
-              e.target.offsetLeft +
-              document.documentElement.scrollLeft,
+            e.target.offsetLeft +
+            document.documentElement.scrollLeft,
             e.changedTouches[0].clientY -
-              40 -
-              e.target.offsetTop +
-              document.documentElement.scrollTop
+            40 -
+            e.target.offsetTop +
+            document.documentElement.scrollTop
           );
         }.bind(this),
         true
@@ -293,7 +312,7 @@ export default {
       //绘制中
       this.canvas.addEventListener(
         "touchmove",
-        function(e) {
+        function (e) {
           // console.log(
           //   e.changedTouches[0].clientY,
           //   e.target.offsetLeft,
@@ -303,12 +322,12 @@ export default {
           // this.cxt.lineTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
           this.cxt.lineTo(
             e.changedTouches[0].clientX -
-              e.target.offsetLeft +
-              document.documentElement.scrollLeft,
+            e.target.offsetLeft +
+            document.documentElement.scrollLeft,
             e.changedTouches[0].clientY -
-              40 -
-              e.target.offsetTop +
-              document.documentElement.scrollTop
+            40 -
+            e.target.offsetTop +
+            document.documentElement.scrollTop
           );
           this.cxt.stroke();
         }.bind(this),
@@ -317,7 +336,7 @@ export default {
       //结束绘制
       this.canvas.addEventListener(
         "touchend",
-        function() {
+        function () {
           this.cxt.closePath();
           let imgBase64 = this.canvas.toDataURL();
           //console.log(imgBase64);
@@ -328,7 +347,7 @@ export default {
       //清除画布
       this.clearEl.addEventListener(
         "click",
-        function() {
+        function () {
           this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }.bind(this),
         true
@@ -336,7 +355,7 @@ export default {
       //保存图片，直接转base64
       this.saveEl.addEventListener(
         "click",
-        function() {
+        function () {
           let imgBase64 = this.canvas.toDataURL();
           this.params.empSign = imgBase64;
           setTimeout(() => {
@@ -348,11 +367,20 @@ export default {
         true
       );
     },
-    goback() {
+    goback () {
       history.go(-1);
     },
     // 提交审批
-    async submitApprove() {
+    async submitApprove () {
+			if(!this.params.empSign){
+				this.$Toast({
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+
+			}
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type.bizType;

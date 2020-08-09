@@ -9,8 +9,8 @@
 		fieldTwo(:info="caiwuTwo" :type="typeOne" :detail="detail" :read="false" ref="caiwutwo")
 		fieldTwo(:info="caiwuThree" :type="typeTwo" :detail="detail" :read="false" ref="caiwuthree")
 		fieldTwo(:info="caiwuFour" :type="typeTwo" :detail="detail" :read="false" ref="caiwufour")
-		.war-tag
-			mt-field(class="war-tag" v-model="params.financeMsg"  type="textarea" rows="5" placeholder="请输入")
+		//- .war-tag 
+		//- 	mt-field(:placeholder="financeMsg" class="war-tag" v-model="detail.financeMsg"  type="textarea" rows="5" )
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
   components: { fieldTwo },
   mixins: [normalMixin],
   props: ["detail"],
-  data() {
+  data () {
     return {
       typeOne: 1,
       typeTwo: 2,
@@ -36,14 +36,15 @@ export default {
       caiwuThree: caiwuThree,
       caiwuFour: caiwuFour,
       params: {
-        financeMsg:
-          "根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。"
+        financeMsg: ""
       },
-      loanBusiness: {}
+      loanBusiness: {},
+      financeMsg:
+        "根据财务信息及现场检查情况,判断企业是否主营业务变动、生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，主要原材料或货物的采购成本变动，销售异常，上下游核小客户变动等情况，并详细阐述异常情况对企业偿债能力的影响。"
     };
   },
   watch: {
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         const financeClassification = {
           financeClassification: "1"
@@ -51,12 +52,12 @@ export default {
         this.loanBusiness = Object.assign(
           {},
           financeClassification,
-          this.params,
           this.$refs.caiwuone.params,
           this.$refs.caiwutwo.params,
           this.$refs.caiwuthree.params,
           this.$refs.caiwufour.params
         );
+        console.log(this.loanBusiness)
 
         this.$emit("childParams", this.loanBusiness);
         // this.setm1Definite2({ params: this.params });
@@ -88,6 +89,7 @@ export default {
 // @import "../../../assets/style/global.scss";
 .definite-8-wrapper {
   .war-tag {
+    border-top: px2rem(1) solid #dbdbdb;
     .mint-cell-wrapper {
       padding: 0 !important;
       font-size: px2rem(14);

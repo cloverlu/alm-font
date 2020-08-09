@@ -64,7 +64,8 @@ export default {
       var params = {
         queryType: this.$route.params.queryType,
         custName: this.$route.params.custName,
-        emplName: this.$route.params.emplName
+				emplName: this.$route.params.emplName,
+				custCode: this.$route.params.custCode,
       };
       loanReceiptParams(this, params).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {

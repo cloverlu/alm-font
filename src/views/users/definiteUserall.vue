@@ -159,7 +159,6 @@ export default {
             bizId: this.bizId
           };
           params = Object.assign({}, this.$refs.userview.loanBusiness, pa);
-          // console.log(params);
         }
         this.userInfoSave(params, name, type, operate);
       });

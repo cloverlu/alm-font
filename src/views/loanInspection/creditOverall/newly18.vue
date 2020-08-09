@@ -84,7 +84,7 @@ import definiteProp from "../components/prop";
 export default {
   components: { almSelect, fieldOne, definiteProp },
   mixins: [normalMixin],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId,
       hasOverallChildRouter: this.$route.params.hasOverallChildRouter,
@@ -100,7 +100,8 @@ export default {
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
-      securityKindId: "securityKind",
+			securityKindId: "securityKind",
+			otherSecurityKindMsg:'',
       params: {
         loanBalance: "",
         lineAmout: "",
@@ -119,11 +120,11 @@ export default {
       }
     };
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     to.params.hasOverallChildRouter = to.name === "creditOverallIndex";
     next();
   },
-  beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate (to, from, next) {
     this.hasOverallChildRouter = to.name === "creditOverallIndex";
     next();
     // 点击上一步回到当前页面的时候数据回显，这边只有每个流程的第一个页面需要
@@ -133,12 +134,12 @@ export default {
     }
   },
   computed: {
-    securityKindTag() {
+    securityKindTag () {
       if (
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-        const flag = this.params.securityKind.some(item => item === "5");
+				const flag = this.params.securityKind.some(item => item === "5");
         if (flag) {
           return true;
         } else {
@@ -149,36 +150,47 @@ export default {
       }
     }
   },
-  async mounted() {
+  async mounted () {
     // 基本详情与流程详情的接口写在了vuex里
     //保存接口写在了Mixin里
     // 获取基本详情
-    await this.setqueryDetail(this);
-    this.bizType(this.queryDetail, this.queryDetail.checkType);
-    this.detail = this.queryDetail;
+    const currentName = this.$route.name;
+    if (currentName === "creditOverallIndex") {
+      await this.setqueryDetail(this);
+      this.bizType(this.queryDetail, this.queryDetail.checkType);
+      this.detail = this.queryDetail;
 
-    //判断是否是已经填了部分
-    if (
-      this.$route.params.saveFlag === 1 ||
-      this.$route.params.saveFlag === "1" ||
-      this.tranSactName1.tranSactName1 === true
-    ) {
-      await this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-      this.securityKindsF();
-    } else {
-      this.securityKindsF();
+      //判断是否是已经填了部分
+      if (
+        this.$route.params.saveFlag === 1 ||
+        this.$route.params.saveFlag === "1" ||
+        this.tranSactName1.tranSactName1 === true
+      ) {
+        await this.setforDizDetail(this);
+				this.params = this.forBizDetail(this.$route.name);
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag && this.params.otherSecurityKindMsg){
+					this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+				}else{
+					this.otherSecurityKindMsg =''
+				}
+        this.securityKindsF();
+      } else {
+				this.otherSecurityKindMsg =''
+        this.securityKindsF();
+      }
+      //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+      this.setScrollToPo({
+        x: 0,
+        y: 0,
+        ratenum: Date.now(),
+        tag: "nextFooter"
+      });
     }
-    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-    this.setScrollToPo({
-      x: 0,
-      y: 0,
-      ratenum: Date.now(),
-      tag: "nextFooter"
-    });
+
   },
   watch: {
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         this.$Indicator.open();
         const currentName = this.$route.name;
@@ -216,6 +228,7 @@ export default {
               this.$refs.m3rview.loanBusiness,
               bizId
             );
+            console.log(loanBusiness)
             this.infoSave(loanBusiness, currentName, type, val.tag);
           });
         }
@@ -223,29 +236,37 @@ export default {
     }
   },
   methods: {
-    getSelect(val) {
+    getSelect (val) {
       this.params.securityKind = val[0].key;
     },
-    changeProp(val) {
+    changeProp (val) {
       this.popupVisible = val;
     },
-    checkData(val) {
+    checkData (val) {
       this.params.securityKind = val;
       this.securityKindsF();
     },
-    securityKindsF() {
+    securityKindsF () {
       var arr = [];
       if (
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
+				const flag = this.params.securityKind.some(item => item === "5");
+				
+				if(flag){
+					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+				}else{
+					this.params.otherSecurityKindMsg = ''
+				}
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {
               arr.push(item.label);
             }
           });
-        });
+				});
+				
         this.securityKind = arr.join(",");
       }
     }

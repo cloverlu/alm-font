@@ -53,7 +53,7 @@
 			v-model="pickerValue" 
 			@confirm="handleConfirm()")
 		.war-tag
-			mt-field(class="war-tag" v-model="params.collEstimateMsg"  type="textarea" rows="3" placeholder="请输入")
+			mt-field(:placeholder="collEstimateMsg" class="war-tag" v-model="params.collEstimateMsg"  type="textarea" rows="3" )
 	  
 </template>
 
@@ -80,8 +80,7 @@ export default {
         collEstimateDate: "",
         collEstimateValue: "",
         otherSitu: "",
-        collEstimateMsg:
-          "根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。"
+        collEstimateMsg:""
       },
       startDate: new Date(getLastYearYestdy(new Date())),
       endDate: new Date(),
@@ -94,7 +93,9 @@ export default {
       selectTitle3: "生产经营是否存在安全隐患",
       fontColor: "blue",
       yesNo: yesNo,
-      loanBusiness: {}
+			loanBusiness: {},
+			collEstimateMsg:
+          "根据现场检查及非现场查询情况，从抵(质)押物市场价值和变现能力方面分析，判|断抵(质)押物是否出现约定的需增加、置换等变动情形。"
     };
   },
   mounted() {
@@ -128,7 +129,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.startDate;
       }
-      this.params.collEstimateDate = formatDate(this.pickerValue);
+			// this.params.collEstimateDate = formatDate(this.pickerValue);
+			this.$set(this.params,'collEstimateDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     },
     IndustrycChangSiut(val) {

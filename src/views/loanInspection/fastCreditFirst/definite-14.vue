@@ -73,7 +73,7 @@
         @confirm="handleConfirm()"
       ></mt-datetime-picker> -->
 
-      <mt-field class="textFiled" label="约定用途"></mt-field>
+      <mt-field class="textFiled" label="约定用途" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -101,7 +101,7 @@
         <span class="coName">检查内容</span>
       </div>
 
-      <mt-field class="textFiled" label="资金使用情况说明"></mt-field>
+      <mt-field class="textFiled" label="资金使用情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -111,7 +111,7 @@
         placeholder="包括支付对象名称、金额等，必要时可收集汇款凭证、商务合同、账户流水等证明材料进行佐证。"
       ></mt-field>
       <div class="item1">
-        <span class="tag">是否按合同约定的用途使用信贷资金</span>
+        <span class="tag bigTag">是否按合同约定的用途使用信贷资金</span>
         <almSelect
           :selectData="yesNo"
           :defaultValue="params.useAmoutByContract"
@@ -137,7 +137,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field class="textFiled" label="情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -160,7 +160,7 @@
         <span class="iconfont iconxiala arrow"></span>
       </div>
 
-      <mt-field class="textFiled" label="情况说明"></mt-field>
+      <mt-field class="textFiled" label="情况说明" disabled></mt-field>
       <mt-field
         type="textarea"
         rows="3"
@@ -228,27 +228,31 @@ export default {
   async mounted() {
     // 基本详情与流程详情的接口写在了vuex里
     //保存接口写在了Mixin里
-    // 获取基本详情
-    await this.setqueryDetail(this);
-    this.bizType(this.queryDetail, this.queryDetail.checkType);
-    this.detail = this.queryDetail;
+		// 获取基本详情
+		const currentName = this.$route.name;
+		if (currentName === "fastCreditFirstIndex") {
+			await this.setqueryDetail(this);
+			this.bizType(this.queryDetail, this.queryDetail.checkType);
+			this.detail = this.queryDetail;
 
-    //判断是否是已经填了部分
-    if (
-      this.$route.params.saveFlag === 1 ||
-      this.$route.params.saveFlag === "1" ||
-      this.tranSactName1.tranSactName1 === true
-    ) {
-      await this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-    }
-    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-    this.setScrollToPo({
-      x: 0,
-      y: 0,
-      ratenum: Date.now(),
-      tag: "nextFooter"
-    });
+			//判断是否是已经填了部分
+			if (
+				this.$route.params.saveFlag === 1 ||
+				this.$route.params.saveFlag === "1" ||
+				this.tranSactName1.tranSactName1 === true
+			) {
+				await this.setforDizDetail(this);
+				this.params = this.forBizDetail(this.$route.name);
+			}
+			//刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+			this.setScrollToPo({
+				x: 0,
+				y: 0,
+				ratenum: Date.now(),
+				tag: "nextFooter"
+			});
+		}
+   
   },
   beforeRouteEnter(to, from, next) {
     to.params.hasRouterChildM5 = to.name === "fastCreditFirstIndex";
@@ -319,7 +323,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.startDate;
       }
-      this.params.loanDate = formatDate(this.pickerValue);
+			// this.params.loanDate = formatDate(this.pickerValue);
+			this.$set(this.params,'loanDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }
@@ -424,10 +429,10 @@ export default {
   .item1 {
     background-color: #fff;
     width: 100%;
-    height: px2rem(44);
-    line-height: px2rem(44);
-    padding: 0 px2rem(16);
-    display: flex;
+   	padding: px2rem(15) ;
+		display: flex;
+		justify-content: flex-start;
+  	align-items: center;
     font-size: px2rem(14);
     box-sizing: border-box;
     border-top: px2rem(1) solid rgba(229, 229, 229, 1);
@@ -436,12 +441,12 @@ export default {
       padding: 0 px2rem(10);
     }
     .tag {
-      width: px2rem(224);
-      text-align: left;
-      color: #090909;
-      height: px2rem(44);
-      font-size: px2rem(14);
-      line-height: px2rem(44);
+      flex: 0 0 px2rem(140);
+			text-align: left;
+			color: #090909;
+			&.bigTag{
+				flex: 0 0 px2rem(240);
+			}
     }
     .arrow {
       font-size: px2rem(14);

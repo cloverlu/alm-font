@@ -8,9 +8,9 @@
     <!--填写信息  -->
     <div class="newly9" v-if="hasRouterChild4">
       <div class="coInformation">
-        <div class="formTitle">
-          <span class="lightBlue"></span>
-          <span class="coName">存货</span>
+        <div class="definite-1-title">
+          <span class="colum-blue"></span>
+          <span class="title">{{ detail.custName }}</span>
         </div>
         <mt-cell
           class="textFiled"
@@ -127,27 +127,31 @@ export default {
   async mounted() {
     // 基本详情与流程详情的接口写在了vuex里
     //保存接口写在了Mixin里
-    // 获取基本详情
-    await this.setqueryDetail(this);
-    this.bizType(this.queryDetail, this.queryDetail.checkType);
-    this.detail = this.queryDetail;
+		// 获取基本详情
+		const currentName = this.$route.name;
+		if (currentName === "repaymentInspectionIndex") {
+			await this.setqueryDetail(this);
+			this.bizType(this.queryDetail, this.queryDetail.checkType);
+			this.detail = this.queryDetail;
 
-    //判断是否是已经填了部分
-    if (
-      this.$route.params.saveFlag === 1 ||
-      this.$route.params.saveFlag === "1" ||
-      this.tranSactName1.tranSactName1 === true
-    ) {
-      await this.setforDizDetail(this);
-      this.params = this.forBizDetail(this.$route.name);
-    }
-    //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
-    this.setScrollToPo({
-      x: 0,
-      y: 0,
-      ratenum: Date.now(),
-      tag: "nextFooter"
-    });
+			//判断是否是已经填了部分
+			if (
+				this.$route.params.saveFlag === 1 ||
+				this.$route.params.saveFlag === "1" ||
+				this.tranSactName1.tranSactName1 === true
+			) {
+				await this.setforDizDetail(this);
+				this.params = this.forBizDetail(this.$route.name);
+			}
+			//刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
+			this.setScrollToPo({
+				x: 0,
+				y: 0,
+				ratenum: Date.now(),
+				tag: "nextFooter"
+			});
+		}
+    
   },
   watch: {
     nextFooter(val, oldval) {
@@ -200,7 +204,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.repayDate = formatDate(this.pickerValue);
+			// this.params.repayDate = formatDate(this.pickerValue);
+			this.$set(this.params,'repayDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

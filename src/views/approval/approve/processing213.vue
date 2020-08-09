@@ -88,7 +88,7 @@ export default {
       existRisk: "existRisk",
       agreeResult: "agreeResult",
       params: {
-        existRisk: 0, // 存在风险
+        existRisk: 1, // 存在风险
         agreeResult: 1, // 一级支行/二级分行审核意见
         msg: "", // 一级支行/二级分行审核意见说明
         riskMsg: "", // 风险说明

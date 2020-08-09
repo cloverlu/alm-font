@@ -39,8 +39,8 @@
       ></mt-cell>
       <mt-cell
         class="textFiled"
-        title="还款日期"
-        :value="detail.definite14.repayDate"
+        title="放款日期"
+        :value="detail.definite14.loanDate"
       ></mt-cell>
       <mt-field class="textFiled" label="约定用途"></mt-field>
       <mt-field
@@ -79,7 +79,7 @@
         :disabled="true"
       ></mt-field>
       <div class="item1">
-        <span class="tag">是否按合同约定的用途使用信贷资金</span>
+        <span class="tag bigTag">是否按合同约定的用途使用信贷资金</span>
         <span class="info" v-if="detail.definite14.useAmoutByContract === 1"
           >是</span
         >
@@ -220,24 +220,26 @@ export default {
   .item1 {
     background-color: #fff;
     width: 100%;
-    height: px2rem(44);
-    line-height: px2rem(44);
-    padding: 0 px2rem(10);
-    display: flex;
+    // height: px2rem(44);
+    // line-height: px2rem(44);
+    padding: px2rem(15) ;
+		display: flex;
+		justify-content: flex-start;
+  	align-items: center;
     font-size: px2rem(14);
     box-sizing: border-box;
-    border-top: px2rem(1) solid rgba(229, 229, 229, 1);
+		border-top: px2rem(1) solid rgba(229, 229, 229, 1);
     &:last-child {
       border: none;
       padding: 0 px2rem(10);
     }
     .tag {
-      width: px2rem(224);
-      text-align: left;
-      color: #090909;
-      height: px2rem(44);
-      font-size: px2rem(14);
-      line-height: px2rem(44);
+     	flex: 0 0 px2rem(140);
+			text-align: left;
+			color: #090909;
+			&.bigTag{
+			flex: 0 0 px2rem(240);
+			}
     }
     .arrow {
       font-size: px2rem(14);

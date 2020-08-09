@@ -86,6 +86,7 @@
     <newly2 :detail="detail.newly2"></newly2>
     <newly3 :detail="detail.newly3"></newly3>
     <newly45 :detail="detail.newly45"></newly45>
+		<newly16 :detail="detail.newly6"></newly16>
     <definite16 :detail="detail.definite16"></definite16>
   </div>
 </template>
@@ -94,6 +95,7 @@
 import newly2 from "../m6/newly-2";
 import newly3 from "../m6/newly-3";
 import newly45 from "../m6/newly-45";
+import newly16 from  '../m6/newly-6'
 import definite16 from "../m6/definite-16";
 import { normalMixin, approvalMixin } from "../../../../utils/mixin";
 import { securityKindsArr } from "../../../../utils/dataMock";
@@ -103,7 +105,8 @@ export default {
     newly2,
     newly3,
     newly45,
-    definite16
+		definite16,
+		newly16
   },
   mixins: [normalMixin, approvalMixin],
   data() {
@@ -129,7 +132,8 @@ export default {
         newly1: {},
         newly2: {},
         newly3: {},
-        newly45: {},
+				newly45: {},
+				newly6:{},
         definite16: {}
       }
     };
@@ -137,10 +141,10 @@ export default {
   computed: {
     securityKindTag() {
       if (
-        this.params.securityKind &&
-        typeof this.detail.securityKind === "object"
+        this.detail.newly1.securityKind &&
+        typeof this.detail.newly1.securityKind === "object"
       ) {
-        const flag = this.detail.securityKind.some(item => item === "5");
+        const flag = this.detail.newly1.securityKind.some(item => item === "5");
         if (flag) {
           return true;
         } else {
@@ -154,17 +158,17 @@ export default {
   async mounted() {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
-    this.securityKindsF();
+		this.securityKindsF();
   },
   methods: {
     securityKindsF() {
       if (
-        this.params.securityKind &&
-        typeof this.detail.securityKind === "object"
+        this.detail.newly1.securityKind &&
+        typeof this.detail.newly1.securityKind === "object"
       ) {
         var arr = [];
         this.securityKindsArr.map(item => {
-          this.detail.securityKind.map(item2 => {
+          this.detail.newly1.securityKind.map(item2 => {
             if (item2 === item.value) {
               arr.push(item.label);
             }

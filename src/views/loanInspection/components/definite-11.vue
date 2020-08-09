@@ -356,7 +356,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.startDate;
       }
-      this.params.queryDateForPer = formatDate(this.pickerValue);
+			// this.params.queryDateForPer = formatDate(this.pickerValue);
+			this.$set(this.params, 'queryDateForPer', formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

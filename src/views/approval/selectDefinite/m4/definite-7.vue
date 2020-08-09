@@ -11,7 +11,7 @@
         <span class="lightBlue"></span>
         <span class="coName">检查阶段</span>
       </div>
-      <div class="zanwu" v-if="detail.stageData.length < 1">暂无信息</div>
+      <div class="zanwu" v-if="detail.stageData && detail.stageData.length < 1">暂无信息</div>
       <div
         class="type1 "
         v-for="item in detail.stageData"

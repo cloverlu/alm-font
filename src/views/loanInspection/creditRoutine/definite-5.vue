@@ -14,21 +14,18 @@
             <span class="lightBlue"></span>
             <span class="coName">存货</span>
           </div>
-          <mt-field
-            class="textFiled"
-            label="上次全面检查或调查时余额"
-            placeholder="请输入"
-            v-model="params.stockLastBalance"
-          ></mt-field>
-          <mt-cell class="textFiled" title="本次检查存货变动情况"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="params.stockChangSitu"
-            class="text"
-            style="overflow:hidden"
-            placeholder="请输入本次检查存货变动情况说明"
-          ></mt-field>
+          <mt-field class="textFiled"
+                    label="上次全面检查或调查时余额"
+                    placeholder="请输入"
+                    v-model="params.stockLastBalance"></mt-field>
+          <mt-cell class="textFiled"
+                   title="本次检查存货变动情况"></mt-cell>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="params.stockChangSitu"
+                    class="text"
+                    style="overflow:hidden"
+                    placeholder="请输入本次检查存货变动情况说明"></mt-field>
         </div>
 
         <div class="enterpriseCredit">
@@ -38,53 +35,43 @@
             <span class="coName">营业收入</span>
           </div>
 
-          <mt-field
-            class="textFiled"
-            label="上次全面检查或调查时余额"
-            placeholder="请输入"
-            v-model="params.busIncLastBalance"
-          ></mt-field>
-          <mt-cell class="textFiled" title="本次检查营业收入变动情况"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="params.busIncChangSitu"
-            class="text"
-            style="overflow:hidden"
-            placeholder="请输入本次检查营业收入变动情况说明"
-          ></mt-field>
+          <mt-field class="textFiled"
+                    label="上次全面检查或调查时余额"
+                    placeholder="请输入"
+                    v-model="params.busIncLastBalance"></mt-field>
+          <mt-cell class="textFiled"
+                   title="本次检查营业收入变动情况"></mt-cell>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="params.busIncChangSitu"
+                    class="text"
+                    style="overflow:hidden"
+                    placeholder="请输入本次检查营业收入变动情况说明"></mt-field>
 
           <!-- 加工制造类 -->
           <div class="formTitle">
             <span class="lightBlue"></span>
-            <span class="coName"
-              >水、电、煤、气费其中一项或多项(加工制造类企业必填)</span
-            >
+            <span class="coName">水、电、煤、气费其中一项或多项(加工制造类企业必填)</span>
           </div>
-          <mt-field
-            class="textFiled"
-            label="上次全面检查或调查时余额"
-            placeholder="请输入"
-            v-model="params.dailyExpenLastBalance"
-          ></mt-field>
-          <mt-cell class="textFiled" title="本次检查变动情况"></mt-cell>
-          <mt-field
-            type="textarea"
-            rows="3"
-            v-model="params.dailyExpenChangSitu"
-            class="text"
-            style="overflow:hidden"
-            placeholder="请输入本次检查变动情况说明"
-          ></mt-field>
+          <mt-field class="textFiled"
+                    label="上次全面检查或调查时余额"
+                    placeholder="请输入"
+                    v-model="params.dailyExpenLastBalance"></mt-field>
+          <mt-cell class="textFiled"
+                   title="本次检查变动情况"></mt-cell>
+          <mt-field type="textarea"
+                    rows="3"
+                    v-model="params.dailyExpenChangSitu"
+                    class="text"
+                    style="overflow:hidden"
+                    placeholder="请输入本次检查变动情况说明"></mt-field>
 
-          <mt-field
-            type="textarea"
-            rows="4"
-            class="text"
-            v-model="params.proAndOpeAbnormalSuitMsg"
-            style="overflow:hidden"
-            placeholder="根据财务信息及现场检查情况，判断企业是否生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，并详细阐述异常情况对企业偿债能力的影响。"
-          ></mt-field>
+          <mt-field type="textarea"
+                    rows="4"
+                    class="text"
+                    v-model="params.proAndOpeAbnormalSuitMsg"
+                    style="overflow:hidden"
+                    placeholder="根据财务信息及现场检查情况，判断企业是否生产经营异常(停产、半停产、员工数量骤减、设备开工率不足等)，并详细阐述异常情况对企业偿债能力的影响。"></mt-field>
         </div>
       </div>
     </div>
@@ -96,7 +83,7 @@ import { normalMixin, userMixin } from "../../../utils/mixin";
 export default {
   mixins: [normalMixin, userMixin],
   props: ["uBizId"],
-  data() {
+  data () {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       params: {
@@ -111,7 +98,7 @@ export default {
       loanBusiness: {}
     };
   },
-  mounted() {
+  mounted () {
     const moduleName = this.$route.params.moduleName;
     const name = this.$route.name;
     const type = this.userBizType.bizType;
@@ -129,7 +116,7 @@ export default {
   methods: {},
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
-    nextFooter(val, oldval) {
+    nextFooter (val, oldval) {
       if (val !== oldval) {
         this.loanBusiness = {
           financeInfo: this.params

@@ -14,74 +14,75 @@
       </div>
       <div class="item1">
         <span class="tag1">是否同意检查结论</span>
-        <almSelect
-          :selectData="yesNo"
-          :defaultValue="params.agreeResult"
-          :triggerId="agreeResult"
-          :title="selectTitle1"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect1"
-          class="info"
-        ></almSelect>
+        <almSelect :selectData="yesNo"
+                   :defaultValue="params.agreeResult"
+                   :triggerId="agreeResult"
+                   :title="selectTitle1"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelect1"
+                   class="info"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <mt-field
-        type="textarea"
-        rows="3"
-        v-model="params.msg"
-        class="text"
-        style="overflow:hidden"
-        placeholder="请输入理由"
-      ></mt-field>
+      <mt-field type="textarea"
+                rows="3"
+                v-model="params.msg"
+                class="text"
+                style="overflow:hidden"
+                placeholder="请输入理由"></mt-field>
       <div class="item1">
         <span class="tag1">是否存在风险预警信号</span>
-        <almSelect
-          :selectData="yesNo"
-          :defaultValue="params.existRisk"
-          :triggerId="existRisk"
-          :title="selectTitle2"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect2"
-          class="info"
-        ></almSelect>
+        <almSelect :selectData="yesNo"
+                   :defaultValue="params.existRisk"
+                   :triggerId="existRisk"
+                   :title="selectTitle2"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelect2"
+                   class="info"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <mt-field
+      <div class="item1">
+        <span class="tag1">发生阶段</span>
+        <almSelect :selectData="happenPats"
+                   :defaultValue="params.riskStage"
+                   :triggerId="RiskStage"
+                   :title="selectTitleRiskStage"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelectRiskStage"
+                   class="info"></almSelect>
+        <span class="iconfont iconxiala arrow"></span>
+      </div>
+      <!-- <mt-field
         class="textFiled"
         label="发生阶段"
         placeholder="请输入发生阶段"
         v-model="params.riskStage"
-      ></mt-field>
-      <mt-cell class="textFiled" title="预警信号说明"></mt-cell>
-      <mt-field
-        type="textarea"
-        rows="3"
-        v-model="params.riskMsg"
-        class="text"
-        style="overflow:hidden"
-        placeholder="请输入预警信号说明"
-      ></mt-field>
-      <mt-cell class="textFiled" title="复核意见及行动建议"></mt-cell>
-      <mt-field
-        type="textarea"
-        rows="3"
-        v-model="params.suggest"
-        class="text"
-        style="overflow:hidden"
-        placeholder="请输入复核意见及行动建议"
-      ></mt-field>
+      ></mt-field> -->
+      <mt-cell class="textFiled"
+               title="预警信号说明"></mt-cell>
+      <mt-field type="textarea"
+                rows="3"
+                v-model="params.riskMsg"
+                class="text"
+                style="overflow:hidden"
+                placeholder="请输入预警信号说明"></mt-field>
+      <mt-cell class="textFiled"
+               title="复核意见及行动建议"></mt-cell>
+      <mt-field type="textarea"
+                rows="3"
+                v-model="params.suggest"
+                class="text"
+                style="overflow:hidden"
+                placeholder="请输入复核意见及行动建议"></mt-field>
       <div class="item">
         <span class="tag1">下一岗位处理人</span>
-        <almSelect
-          :selectData="nextPositionHandlersArr"
-          :defaultValue="params.nextEmplCode"
-          :triggerId="nextEmplCode"
-          :title="selectTitle3"
-          :fontColor="fontColor"
-          @getSelectValue="getSelect3"
-          class="info"
-          v-if="selectData"
-        ></almSelect>
+        <almSelect :selectData="nextPositionHandlersArr"
+                   :defaultValue="params.nextEmplCode"
+                   :triggerId="nextEmplCode"
+                   :title="selectTitle3"
+                   :fontColor="fontColor"
+                   @getSelectValue="getSelect3"
+                   class="info"
+                   v-if="selectData"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
     </div>
@@ -89,7 +90,7 @@
 </template>
 
 <script>
-import { yesNo, agreeOrNot } from "../../../utils/dataMock";
+import { yesNo, agreeOrNot, happenPats2 } from "../../../utils/dataMock";
 import { mapActions } from "vuex";
 import almSelect from "../../loanInspection/components/select";
 export default {
@@ -97,7 +98,7 @@ export default {
     almSelect
   },
   props: ["nextPositionHandlersArr"],
-  data() {
+  data () {
     return {
       selectData: false,
       popupVisible: false,
@@ -105,33 +106,36 @@ export default {
       selectTitle1: "是否同意检查结论",
       selectTitle2: "是否存在风险预警信号",
       selectTitle3: "下一岗位处理人",
+      selectTitleRiskStage: '发生阶段',
       fontColor: "blue",
       yesNo: yesNo,
       agreeOrNot: agreeOrNot,
       existRisk: "existRisk",
       agreeResult: "agreeResult",
       nextEmplCode: "nextEmplCode",
+      happenPats: happenPats2,
+      RiskStage: 'RiskStage',
       params: {
-        existRisk: 0, // 存在风险
-        agreeResult: 0, // 一级支行/二级分行复核意见
+        existRisk: 1, // 存在风险
+        agreeResult: 1, // 一级支行/二级分行复核意见
         nextEmplCode: "", // 下一岗位处理人
         emplName: "",
         msg: "", // 一级支行/二级分行复核意见说明
-        riskStage: "", // 发生阶段
+        riskStage: "一", // 发生阶段
         riskMsg: "", // 风险说明
         suggest: "" // 措施建议
       }
     };
   },
   watch: {
-    nextPositionHandlersArr(val, oldval) {
+    nextPositionHandlersArr (val, oldval) {
       if (val) {
         this.params.nextEmplCode = val[0].key;
         this.selectData = true;
       }
     }
   },
-  mounted() {
+  mounted () {
     //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
     this.setScrollToPo({
       x: 0,
@@ -142,15 +146,20 @@ export default {
   },
   methods: {
     ...mapActions(["setScrollToPo"]),
-    getSelect1: function(data) {
+    getSelect1: function (data) {
       this.params.agreeResult = data[0].key;
     },
-    getSelect2: function(data) {
+    getSelect2: function (data) {
       this.params.existRisk = data[0].key;
     },
-    getSelect3: function(data) {
+    getSelect3: function (data) {
       this.params.nextEmplCode = data[0].key;
       this.params.emplName = data[0].value;
+    },
+    getSelectRiskStage (data) {
+      this.params.riskStage = data[0].key
+
+
     }
   }
 };

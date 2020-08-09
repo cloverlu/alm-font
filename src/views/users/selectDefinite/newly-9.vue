@@ -8,10 +8,10 @@
     <!--填写信息  -->
     <div class="newly9">
       <div class="coInformation">
-        <div class="formTitle">
+        <!-- <div class="formTitle">
           <span class="lightBlue"></span>
           <span class="coName">存货</span>
-        </div>
+        </div> -->
         <mt-cell
           class="textFiled"
           title="贷款金额"
@@ -119,7 +119,7 @@ export default {
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
-      this.loanBusiness = this.params;
+      this.loanBusiness = Object.assign({},this.detail,this.params);
     }
   },
   methods: {
@@ -130,7 +130,8 @@ export default {
       if (!this.pickerValue) {
         this.pickerValue = this.endDate;
       }
-      this.params.repayDate = formatDate(this.pickerValue);
+			// this.params.repayDate = formatDate(this.pickerValue);
+			this.$set(this.params,'repayDate',formatDate(this.pickerValue))
       this.$refs.picker.close();
     }
   }

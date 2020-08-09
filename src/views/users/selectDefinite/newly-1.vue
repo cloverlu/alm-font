@@ -133,7 +133,8 @@ export default {
       revalOfColl: "revalOfColl",
       cooperate: "cooperate",
       yearlyInspection: "yearlyInspection",
-      fontColor: "blue",
+			fontColor: "blue",
+			otherSecurityKindMsg:'',
       params: {
         otherSecurityKindMsg: "",
         repayKind: "",
@@ -141,7 +142,7 @@ export default {
         checkModel: "", // 检查模式
         lineAmout: "", // 授信金额
         lineBalance: "", // 授信余额
-        securityKind: "1", // 担保方式
+        securityKind: ["1"], // 担保方式
         cooperate: "1", // 检查配合程度
         yearlyInspection: 1, // 额度年检
         revalOfColl: 1 // 押品重估
@@ -167,13 +168,21 @@ export default {
     }
   },
   async mounted() {
-    this.securityKindsF();
+		this.securityKindsF();
+   
     const type = this.userBizType.bizType;
     const name = this.$route.name;
 
     if (this.bizId) {
       await this.setUserforDizDetail(this);
-      this.params = this.userForBizDetail(name, type);
+			this.params = this.userForBizDetail(name, type);
+			const flag = this.params.securityKind.some(item => item === "5");
+			if(flag && this.params.otherSecurityKindMsg){
+				this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+			}else{
+				this.otherSecurityKindMsg =''
+			}
+			
     }
     this.setScrollToPo({
       x: 0,
@@ -185,7 +194,7 @@ export default {
   watch: {
     // 监听是否点击了下一步，用vuex里的nextFooter属性
     nextFooter(val, oldval) {
-      this.loanBusiness = this.params;
+			this.loanBusiness = Object.assign({},this.detail,this.params);
     }
   },
   methods: {
@@ -213,7 +222,13 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-        var arr = [];
+				const flag = this.params.securityKind.some(item => item === "5");
+				if(flag){
+					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+				}else{
+					this.params.otherSecurityKindMsg = ''
+				}
+				var arr = [];
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {

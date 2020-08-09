@@ -84,7 +84,7 @@ export default {
       existRisk: "existRisk",
       agreeResult: "agreeResult",
       params: {
-        existRisk: 0, // 存在风险
+        existRisk: 1, // 存在风险
         agreeResult: 1, // 第二经营主责任人审核意见
         msg: "", // 第二经营主责任人审核意见说明
         riskMsg: "", // 风险说明
