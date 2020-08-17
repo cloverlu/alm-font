@@ -19,10 +19,7 @@
 			div.almUpload(:style="{ left: leftPx , bottom: bottomPx }"  @click="OpenAlbum" :ref="'almUpload' + item.vModel" v-if="imageHas" )
 				i(class="iconfont iconpaizhao")
 			span(v-else-if="!imageHas") 无照片 
-
-				
 			
-		
 
 </template>
 
@@ -265,6 +262,8 @@ export default {
     OpenAlbum () {
       let xuiPicture = requireModuleJs("xuiPicture");
       xuiPicture.create({}, res => {
+        // alert(JSON.stringify(res.fileList[0].longitude));
+        // alert(JSON.stringify(res.fileList[0].latitude));
         res.fileList.forEach(item => {
           this.fileList[this.item.vModel].push({
             name: item.name,

@@ -93,7 +93,7 @@ export default {
     definite11
   },
   mixins: [normalMixin, approvalMixin],
-  data() {
+  data () {
     const definite17 = _ => {
       const definite17 = {};
       for (let i = 0; i < 12; i++) {
@@ -130,7 +130,7 @@ export default {
     };
   },
   computed: {
-    securityKindTag() {
+    securityKindTag () {
       if (
         this.detail.newly18.securityKind &&
         typeof this.detail.newly18.securityKind === "object"
@@ -147,13 +147,13 @@ export default {
     }
   },
 
-  async mounted() {
+  async mounted () {
     await this.setApproveDetail(this);
     this.detail = this.approveDetail(this.$route.params.type);
     this.securityKindsF();
   },
   methods: {
-    securityKindsF() {
+    securityKindsF () {
       if (
         this.detail.newly18.securityKind &&
         typeof this.detail.newly18.securityKind === "object"

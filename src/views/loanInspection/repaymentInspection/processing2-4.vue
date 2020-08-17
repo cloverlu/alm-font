@@ -4,6 +4,7 @@
  * @Date: 2020-06-04 17:03:54
 -->
 <template>
+
   <div class="checkDetail">
     <!--填写信息  -->
     <div class="processing4"
