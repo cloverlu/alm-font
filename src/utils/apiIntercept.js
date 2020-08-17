@@ -63,13 +63,13 @@ apiIntercept.install = vue => {
   Axios.interceptors.response.use(
     response => {
       if (response) {
-        if (response.data.status) {
-          switch (response.data.status) {
+        if (response.status) {
+          switch (response.status) {
 						case 200:
-							if(response.data.data.returnCode !== "200000"){
+							if(response.data.returnCode !== "200000"){
 								Indicator.close();
 								Toast({
-									message: response.data.data.returnMsg,
+									message: response.data.returnMsg,
 									iconClass: 'iconfont iconcha-01',
 									duration: 5000,
 								})

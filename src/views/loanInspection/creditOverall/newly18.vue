@@ -20,7 +20,7 @@
 						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
 					span(class="tag") 贷款余额
-					span(class="info") {{params.loanBalance}}
+					span(class="info") {{detail.loanBalance}}
 				.item(@click="popupVisible = !popupVisible")
 					span(class="tag") 担保方式
 					span(class="info sec") {{ securityKind }}
@@ -100,8 +100,8 @@ export default {
       newly18Two: newly18Two,
       selectTitle: "担保方式",
       fontColor: "blue",
-			securityKindId: "securityKind",
-			otherSecurityKindMsg:'',
+      securityKindId: "securityKind",
+      otherSecurityKindMsg: '',
       params: {
         loanBalance: "",
         lineAmout: "",
@@ -139,7 +139,7 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-				const flag = this.params.securityKind.some(item => item === "5");
+        const flag = this.params.securityKind.some(item => item === "5");
         if (flag) {
           return true;
         } else {
@@ -167,16 +167,16 @@ export default {
         this.tranSactName1.tranSactName1 === true
       ) {
         await this.setforDizDetail(this);
-				this.params = this.forBizDetail(this.$route.name);
-				const flag = this.params.securityKind.some(item => item === "5");
-				if(flag && this.params.otherSecurityKindMsg){
-					this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
-				}else{
-					this.otherSecurityKindMsg =''
-				}
+        this.params = this.forBizDetail(this.$route.name);
+        const flag = this.params.securityKind.some(item => item === "5");
+        if (flag && this.params.otherSecurityKindMsg) {
+          this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
+        } else {
+          this.otherSecurityKindMsg = ''
+        }
         this.securityKindsF();
       } else {
-				this.otherSecurityKindMsg =''
+        this.otherSecurityKindMsg = ''
         this.securityKindsF();
       }
       //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
@@ -252,21 +252,21 @@ export default {
         this.params.securityKind &&
         typeof this.params.securityKind === "object"
       ) {
-				const flag = this.params.securityKind.some(item => item === "5");
-				
-				if(flag){
-					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
-				}else{
-					this.params.otherSecurityKindMsg = ''
-				}
+        const flag = this.params.securityKind.some(item => item === "5");
+
+        if (flag) {
+          this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+        } else {
+          this.params.otherSecurityKindMsg = ''
+        }
         this.securityKindsArr.map(item => {
           this.params.securityKind.map(item2 => {
             if (item2 === item.value) {
               arr.push(item.label);
             }
           });
-				});
-				
+        });
+
         this.securityKind = arr.join(",");
       }
     }
