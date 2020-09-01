@@ -14,7 +14,7 @@
 						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
 					span(class="tag") 贷款余额
-					span(class="info") {{detail.loanBalance}}
+					span(class="info") {{params.loanBalance}}
 				.item(@click="popupVisible = !popupVisible")
 					span(class="tag") 担保方式
 					span(class="info sec") {{ securityKind }}
@@ -69,38 +69,38 @@ import {
   newly18One,
   newly18Two,
   definite1FieldSpecial,
-  definite1FieldRate
-} from "../../../utils/dataMock.js";
-import almSelect from "../../loanInspection/components/select";
-import fieldOne from "../../loanInspection/components/fieldOne";
-import { normalMixin, userMixin } from "../../../utils/mixin";
-import definiteProp from "../../loanInspection/components/prop";
+  definite1FieldRate,
+} from '../../../utils/dataMock.js'
+import almSelect from '../../loanInspection/components/select'
+import fieldOne from '../../loanInspection/components/fieldOne'
+import { normalMixin, userMixin } from '../../../utils/mixin'
+import definiteProp from '../../loanInspection/components/prop'
 export default {
   components: { almSelect, fieldOne, definiteProp },
   mixins: [normalMixin, userMixin],
-  props: ["detail", "uBizId"],
+  props: ['detail', 'uBizId'],
   data() {
     return {
       bizId: this.uBizId,
       info: securityKindsArr,
       securityKindsArr: securityKindsArr,
-      securityKind: "",
+      securityKind: '',
       popupVisible: false,
       definite1Field: definite1Field,
       definite1FieldSpecial: definite1FieldSpecial,
       definite1FieldRate: definite1FieldRate,
       newly18One: newly18One,
       newly18Two: newly18Two,
-      selectTitle: "担保方式",
-      fontColor: "blue",
-			securityKindId: "securityKind",
-			otherSecurityKindMsg:'',
+      selectTitle: '担保方式',
+      fontColor: 'blue',
+      securityKindId: 'securityKind',
+      otherSecurityKindMsg: '',
       params: {
-        lineAmout: "",
-        loanBalance: "",
-        securityKind: ["1"],
-        otherSecurityKindMsg: "",
-        repayKind: "",
+        lineAmout: '',
+        loanBalance: '',
+        securityKind: ['1'],
+        otherSecurityKindMsg: '',
+        repayKind: '',
         // requireCheck: "", //审批意见中贷后日常检查要求及落实情况
         // checked: "", //审批意见中贷后日常检查要求及落实情况
         // specialRequireCheck: "", //产品贷后日常检查特殊要求及落实情况
@@ -109,50 +109,52 @@ export default {
         // rateAndIntfinSerChecked: "", // 利率及综合金融服务的要求及落实情况
         // HoldPensonRisk: "", //实际控制人或法定代表人风险点
         // managerRisk: "", //管理层风险点
-        otherRisk: "" //近期检查发现的其他风险点
+        otherRisk: '', //近期检查发现的其他风险点
       },
-      loanBusiness: {}
-    };
+      loanBusiness: {},
+    }
   },
   computed: {
     securityKindTag() {
       if (
         this.params.securityKind &&
-        typeof this.params.securityKind === "object"
+        typeof this.params.securityKind === 'object'
       ) {
-        const flag = this.params.securityKind.some(item => item === "5");
+        const flag = this.params.securityKind.some((item) => item === '5')
         if (flag) {
-          return true;
+          return true
         } else {
-          return false;
+          return false
         }
       } else {
-        return false;
+        return false
       }
-    }
+    },
   },
 
   async mounted() {
-    this.securityKindsF();
-    const type = this.userBizType.bizType;
-    const name = this.$route.name;
+    this.securityKindsF()
+    const type = this.userBizType.bizType
+    const name = this.$route.name
 
     if (this.bizId) {
-      await this.setUserforDizDetail(this);
-			this.params = this.userForBizDetail(name, type);
-			const flag = this.params.securityKind.some(item => item === "5");
-			if(flag && this.params.otherSecurityKindMsg){
-				this.otherSecurityKindMsg = JSON.parse(JSON.stringify(this.params.otherSecurityKindMsg))
-			}else{
-				this.otherSecurityKindMsg =''
-			}
+      await this.setUserforDizDetail(this)
+      this.params = this.userForBizDetail(name, type)
+      const flag = this.params.securityKind.some((item) => item === '5')
+      if (flag && this.params.otherSecurityKindMsg) {
+        this.otherSecurityKindMsg = JSON.parse(
+          JSON.stringify(this.params.otherSecurityKindMsg)
+        )
+      } else {
+        this.otherSecurityKindMsg = ''
+      }
     }
     this.setScrollToPo({
       x: 0,
       y: 0,
       ratenum: Date.now(),
-      tag: "nextFooter"
-    });
+      tag: 'nextFooter',
+    })
   },
   watch: {
     nextFooter(val, oldval) {
@@ -163,47 +165,47 @@ export default {
         this.$refs.fieldTwo.params,
         this.$refs.fieldThree.params,
         this.$refs.fieldFour.params,
-				this.$refs.fieldFive.params,
-				this.detail
-      );
-      this.loanBusiness = loanBusiness;
-    }
+        this.$refs.fieldFive.params,
+        this.detail
+      )
+      this.loanBusiness = loanBusiness
+    },
   },
   methods: {
     getSelect(val) {
-      this.params.securityKind = val[0].key;
+      this.params.securityKind = val[0].key
     },
     changeProp(val) {
-      this.popupVisible = val;
+      this.popupVisible = val
     },
     checkData(val) {
-      this.params.securityKind = val;
-      this.securityKindsF();
+      this.params.securityKind = val
+      this.securityKindsF()
     },
     securityKindsF() {
       if (
         this.params.securityKind &&
-        typeof this.params.securityKind === "object"
+        typeof this.params.securityKind === 'object'
       ) {
-				const flag = this.params.securityKind.some(item => item === "5");
-				if(flag){
-					this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
-				}else{
-					this.params.otherSecurityKindMsg = ''
-				}
-				var arr = [];
-        this.securityKindsArr.map(item => {
-          this.params.securityKind.map(item2 => {
+        const flag = this.params.securityKind.some((item) => item === '5')
+        if (flag) {
+          this.params.otherSecurityKindMsg = this.otherSecurityKindMsg
+        } else {
+          this.params.otherSecurityKindMsg = ''
+        }
+        var arr = []
+        this.securityKindsArr.map((item) => {
+          this.params.securityKind.map((item2) => {
             if (item2 === item.value) {
-              arr.push(item.label);
+              arr.push(item.label)
             }
-          });
-        });
-        this.securityKind = arr.join(",");
+          })
+        })
+        this.securityKind = arr.join(',')
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
 // @import "../../../assets/style/global.scss";
