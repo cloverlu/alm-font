@@ -4,36 +4,40 @@
  * @Date: 2020-07-08 16:59:09
 -->
 <template lang="pug">
-	.approve-wrapper(ref="processing2")
-		.wrapper-content  
-			components(:is="commpoentName" :nextPositionHandlersArr="nextPositionHandlersArr" ref="commpoent")
-		.wrapper-operation
-			.signBox
-				span(class="left") {{signName}}人员（签字）：
-				span(class="iconfont iconqianzi" @click="goSign")
-			.qianming
-				img(:src="params.empSign")
-			.subBox
-				.submit
-					mt-button(type="primary" size="large" @click.native="submitApprove") 提交
-					mt-button(size="large" @click.native="goback") 回退
-					mt-button(size="large" @click.native="gobackLast") 退回上一岗位
+.approve-wrapper(ref="processing2")
+  .wrapper-content 
+    components(
+      :is="commpoentName",
+      :nextPositionHandlersArr="nextPositionHandlersArr",
+      ref="commpoent"
+    )
+  .wrapper-operation
+    .signBox
+      span.left {{ signName }}人员（签字）：
+      span.iconfont.iconqianzi(@click="goSign")
+    .qianming
+      img(:src="params.empSign")
+    .subBox
+      .submit
+        mt-button(type="primary", size="large", @click.native="submitApprove") 提交
+        mt-button(size="large", @click.native="goback") 回退
+        mt-button(size="large", @click.native="gobackLast") 退回上一岗位
 
-		mt-popup(v-model="popupVisible" class="sign-content" popup-transition="popup-fade")
-			.tanchaung
-				.definite4
-					.coInformation
-						.enterpriseCredit(ref="scroll")
-							.signBox
-								span(class="left") {{signName}}人员（签字）：
-								span(class="iconfont iconqianzi")
-							canvas
-						.submit
-							button(id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default") 重置
-							button(type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button") 保存
-
-			
-		 
+  mt-popup.sign-content(v-model="popupVisible", popup-transition="popup-fade")
+    .tanchaung
+      .definite4
+        .coInformation
+          .enterpriseCredit(ref="scroll")
+            .signBox
+              span.left {{ signName }}人员（签字）：
+              span.iconfont.iconqianzi
+            canvas
+          .submit
+            button#clearCanvas.mint-button.mint-button--default(
+              ,
+              ref="clearCanvas"
+            ) 重置
+            button#saveCanvas.mint-button(type="primary", ref="saveCanvas") 保存
 </template>
 <script>
 // processing26:审核;processing28:审核;processing213:审核；processing23:审核;processing210:审核;processing211:抽查;processing213:抽查复核
@@ -142,24 +146,24 @@ export default {
       });
     },
     async submitApprove() {
-			const cav =document.getElementsByTagName("canvas")[0];
-			if(isCanvasBlank(cav)){
+      const cav = document.getElementsByTagName("canvas")[0];
+      if (isCanvasBlank(cav)) {
         this.$Toast({
-            message: '请签名！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-				return false;
-    	}
-			// if(!this.params.empSign){
-			// 	this.$Toast({
+          message: "请签名！",
+          iconClass: "iconfont iconcha-01",
+          duration: 2000
+        });
+        return false;
+      }
+      // if(!this.params.empSign){
+      // 	this.$Toast({
       //       message: '请签名！',
       //       iconClass: 'iconfont iconcha-01',
       //       duration: 2000,
-			// 		})
-			// 	return false;
+      // 		})
+      // 	return false;
 
-			// }
+      // }
       this.params2.opType = "1";
       const params = Object.assign(
         {},
@@ -167,40 +171,39 @@ export default {
         this.params2,
         this.params
       );
-			console.log(params);
-			if(params.agreeResult){
-				if(params.agreeResult === 9){
-					this.$Toast({
-            message: '请选择 复核/审核 意见！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
-			if(params.existRisk){
-				if(params.existRisk === 9){
-					this.$Toast({
-            message: '请选择风险预警信号！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
+      console.log(params);
+      if (params.agreeResult) {
+        if (params.agreeResult === 9) {
+          this.$Toast({
+            message: "请选择 复核/审核 意见！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
+      if (params.existRisk) {
+        if (params.existRisk === 9) {
+          this.$Toast({
+            message: "请选择风险预警信号！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
 
       await this.submit2(params);
     },
     async goback() {
-			if(!this.params.empSign){
-				this.$Toast({
-            message: '请签名！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-				return false;
-
-			}
+      if (!this.params.empSign) {
+        this.$Toast({
+          message: "请签名！",
+          iconClass: "iconfont iconcha-01",
+          duration: 2000
+        });
+        return false;
+      }
       this.params2.opType = "2";
       const params = Object.assign(
         {},
@@ -208,39 +211,38 @@ export default {
         this.params2,
         this.params
       );
-			console.log(params);
-			if(params.agreeResult){
-				if(params.agreeResult === 9){
-					this.$Toast({
-            message: '请选择 复核/审核 意见！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
-			if(params.existRisk){
-				if(params.existRisk === 9){
-					this.$Toast({
-            message: '请选择风险预警信号！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
+      console.log(params);
+      if (params.agreeResult) {
+        if (params.agreeResult === 9) {
+          this.$Toast({
+            message: "请选择 复核/审核 意见！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
+      if (params.existRisk) {
+        if (params.existRisk === 9) {
+          this.$Toast({
+            message: "请选择风险预警信号！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
       await this.submit2(params);
     },
     async gobackLast() {
-			if(!this.params.empSign){
-				this.$Toast({
-            message: '请签名！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-				return false;
-
-			}
+      if (!this.params.empSign) {
+        this.$Toast({
+          message: "请签名！",
+          iconClass: "iconfont iconcha-01",
+          duration: 2000
+        });
+        return false;
+      }
       this.params2.opType = "3";
       const params = Object.assign(
         {},
@@ -248,27 +250,27 @@ export default {
         this.params2,
         this.params
       );
-			console.log(params);
-			if(params.agreeResult){
-				if(params.agreeResult === 9){
-					this.$Toast({
-            message: '请选择 复核/审核 意见！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
-			if(params.existRisk){
-				if(params.existRisk === 9){
-					this.$Toast({
-            message: '请选择风险预警信号！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-					return false;
-				}
-			}
+      console.log(params);
+      if (params.agreeResult) {
+        if (params.agreeResult === 9) {
+          this.$Toast({
+            message: "请选择 复核/审核 意见！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
+      if (params.existRisk) {
+        if (params.existRisk === 9) {
+          this.$Toast({
+            message: "请选择风险预警信号！",
+            iconClass: "iconfont iconcha-01",
+            duration: 2000
+          });
+          return false;
+        }
+      }
       await this.submit2(params);
     },
     routerMatch() {
@@ -291,8 +293,7 @@ export default {
         } else if (type === "m6") {
           this.commpoentName = "processing29";
         }
-			}
-			else if (currPost === "320") {
+      } else if (currPost === "320") {
         if (biggerThan500 === 1) {
           if (type === "m1") {
             this.commpoentName = "processing2";
@@ -401,7 +402,7 @@ export default {
             setTimeout(() => {
               this.$router.push({ name: "approvalIndex" });
             }, 1200);
-          } 
+          }
         } else {
           this.$Indicator.close();
           this.$Toast({
@@ -447,7 +448,7 @@ export default {
           this.cxt.beginPath();
           this.cxt.moveTo(
             e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
+            e.changedTouches[0].pageY - 140
           );
         }.bind(this),
         true
@@ -458,7 +459,7 @@ export default {
         function(e) {
           this.cxt.lineTo(
             e.changedTouches[0].pageX,
-            e.changedTouches[0].pageY - 40
+            e.changedTouches[0].pageY - 140
           );
           this.cxt.stroke();
         }.bind(this),
