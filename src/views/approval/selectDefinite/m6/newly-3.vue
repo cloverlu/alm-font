@@ -22,6 +22,8 @@
         <div class="item">
           <span class="tag1">企业实际股权结构是否与上述工商信息网查询一致</span>
           <span class="info"
+                v-if="detail.ownerStruSame === 9">请选择</span>
+          <span class="info"
                 v-if="detail.ownerStruSame === 1">是</span>
           <span class="info"
                 v-if="detail.ownerStruSame === 0">否</span>
@@ -34,6 +36,8 @@
                   :disabled="true"></mt-field>
         <div class="item">
           <span class="tag">企业所在行业是否发生重大不利变化</span>
+          <span class="info"
+                v-if="detail.industrycChangSiut === 9">请选择</span>
           <span class="info"
                 v-if="detail.industrycChangSiut === 1">是</span>
           <span class="info"
@@ -48,6 +52,8 @@
         <div class="item">
           <span class="tag">企业主营业务情况是否发生变更</span>
           <span class="info"
+                v-if="detail.mainBusIsChanged === 9">请选择</span>
+          <span class="info"
                 v-if="detail.mainBusIsChanged === 1">是</span>
           <span class="info"
                 v-if="detail.mainBusIsChanged === 0">否</span>
@@ -60,6 +66,8 @@
                   :disabled="true"></mt-field>
         <div class="item">
           <span class="tag">企业是否有与主业无关的扩张计划</span>
+          <span class="info"
+                v-if="detail.planExpandSitu === 9">请选择</span>
           <span class="info"
                 v-if="detail.planExpandSitu === 1">是</span>
           <span class="info"
@@ -75,6 +83,8 @@
         <div class="item">
           <span class="tag">企业生产经营场所是否发生或即将发生变动</span>
           <span class="info"
+                v-if="detail.addrIsChanged === 9">请选择</span>
+          <span class="info"
                 v-if="detail.addrIsChanged === 1">是</span>
           <span class="info"
                 v-if="detail.addrIsChanged === 0">否</span>
@@ -87,6 +97,8 @@
                   :disabled="true"></mt-field>
         <div class="item">
           <span class="tag">企业主要原材料或货物的采购成本是否明显上升</span>
+          <span class="info"
+                v-if="detail.purchaseCost === 9">请选择</span>
           <span class="info"
                 v-if="detail.purchaseCost === 1">是</span>
           <span class="info"
@@ -101,6 +113,8 @@
         <div class="item1">
           <span class="tag">企业生产经营是否出现异常情况(停产、半停产、销售大规模退货、员工数量骤减、劳资关系紧张、设备开工率不足、拖欠租金等)</span>
           <span class="info"
+                v-if="detail.proAndOpeAbnormalSuit === 9">请选择</span>
+          <span class="info"
                 v-if="detail.proAndOpeAbnormalSuit === 1">是</span>
           <span class="info"
                 v-if="detail.proAndOpeAbnormalSuit === 0">否</span>
@@ -114,6 +128,8 @@
         <div class="item">
           <span class="tag1">企业销售是否出现异常情况(销售大规模退货、存货积压严重)</span>
           <span class="info"
+                v-if="detail.saleAbnormalSuit === 9">请选择</span>
+          <span class="info"
                 v-if="detail.saleAbnormalSuit === 1">是</span>
           <span class="info"
                 v-if="detail.saleAbnormalSuit === 0">否</span>
@@ -126,6 +142,8 @@
                   :disabled="true"></mt-field>
         <div class="item">
           <span class="tag">企业上下游核心客户是否发生重大变更</span>
+          <span class="info"
+                v-if="detail.chainChange === 9">请选择</span>
           <span class="info"
                 v-if="detail.chainChange === 1">是</span>
           <span class="info"
@@ -141,6 +159,8 @@
           <span class="tag1">制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降(降幅达30%)
           </span>
           <span class="info"
+                v-if="detail.dailyCostDecline === 9">请选择</span>
+          <span class="info"
                 v-if="detail.dailyCostDecline === 1">是</span>
           <span class="info"
                 v-if="detail.dailyCostDecline === 0">否</span>
@@ -155,6 +175,8 @@
           <span class="tag1">企业订单是否出现大幅下降（降幅达30%）
           </span>
           <span class="info"
+                v-if="detail.orderDecline === 9">请选择</span>
+          <span class="info"
                 v-if="detail.orderDecline === 1">是</span>
           <span class="info"
                 v-if="detail.orderDecline === 0">否</span>
@@ -167,6 +189,8 @@
                   :disabled="true"></mt-field>
         <div class="item">
           <span class="tag">企业生产经营是否有安全隐患</span>
+          <span class="info"
+                v-if="detail.hiddenTroubleSitu === 9">请选择</span>
           <span class="info"
                 v-if="detail.hiddenTroubleSitu === 1">是</span>
           <span class="info"
@@ -206,12 +230,16 @@
         <div class="item">
           <span class="tag1">剔除季节性因素后的现金流是否有大幅下降(降幅超30%)</span>
           <span class="info"
+                v-if="detail.cashDecline === 9">请选择</span>
+          <span class="info"
                 v-if="detail.cashDecline === 1">是</span>
           <span class="info"
                 v-if="detail.cashDecline === 0">否</span>
         </div>
         <div class="item noBorder">
           <span class="tag">现金流与营业收入是否基本匹配 </span>
+          <span class="info"
+                v-if="detail.cashMatchesAndProAndOpe === 9">请选择</span>
           <span class="info"
                 v-if="detail.cashMatchesAndProAndOpe === 1">是</span>
           <span class="info"

@@ -156,8 +156,8 @@ export default {
         lineBalance: "", // 授信余额
         securityKind: ["1"], // 担保方式
         cooperate: "1", // 检查配合程度
-        yearlyInspection: 1, // 额度年检
-        revalOfColl: 1 // 押品重估
+        yearlyInspection: 9, // 额度年检
+        revalOfColl: 9 // 押品重估
       }
     };
   },

@@ -40,7 +40,7 @@
                    class="info"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <div class="item1">
+      <div class="item1" v-if="params.existRisk === 1">
         <span class="tag1">发生阶段</span>
         <almSelect :selectData="happenPats"
                    :defaultValue="params.riskStage"
@@ -48,8 +48,9 @@
                    :title="selectTitleRiskStage"
                    :fontColor="fontColor"
                    @getSelectValue="getSelectRiskStage"
+									  v-if="existRiskYN"
                    class="info"></almSelect>
-        <span class="iconfont iconxiala arrow"></span>
+        <span class="iconfont iconxiala arrow"  v-if="existRiskYN"></span>
       </div>
       <!-- <mt-field
         class="textFiled"
@@ -114,14 +115,15 @@ export default {
       agreeResult: "agreeResult",
       nextEmplCode: "nextEmplCode",
       happenPats: happenPats2,
-      RiskStage: 'RiskStage',
+			RiskStage: 'RiskStage',
+			existRiskYN: true,
       params: {
-        existRisk: 1, // 存在风险
-        agreeResult: 1, // 一级支行/二级分行复核意见
+        existRisk: 9, // 存在风险
+        agreeResult: 9, // 一级支行/二级分行复核意见
         nextEmplCode: "", // 下一岗位处理人
         emplName: "",
         msg: "", // 一级支行/二级分行复核意见说明
-        riskStage: "一", // 发生阶段
+        riskStage: "", // 发生阶段
         riskMsg: "", // 风险说明
         suggest: "" // 措施建议
       }
@@ -150,7 +152,15 @@ export default {
       this.params.agreeResult = data[0].key;
     },
     getSelect2: function (data) {
-      this.params.existRisk = data[0].key;
+			this.params.existRisk = data[0].key;
+			if (this.params.existRisk === 1) {
+        this.existRiskYN = true
+        this.params.riskStage = '一'
+      } else if (this.params.existRisk === 0 || this.params.existRisk === 9) {
+        this.existRiskYN = false
+        this.params.riskStage = ''
+
+      }
     },
     getSelect3: function (data) {
       this.params.nextEmplCode = data[0].key;

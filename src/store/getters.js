@@ -119,7 +119,7 @@ const getters = {
 				obj2[key] = forBizDetail[key]
 				if(initArray.indexOf(key) !== -1){
 					if (forBizDetail[key] === null) {
-            obj2[key] = 1
+            obj2[key] = 9
           }
 				}
         else if (key === 'cooperate' || key === 'payKind') {
@@ -259,7 +259,7 @@ const getters = {
 						obj[key][k] = approveData[k]
 						if(initArray.indexOf(k) !== -1){
 							if (approveData[k] === null) {
-								obj[key][k] = 1
+								obj[key][k] = 9
 							}
 						}
             else if (k === 'cooperate' || k === 'payKind') {
@@ -412,7 +412,7 @@ const getters = {
 				obj2[key] = forBizDetail[key]
 				if(initArray.indexOf(key) !== -1){
 					if (forBizDetail[key] === null) {
-            obj2[key] = 1
+            obj2[key] = 9
           }
 				}
         else if (key === 'cooperate' || key === 'payKind') {

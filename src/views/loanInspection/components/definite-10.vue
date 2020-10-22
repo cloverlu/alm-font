@@ -389,7 +389,7 @@ export default {
         guaranteeAmoutCon: "", //对外担保金额
         guaranteeBalanceCon: "", //对外担保结余
         badRecordMsgCon: "", //  逾期及违约 不良影响
-        existBadRecordCon: 1, // 逾期及违约 是否
+        existBadRecordCon: 9, // 逾期及违约 是否
 
         // 企业法定代表人部分
         unPayOffLoanNumJur: "", //未结清贷款笔数
@@ -403,17 +403,17 @@ export default {
         guaranteeAmoutJur: "", //对外担保金额
         guaranteeBalanceJur: "", //对外担保结余
         badRecordMsgJur: "", //  逾期及违约 不良影响
-        existBadRecordJur: 1, //  逾期及违约 是否存在
+        existBadRecordJur: 9, //  逾期及违约 是否存在
 
         creditChageMsg4: "", // 企业实际控制人 征信变化情况说明
-        existCreditChage4: 1, // 企业实际控制人 征信变化是否变化
+        existCreditChage4: 9, // 企业实际控制人 征信变化是否变化
         creditChageMsg5: "", // 企业法定代表人 征信变化情况说明
-        existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
+        existCreditChage5: 9, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: "", // 企业其他保证人 征信变化情况说明
         existCreditChage6: "", // 企业其他保证人 征信变化是否变化
-        existCreditChager6: 1,
+        existCreditChager6: 9,
         creditChageMsg3: "", // 法人保证人 征信变化情况说明
-        existCreditChage3: 1, // 法人保证人 征信变化是否变化
+        existCreditChage3: 9, // 法人保证人 征信变化是否变化
 
         msg: "",
         addedOverdues: false,

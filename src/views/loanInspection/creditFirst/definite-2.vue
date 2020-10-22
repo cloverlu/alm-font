@@ -78,7 +78,7 @@ export default {
       parentsDraw: false,
       params: {
         cooperate: "1",
-        useAmoutByContract: 1,
+        useAmoutByContract: 9,
         checkAddr: "",
         addrChangedMsg: "",
         staff: ""

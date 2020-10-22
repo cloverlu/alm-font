@@ -116,8 +116,10 @@
           <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
           <div class="item1">
             <span class="tag">征信记录是否有异常变化</span>
+            <span class="info"
+                v-if="detail.existCreditChage1 === 9">请选择</span>
 						<span class="info"
-                v-if="detail.existCreditChage1 === 1">是</span>
+                v-else-if="detail.existCreditChage1 === 1">是</span>
 						<span class="info"
 									v-else-if="detail.existCreditChage1 === 0">否</span>
           </div>
@@ -135,8 +137,10 @@
           <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
           <div class="item1">
             <span class="tag">征信记录是否有异常变化</span>
+            <span class="info"
+                v-if="detail.existCreditChage2 === 9">请选择</span>
 						<span class="info"
-                v-if="detail.existCreditChage2 === 1">是</span>
+                v-else-if="detail.existCreditChage2 === 1">是</span>
 						<span class="info"
 									v-else-if="detail.existCreditChage2=== 0">否</span>
           </div>
@@ -154,8 +158,10 @@
           <!-- <mt-cell title="征信记录是否有异常变化"> </mt-cell> -->
           <div class="item1">
             <span class="tag">征信记录是否有异常变化</span>
+            <span class="info"
+                v-if="detail.existCreditChage3 === 9">请选择</span>
 						<span class="info"
-                v-if="detail.existCreditChage3 === 1">是</span>
+                v-else-if="detail.existCreditChage3 === 1">是</span>
 						<span class="info"
 									v-else-if="detail.existCreditChage3=== 0">否</span>
           </div>

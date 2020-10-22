@@ -60,7 +60,7 @@ export default {
       agreeOrNot: agreeOrNot,
       agreeResult: "agreeResult",
       params: {
-        agreeResult: 1, // 一级支行/二级分行复核意见
+        agreeResult: 9, // 一级支行/二级分行复核意见
         msg: "", // 一级支行/二级分行复核意见说明
         suggest: "" // 措施建议
       }

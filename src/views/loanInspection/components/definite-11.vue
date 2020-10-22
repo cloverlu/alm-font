@@ -293,7 +293,7 @@ export default {
         guaranteeNum: "", //对外担保笔数
         guaranteeAmout: "", //对外担保金额
         guaranteeBalance: "", //对外担保结余
-        existBadRecord: 1, // 是否逾期 借款企业
+        existBadRecord: 9, // 是否逾期 借款企业
         badRecordMsg: "", //  逾期及违约 不良影响
         oweTaxRecordNum: "", // 欠税记录
         civilJudgmentRecordNum: "", // 民事判决
@@ -301,11 +301,11 @@ export default {
         administRecordNum: "", // 行政处罚记录
 
         creditChageMsg1: "", // 	借款企业 征信变化情况说明
-        existCreditChage1: 1, // 借款企业 征信变化是否变化
+        existCreditChage1: 9, // 借款企业 征信变化是否变化
         creditChageMsg2: "", // 	关联企业 征信变化情况说明
-        existCreditChage2: 1, // 关联企业 征信变化是否变化
+        existCreditChage2: 9, // 关联企业 征信变化是否变化
         creditChageMsg3: "", // 	法人保证人 征信变化情况说明
-        existCreditChage3: 1 // 法人保证人 征信变化是否变化
+        existCreditChage3: 9 // 法人保证人 征信变化是否变化
       },
       loanBusiness: {}
     };
