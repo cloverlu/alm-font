@@ -9,9 +9,9 @@
     <div class="newly9">
       <div class="coInformation">
 
-        <mt-cell class="textFiled"
+        <!-- <mt-cell class="textFiled"
                  title="客户名称"
-                 :value="detail.newly9.custName"></mt-cell>
+                 :value="detail.newly9.custName"></mt-cell> -->
         <mt-cell class="textFiled"
                  title="贷款金额"
                  :value="detail.newly9.loanAmout"></mt-cell>

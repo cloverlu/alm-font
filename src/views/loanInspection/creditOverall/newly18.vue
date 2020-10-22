@@ -103,7 +103,7 @@ export default {
       securityKindId: "securityKind",
       otherSecurityKindMsg: '',
       params: {
-        loanBalance: "",
+        // loanBalance: "",
         lineAmout: "",
         securityKind: ["1"], // 担保方式
         otherSecurityKindMsg: "",

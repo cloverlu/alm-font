@@ -53,6 +53,7 @@ import processing212 from "../approval/approve/processing212";
 import processing213 from "../approval/approve/processing213";
 import { approvalMixin, normalMixin } from "../../utils/mixin.js";
 import { submitApprove } from "../../api/loanlnspection";
+import { isCanvasBlank } from "@/utils/utils";
 export default {
   components: {
     "mt-button": Button,
@@ -141,15 +142,24 @@ export default {
       });
     },
     async submitApprove() {
-			if(!this.params.empSign){
-				this.$Toast({
+			const cav =document.getElementsByTagName("canvas")[0];
+			if(isCanvasBlank(cav)){
+        this.$Toast({
             message: '请签名！',
             iconClass: 'iconfont iconcha-01',
             duration: 2000,
 					})
 				return false;
+    	}
+			// if(!this.params.empSign){
+			// 	this.$Toast({
+      //       message: '请签名！',
+      //       iconClass: 'iconfont iconcha-01',
+      //       duration: 2000,
+			// 		})
+			// 	return false;
 
-			}
+			// }
       this.params2.opType = "1";
       const params = Object.assign(
         {},
@@ -157,7 +167,27 @@ export default {
         this.params2,
         this.params
       );
-      console.log(params);
+			console.log(params);
+			if(params.agreeResult){
+				if(params.agreeResult === 9){
+					this.$Toast({
+            message: '请选择 复核/审核 意见！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
+			if(params.existRisk){
+				if(params.existRisk === 9){
+					this.$Toast({
+            message: '请选择风险预警信号！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
 
       await this.submit2(params);
     },
@@ -178,7 +208,27 @@ export default {
         this.params2,
         this.params
       );
-      console.log(params);
+			console.log(params);
+			if(params.agreeResult){
+				if(params.agreeResult === 9){
+					this.$Toast({
+            message: '请选择 复核/审核 意见！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
+			if(params.existRisk){
+				if(params.existRisk === 9){
+					this.$Toast({
+            message: '请选择风险预警信号！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
       await this.submit2(params);
     },
     async gobackLast() {
@@ -198,7 +248,27 @@ export default {
         this.params2,
         this.params
       );
-      console.log(params);
+			console.log(params);
+			if(params.agreeResult){
+				if(params.agreeResult === 9){
+					this.$Toast({
+            message: '请选择 复核/审核 意见！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
+			if(params.existRisk){
+				if(params.existRisk === 9){
+					this.$Toast({
+            message: '请选择风险预警信号！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+					return false;
+				}
+			}
       await this.submit2(params);
     },
     routerMatch() {
@@ -353,7 +423,7 @@ export default {
       });
     },
     lineCanvas(obj) {
-      this.linewidth = 2;
+      this.linewidth = 6;
       this.color = "#000000";
       this.background = "rgba(0, 0, 0, 0)";
       for (var i in obj) {

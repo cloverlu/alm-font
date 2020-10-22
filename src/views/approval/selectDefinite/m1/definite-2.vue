@@ -32,6 +32,7 @@
 		.definite-field(class="field2")
 			.item
 				span(class="big-max") 是否按合同约定的用途使用信贷资金
+				span(class="info" v-if="detail.useAmoutByContract === 9")  请选择
 				span(class="info" v-if="detail.useAmoutByContract === 0")  否
 				span(class="info" v-if="detail.useAmoutByContract === 1")  是
 			.item2

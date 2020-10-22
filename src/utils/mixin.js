@@ -254,14 +254,15 @@ export const normalMixin = {
               this.$router.push({ name: 'loanInspectionIndex' })
             }, 1200)
           } 
-        } else {
-          this.$Indicator.close()
-          this.$Toast({
-            message: message + '失败！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 5000,
-          })
-        }
+				} 
+				// else {
+        //   this.$Indicator.close()
+        //   this.$Toast({
+        //     message: message + '失败！',
+        //     iconClass: 'iconfont iconcha-01',
+        //     duration: 5000,
+        //   })
+        // }
       })
     },
     // mounted中需要判断是否走详情接口的内容
@@ -279,7 +280,7 @@ export const normalMixin = {
 					}
 					if(this.params.existRisk === 1){
 						this.existRiskYN = true
-					}else if(this.params.existRisk === 0){
+					}else if(this.params.existRisk === 0 || this.params.existRisk === 9){
 						this.existRiskYN = false
 
 					}

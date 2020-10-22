@@ -83,7 +83,7 @@ export default {
       agreeResult: "agreeResult",
       nextEmplCode: "nextEmplCode",
       params: {
-        agreeResult: 1, // 一级支行/二级分行复核意见
+        agreeResult: 9, // 一级支行/二级分行复核意见
         nextEmplCode: "", // 下一岗位处理人
         emplName: "",
         msg: "", // 一级支行/二级分行复核意见说明

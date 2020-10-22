@@ -417,37 +417,37 @@ export default {
 			selectTitle13: "现金流与营业收入是否基本匹配",
 			selectTitle14:"企业订单是否出现大幅下降（降幅达30%）",
       params: {
-        ownerStruSame: 1, // 企业实际股权结构是否与上述工商信息网查询一致
+        ownerStruSame: 9, // 企业实际股权结构是否与上述工商信息网查询一致
         ownerStruSameMsg: "", // 实际股权结构与工商信息网查询说明
-        industrycChangSiut: 1, // 企业所在行业是否发生重大不利变化
+        industrycChangSiut: 9, // 企业所在行业是否发生重大不利变化
         industrycChangSiutMsg: "", // 企业所在行业是否发生重大不利变化具体情况
-        mainBusIsChanged: 1, // 企业主营业务情况是否发生变更
+        mainBusIsChanged: 9, // 企业主营业务情况是否发生变更
         mainBusIsChangedMsg: "", // 企业主营业务情况是否发生变更情况
-        planExpandSitu: 1, // 企业是否有与主业无关的扩张计划
+        planExpandSitu: 9, // 企业是否有与主业无关的扩张计划
         planExpandSituMsg: "", // 企业是否有与主业无关的扩张计划具体情况
-        addrIsChanged: 1, // 生产经营场所是否发生变化
+        addrIsChanged: 9, // 生产经营场所是否发生变化
         addrChangedMsg: "", // 生产经营场所变动情况
-        hiddenTroubleSitu: 1, // 生产经营是否存在安全隐患
+        hiddenTroubleSitu: 9, // 生产经营是否存在安全隐患
         hiddenTroubleSituMsg: "", // 生产经营是否存在安全隐患具体情况
-        purchaseCost: 1, // 企业主要原材料或货物的采购成本是否明显上升
+        purchaseCost: 9, // 企业主要原材料或货物的采购成本是否明显上升
         purchaseCostMsg: "", // 企业主要原材料或货物的采购成本是否明显上升情况
-        proAndOpeAbnormalSuit: 1, // 企业生产经营是否出现异常情况
+        proAndOpeAbnormalSuit: 9, // 企业生产经营是否出现异常情况
         proAndOpeAbnormalSuitMsg: "", // 企业生产经营是否出现异常情况说明
-        saleAbnormalSuit: 1, // 企业销售是否出现异常情况
+        saleAbnormalSuit: 9, // 企业销售是否出现异常情况
         saleAbnormalSuitMsg: "", // 企业销售是否出现异常情况说明
-        chainChange: 1, // 企业上下游核心客户是否发生重大变更
+        chainChange: 9, // 企业上下游核心客户是否发生重大变更
         chainChangeMsg: "", // 企业上下游核心客户发生重大变更说明
-        dailyCostDecline: 1, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
+        dailyCostDecline: 9, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
         dailyCostDeclineMsg: "", // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）shuoming
         // orderDecline: 0, // 企业订单是否出现大幅下降（降幅达30%）
         // orderDeclinemsg: "", // 企业订单出现大幅下降（降幅达30%）说明
         cashLastToNow: "", // 上次检查（或调查）至本次检查期间的现金
-        cashDecline: 1, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
-        cashMatchesAndProAndOpe: 1, // 现金流与营业收入是否基本匹配
+        cashDecline: 9, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
+        cashMatchesAndProAndOpe: 9, // 现金流与营业收入是否基本匹配
         cashOtherMsg: "", // 现金流其他说明
         summaryForCheck: "", // 检查要点小结
 				otherSitu: "", // 其他情况
-				orderDecline:1,
+				orderDecline:9,
 				orderDeclineMsg:''
       },
       loanBusiness: {}

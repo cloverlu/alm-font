@@ -79,7 +79,9 @@
         <div class="item1">
           <span class="tag">是否存在逾期及违约记录</span>
           <span class="info"
-                v-if="detail.existBadRecordCon === 1">是</span>
+                v-if="detail.existBadRecordCon === 9">请选择</span>
+          <span class="info"
+                v-else-if="detail.existBadRecordCon === 1">是</span>
           <span class="info"
                 v-else-if="detail.existBadRecordCon === 0">否</span>
         </div>
@@ -95,9 +97,11 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info"
-                v-if="detail.existBadRecordJur === 1">是</span>
+                v-if="detail.existCreditChage4 === 9">请选择</span>
           <span class="info"
-                v-else-if="detail.existBadRecordJur === 0">否</span>
+                v-else-if="detail.existCreditChage4 === 1">是</span>
+          <span class="info"
+                v-else-if="detail.existCreditChage4 === 0">否</span>
         </div>
         <mt-field type="textarea"
                   rows="3"
@@ -159,9 +163,11 @@
         <div class="item1">
           <span class="tag">是否存在逾期及违约记录</span>
           <span class="info"
-                v-if="detail.existCreditChage4 === 1">是</span>
+                v-if="detail.existBadRecordJur === 9">请选择</span>
           <span class="info"
-                v-else-if="detail.existCreditChage4 === 0">否</span>
+                v-else-if="detail.existBadRecordJur === 1">是</span>
+          <span class="info"
+                v-else-if="detail.existBadRecordJur === 0">否</span>
         </div>
         <mt-field type="textarea"
                   rows="3"
@@ -175,7 +181,9 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info"
-                v-if="detail.existCreditChage5 === 1">是</span>
+                v-if="detail.existCreditChage5 === 9">请选择</span>
+          <span class="info"
+                v-else-if="detail.existCreditChage5 === 1">是</span>
           <span class="info"
                 v-else-if="detail.existCreditChage5 === 0">否</span>
         </div>
@@ -191,7 +199,9 @@
         <div class="item1">
           <span class="tag">征信记录是否有异常变化</span>
           <span class="info"
-                v-if="detail.existCreditChager6 === 1">是</span>
+                v-if="detail.existCreditChager6 === 9">请选择</span>
+          <span class="info"
+                v-else-if="detail.existCreditChager6 === 1">是</span>
           <span class="info"
                 v-else-if="detail.existCreditChager6 === 0">否</span>
         </div>

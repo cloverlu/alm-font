@@ -181,15 +181,15 @@ export default {
       params: {
         queryDate: "",
         fiveClass: "", // 当前企业及实际控制人征信情况（注明征信查询分类结果)
-        addedOverdues: 1, // 企业或企业主征信是否有新增逾期记录  客户资信检查
+        addedOverdues: 9, // 企业或企业主征信是否有新增逾期记录  客户资信检查
         addedOverduesMsg: "", // 当前企业及实际控制人征信情况 说明
-        addedLoans: 1, // 企业或企业主是否有他行新增贷款  客户资信检查
+        addedLoans: 9, // 企业或企业主是否有他行新增贷款  客户资信检查
         addedLoansMsg: "", // 企业或企业主是否有他行新增贷款情况 说明
-        shrinkLoanScale: 1, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
+        shrinkLoanScale: 9, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
         shrinkLoanScaleMsg: "", // 企业或企业主是否有他行收缩贷款规模 说明
-        addedGuarantees: 1, // 企业或企业主是否有新增对外担保记录  客户资信检查
+        addedGuarantees: 9, // 企业或企业主是否有新增对外担保记录  客户资信检查
         addedGuaranteesMsg: "", // 企业或企业主是否有新增对外担保记录 说明
-        otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
+        otherSitu: 9, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: "", // 企业或企业主是否有其他异常变化 说明
         summarySituMsg: ""
       },

@@ -14,7 +14,7 @@
 						input(v-model="params.lineAmout" type="input" class="field-input" placeholder="请输入授信金额")
 				.item
 					span(class="tag") 贷款余额
-					span(class="info") {{params.loanBalance}}
+					span(class="info") {{detail.loanBalance}}
 				.item(@click="popupVisible = !popupVisible")
 					span(class="tag") 担保方式
 					span(class="info sec") {{ securityKind }}
@@ -135,7 +135,7 @@ export default {
   async mounted() {
     this.securityKindsF()
     const type = this.userBizType.bizType
-    const name = this.$route.name
+		const name = this.$route.name
 
     if (this.bizId) {
       await this.setUserforDizDetail(this)
@@ -148,7 +148,8 @@ export default {
       } else {
         this.otherSecurityKindMsg = ''
       }
-    }
+		}
+		
     this.setScrollToPo({
       x: 0,
       y: 0,

@@ -36,8 +36,10 @@
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主征信是否有新增逾期记录</span>
+          <span class="info" v-if="detail.addedOverdues === 9">请选择</span>
           <span class="info" v-if="detail.addedOverdues === 1">是</span>
           <span class="info" v-if="detail.addedOverdues === 0">否</span>
+
         </div>
         <mt-field
           type="textarea"
@@ -49,6 +51,7 @@
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行新增贷款</span>
+          <span class="info" v-if="detail.addedLoans === 9">请选择</span>
           <span class="info" v-if="detail.addedLoans === 1">是</span>
           <span class="info" v-if="detail.addedLoans === 0">否</span>
         </div>
@@ -62,6 +65,7 @@
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有他行收缩贷款规模</span>
+          <span class="info" v-if="detail.shrinkLoanScale === 9">请选择</span>
           <span class="info" v-if="detail.shrinkLoanScale === 1">是</span>
           <span class="info" v-if="detail.shrinkLoanScale === 0">否</span>
         </div>
@@ -75,6 +79,7 @@
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有新增对外担保记录</span>
+          <span class="info" v-if="detail.addedGuarantees === 9">请选择</span>
           <span class="info" v-if="detail.addedGuarantees === 1">是</span>
           <span class="info" v-if="detail.addedGuarantees === 0">否</span>
         </div>
@@ -88,6 +93,7 @@
         ></mt-field>
         <div class="item">
           <span class="tag">企业或企业主是否有其他异常变化</span>
+          <span class="info" v-if="detail.otherSitu === 9">请选择</span>
           <span class="info" v-if="detail.otherSitu === 1">是</span>
           <span class="info" v-if="detail.otherSitu === 0">否</span>
         </div>
