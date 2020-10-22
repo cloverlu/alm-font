@@ -217,8 +217,8 @@ export default {
         loanDate: "", // 还款日期
         loanPurpose: "", // 约定用途
         detailMsg4useAmout: "", // 资金使用情况详细说明
-        useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
-        executeCon: 1, //是否履行合同约定
+        useAmoutByContract: 9, //是否按合同约定的用途使用信贷资金
+        executeCon: 9, //是否履行合同约定
         cooperate: "1", //对我行检查的态度
         cooperateMsg: "", // 其他
         msg: ""

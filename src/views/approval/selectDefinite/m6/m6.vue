@@ -63,6 +63,8 @@
             </div>
             <div class="item">
               <span class="tag">额度年检</span>
+              <span class="info" v-if="detail.newly1.yearlyInspection === 9"
+                >请选择</span>
               <span class="info" v-if="detail.newly1.yearlyInspection === 0"
                 >否</span
               >
@@ -72,6 +74,9 @@
             </div>
             <div class="item">
               <span class="tag">押品重估</span>
+              <span class="info" v-if="detail.newly1.revalOfColl === 9"
+                >请选择</span
+              >
               <span class="info" v-if="detail.newly1.revalOfColl === 0"
                 >否</span
               >

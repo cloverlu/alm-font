@@ -14,7 +14,8 @@
 				fieldOne(:definite="newly6" :info="detail" :read="true" ref="fieldOne" )
 			.item
 				span(class="tag") 是否建议调整额度
-				span(class="info" v-if="detail.isAdjustLine === 1") 是
+				span(class="info" v-if="detail.isAdjustLine === 9") 请选择
+				span(class="info" v-else-if="detail.isAdjustLine === 1") 是
 				span(class="info" v-else-if="detail.isAdjustLine === 0") 否
 			.item
 				span(class="tag") 调整为

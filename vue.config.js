@@ -27,7 +27,7 @@ module.exports = {
       "/alm": {
         // alm开发环境API地址
 				// target: "http://192.168.43.76:9001",
-				target: "http://20.147.168.82:9001",
+				target: "http://20.147.168.86:9001",
 				// target: "http://200.144.81.84:9001",
         // 如果要代理 websockets
         ws: true,

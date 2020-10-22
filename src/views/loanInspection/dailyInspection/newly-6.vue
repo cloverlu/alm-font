@@ -42,7 +42,7 @@ export default {
 			selectTitle:'是否建议调整额度',
 			fontColor:'blue',
 			params:{
-				isAdjustLine:1,
+				isAdjustLine:9,
 				adjustLine:''
 			},
 			loanBusiness:{}

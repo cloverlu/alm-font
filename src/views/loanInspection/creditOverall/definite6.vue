@@ -71,9 +71,9 @@ export default {
     return {
       bizId: this.$route.params.bizId || this.uBizId,
       params: {
-        industrycChangSiut: 1,
-        planExpandSitu: 1,
-        hiddenTroubleSitu: 1,
+        industrycChangSiut: 9,
+        planExpandSitu: 9,
+        hiddenTroubleSitu: 9,
         industrycChangSiutMsg: "",
         planExpandSituMsg: "",
         hiddenTroubleSituMsg: "",

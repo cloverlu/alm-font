@@ -14,19 +14,22 @@
 		.definite-field
 			.item
 				span(class="tag big-max") 企业所在行业是否发生重大不利变化
-				span(class="info" v-if="detail.industrycChangSiut === 0") 否
+				span(class="info" v-if="detail.industrycChangSiut === 9") 请选择
+				span(class="info" v-else-if="detail.industrycChangSiut === 0") 否
 				span(class="info" v-else-if="detail.industrycChangSiut === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.industrycChangSiutMsg" :disabled="true" class="textArea" type="textarea" rows="3" )
 			.item
 				span(class="tag big-max") 企业是否有与主业无关的扩张计划
-				span(class="info" v-if="detail.planExpandSitu === 0") 否
+				span(class="info" v-if="detail.planExpandSitu === 9") 请选择
+				span(class="info" v-else-if="detail.planExpandSitu === 0") 否
 				span(class="info" v-else-if="detail.planExpandSitu === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.planExpandSituMsg" :disabled="true" class="textArea" type="textarea" rows="3" )
 			.item
 				span(class="tag big-max") 生产经营是否存在安全隐患
-				span(class="info" v-if="detail.hiddenTroubleSitu === 0") 否
+				span(class="info" v-if="detail.hiddenTroubleSitu === 9") 请选择
+				span(class="info" v-else-if="detail.hiddenTroubleSitu === 0") 否
 				span(class="info" v-else-if="detail.hiddenTroubleSitu === 1") 是
 			.item(class="item-textarea")
 				mt-field(v-model="detail.hiddenTroubleSituMsg" :disabled="true"  class="textArea" type="textarea" rows="3")

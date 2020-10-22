@@ -178,3 +178,11 @@ export function GetQueryValue(queryName) {
 export function isInteger(obj) {
   return typeof obj === 'number' && obj % 1 === 0
 }
+
+//验证canvas画布是否为空函数
+export function isCanvasBlank(canvas) {
+	var blank = document.createElement('canvas');//系统获取一个空canvas对象
+	blank.width = canvas.width;
+	blank.height = canvas.height;
+	return canvas.toDataURL() == blank.toDataURL();//比较值相等则为空
+}

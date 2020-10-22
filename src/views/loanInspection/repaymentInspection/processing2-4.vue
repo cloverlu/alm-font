@@ -24,7 +24,7 @@
                    class="info"></almSelect>
         <span class="iconfont iconxiala arrow"></span>
       </div>
-      <div class="item1">
+      <div class="item1" >
         <span class="tag1">发生阶段</span>
         <almSelect :selectData="happenPats"
                    :defaultValue="params.riskStage"
@@ -153,6 +153,7 @@ import { Field, Cell, Button, Popup } from "mint-ui";
 import BScroll from "@better-scroll/core";
 import almSelect from "../components/select";
 import { normalMixin, userMixin } from "../../../utils/mixin";
+import { isCanvasBlank } from "@/utils/utils";
 export default {
   components: {
     "mt-cell": Cell,
@@ -180,10 +181,10 @@ export default {
       existSignal: "existSignal",
       existRiskYN: true,
       params: {
-        riskStage: "一",
+        riskStage: "",
         riskMsg: "",
         suggest: "",
-        existRisk: 1,
+        existRisk: 9,
         empSign: "" // 签名
       },
       params2: {},
@@ -265,7 +266,7 @@ export default {
       if (this.params.existRisk === 1) {
         this.existRiskYN = true
         this.params.riskStage = '一'
-      } else if (this.params.existRisk === 0) {
+      } else if (this.params.existRisk === 0 || this.params.existRisk === 9) {
         this.existRiskYN = false
         this.params.riskStage = ''
 
@@ -286,7 +287,7 @@ export default {
       });
     },
     lineCanvas (obj) {
-      this.linewidth = 2;
+      this.linewidth = 6;
       this.color = "#000000";
       this.background = "rgba(0, 0, 0, 0)";
       for (var i in obj) {
@@ -384,9 +385,18 @@ export default {
     },
     // 提交审批
     async submitApprove () {
-      if (!this.params.empSign) {
+			const cav =document.getElementsByTagName("canvas")[0];
+			if(isCanvasBlank(cav)){
         this.$Toast({
-          message: '请签名！',
+            message: '请签名！',
+            iconClass: 'iconfont iconcha-01',
+            duration: 2000,
+					})
+				return false;
+    	}
+      if (this.params.existRisk === 9) {
+        this.$Toast({
+          message: '请选择风险预警信号！',
           iconClass: 'iconfont iconcha-01',
           duration: 2000,
         })

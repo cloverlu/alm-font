@@ -96,6 +96,7 @@ import BScroll from "@better-scroll/core";
 import almSelect from "../components/select";
 import { normalMixin, userMixin } from "../../../utils/mixin";
 import { submitApprove } from "../../../api/loanlnspection";
+import { isCanvasBlank } from "@/utils/utils";
 export default {
   mixins: [normalMixin, userMixin],
   components: {
@@ -114,7 +115,7 @@ export default {
       fontColor: "blue",
       existRisk: "existRisk",
       params: {
-        existRisk: 1, // 是否存在风险预警信号
+        existRisk: 9, // 是否存在风险预警信号
         riskMsg: "", // 预警信号说明
         suggest: "", // 建议
         empSign: "" // 签名
@@ -196,15 +197,33 @@ export default {
     },
     // 提交审批
     async submitApprove() {
-			if(!this.params.empSign){
-				this.$Toast({
+			const cav =document.getElementsByTagName("canvas")[0];
+			if(isCanvasBlank(cav)){
+        this.$Toast({
             message: '请签名！',
             iconClass: 'iconfont iconcha-01',
             duration: 2000,
 					})
 				return false;
+			}
+			if(this.params.existRisk && this.params.existRisk === 9){
+				this.$Toast({
+					message: '请选择风险预警信号！',
+					iconClass: 'iconfont iconcha-01',
+					duration: 2000,
+				})
+				return false;
 
 			}
+			// if(!this.params.empSign){
+			// 	this.$Toast({
+      //       message: '请签名！',
+      //       iconClass: 'iconfont iconcha-01',
+      //       duration: 2000,
+			// 		})
+			// 	return false;
+
+			// }
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type;
@@ -243,7 +262,7 @@ export default {
       });
     },
     lineCanvas(obj) {
-      this.linewidth = 2;
+      this.linewidth = 6;
       this.color = "#000000";
       this.background = "rgba(0, 0, 0, 0)";
       for (var i in obj) {
