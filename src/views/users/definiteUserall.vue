@@ -14,7 +14,7 @@
 				.definite-field
 					.item
 						span(class="tag") 检查类型
-						almSelect(:selectData="bizTypes"  :defaultValue="params.bizType" :title="selectTitle" :triggerId="triggerId" :fontColor="fontColor" @getSelectValue="getUserSelect" class="info" ) 
+						almSelect(:selectData="bizTypes2"  :defaultValue="params.bizType" :title="selectTitle" :triggerId="triggerId" :fontColor="fontColor" @getSelectValue="getUserSelect" class="info" ) 
 						span(class="iconfont iconxiala arrow")
 					.item
 						span(class="tag") 借据编号
@@ -34,7 +34,7 @@
 
 <script>
 import almSelect from "../loanInspection/components/select";
-import { bizTypes } from "../../utils/dataMock.js";
+import { bizTypes2 } from "../../utils/dataMock.js";
 import definite1 from "../users/selectDefinite/definite1";
 import definite12 from "../users/selectDefinite/definite-12";
 import newly18 from "../users/selectDefinite/newly18";
@@ -67,7 +67,7 @@ export default {
       fontColor: "blue",
       detail: {},
 
-      bizTypes: bizTypes
+      bizTypes2: bizTypes2
     };
   },
   beforeRouteEnter(to, from, next) {

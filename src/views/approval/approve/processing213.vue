@@ -88,8 +88,8 @@ export default {
       existRisk: "existRisk",
       agreeResult: "agreeResult",
       params: {
-        existRisk: 1, // 存在风险
-        agreeResult: 1, // 一级支行/二级分行审核意见
+        existRisk: 9, // 存在风险
+        agreeResult: 9, // 一级支行/二级分行审核意见
         msg: "", // 一级支行/二级分行审核意见说明
         riskMsg: "", // 风险说明
         suggest: "" // 措施建议
@@ -97,6 +97,7 @@ export default {
     };
   },
   mounted() {
+		
     //刚进入页面时页面滑到了最底端，这个用了vuex进行页面的滑动
     this.setScrollToPo({
       x: 0,

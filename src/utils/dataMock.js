@@ -243,6 +243,35 @@ const bizTypes = [
   },
 ]
 
+
+// 检查类型
+const bizTypes2 = [
+  {
+    key: 'm1',
+    value: '小企业授信业务首次跟踪检查',
+  },
+  {
+    key: 'm2',
+    value: '小企业授信业务贷后例行检查',
+  },
+  {
+    key: 'm3',
+    value: '小企业授信业务贷后全面检查',
+  },
+  {
+    key: 'm4',
+    value: '小企业授信业务还款资金落实情况检查',
+  },
+  // {
+  //   key: 'm5',
+  //   value: '小企业法人快捷贷首次检查',
+  // },
+  // {
+  //   key: 'm6',
+  //   value: '小企业法人快捷贷贷后日常检查',
+  // },
+]
+
 const loanInsList = (_) => {
   // shouldDo-应做，notDo-未做，alreadyDo-已做，inReview-审批中
   const status = ['alreadyDo', 'shouldDo', 'notDo']
@@ -307,6 +336,10 @@ const coordinate = [
 
 //同意
 const agreeOrNot = [
+	{
+    key: 9,
+    value: '请选择',
+  },
   {
     key: 1,
     value: '同意',
@@ -331,6 +364,10 @@ const nextPositionHandlersArr = [
 
 //是否
 const yesNo = [
+	{
+    key: 9,
+    value: '请选择',
+  },
   {
     key: 1,
     value: '是',
@@ -338,7 +375,7 @@ const yesNo = [
   {
     key: 0,
     value: '否',
-  },
+	}
 ]
 
 // 贷款支付方式
@@ -959,5 +996,6 @@ export {
   userInfo2,
   happenPats,
   newly6,
-  happenPats2,
+	happenPats2,
+	bizTypes2
 }

@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     lineCanvas(obj) {
-      this.linewidth = 2;
+      this.linewidth = 6;
       this.color = "#000000";
       this.background = "#ffffff";
       for (var i in obj) {

@@ -80,6 +80,8 @@
       ></mt-field>
       <div class="item1">
         <span class="tag bigTag">是否按合同约定的用途使用信贷资金</span>
+        <span class="info" v-if="detail.definite14.useAmoutByContract === 9"
+          >请选择</span>
         <span class="info" v-if="detail.definite14.useAmoutByContract === 1"
           >是</span
         >
@@ -89,6 +91,7 @@
       </div>
       <div class="item1">
         <span class="tag">是否履行合同约定</span>
+        <span class="info" v-if="detail.definite14.executeCon === 9">请选择</span>
         <span class="info" v-if="detail.definite14.executeCon === 1">是</span>
         <span class="info" v-if="detail.definite14.executeCon === 0">否</span>
       </div>

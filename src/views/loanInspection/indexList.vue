@@ -11,6 +11,7 @@
 				.item-header-state(class="undo" v-if="item.bizStatus === 'notDo'" ) 未做
 				.item-header-state(class="alreadydo" v-if="item.bizStatus === 'alreadyDo'" ) 已做
 				.item-header-state(class="inreview" v-if="item.bizStatus === 'inReview'" ) 审批中
+				.item-header-state(class="manual" v-if="item.bizStatus === 'manual'" ) 手工
 				.item-header-title  {{item.bizTypeName}}
 			.item-username
 				span(class="item-tag") 客户名称 
@@ -211,6 +212,9 @@ export default {
         }
         &.inreview {
           background-color: #4e78de;
+        }
+				&.manual {
+          background-color: #828005;
         }
       }
       .item-header-title {

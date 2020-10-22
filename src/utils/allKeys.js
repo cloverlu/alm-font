@@ -40,7 +40,7 @@ const loanlnspection = {
     },
     definite16: Object.assign({}, mVmodel(11), bizId),
     definite3: {
-      existRisk: 1, // 是否存在风险预警信号
+      existRisk: 9, // 是否存在风险预警信号
       riskMsg: '', // 预警信号说明
       suggest: '', // 建议
       empSign: '', // 签名
@@ -82,7 +82,7 @@ const loanlnspection = {
         guaranteeNum: '', //对外担保笔数
         guaranteeAmout: '', //对外担保金额
         guaranteeBalance: '', //对外担保结余
-        existBadRecord: 1, // 是否逾期 借款企业
+        existBadRecord: 9, // 是否逾期 借款企业
         badRecordMsg: '', //  逾期及违约 不良影响
         oweTaxRecordNum: '', // 欠税记录
         civilJudgmentRecordNum: '', // 民事判决
@@ -90,11 +90,11 @@ const loanlnspection = {
         administRecordNum: '', // 行政处罚记录
 
         creditChageMsg1: '', // 	借款企业 征信变化情况说明
-        existCreditChage1: 1, // 借款企业 征信变化是否变化
+        existCreditChage1: 9, // 借款企业 征信变化是否变化
         creditChageMsg2: '', // 	关联企业 征信变化情况说明
-        existCreditChage2: 1, // 关联企业 征信变化是否变化
+        existCreditChage2: 9, // 关联企业 征信变化是否变化
         creditChageMsg3: '', // 	法人保证人 征信变化情况说明
-        existCreditChage3: 1, // 法人保证人 征信变化是否变化
+        existCreditChage3: 9, // 法人保证人 征信变化是否变化
       },
     },
     definite10: {
@@ -114,7 +114,7 @@ const loanlnspection = {
         guaranteeAmoutCon: '', //对外担保金额
         guaranteeBalanceCon: '', //对外担保结余
         badRecordMsgCon: '', //  逾期及违约 不良影响
-        existBadRecordCon: 1, // 逾期及违约 是否
+        existBadRecordCon: 9, // 逾期及违约 是否
 
         // 企业法定代表人部分
         unPayOffLoanNumJur: '', //未结清贷款笔数
@@ -128,18 +128,18 @@ const loanlnspection = {
         guaranteeAmoutJur: '', //对外担保金额
         guaranteeBalanceJur: '', //对外担保结余
         badRecordMsgJur: '', //  逾期及违约 不良影响
-        existBadRecordJur: 1, //  逾期及违约 是否存在
+        existBadRecordJur: 9, //  逾期及违约 是否存在
 
         creditChageMsg4: '', // 企业实际控制人 征信变化情况说明
-        existCreditChage4: 1, // 企业实际控制人 征信变化是否变化
+        existCreditChage4: 9, // 企业实际控制人 征信变化是否变化
         creditChageMsg5: '', // 企业法定代表人 征信变化情况说明
-        existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
+        existCreditChage5: 9, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: '', // 企业其他保证人 征信变化情况说明
         existCreditChage6: '', // 企业其他保证人 征信变化是否变化
-        existCreditChager6: 1,
+        existCreditChager6: 9,
         creditChageMsg3: '', // 法人保证人 征信变化情况说明
-        existCreditChage3: 1, // 法人保证人 征信变化是否变化
-        addedOverdues: 1,
+        existCreditChage3: 9, // 法人保证人 征信变化是否变化
+        addedOverdues: 9,
         pickerVisible: false,
       },
       msg: '',
@@ -157,7 +157,7 @@ const loanlnspection = {
     },
     definite18: Object.assign({}, mVmodel(11), bizId),
     definite3: {
-      existRisk: 1, // 是否存在风险预警信号
+      existRisk: 9, // 是否存在风险预警信号
       riskMsg: '', // 预警信号说明
       suggest: '', // 建议
       empSign: '', // 签名
@@ -203,7 +203,7 @@ const loanlnspection = {
         guaranteeNum: '', //对外担保笔数
         guaranteeAmout: '', //对外担保金额
         guaranteeBalance: '', //对外担保结余
-        existBadRecord: 1, // 是否逾期 借款企业
+        existBadRecord: 9, // 是否逾期 借款企业
         badRecordMsg: '', //  逾期及违约 不良影响
         oweTaxRecordNum: '', // 欠税记录
         civilJudgmentRecordNum: '', // 民事判决
@@ -211,11 +211,11 @@ const loanlnspection = {
         administRecordNum: '', // 行政处罚记录
 
         creditChageMsg1: '', // 	借款企业 征信变化情况说明
-        existCreditChage1: 1, // 借款企业 征信变化是否变化
+        existCreditChage1: 9, // 借款企业 征信变化是否变化
         creditChageMsg2: '', // 	关联企业 征信变化情况说明
-        existCreditChage2: 1, // 关联企业 征信变化是否变化
+        existCreditChage2: 9, // 关联企业 征信变化是否变化
         creditChageMsg3: '', // 	法人保证人 征信变化情况说明
-        existCreditChage3: 1, // 法人保证人 征信变化是否变化
+        existCreditChage3: 9, // 法人保证人 征信变化是否变化
       },
     },
     definite10: {
@@ -235,7 +235,7 @@ const loanlnspection = {
         guaranteeAmoutCon: '', //对外担保金额
         guaranteeBalanceCon: '', //对外担保结余
         badRecordMsgCon: '', //  逾期及违约 不良影响
-        existBadRecordCon: 1, // 逾期及违约 是否
+        existBadRecordCon: 9, // 逾期及违约 是否
 
         // 企业法定代表人部分
         unPayOffLoanNumJur: '', //未结清贷款笔数
@@ -249,20 +249,20 @@ const loanlnspection = {
         guaranteeAmoutJur: '', //对外担保金额
         guaranteeBalanceJur: '', //对外担保结余
         badRecordMsgJur: '', //  逾期及违约 不良影响
-        existBadRecordJur: 1, //  逾期及违约 是否存在
+        existBadRecordJur: 9, //  逾期及违约 是否存在
 
         creditChageMsg4: '', // 企业实际控制人 征信变化情况说明
-        existCreditChage4: 1, // 企业实际控制人 征信变化是否变化
+        existCreditChage4: 9, // 企业实际控制人 征信变化是否变化
         creditChageMsg5: '', // 企业法定代表人 征信变化情况说明
-        existCreditChage5: 1, // 企业法定代表人 征信变化是否变化
+        existCreditChage5: 9, // 企业法定代表人 征信变化是否变化
         creditChageMsg6: '', // 企业其他保证人 征信变化情况说明
         existCreditChage6: '', // 企业其他保证人 征信变化是否变化
-        existCreditChager6: 1,
+        existCreditChager6: 9,
         creditChageMsg3: '', // 法人保证人 征信变化情况说明
-        existCreditChage3: 1, // 法人保证人 征信变化是否变化
+        existCreditChage3: 9, // 法人保证人 征信变化是否变化
 
         RecentNegativeInformation: '',
-        addedOverdues: 1,
+        addedOverdues: 9,
         pickerVisible: false,
       },
     },
@@ -325,20 +325,20 @@ const loanlnspection = {
     },
     definite6: {
       bizId: '',
-      industrycChangSiut: 1, //企业所在行业是否发生重大不利变化
-      planExpandSitu: 1, //企业是否有与主业无关的扩张计划
-      hiddenTroubleSitu: 1, //生产经营是否存在安全隐患
+      industrycChangSiut: 9, //企业所在行业是否发生重大不利变化
+      planExpandSitu: 9, //企业是否有与主业无关的扩张计划
+      hiddenTroubleSitu: 9, //生产经营是否存在安全隐患
       industrycChangSiutMsg: '', //企业所在行业是否发生重大不利变化具体情况
       planExpandSituMsg: '', //企业是否有与主业无关的扩张计划具体情况
       hiddenTroubleSituMsg: '', //生产经营是否存在安全隐患具体情况
       collEstimateDate: '', //上次抵质押物评估或重估日期
       collEstimateValue: '', //上次抵质押物评估或重估金额
-      otherSitu: 1, //其他情况
+      otherSitu: 9, //其他情况
       collEstimateMsg: '',
     },
     definite17: Object.assign({}, mVmodel(12), bizId),
     definite3: {
-      existRisk: 1, // 是否存在风险预警信号
+      existRisk: 9, // 是否存在风险预警信号
       riskMsg: '', // 预警信号说明
       suggest: '', // 建议
       empSign: '', // 签名
@@ -364,7 +364,7 @@ const loanlnspection = {
       riskStage: '',
       riskMsg: '',
       suggest: '',
-      existRisk: 1,
+      existRisk: 9,
       empSign: '', // 签名
       imageList: [],
     },
@@ -377,15 +377,15 @@ const loanlnspection = {
       loanDate: '', // 还款日期
       loanPurpose: '', // 约定用途
       detailMsg4useAmout: '', // 资金使用情况详细说明
-      useAmoutByContract: 1, //是否按合同约定的用途使用信贷资金
-      executeCon: 1, //是否履行合同约定
+      useAmoutByContract: 9, //是否按合同约定的用途使用信贷资金
+      executeCon: 9, //是否履行合同约定
       cooperate: "1", //对我行检查的态度
       cooperateMsg: '', // 其他
       msg: '',
     },
     definite16: Object.assign({}, mVmodel(11), bizId),
     definite3: {
-      existRisk: 1, // 是否存在风险预警信号
+      existRisk: 9, // 是否存在风险预警信号
       riskMsg: '', // 预警信号说明
       suggest: '', // 建议
       empSign: '', // 签名
@@ -394,7 +394,7 @@ const loanlnspection = {
   },
   m6: {
     newly1: {
-      revalOfColl: 1,
+      revalOfColl: 9,
       bizId: '',
       otherSecurityKindMsg: '',
       repayKind: '',
@@ -404,21 +404,21 @@ const loanlnspection = {
       lineBalance: '', // 授信余额
       securityKind: ['1'], // 担保方式
       cooperate: "1", // 检查配合程度
-      yearlyInspection: 1, // 额度年检
+      yearlyInspection: 9, // 额度年检
     },
     newly2: {
       assetCreditInfo: {
         queryDate: '',
         fiveClass: '', // 当前企业及实际控制人征信情况（注明征信查询分类结果)
-        addedOverdues: 1, // 企业或企业主征信是否有新增逾期记录  客户资信检查
+        addedOverdues: 9, // 企业或企业主征信是否有新增逾期记录  客户资信检查
         addedOverduesMsg: '', // 当前企业及实际控制人征信情况 说明
-        addedLoans: 1, // 企业或企业主是否有他行新增贷款  客户资信检查
+        addedLoans: 9, // 企业或企业主是否有他行新增贷款  客户资信检查
         addedLoansMsg: '', // 企业或企业主是否有他行新增贷款情况 说明
-        shrinkLoanScale: 1, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
+        shrinkLoanScale: 9, // 企业或企业主是否有他行收缩贷款规模  客户资信检查
         shrinkLoanScaleMsg: '', // 企业或企业主是否有他行收缩贷款规模 说明
-        addedGuarantees: 1, // 企业或企业主是否有新增对外担保记录  客户资信检查
+        addedGuarantees: 9, // 企业或企业主是否有新增对外担保记录  客户资信检查
         addedGuaranteesMsg: '', // 企业或企业主是否有新增对外担保记录 说明
-        otherSitu: 1, // 企业或企业主是否有其他异常变化  客户资信检查
+        otherSitu: 9, // 企业或企业主是否有其他异常变化  客户资信检查
         otherSituMsg: '', // 企业或企业主是否有其他异常变化 说明
         summarySituMsg: '',
       },
@@ -426,37 +426,37 @@ const loanlnspection = {
     },
     newly3: {
       bizId: '',
-      ownerStruSame: 1, // 企业实际股权结构是否与上述工商信息网查询一致
+      ownerStruSame: 9, // 企业实际股权结构是否与上述工商信息网查询一致
       ownerStruSameMsg: '', // 实际股权结构与工商信息网查询说明
-      industrycChangSiut: 1, // 企业所在行业是否发生重大不利变化
+      industrycChangSiut: 9, // 企业所在行业是否发生重大不利变化
       industrycChangSiutMsg: '', // 企业所在行业是否发生重大不利变化具体情况
-      mainBusIsChanged: 1, // 企业主营业务情况是否发生变更
+      mainBusIsChanged: 9, // 企业主营业务情况是否发生变更
       mainBusIsChangedMsg: '', // 企业主营业务情况是否发生变更情况
-      planExpandSitu: 1, // 企业是否有与主业无关的扩张计划
+      planExpandSitu: 9, // 企业是否有与主业无关的扩张计划
       planExpandSituMsg: '', // 企业是否有与主业无关的扩张计划具体情况
-      addrIsChanged: 1, // 生产经营场所是否发生变化
+      addrIsChanged: 9, // 生产经营场所是否发生变化
       addrChangedMsg: '', // 生产经营场所变动情况
-      hiddenTroubleSitu: 1, // 生产经营是否存在安全隐患
+      hiddenTroubleSitu: 9, // 生产经营是否存在安全隐患
       hiddenTroubleSituMsg: '', // 生产经营是否存在安全隐患具体情况
-      purchaseCost: 1, // 企业主要原材料或货物的采购成本是否明显上升
+      purchaseCost: 9, // 企业主要原材料或货物的采购成本是否明显上升
       purchaseCostMsg: '', // 企业主要原材料或货物的采购成本是否明显上升情况
-      proAndOpeAbnormalSuit: 1, // 企业生产经营是否出现异常情况
+      proAndOpeAbnormalSuit: 9, // 企业生产经营是否出现异常情况
       proAndOpeAbnormalSuitMsg: '', // 企业生产经营是否出现异常情况说明
-      saleAbnormalSuit: 1, // 企业销售是否出现异常情况
+      saleAbnormalSuit: 9, // 企业销售是否出现异常情况
       saleAbnormalSuitMsg: '', // 企业销售是否出现异常情况说明
-      chainChange: 1, // 企业上下游核心客户是否发生重大变更
+      chainChange: 9, // 企业上下游核心客户是否发生重大变更
       chainChangeMsg: '', // 企业上下游核心客户发生重大变更说明
-      dailyCostDecline: 1, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
+      dailyCostDecline: 9, // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）
       dailyCostDeclineMsg: '', // 制造型企业水、电、煤、气等资源消耗量是否较上年同期明显下降（降幅达30%）shuoming
       // orderDecline: 0, // 企业订单是否出现大幅下降（降幅达30%）
       // orderDeclinemsg: "", // 企业订单出现大幅下降（降幅达30%）说明
       cashLastToNow: '', // 上次检查（或调查）至本次检查期间的现金
-      cashDecline: 1, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
-      cashMatchesAndProAndOpe: 1, // 现金流与营业收入是否基本匹配
+      cashDecline: 9, // 剔除季节性因素后的现金流是否有大幅下降（降幅超30%）
+      cashMatchesAndProAndOpe: 9, // 现金流与营业收入是否基本匹配
       cashOtherMsg: '', // 现金流其他说明
       summaryForCheck: '', // 检查要点小结
-      otherSitu: 1, // 其他情况
-      orderDecline: 1,
+      otherSitu: 9, // 其他情况
+      orderDecline: 9,
       orderDeclineMsg: '',
     },
     newly45: {
@@ -469,12 +469,12 @@ const loanlnspection = {
     },
     newly6: {
       inspConAndSug: '',
-      isAdjustLine: 1,
+      isAdjustLine: 9,
       adjustLine: '',
     },
     definite16: Object.assign({}, mVmodel(10), bizId),
     definite3: {
-      existRisk: 1, // 是否存在风险预警信号
+      existRisk: 9, // 是否存在风险预警信号
       riskMsg: '', // 预警信号说明
       suggest: '', // 建议
       empSign: '', // 签名
