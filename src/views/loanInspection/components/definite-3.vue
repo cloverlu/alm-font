@@ -57,7 +57,9 @@
       </div>
       <div class="subBox">
         <div class="submit">
-          <mt-button type="primary" size="large" @click="submitApprove()">提交审批</mt-button>
+          <mt-button type="primary" size="large" @click="submitApprove()"
+            >提交审批</mt-button
+          >
           <mt-button size="large" @click="goback()">上一步</mt-button>
         </div>
       </div>
@@ -80,8 +82,21 @@
             </div>
           </div>
           <div class="submit">
-            <button id="clearCanvas" ref="clearCanvas" class="mint-button mint-button--default">重置</button>
-            <button type="primary" id="saveCanvas" ref="saveCanvas" class="mint-button">保存</button>
+            <button
+              id="clearCanvas"
+              ref="clearCanvas"
+              class="mint-button mint-button--default"
+            >
+              重置
+            </button>
+            <button
+              type="primary"
+              id="saveCanvas"
+              ref="saveCanvas"
+              class="mint-button"
+            >
+              保存
+            </button>
           </div>
         </div>
       </div>
@@ -197,33 +212,32 @@ export default {
     },
     // 提交审批
     async submitApprove() {
-			const cav =document.getElementsByTagName("canvas")[0];
-			if(isCanvasBlank(cav)){
+      const cav = document.getElementsByTagName("canvas")[0];
+      if (isCanvasBlank(cav)) {
         this.$Toast({
-            message: '请签名！',
-            iconClass: 'iconfont iconcha-01',
-            duration: 2000,
-					})
-				return false;
-			}
-			if(this.params.existRisk && this.params.existRisk === 9){
-				this.$Toast({
-					message: '请选择风险预警信号！',
-					iconClass: 'iconfont iconcha-01',
-					duration: 2000,
-				})
-				return false;
-
-			}
-			// if(!this.params.empSign){
-			// 	this.$Toast({
+          message: "请签名！",
+          iconClass: "iconfont iconcha-01",
+          duration: 2000
+        });
+        return false;
+      }
+      if (this.params.existRisk && this.params.existRisk === 9) {
+        this.$Toast({
+          message: "请选择风险预警信号！",
+          iconClass: "iconfont iconcha-01",
+          duration: 2000
+        });
+        return false;
+      }
+      // if(!this.params.empSign){
+      // 	this.$Toast({
       //       message: '请签名！',
       //       iconClass: 'iconfont iconcha-01',
       //       duration: 2000,
-			// 		})
-			// 	return false;
+      // 		})
+      // 	return false;
 
-			// }
+      // }
       const moduleName = this.$route.params.moduleName;
       const currentName = this.$route.name;
       const type = this.type;
@@ -290,7 +304,7 @@ export default {
               e.target.offsetLeft +
               document.documentElement.scrollLeft,
             e.changedTouches[0].clientY -
-              40 -
+              100 -
               e.target.offsetTop +
               document.documentElement.scrollTop
           );
@@ -313,7 +327,7 @@ export default {
               e.target.offsetLeft +
               document.documentElement.scrollLeft,
             e.changedTouches[0].clientY -
-              40 -
+              100 -
               e.target.offsetTop +
               document.documentElement.scrollTop
           );

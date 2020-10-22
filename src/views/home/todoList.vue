@@ -23,30 +23,26 @@ import { getToDoList } from "../../api/home";
 import { Toast } from "mint-ui";
 import Scroll from "../../components/Scroll";
 // import global_ from '../../utils/global'
-import { GetQueryValue } from '../../utils/utils'
+import { GetQueryValue } from "../../utils/utils";
 export default {
   components: { Scroll },
-  data () {
+  data() {
     return {
       todoListTitle: todoListTitle,
       userInfo: userInfo,
-      list: [],
+      list: []
       // userParams: global_.param
     };
   },
-  created () {
-
-
-  },
-  mounted () {
-    var params = {}
-    if (GetQueryValue("app") === 'youjie') {
+  created() {},
+  mounted() {
+    var params = {};
+    if (GetQueryValue("app") === "youjie") {
       params = {
         emplName: GetQueryValue("userName"),
         orgCode: GetQueryValue("instId"),
-        orgName: GetQueryValue("instName"),
+        orgName: GetQueryValue("instName")
       };
-
     } else {
       // alert('没有获取到用户信息')
       params = {
@@ -55,7 +51,7 @@ export default {
         orgName: "南京"
       };
     }
-    this.getList(params)
+    this.getList(params);
     // const userInfo = {
     // 	emplName: "金林",
     // 	orgCode : "12222",
@@ -87,12 +83,9 @@ export default {
     // 	  alert(typeof res.detail.userInfo)
     //     alert(JSON.stringify(res.detail.userInfo))
     // });
-
-
-
   },
   methods: {
-    handleClick (id) {
+    handleClick(id) {
       if (id === 2) {
         this.$router.push({
           name: "loanInspectionIndex",
@@ -109,7 +102,7 @@ export default {
         });
       }
     },
-    getList (params) {
+    getList(params) {
       this.$Indicator.open();
       getToDoList(this, { params }).then(res => {
         if (res.status === 200 && res.data.returnCode === "200000") {
@@ -120,11 +113,11 @@ export default {
                 item2.warningNumber = item.itemRecordNum;
                 item2.postCode = item.postCode;
               }
-            })
+            });
           });
         }
       });
-    },
+    }
     // getUserInfo() {
     // 	alert("成功获取用户信息");
     // 	let xui = requireModuleJs("xui");
